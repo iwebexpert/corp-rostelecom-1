@@ -11,6 +11,7 @@
     <script>
         // простые числа
         let nowNamber = 2;
+        let result = "Простые числа ";
 
         while (nowNamber < 100) {
 
@@ -27,12 +28,14 @@
             }
 
             if (marker == true) {
-                console.log("Число " + nowNamber + " является прстым.");
+
+                result += nowNamber+"  ";
             }
 
             nowNamber++;
 
         }
+        console.log(result);
     </script>
 
     <script>
