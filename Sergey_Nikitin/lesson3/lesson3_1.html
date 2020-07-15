@@ -1,1 +1,35 @@
-!
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let i = 1;
+        console.log(i);
+        i++;
+        while (i <= 100) {
+            let j = 2;
+            while (j <= i) {
+                if (j == i) {
+                    console.log(i);
+
+                }
+                else {
+                    if (i % j == 0) {
+                        break;
+                    }
+                }
+                j++;
+            }
+            i++;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
