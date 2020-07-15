@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 2</title>
+
+    <script>
+        // 2. Организовать массив для хранения товаров в корзине;
+        // Организовать функцию countBasketPrice, которая будет считать стоимость корзины.
+
+        const basket = [
+            ["Keyboard", 1000, "RUB", 1],
+            ["Mouse", 700, "RUB", 2],
+            ["Pen", 70, "RUB", 4]
+        ];
+
+        function countBasketPrice(items) {
+            let ammount = 0;
+
+            for (let i = 0; i < basket.length; i++) {
+                ammount = ammount + basket[i][1] * basket[i][3];
+            }
+
+            return ammount;
+        }
+
+        console.log('Общая стоимость товаров: ', countBasketPrice(basket));
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
