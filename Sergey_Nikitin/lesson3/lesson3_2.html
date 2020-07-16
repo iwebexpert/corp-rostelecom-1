@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function countBasketPrice(binArray) {
+            let res = 0
+            for (i = 0; i < binArray.length; i++) {
+                res += (parseInt(binArray[i][1]) * parseInt(binArray[i][3]));
+
+            }
+            return res;
+        }
+        const shopBin = [
+            ["Материнка", 10000, "RUB", 1],
+            ["Проц", 33000, "RUB", 1],
+            ["Плашка оперативы", 5000, "RUB", 2],
+            ["Видяха", 40000, "RUB", 1],
+            ["Блок питалова", 10000, "RUB", 1],
+            ["Корпус", 4000, "RUB", 1],
+            ["Кулер", 1500, "RUB", 1]
+        ];
+        console.log("Корзина:", shopBin);
+        console.log("Цена компа=", countBasketPrice(shopBin));
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

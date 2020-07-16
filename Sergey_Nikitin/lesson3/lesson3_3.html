@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        console.log("Первый вариант:");
+        function inc(j) {
+            console.log(j)
+            return j += 1;
+        }
+        for (i = 0; i < 10; i = inc(i)) {//первый пришедший на ум вариант
+
+        }
+        console.log("Второй вариант:");
+        for (i = 0; i < 10; console.log(i++)) {// подумав сократил до этого
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
