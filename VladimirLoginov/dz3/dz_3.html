@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dz_3</title>
+</head>
+
+<body>
+    <script>
+        // простые числа
+        let nowNamber = 2;
+        let result = "Простые числа ";
+
+        while (nowNamber < 100) {
+
+            let testNamber = 2;
+            let marker = true;
+
+            while (testNamber < nowNamber) {
+
+                if (nowNamber % testNamber == 0) {
+                    marker = false;
+                    break;
+                }
+                testNamber++;
+            }
+
+            if (marker == true) {
+
+                result += nowNamber+"  ";
+            }
+
+            nowNamber++;
+
+        }
+        console.log(result);
+    </script>
+
+    <script>
+        // task_3
+
+        //массив товар, количество, цена
+        let basket = [["товар_1", 2, 50], ["товар_2", 1, 133], ["товар_3", 2, 66]];
+
+        function basketSum(basket) {
+
+            // количество товаров в корзине
+            let basketCount = basket.length;
+
+            //сумма покупки
+            let basketSum = 0;
+
+            for (let i = 0; i < basketCount; i++) {
+
+                // умножаем количество на цену
+                basketSum += basket[i][1] * basket[i][2];
+
+            }
+            return basketSum;
+        }
+
+        console.log("Сумма покупки - " + basketSum(basket));
+
+    </script>
+    <script>
+        // task_4
+
+        for (let start = -1; start < 9; start++, console.log(start));
+
+    </script>
+
+    <script>
+        // task_5
+
+        printX = "x";
+        for (let count20 = 1; count20 <= 20; count20++) {
+
+            console.log(printX);
+            printX += "x";
+
+        }
+
+    </script>
+</body>
+
+</html>
