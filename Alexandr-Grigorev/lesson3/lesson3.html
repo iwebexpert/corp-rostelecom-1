@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3</title>
+    <script>
+
+        ///////////////////////////////////////////
+        console.log("Number 1")
+        let k = 2;
+        let prime = true;
+        while (k <= 100) {
+            for (let l = 2; l <= k - 1; l++) {
+                if (k % l == 0) { prime = false; break; }
+                else prime = true;
+            }
+            if (prime == true) { console.log(k) };
+            k++;
+        }
+        ////////////////////////////////////////////////////
+        console.log("Number 2");
+        const shop = [["Keyboard", 1000, "RUB", 1],
+        ["Mouse", 700, "RUB", 2],
+        ["Monitor", 5000, "RUB", 1],
+        ["Tablet", 3400, "RUB", 2]
+        ];
+
+        function countBasketPrice(items) {
+            let ammount = 0;
+            for (let i = 0; i <= items.length - 1; i++) {
+                ammount += items[i][1] * items[i][3];
+            }
+            return ammount;
+        }
+        console.log('Общая стоимость товаров: ', countBasketPrice(shop));
+        //////////////////////////////////////////////////////
+        console.log("Number 3");
+        for (let j = 0; j <= 9; console.log(j++)) { };
+        /////////////////////////////////////////////////////////
+        console.log("Number 4");
+        let str = "";
+        for (let p = 0; p < 20; p++) {
+            str += "*"
+            console.log(str);
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
