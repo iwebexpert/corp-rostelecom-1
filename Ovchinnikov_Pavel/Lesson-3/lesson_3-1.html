@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        const nEnd = 100;
+        let isSimple;
+        let i = 1;
+
+        while (i <= nEnd) {
+
+            isSimple = true;
+            let j = 2;
+            while (j < i) {
+                if (i % j == 0) {
+                    isSimple = false;
+                    break;
+                }
+                j++
+            }
+
+            if (isSimple)
+                console.log(i);
+
+            i++;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
