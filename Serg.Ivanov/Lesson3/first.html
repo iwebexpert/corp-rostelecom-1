@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson_3 First</title>
+    <script>
+        var a = 100;
+        var n = 2;
+        while (n <= a) {
+            var i = 2;
+            var j = 0;
+            while (i * i <= n && j != 1) {
+                if (n % i == 0) { j = 1 }
+                i = i + 1;
+            }
+            if (j == 0) { console.log(n); }
+            n = n + 1;
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
