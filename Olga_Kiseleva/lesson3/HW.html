@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson3</title>
+    <script>
+
+        console.log('Практическое задание № 1: с помощью цикла while вывести все простые числа в промежутке от 0 до 100')
+
+        let i = 1;
+        next:
+        while (++i <= 100) {
+            let j = 1;
+            while (++j < i) {
+                if (i % j == 0) {
+                    continue next;
+                }
+            }
+            console.log(i);
+        }
+
+        console.log('Практическое задание № 2,3: Организовать функцию countBasketPrice, которая считает стоимость корзины')
+        // корзина
+        const basket = [
+            ["Apple", 150, "RUB", 1],
+            ["Orange", 80, "RUB", 2],
+            ["Pear", 120, "RUB", 4],
+            ["Plum", 160, "RUB", 3],
+        ];
+        // функция
+        function countBasketPrice(items) {
+            let calcCost = 0;
+            if (items > basket.length) {
+                items = basket.length;
+            }
+            for (let i = 0; i < items; i++) {
+                calcCost += basket[i][1] * basket[i][3];
+            }
+            return calcCost;
+        }
+        // проверка функции
+        let costBasket = countBasketPrice(3);
+        console.log(costBasket);
+
+        console.log('Практическое задание № 4: Вывести с помощью цикла for числа от 0 до 9, не используя тело цикла')
+        for (let i = 0; i <= 9; console.log(i), i++) { }
+
+        console.log('Практическое задание № 5: Нарисовать пирамиду с 20 рядами с помощью console.log')
+        i = 1
+        j = ""
+        while (i++ <= 20) {
+            j += 'x'
+            console.log(j);
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
