@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3</title>
+    <script>
+        // Вероятно решение подразумевает вложенный цикл, но в задании этого не написано, и поэтому строго по тексту, через один цикл.
+        let i = 0
+        let j = 0
+        let k = 0
+        console.log('Вывод простых чисел от 0 до 100:')
+        while (i <= 100) {
+
+            if (i % j === 0) {
+                k++
+            }
+
+            if (j > 0) {
+                j--
+            } else {
+                if (k === 2) {
+                    console.log(i)
+                }
+                k = 0
+                i++
+                j = i
+            }
+        }
+
+        // Сущность корзины: 1. Код товара; 2. Наименование товара; 3. Стоимость товара; 4. Валюта стоимости; 5. Количество товара.
+        const orderList = [
+            [1, 'Keyboard', 1000, 'RUB', 2],
+            [2, 'Mouse', 600, 'RUB', 4],
+            [3, 'USB cable', 300, 'RUB', 17],
+            [4, 'HDMI cable', 450, 'RUB', 21]
+        ]
+        countBasketPrice(orderList)
+
+
+        function countBasketPrice(basket) {
+            let sumPrice = 0
+            for (i = 0; i < basket.length; i++) {
+                sumPrice += basket[i][2] * basket[i][4]
+            }
+            return console.log('Сумма заказа:', sumPrice)
+        }
+        // Выводим без тела цикла for цифры от 0 до 9
+        console.log('Выводим без тела цикла for цифры от 0 до 9:')
+        for (i = 0; i <= 9; console.log(i++)) {
+
+
+        }
+        //Рисуем пирамиду. Немного модернизировал.
+        let brick = 'x'
+        let space = ' '
+        console.log('Рисуем пирамиду:')
+        for (i = 20; i >= 1; i--) {
+
+            console.log(space.repeat(i), brick + brick)
+            brick += 'x'
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
