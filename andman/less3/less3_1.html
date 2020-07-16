@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3_1</title>
+    <script>        
+        var i = 0;
+        while (i <= 100) {
+            /*делить на 1 нет смысла поэтому начинаем с 2 */
+            j = 2
+            while (j <= i) 
+            {
+                if ((i % j === 0) & (i != j))
+                    break;
+                else if ((i === j) & (i > 1)) //Простые числа с 2-х начинаются, 0 и 1 не считаем            
+                    console.log('Простое число', i);
+                j++;
+            }
+            i++;
+        }
+    </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

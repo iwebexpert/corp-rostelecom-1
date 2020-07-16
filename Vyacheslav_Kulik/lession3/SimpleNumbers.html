@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>SimpleNumbers</title>
+    <script>
+        let i = 1, j, countNumber;
+        const simpleArray = [];
+
+        while (i < 101){
+            countNumber =  0;
+            for(j = 1; j <= i; j++ ) {
+                if (i%j === 0){
+                    countNumber++;
+                    //console.log('i = ', i, ' ,j = ', j);
+                }
+            }
+            if (countNumber === 2){
+                console.log('Simple Number = ', i);
+                simpleArray.push(i);
+            }
+            i++;
+        }
+        console.log(simpleArray);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

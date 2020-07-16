@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>Shop</title>
+    <script>
+        const shopArray = [ // All items
+            ["Keyboard", 1500, "RUB"],
+            ["Mouse", 500, "RUB"],
+            ["Monitor", 10000, "RUB"],
+            ["Cover", 750, "RUB"],
+            ["Table", 6500, "RUB"],
+            ["Bucket", 1100, "RUB"],
+            ["Speakers", 3000, "RUB"],
+            ["Video card", 27000, "RUB"],
+            ["Processor", 30000, "RUB"],
+            ["Audio card", 5000, "RUB"],
+            ["Network card", 3500, "RUB"],
+        ];
+        const shoppingCart = []; // Shopping Cart
+
+        // Add items in Shopping Cart
+        shoppingCart.push(shopArray[2]);
+        shoppingCart.push(shopArray[3]);
+        shoppingCart.push(shopArray[8]);
+        shoppingCart.push(shopArray[1]);
+        shoppingCart.push(shopArray[3]);
+        shoppingCart.push(shopArray[3]);
+
+        // View Shopping Cart
+        console.log(shoppingCart);
+
+        function countBasketPrice(shopCart) { //  function for calculating full Shopping Cart price
+            amountPrice = 0;
+            for(let i = 0; i < shopCart.length; i++){
+                amountPrice = amountPrice + shopCart[i][1];
+            }
+            return amountPrice;
+        }
+
+        console.log(countBasketPrice(shoppingCart) + ' RUB'); // Show Price
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

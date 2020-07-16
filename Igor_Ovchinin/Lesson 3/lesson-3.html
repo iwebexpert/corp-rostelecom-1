@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3</title>
+    <script>
+        // Задание № 1
+        console.log('Задание № 1:')
+
+        let j = 1;
+        let Arr = [];
+
+        while (j <= 100) {
+            if (j == 1) {
+                Arr.push(1)
+            } else {
+                let result = 2;
+                let i = 2;
+                while (j % i !== 0) {
+                    i += 1;
+                    result += 1;
+                }
+                if (result == j) {
+                    Arr.push(result);
+                }
+            }
+            j += 1;
+        }
+
+        console.log(Arr);
+        // ------------ //
+
+        // Задание № 2, Задание № 3
+        console.log('Задание № 2, 3:')
+
+        let basketPrice = 0;
+        let basket = [
+            { name: 'Товар № 1', price: 60 },
+            { name: 'Товар № 2', price: 35 }
+        ];
+        basket.push({ name: 'Товар № 3', price: 50 });
+        function countBasketPrice(j) {
+            for (i = 0; i < basket.length; i++) {
+                basketPrice = basketPrice + basket[i].price;
+            }
+            return basketPrice;
+        }
+        console.log('В корзине: ');
+        for (i = 0; i < basket.length; i++) {
+            console.log(basket[i].name + ' — ' + basket[i].price + ' руб');
+        }
+        console.log('Стоимость заказа: ' + countBasketPrice(basket));
+
+        // ------------ //
+
+        // Задание № 4
+        console.log('Задание № 4:')
+
+        for (let i = 0; i < 9; i++, console.log(i)) { }
+
+        // ------------ //
+
+        // Задание № 5
+        console.log('Задание № 5:')
+
+        let arr = [];
+        let end = 0;
+        while (end < 20) {
+            end++;
+            arr.push('x');
+            console.log(arr);
+        }
+
+        // ------------ //
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задание 1</title>
+
+    <script>
+        // 1. С помощью цикла while вывести все простые числа в промежутке от 0 до 100.
+
+        for (let i = 2; i <= 100; i++) // перебираем делимое, 0 и 1 не берем т.к. это не простые числа 
+        {
+            let count = true; // маркер
+            for (let k = 2; k < i; k++) // перебираем делитель, 1 не берем, т.к. все числа делятся на 1
+            {
+                if (i % k == 0) // если делится без остатка, то не простое число
+                {
+                    count = false;
+                    break;
+                }
+            }
+            if (count == true) {
+                console.log(i);
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
