@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // task 1
+        console.log('Task 1');
+
+        let count = 2,
+            resultNumb = [];
+
+        while (count <= 100) {
+            let res = 2,
+                i = 2;
+            while (count % i !== 0) {
+                i++;
+                res++;
+                if (res == count) {
+                    resultNumb.push(res);
+                }
+            }
+            count++;
+        }
+        console.log(resultNumb);
+
+        // task 2
+        console.log('Task 2');
+
+        // структура вложенного массива ["Наименование", цена, количество]
+        let basket = [["Оперативная память", 7500, 4], ["Материнская плата", 12569, 1], ["Блок питания", 12980, 1], ["Видеокарта", 47630, 2]];
+
+        // Функция подстчета корзины
+        function basketPrice(basketIn) {
+            let sum = 0;
+            for (let i = 0; i < basketIn.length; i++) {
+                sum += basketIn[i][1] * basketIn[i][2];
+            }
+            console.log(`Сумма корзины: ${sum}`);
+        }
+        basketPrice(basket);
+        // task 3
+        console.log('Task 3');
+
+        for (let i = 0; i <= 9; console.log(i++)) { }
+        // task 4
+        console.log('Task 4');
+
+        for (let i = 'x'; i.length <= 20; i += 'x') {
+            console.log(i);
+
+        }
+    </script>
+</body>
+
+</html>
