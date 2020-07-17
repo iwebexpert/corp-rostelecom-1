@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW.Lesson4</title>
+    <script>
+        console.log('Домашняя работа к лекции 4. Объекты в JS');
+        'use strict'; // Заставляет отладчик браузера переходить в строгий режим и фиксировать все ошибки!!
+
+        // ********************* Задача №1 ************************************
+        //создаем экземпляр object: структуру num_parse
+        const num_parse = {
+            hundreds: null,
+            dozens: null,
+            units: null,
+        };
+
+        function convertNumToObject(str, parse) {
+
+            //проверяем ввод:
+            num = parseInt(str);
+            if ((num > 999) || (num < 100)) {
+                console.log('Вы ввели некорректное число!');
+                return null;
+            }
+
+            //собственно разбор
+            parse.hundreds = str[0];
+            parse.dozens = str[1];
+            parse.units = str[2];
+
+            return parse;
+        }
+
+        //ввод числа
+        str = prompt("Введите трехзначное число (от 100 до 999): ");
+        console.log(str)
+
+        // разбор
+        let result = convertNumToObject(str, num_parse);
+        if (result != null)
+            console.log('Сотни: ', result.hundreds, ' Десятки: ', result.dozens, ' Единицы: ', result.units);
+
+
+        // ********************* Задача №2 ************************************
+        class Product {
+            constructor() {
+                this.article = '';
+                this.quantity = 0;
+                this.cost = 0.0;
+                this.measure = '';
+                this.currency = 'RUR';
+            }
+        }
+
+        let items = new Array(5);
+
+        for (let i = 0; i < items.length; i++)
+            items[i] = new Product();
+
+        //console.log(items);
+        items[0].article = 'Картошка';
+        items[0].quantity = 25;
+        items[0].cost = 25.0;
+        items[0].measure = 'кг';
+
+        items[1].article = 'Морковь';
+        items[1].quantity = 5;
+        items[1].cost = 30.0;
+        items[1].measure = 'кг';
+
+        items[2].article = 'Шоколад';
+        items[2].quantity = 10;
+        items[2].cost = 130.0;
+        items[2].measure = 'шт.';
+
+        items[3].article = 'Молоко';
+        items[3].quantity = 10;
+        items[3].cost = 95.5;
+        items[3].measure = 'литр';
+
+        items[4].article = 'Коньяк';
+        items[4].quantity = 4;
+        items[4].cost = 2350.5;
+        items[4].measure = 'бутылка 0,5 литра';
+
+        class Basket {
+            constructor() {
+                this.products = [];
+            }
+
+            //добавить продукт в корзину
+            addProductToBasket(product) {
+                this.products.push(product);
+                console.log('В корзину добавлено: ', product)
+            }
+
+            //обработать корзину
+            processBasket(product) {
+                let num_products = this.products.length;
+                let total_amount = 0.0;
+                for (let i = 0; i < num_products; total_amount += (this.products[i].cost * this.products[i].quantity), i++);
+
+                console.log('Всего в корзине: ', num_products, 'товаров на сумму ', total_amount, ' ', this.products[0].currency)
+            }
+
+        }
+
+        let cart = new Basket();
+        //console.log(cart);
+        for (let i = 0; i < items.length; cart.addProductToBasket(items[i]), i++);
+        cart.processBasket();
+        console.log(cart);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
