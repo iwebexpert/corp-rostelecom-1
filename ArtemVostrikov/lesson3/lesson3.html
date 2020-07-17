@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lesson3.js"></script>
+</head>
+
+<body>
+    <div>
+        <h1>Урок 3</h1>
+    </div>
+    <div class='number_one'>
+        <h2>Урок задание 1</h2>
+        <script>
+            let i = 0;
+            while (i <= 100) {
+                if (i % 2 !== 0) {
+                    document.write(i, ",")
+                };
+                i++;
+            }
+        </script>
+    </div>
+    <div style="width: 200px;">
+        <h2>Задание 2</h2>
+
+        <script>
+
+            const shopBasket = [["Гитара", 15000, 1], ["Медиатор", 35, 5],
+            ["Струны", 600, 2]];
+            function itogBasket(basket) {
+                let summaBasket = 0
+                for (i = 0; i < basket.length; i++) {
+                    document.write('<pre>', basket[i][0], ":", basket[i][1], " RUR ", basket[i][basket[i].length - 1], " шт ", "Сумма: ", basket[i][1] * basket[i][basket[i].length - 1], '</pre>')
+                    summaBasket = summaBasket + basket[i][1] * basket[i][basket[i].length - 1]
+                }
+                document.write("<hr>")
+                return summaBasket
+            }
+
+            document.write("<b>К оплате: ", itogBasket(shopBasket), " RUR</b>")
+        </script>
+    </div>
+    <div>
+        <h2>Задание 3</h2>
+        <script>
+            for (i = 0; i <= 9; document.write(i), i++) { }
+        </script>
+    </div>
+    <div>
+        <h2>Задание 4</h2>
+        <script>
+            let star = '*';
+            let j = 0;
+            while (j <= 20) {
+                console.log(star)
+                star = star + '*'
+                j = j + 1
+
+            }
+
+
+
+        </script>
+    </div>
+
+</body>
+
+</html>
