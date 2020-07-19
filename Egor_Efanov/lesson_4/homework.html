@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homework_4</title>
+</head>
+
+<body>
+    <script>
+        console.log('Задание 1:');
+
+        const parseNumb = {
+            number: Math.round(Math.random() * 1500),
+            units: 0,
+            tens: 0,
+            hundreds: 0,
+
+            parsing() {
+                if (this.number <= 9) {
+                    this.units = this.number;
+                } else if (this.number <= 999) {
+                    this.units = Math.floor(this.number % 10);
+                    this.tens = Math.floor(this.number / 10 % 10);
+                    this.hundreds = Math.floor(this.number / 100 % 10);
+                    console.log(`сотни: ${this.hundreds} десятки: ${this.tens} единицы: ${this.units}`);
+                } else {
+                    // this.number = 0;
+                    console.log('Вы ввели число за диапазоном 0 - 999');
+                    return parseNumb.number;
+                }
+
+                return parseNumb;
+
+            }
+
+        }
+        parseNumb.parsing();
+        console.log(`Введенное число: ${parseNumb.number}`);
+
+
+        // task 2
+        console.log('Задание 2:');
+
+        class product {
+            constructor(name, price, count) {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            }
+
+            get cost() {
+                return this.count * this.price;
+            }
+        }
+
+        class basket {
+            constructor(basketIn) {
+                this.basketIn = basketIn;
+            }
+            basketPrice() {
+                let sum = 0;
+                for (let i = 0; i < this.basketIn.length; i++)
+                    sum += this.basketIn[i].cost;
+                return sum;
+            }
+        }
+
+        let products = new basket([
+            new product("Оперативная память", 7500, 4),
+            new product("Материнская плата", 12569, 1),
+            new product("Блок питания", 12980, 1),
+            new product("Видеокарта", 47630, 2)
+        ]);
+
+        console.log(`Сумма корзины: ${products.basketPrice()}`);
+
+
+    </script>
+</body>
+
+</html>
