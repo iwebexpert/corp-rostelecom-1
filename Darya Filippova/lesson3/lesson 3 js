@@ -1,0 +1,54 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loops</title>
+    <script type="text/javascript">
+        //Задание 1
+        var n = 100;
+        var i = 1;
+        while (i <= n) {
+            if (i % 2 != 0 && i % 3 != 0) {
+                console.log(i);
+                i = i + 1;
+            }
+            else
+                i = i + 1;
+        }
+        //Задание 2, А
+
+        const shop = [
+            ["Сream", 1000, "RUB", 1],
+            ["Gel", 700, "RUB", 2],
+
+        ];
+
+        for (i = 0; i < shop.length; i++) {
+            console.log('Массив', shop[i]);
+            for (j = 0; j < shop[i].length; j++) {
+                console.log(shop[i][j]);
+            }
+        }
+        //Б
+        function countBasketPrice(items) {
+
+            let ammount = 0;
+            for (i = 0; i < shop.length; i++) {
+                ammount = (shop[i][1] * shop[i][3]) + ammount;
+            }
+
+            return ammount;
+        }
+
+        console.log('Общая стоимость товаров: ', countBasketPrice(shop));
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
