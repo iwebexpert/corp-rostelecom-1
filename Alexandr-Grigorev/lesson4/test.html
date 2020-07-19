@@ -5,11 +5,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson 4</title>
+    <script>
+        /*const guitar1 = {
+            brand: "Fender",
+            model: "Telecaster",
+            year: 2012,
+            strings: 6,
+            color: "gray",
+            plugedIn: false,
+            soundOn: false,
+            plugIn: function () {
+                this.plugedIn = true;
+            },
+            unplug: function () {
+                this.plugedIn = false;
+            },
+            sound: function () {
+                if (this.plugedIn == true) {
+                    this.soundOn = true;
+                    console.log("Enjoy the sound of your guitar!");
+                }
+                else {
+                    console.log("Plug the guitar in!");
+                }
+            },
+        };
+        guitar1.sound();
+        guitar1.plugIn();
+        guitar1.sound();
+        guitar1.unplug();
+        guitar1.sound();*/
+
+        /*class guitar {
+            constructor(brand, year, color) {
+                this.brand = brand;
+                this.year = year;
+                this.color = color;
+            }
+            show() {
+                console.log(this.brand, this.year, this.color);
+            }
+        }
+        const guitar1 = new guitar('Fender', 2012, 'gray');
+        guitar1.show();
+
+        const guitar2 = new guitar('Ibanez', 2018, 'blue');
+        guitar2.show();*/
+
+
+        //////////////////////////// Task 1 /////////////////////
+        const chisloObject = {
+            edinici: null,
+            desyatki: null,
+            sotni: null,
+        };
+        function numberToObject(n) {
+            if (n > 999) {
+                console.log("Enter number less than 1000");
+            }
+            else {
+                chisloObject.edinici = n % 10;
+                chisloObject.desyatki = ((n % 100) - ((n % 100) % 10)) / 10;
+                chisloObject.sotni = ((n % 1000) - ((n % 1000) % 100)) / 100;
+            }
+        }
+        numberToObject(123);
+        console.log("Единицы: ", chisloObject.edinici);
+        console.log("Десятки: ", chisloObject.desyatki);
+        console.log("Сотни: ", chisloObject.sotni);
+
+        /////////////////////////////// Task 2 /////////////////////////
+
+        class product {
+            constructor(name, price, currency) {
+                this.name = name;
+                this.price = price;
+                this.currency = currency;
+            }
+        }
+        const product1 = new product('Keyboard', 1000, 'RUB');
+        const product2 = new product('Mouse', 700, 'RUB');
+        const product3 = new product('Phone', 15000, 'RUB');
+        const product4 = new product('USB-cable', 200, 'RUB');
+        const product5 = new product('camera', 800, 'RUB');
+
+        /*let summa = 0;           /////////////////////// старое решение /////////////////////
+        const busket = {
+            sum(product, kolichestvo) {
+                summa += product.price * kolichestvo;
+                return summa;
+            },
+            deleteProduct(product, kolichestvo) {
+                summa -= product.price * kolichestvo;
+                return summa;
+            }
+        }
+        busket.sum(product1, 2);
+        busket.sum(product2, 6);
+        busket.sum(product3, 3);
+        busket.sum(product4, 2);
+        console.log('Товаров в корзине на сумму: ', summa);
+        busket.deleteProduct(product4, 1);
+        busket.deleteProduct(product2, 5);
+        console.log('Товаров в корзине на сумму: ', summa);*/
+
+        const basket = {
+            items: [],                                                 // массив товаров в корзине
+            countBasketPrice: function () {                            // подсчет стоимости корзины
+                let sum = 0;
+                for (let i = 0; i < this.items.length; i++) {
+                    sum += this.items[i][0].price * this.items[i][1];
+                }
+                return sum;
+            },
+            addItem: function (item, kolvo) {                          // добавление товаров в корзину: товар и количество
+                this.items.push([item, kolvo]);
+            },
+        }
+        basket.addItem(product1, 2);
+        basket.addItem(product2, 3);
+        basket.addItem(product3, 1);
+        basket.addItem(product4, 5);
+        basket.addItem(product5, 1);
+        console.log('Стоимость корзины: ', basket.countBasketPrice());
+
+    </script>
 </head>
 
 <body>
-    <h1>Hello, Lesson 4!</h1>
-    <h2>Trying to understand GIT</h2>
+    <h1>Добро пожаловать! Добро пожаловать в Сити-17!</h1>
 </body>
 
 </html>
