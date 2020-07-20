@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task4-1</title>
+    <script>
+        input_value = prompt('Enter number between 0 and 999: ');
+        let input_num = parseInt(input_value);
+        function numToObject(num) {
+            if (num >= 0 && num <= 999) {
+                const numObj = {
+                    hungreds: parseInt(num / 100),
+                    tens: parseInt((num % 100) / 10),
+                    ones: parseInt((num % 100) % 10),
+                }
+                return console.log(numObj);
+            }
+            else {
+                const incorrectObj = {}
+                console.log("Your number more than 999 or uncorrect input!", incorrectObj)
+            }
+        }
+        numToObject(input_num)
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
