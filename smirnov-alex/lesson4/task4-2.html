@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4-2</title>
+</head>
+
+<body>
+    <script>
+        class Item {
+            constructor(name, price, currency, amount) {
+                this.name = name;
+                this.price = price;
+                this.currency = currency;
+                this.amount = amount;
+            }
+
+            cost() {
+                let cost = this.price * this.amount;
+                return cost;
+            }
+        }
+        const item1 = new Item('Keyboard', 1000, 'RUB', 1);
+        const item2 = new Item('Mouse', 700, 'RUB', 2);
+        const item3 = new Item('Videocard', 25000, 'RUB', 1);
+        const item4 = new Item('Monitor', 7000, 'RUB', 2);
+
+        const shop = [item1, item2, item3, item4];
+        /* добавил для проверки работы по отдельности
+        console.log(shop);
+        let cost1 = item1.price * item1.amount;
+        console.log(cost1);
+        console.log(item2.cost());
+        */
+
+        function countBasketPrice(items) {
+            let amount = 0;
+            /*
+            for (i = 0; i < items.length; i++) {
+                amount += i.price * i.amount;
+            }
+            */
+            for (i in items) {
+                //amount += i.cost();
+                amount += i.price * i.amount;
+            }
+            return amount;
+        }
+        console.log('Общая стоимость товаров: ', countBasketPrice(shop));
+    </script>
+</body>
+
+</html>
