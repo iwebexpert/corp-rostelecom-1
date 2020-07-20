@@ -1,7 +1,7 @@
 // HW-1
 // С помощью цикла while вывести все простые числа в промежутке от 0 до 100.
 
-console.log('HW-1:');
+console.log('HW 3-1:');
 let prime = 1;
 while (prime <= 100) {
     if (prime === 1) {
@@ -26,7 +26,7 @@ while (prime <= 100) {
 // Организовать такой массив для хранения товаров в корзине;
 // Организовать функцию countBasketPrice, которая будет считать стоимость корзины.
 
-console.log('HW-2:');
+console.log('HW 3-2:');
 const shop = [
     ["Keyboard", 1000, "RUB", 1],
     ["Mouse", 700, "RUB", 2],
@@ -49,7 +49,7 @@ console.log('Общая стоимость товаров: ', countBasketPrice(s
 // HW-3
 // Вывести с помощью цикла for числа от 0 до 9, не используя тело цикла.
 
-console.log('HW-3:');
+console.log('HW 3-3:');
 for (let i = 0; i < 10; console.log(i++)) {
 }
 
@@ -57,10 +57,9 @@ for (let i = 0; i < 10; console.log(i++)) {
 // HW-4
 // Нарисовать пирамиду из 20 рядов с помощью console.log
 
-console.log('HW-4:');
+console.log('HW 3-4:');
 let str = '*';
 console.log(str);
 for (let i = 1; i < 20; i++) {
     console.log(str += '*');
 }
-
