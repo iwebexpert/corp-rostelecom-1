@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        class Product {
+            constructor(name, price, count) {
+                this._name = name;
+                this._price = price;
+                this._count = count;
+            }
+
+            get Count() {
+                return this._count;
+            }
+
+            get Сost() {
+                return this.Count * this._price;
+            }
+        }
+
+        class Products {
+            constructor(products) {
+                this._products = products;
+            }
+
+            get Counts() {
+                let counts = 0;
+                for (let i = 0; i < this._products.length; i++)
+                    counts += this._products[i].Count;
+                return counts;
+            }
+
+            get Сosts() {
+                let сosts = 0;
+                for (let i = 0; i < this._products.length; i++)
+                    сosts += this._products[i].Сost;
+                return сosts;
+            }
+        }
+
+        let products = new Products(
+            [
+                new Product("Клавиатура", 1000, 2),
+                new Product("Мышка", 100, 20),
+                new Product("Коврик", 10, 20),
+                new Product("Конфеты", 1, 100)
+            ])
+            ;
+
+        console.log("Товаров в корзине " + products.Counts + " шт." + " на общую сумму " + products.Сosts + " RUB");
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

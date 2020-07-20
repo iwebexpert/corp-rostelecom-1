@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        class NumberParse {
+            constructor(number) {
+                this._numberInput = number;
+                this.Number = number;
+            }
+
+            get Number() {
+                return this._number;
+            }
+
+            set Number(value) {
+                if (value >= 0 & value < 1000)
+                    this._number = value;
+                else
+                    this._number = null;
+            }
+
+            get getHundreds() {
+                return parseInt(this.Number / 100);
+            }
+
+            get getDecades() {
+                return parseInt((this.Number - this.getHundreds * 100) / 10);
+            }
+
+            get getUnits() {
+                return parseInt(this.Number - this.getHundreds * 100 - this.getDecades * 10);
+            }
+
+            Parse() {
+                console.log('Искомое число: ' + this._numberInput);
+                if (this.Number != null)
+                    console.log('hundreds: ' + this.getHundreds + ", decades: " + this.getDecades + ", units: " + this.getUnits);
+                else
+                    console.log('Искомое число выходит за диапазон от 0 до 999');
+            }
+        }
+
+        let number = new NumberParse(123);
+        number.Parse(); /*Выводим в консоль распарсинное значение*/
+        console.log(number.Number); /* если число выходит за диапазон 0..999, то выводит null*/
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
