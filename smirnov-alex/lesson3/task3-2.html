@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3-2</title>
+</head>
+
+<body>
+    <script>
+        const shop = [
+            ["Keyboard", 1000, "RUB", 1],
+            ["Mouse", 700, "RUB", 2],
+            ["Videocard", 25000, "RUB", 1],
+            ["Monitor", 7000, "RUB", 2]
+        ];
+
+        function countBasketPrice(items) {
+            let amount = 0;
+            //TODO - расчет стоимости
+            for (i = 0; i < shop.length; i++) {
+                    let item_sum = 0;
+                    item_sum = shop[i][1] * shop[i][3];
+                    amount += item_sum;
+                
+            }
+            return amount;
+        }
+            console.log('Общая стоимость товаров: ', countBasketPrice(shop));
+    </script>
+</body>
+
+</html>
