@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Homework lesson 4</title>
+    <script>
+        // -------------------------------Задание № 1-----------------------------
+        // Просим ввести число и вызываем проверку введенного значения
+        function getNumber() {
+            let number = prompt('Введите число от 0 до 999:', '0');
+            validNumber(number);
+        }
+        // Проверяем значение
+        function validNumber(number) {
+            if (number == null) {
+                return console.log('Приходите в другой раз!');
+            }
+            if (number.trim().length === 0) {
+                console.log('Пустая строка! Введите что-нибудь!');
+                getNumber();
+            }
+            if (+number >= 0) {
+                number = Math.round(+number);
+                // Значение подходит для дальнейшей работы и вызываем функцию преобразования
+                numberToObject(number);
+            } else {
+                console.log('Не похоже на число от 0 до 999! Введите что просят!');
+                getNumber();
+            }
+        }
+        // Преобразуем число в объект
+        function numberToObject(number) {
+            number += '';
+            const lengthOfNumber = ['units', 'dozens', 'hundreds'];
+            let numberObject = {};
+            let i = number.length - 1;
+            let j = 0;
+            if (number.length > 3) {
+                return console.log('Введенное число больше 999!', numberObject);
+            }
+            for (; i >= 0; i--, j++) {
+                numberObject[lengthOfNumber[i]] = number[j];
+            }
+            return console.log(numberObject);
+        }
+
+        getNumber();
+
+        // -------------------------------Задание № 2 и 3-----------------------------
+        // Постарался создать единую сущность товара и для примера сделал ему метод который вызывается если товар добавляется в корзину.
+        // Также хотел реализовать сущность корзины. В теории понимаю, как она должна выглядеть, но не хватает навыков чтобы описать это кодом.
+        class Product {
+            constructor(id, category, name, price, value, description, characteristics, countOnStorage) {
+                this.id = id;
+                this.category = category;
+                this.name = name;
+                this.price = price;
+                this.value = value;
+                this.description = description;
+                this.characteristics = characteristics;
+                this.countOnStorage = countOnStorage;
+
+            }
+            inBasket() {
+                return [this.name, this.price];
+            }
+        }
+        class Basket {
+            constructor(products) {
+                this.products = products;
+            }
+            summ() {
+                let finalPrice = 0;
+                for (let i = 0; i < this.products.length; i++) {
+                    finalPrice += this.products[i][0][1] * this.products[i][1];
+                }
+                console.log(finalPrice);
+            }
+        }
+        const product1 = new Product(1, 'Keyboards', 'Super keyboard 2000', 10000, 'RUB', 'Super puper keybord for your hands!', 'Object characteristics', 322);
+        const product2 = new Product(2, 'Mouses', 'Super mouse 2001', 7500, 'RUB', 'Super puper mouse for your hands!', 'Object characteristics', 183);
+        const product3 = new Product(3, 'Pens', 'Red pen', 37, 'RUB', 'Red pen 0.8mm', 'Object characteristics', 6328);
+
+        const basket1 = new Basket([[product1.inBasket(), 2], [product2.inBasket(), 5], [product3.inBasket(), 18]])
+        basket1.summ();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
