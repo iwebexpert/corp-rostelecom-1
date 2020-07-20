@@ -2,13 +2,13 @@ console.log('Домашняя работа к уроку 4');
 // Задание 1
 console.log('Задание 1');
 function EnterNumber(num) {
-    itog = {};
+    let itog = {};
     if (num < 999) {
         let hundred = Math.trunc(num / 100);
         let num2 = (num - hundred * 100);
         let decade = Math.trunc(num2 / 10);
         let units = (num2 % 10);
-        const itog = { 'единицы': units, 'десятки': decade, 'сотни': hundred };
+        itog = { 'единицы': units, 'десятки': decade, 'сотни': hundred };
         return itog;
     }
     else {
