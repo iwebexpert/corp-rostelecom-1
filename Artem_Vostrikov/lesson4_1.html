@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let numInput = prompt();
+        const numberArray = { 'units': '', 'tens': '', 'hundreds': '' }
+        function unitsTens(num) {
+            if (Number.isNaN(Number(num)) === false) {
+                if (num.length === 3) {
+                    numberArray['hundreds'] = Number(num[0])
+                    numberArray['tens'] = Number(num[1])
+                    numberArray['units'] = Number(num[2])
+                }
+                else if (num.length === 2) {
+                    numberArray['hundreds'] = '-'
+                    numberArray['tens'] = Number(num[0])
+                    numberArray['units'] = Number(num[1])
+                }
+                else if (num.length === 1) {
+                    numberArray['hundreds'] = '-'
+                    numberArray['tens'] = '-'
+                    numberArray['units'] = Number(num[0])
+                }
+                return numberArray
+            }
+            else {
+                console.log('Введено не коректное значение попробуйте ввести число от 0 до 999');
+            }
+            return numberArray
+        }
+        console.log(unitsTens(numInput))
+    </script>
+</body>
+
+</html>
