@@ -1,0 +1,29 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const basket = {
+            items: [
+                ["Notebook", 25000, "RUB", 1],
+                ["Gamepad", 5000, "RUB", 0],
+                ["Smartphone", 14000, "RUB", 1],
+                ["Lightspot", 1500, "RUB", 3]
+            ],
+            countBasketPrice: function () {
+                let price = 0;
+                for (let i = 0; i < this.items.length; i++) {
+                    price += this.items[i][1] * this.items[i][3];
+                }
+                return price;
+            },
+        };
+        console.log('Стоимость товаров: ', basket.countBasketPrice());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
