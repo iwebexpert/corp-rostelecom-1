@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>ShopObject</title>
+    <script>
+        class Item {
+            constructor(type, price, currency) {
+                this.type = type;
+                this.price = price;
+                this.currency = currency;
+            }
+
+            show() {
+                return 'Type: ' + this.type + '\tPrice: ' + this.price + '\tCurrency: ' + this.currency;
+            }
+        }
+
+        const shoppingCart = {
+            items: [],
+            checkInItems(objectItems) { //check item (object) into items
+                let checkResult = false;
+                if (this.items.length === 0) { // check empty
+                    return checkResult;
+                } else for (let i = 0; i < this.items.length; i++) {
+                    if (JSON.stringify(this.items[i][0]) === JSON.stringify(objectItems)) {
+                        checkResult = i;
+                    }
+                }
+                return checkResult;
+            },
+            addItems(objectItems) {
+                if (this.checkInItems(objectItems) !== false) {
+                    this.items[this.checkInItems(objectItems)][1]++;
+                } else {
+                    this.items.push([objectItems, 1]);
+                }
+            },
+            show() {
+                for (i = 0; i < this.items.length; i++) {
+                    console.log(this.items[i][0].show(), `\t|\tQuantity: ${this.items[i][1]}`);
+                }
+
+
+            },
+            countBasketPrice() {
+                let amountPrice = 0;
+                for (i = 0; i < this.items.length; i++) {
+                    amountPrice += this.items[i][0].price * this.items[i][1];
+                }
+                return amountPrice;
+            }
+
+        }
+        //Add item
+        const keyboard = new Item("Keyboard", 1500, "RUB");
+        const mouse = new Item("Mouse", 500, "RUB");
+        const monitor = new Item("Monitor", 10000, "RUB");
+        const cover = new Item("Cover", 750, "RUB");
+        const table = new Item("Table", 6500, "RUB");
+        const bucket = new Item("Bucket", 1100, "RUB");
+        const speakers = new Item("Speakers", 3000, "RUB");
+        const videoCard = new Item("Video card", 27000, "RUB");
+        const processor = new Item("Processor", 30000, "RUB");
+        const audioCard = new Item("Audio card", 5000, "RUB");
+        const networkCard = new Item("Network card", 3500, "RUB");
+
+        //Show item
+        console.log(keyboard.show());
+        console.log(audioCard.show());
+        console.log(networkCard.show());
+
+        // Add items in Shopping Cart
+        shoppingCart.addItems(keyboard);
+        shoppingCart.addItems(keyboard);
+        shoppingCart.addItems(keyboard);
+        shoppingCart.addItems(keyboard);
+        shoppingCart.addItems(monitor);
+        shoppingCart.addItems(monitor);
+        shoppingCart.addItems(table);
+        shoppingCart.addItems(table);
+        shoppingCart.addItems(table);
+        shoppingCart.addItems(bucket);
+        shoppingCart.addItems(processor);
+
+        // Show Shopping Cart
+        shoppingCart.show();
+
+        console.log("Full Price:", shoppingCart.countBasketPrice(), "RUB");
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

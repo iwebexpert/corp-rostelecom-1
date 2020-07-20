@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>HomeWork41</title>
+    <script>
+        function convertNumberToObject(num) {
+            let str = String(num); // convert Number to String
+
+            const objString = { // Define Object's Structure
+                units: undefined,
+                tens: undefined,
+                hundreds: undefined,
+                show() {
+                    console.log('Units: ', this.units);
+                    console.log('Tens: ', this.tens);
+                    console.log('Hundreds: ', this.hundreds);
+                }
+            };
+
+            if (num < 0) { //validation check
+                console.log("Number less then 0");
+                return objString;
+            } else if (num >= 0 && num <= 999) {
+                while (str.length !== 3) { // Normalization
+                    str = '0' + str;
+                }
+                objString.units = str[2];
+                objString.tens = str[1];
+                objString.hundreds = str[0];
+                return objString;
+
+            } else if (num > 999) { //validation check
+                console.log("Number is greater then 999");
+                return objString;
+            }
+        }
+
+        let numberUse;
+        numberUse = prompt("Введите число от 0 до 999:",0);
+        let objUse = convertNumberToObject(numberUse);
+        objUse.show();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

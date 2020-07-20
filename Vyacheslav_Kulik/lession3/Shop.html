@@ -33,9 +33,9 @@
         console.log(shoppingCart);
 
         function countBasketPrice(shopCart) { //  function for calculating full Shopping Cart price
-            amountPrice = 0;
+            let amountPrice = 0;
             for(let i = 0; i < shopCart.length; i++){
-                amountPrice = amountPrice + shopCart[i][1];
+                amountPrice += shopCart[i][1];
             }
             return amountPrice;
         }
