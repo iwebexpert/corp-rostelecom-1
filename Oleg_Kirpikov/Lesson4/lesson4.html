@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html lang="ru">
+
+<head>
+    <title>Lesson 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        console.log('------ Task 1. --------')
+
+        function splittedNumber(number) {
+            if (number < 0 || number > 999) {
+                console.log('Number not between 0 and 999');
+            } else {
+                number += '';
+                this.units = number[number.length - 1];
+                this.decimals = number[number.length - 2];
+                this.hundreds = number[number.length - 3];
+            }
+        };
+
+        console.log('0 - ', new splittedNumber(0));
+        console.log('9 - ', new splittedNumber(9));
+        console.log('19 - ', new splittedNumber(19));
+        console.log('179 - ', new splittedNumber(179));
+        console.log('1000 - ', new splittedNumber(1000));
+
+
+        console.log('------ Task 2,3. --------')
+
+
+        var shoppingCart = {
+            items: [],
+
+            getItems: function () {
+                return this.items
+            },
+
+            addItem: function (product, count) {
+                let Item = {
+                    product: product,
+                    count: count,
+                };
+                this.items.push(Item)
+            },
+
+            countBasketPrice: function () {
+                let total = 0;
+                for (let item of this.items) {
+                    total += item.count * item.product.price;
+                };
+                return total;
+            },
+        };
+
+        function product(name, price, currency) {
+            this.name = name;
+            this.price = price;
+            this.currency = currency;
+        };
+
+
+        product1 = new product('Item1', 100, 'RUB');
+        product2 = new product('Item2', 200, 'RUB');
+        product3 = new product('Item3', 250, 'RUB');
+
+        shoppingCart.addItem(product1, 1);
+        shoppingCart.addItem(product2, 2);
+        shoppingCart.addItem(product3, 1);
+        console.log('Total:  ' + shoppingCart.countBasketPrice());
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
