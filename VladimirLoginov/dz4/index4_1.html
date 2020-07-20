@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dz_4-1</title>
+</head>
+
+<body>
+    <script>
+
+        const parsingNamber = {
+
+            namber1: "",
+            namber10: "",
+            namber100: "",
+            textError: "",
+
+            checkTypeData: function (inputData) {
+
+                let dataInt = parseInt(inputData);
+                if (isNaN(dataInt)) {
+                    return "Ошибка ввода даных. Введены символы отличные от чисел. Введите число от 0 до 999";
+                }
+                return dataInt;
+            },
+
+            checkLenghtData: function (inputData) {
+
+                if (inputData.length > 3) {
+                    return "Ошибка ввода даных. Введёное значение имеет больше трёх символов. Введите число от 0 до 999";
+                }
+
+                if (inputData < 0) {
+                    return "Ошибка ввода даных. Введёное число меньше 0. Введите число от 0 до 999";
+                }
+                return true;
+            },
+            checkData: function (inputData) {
+                if (this.checkLenghtData(inputData) == true && typeof this.checkTypeData(inputData) == "number") {
+
+                    // console.log("OK");
+                    return this.checkTypeData(inputData);
+
+                } else {
+
+                    return false;
+                }
+            },
+            initProperty: function () {
+
+                switch (inputData.length) {
+                
+                    case 3:
+                        this.namber1 = inputData[2];
+                        this.namber10 = inputData[1];
+                        this.namber100 = inputData[0];
+                        break;
+
+                    case 2:
+                        this.namber1 = inputData[1];
+                        this.namber10 = inputData[0];
+                        break;
+
+                    case 1:
+                         this.namber1 = inputData[0];
+                        break;
+
+                    default:
+                        console.log("Что-то пошло не так");
+                        break
+
+                }
+
+            },
+        }
+
+        let inputData = prompt("Введите число от 0 до 999");
+
+        if (parsingNamber.checkData(inputData) != false) {
+
+            console.log("Введёное число " + parsingNamber.checkData(inputData));
+
+            parsingNamber["initProperty"](parsingNamber.checkData(inputData));
+
+            console.log("Свойство namber1 " + parsingNamber["namber1"]);
+            console.log("Свойство namber10 " + parsingNamber["namber10"]);
+            console.log("Свойство namber100 " + parsingNamber["namber100"]);
+
+        } else {
+
+            console.log("Введёное число " + inputData);
+            console.log("Error");
+            console.log("Проверка длины - " + parsingNamber.checkLenghtData(inputData));
+            console.log("Проверка типа данных - " + parsingNamber.checkTypeData(inputData));
+
+            parsingNamber["initProperty"](parsingNamber.checkTypeData(inputData));
+
+            console.log("Первый символ " + inputData[0]);
+            console.log("Второй символ " + inputData[1]);
+            console.log("Третий символ " + inputData[2]);
+
+        }
+
+    </script>
+</body>
+
+</html>
