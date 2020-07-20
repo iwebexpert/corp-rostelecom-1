@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        console.log('Задание № 1');
+        let num = prompt('Введите число от 0 до 999', '245');
+        const number = {};
+        if (num > 0 && num <= 999) {
+            number['единицы'] = num[num.length - 1];
+            number['десятки'] = num[num.length - 2] || 0;
+            number['сотни'] = num[num.length - 3] || 0;
+        } else { console.log('заданное число находится вне диапозона: 0 - 999') };
+        console.log(number);
+
+        console.log('Задание № 2');
+
+        class Product {
+            constructor(name, price, currency, volume) {
+                this.name = name;
+                this.price = price;
+                this.currency = currency;
+                this.volume = volume;
+            };
+            cost() {
+                return this.price * this.volume;
+            }
+        };
+        const apple = new Product("Apple", 150, "RUB", 1);
+        const orange = new Product("Orange", 80, "RUB", 2);
+        const pear = new Product("Pear", 120, "RUB", 4);
+        const plum = new Product("Plum", 160, "RUB", 3);
+
+        const basket = {
+            items: [apple, orange, pear, plum],
+            countBasketPrice() {
+                let calcCost = 0;
+                basket.items.forEach(function (item) {
+                    calcCost += item.cost();
+                });
+                console.log(calcCost);
+            },
+        };
+        basket.countBasketPrice();
+
+        // Предполагаю, что можно было бы создать глобальную переменную классу Product
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
