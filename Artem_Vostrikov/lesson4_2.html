@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const basket = {
+            prod_list: [
+                { product: 'Гитара', price: 15000, amount: 1 },
+                { product: 'Медиатор', price: 35, amount: 5 },
+                { product: 'Струны', price: 600, amount: 2 }
+            ],
+            itogBasket: function () {
+                let summaBasket = 0
+                for (i = 0; i < this.prod_list.length; i++) {
+                    document.write('<pre>',this.prod_list[i].product,':',this.prod_list[i].price,' RUR ',this.prod_list[i].amount, ' шт ', ' Сумма: ', this.prod_list[i].price * this.prod_list[i].amount,'</pre>')
+                    summaBasket += this.prod_list[i].price * this.prod_list[i].amount
+                }
+                document.write("<hr>")
+                return summaBasket
+            }
+
+        }
+        document.write("<b>К оплате: ", basket.itogBasket(), " RUR</b>")
+    </script>
+</body>
+
+</html>
