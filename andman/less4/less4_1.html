@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4_1</title>
+    <script>
+        function Obj(num) {
+            if (num > 999) console.log('Введено число больше 999');
+            /* можно было сделать сообщение об ошибке частью возвращаемого объекта 
+             {"error_message": ... , {"единицы":x, "десятки":y, "сотни":z}}
+            */
+            return (num > 999) ? {} :
+                {
+                    "units": num % 10,
+                    "ten": Math.floor((num % 100) / 10),
+                    "hundreds": Math.floor(num / 100),
+                };
+        }
+        /*test*/
+        console.log(Obj(783));
+        console.log(Obj(13));
+        console.log(Obj(9));
+        console.log(Obj(1001));
+
+
+    </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>
