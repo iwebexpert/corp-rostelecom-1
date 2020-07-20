@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson-4_3</title>
+    <script>
+        /* такой вариант 
+        product - прейскурант (каталог), который можем распечатать showProducts()
+        и получить определенный товар методом getItem()
+
+        basket - корзина, которую наполняем данными из прейскуранта (product.getItem())
+        методом basket.addItem(), куда передаем товар и количество.
+        Также можем посчитать сумму товаров в корзине методом countBasketPrice()
+        */
+
+
+        const product = {
+            items: [
+                { "name": "Cofe", "cost": 150, "curr": "RUR" },
+                { "name": "Cake", "cost": 50, "curr": "RUR" },
+                { "name": "Sugar", "cost": 15, "curr": "RUR" },
+                { "name": "Milk", "cost": 25, "curr": "RUR" },
+                { "name": "Tea", "cost": 130, "curr": "RUR" },
+                { "name": "GreenTea", "cost": 200, "curr": "RUR" },
+
+            ],
+            showProducts: function () {
+                console.log('Прейскурант:');
+                for (let i = 0; i < this.items.length; i++)
+                    console.log(this.items[i].name, ' - ', this.items[i].cost, this.items[i].curr);
+            },
+            getItem: function (item_num) {
+                return this.items[item_num] ? this.items[item_num] : {};
+            }
+        }
+
+        const basket = {
+            items: [],
+            addItem: function (item, item_count) {
+                this.items.push({ "goods": item, "count": item_count });
+            },
+            countBasketPrice: function () {
+                let amount = 0;
+                for (let i = 0; i < this.items.length; i++)
+                    amount += this.items[i].goods.cost * this.items[i].count;
+                return amount;
+
+            }
+
+        }
+
+        product.showProducts(); //Распечатать прейскурант
+
+        basket.addItem(product.getItem(0), 1);
+        basket.addItem(product.getItem(1), 2);
+        basket.addItem(product.getItem(2), 4);
+        basket.addItem(product.getItem(3), 2);
+
+        console.log(basket);
+        console.log('Выбрано товаров на сумму:', basket.countBasketPrice(), 'RUB');
+
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
