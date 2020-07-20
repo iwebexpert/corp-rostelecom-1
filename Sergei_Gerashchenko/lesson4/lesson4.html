@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+        //Задание 1
+
+        class NumParts{
+
+            constructor(number){
+                if(number>999 || number<0)
+                    console.log('Значение должно быть от 0 до 999');
+                    return null;
+                let v = number % 100;
+                this.hundreds =parseInt(number/100);
+                this.units = v % 10;
+                this.dozens = parseInt(v/10);
+            };
+        };
+
+        const p = new NumParts(1232);
+        console.log(p);
+        //Задание 2
+
+        class BasketItem {
+            constructor(name, price, currency, count){
+                this.name=name;
+                this.price = price;
+                this.currency = currency;
+                this.count = count;
+            };
+
+            get cost(){
+                return this.price * this.count;
+            }
+        };
+
+        class Basket{
+            constructor(){
+                this.items = [];
+            }
+
+            addItem(item) {
+            
+                this.items.push(item);
+            }
+
+            add(name, price, currency, count){
+                this.addItem(new BasketItem(name, price, currency, count));
+            }
+
+            get total_cost(){
+                let total = 0;
+                for(let i=0;i<this.items.length;i++){
+                    total += this.items[i].cost;
+                }
+                return total;
+            }
+        }
+
+        const basket = new Basket();
+        basket.add("Keyboard", 2000, "RUB", 1);
+        basket.add("Mouse", 1200, "RUB", 2);
+        basket.add("CompactFlash", 700, "RUB", 4);
+
+        console.log("Задание 2");
+        let basket_items = [["Keyboard", 2000, "RUB", 1],
+                    ["Mouse", 1200, "RUB", 2],
+                    ["CompactFlash", 700, "RUB", 4]];
+
+        function countBasketPrice(items)
+        {
+            let total_cost=0;
+            for(let i=0; i<items.length; i++){
+                total_cost += items[i][1]*items[i][3];
+            }
+            return total_cost;
+        }
+
+        console.log(basket.total_cost);
+
+
+        //Задание 3
+
+        //Задание 4
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
