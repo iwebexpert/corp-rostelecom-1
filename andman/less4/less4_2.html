@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson-4_2</title>
+    <script>
+        const basket = {
+            items: [{ "name": "Cofe", "cost": 150, "curr": "RUR", "count": 2 },
+            { "name": "Cake", "cost": 50, "curr": "RUR", "count": 4 },
+            { "name": "Sugar", "cost": 15, "curr": "RUR", "count": 1 },
+            { "name": "Milk", "cost": 25, "curr": "RUR", "count": 1 },
+            ],
+            countBasketPrice: function () {
+                let amount = 0;
+                for (let i = 0; i < this.items.length; i++)
+                    amount += this.items[i].cost * this.items[i].count;
+                return amount;
+            }
+        }
+
+        console.log(basket);
+        console.log('Выбрано товаров на сумму:', basket.countBasketPrice(), 'RUB');
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
