@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function numberToStringObj(num) {
+            let numstr = num + "";
+            if (num > 999) {
+                console.log("Error: num too mutch(>999)");
+                return null;
+            }
+            else {
+                return { units: numstr[2], dozens: numstr[1], hundreds: numstr[0] };
+            }
+
+        }
+        console.log("console.log(numberToStringObj(23335))")
+        console.log(numberToStringObj(23335))
+        console.log("console.log(numberToStringObj(235))")
+        console.log(numberToStringObj(235))
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

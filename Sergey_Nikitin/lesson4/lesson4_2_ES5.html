@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        'use strict';
+        function product(_title, _price, _priceType) {
+            this.title = _title;
+            this.price = _price;
+            this.priceType = _priceType;
+        }
+        function backetUnit(_prod, _count) {
+            this.product = _prod;
+            this.count = _count;
+
+        }
+        function backet() {
+            this.shopBin = new Array(0);
+
+            this.add = function (_backetUnit) {
+                for (let i = 0; i < this.shopBin.length; i++) {
+                    if (this.shopBin[i].product.title === _backetUnit.product.title) {
+                        this.shopBin[i].count += _backetUnit.count;
+                        return true;
+                    }
+
+                }
+                this.shopBin.push(_backetUnit);
+            }
+            this.countBasketPrice = function () {
+                let res = 0
+                for (let i = 0; i < this.shopBin.length; i++) {
+                    res += (parseInt(this.shopBin[i].product.price) * parseInt(this.shopBin[i].count));
+
+                }
+                return res;
+            }
+        }
+        const backetCurrent = new backet();
+        backetCurrent.add(new backetUnit(new product("Материнка", 10000, "RUB"), 1));
+        backetCurrent.add(new backetUnit(new product("Проц", 33000, "RUB"), 1));
+        backetCurrent.add(new backetUnit(new product("Плашка оперативы", 5000, "RUB"), 2));
+        backetCurrent.add(new backetUnit(new product("Видяха", 40000, "RUB"), 1));
+        backetCurrent.add(new backetUnit(new product("Блок питалова", 10000, "RUB"), 1));
+        backetCurrent.add(new backetUnit(new product("Корпус", 4000, "RUB"), 1));
+        backetCurrent.add(new backetUnit(new product("Кулер", 1500, "RUB"), 1));
+        console.log("Корзина:", backetCurrent);
+        console.log("Цена компа=", backetCurrent.countBasketPrice());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

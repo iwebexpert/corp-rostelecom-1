@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //У меня только 1 мысль как реализовать это задание 
+        //-это наследование классов 
+        'use strict';
+        class product {
+            constructor(_title, _price, _priceType) {
+                this.title = _title;
+                this.price = _price;
+                this.priceType = _priceType;
+            }
+        }
+        class backetUnit extends product { //собственно наследование 
+            constructor(_title, _price, _priceType, _count) {
+                super(_title, _price, _priceType)
+                this.count = _count;
+            }
+            getSumPrice() {
+                return parseInt(this.price) * parseInt(this.count);
+            }
+
+        }
+        class backet {
+
+            constructor() {
+                this.shopBin = new Array(0);
+            }
+            add(_backetUnit) {
+                for (let i = 0; i < this.shopBin.length; i++) {
+                    if (this.shopBin[i].title === _backetUnit.title) {
+                        this.shopBin[i].count += _backetUnit.count;
+                        return true;
+                    }
+
+                }
+                this.shopBin.push(_backetUnit);
+            }
+            countBasketPrice() {
+                let res = 0
+                for (let i = 0; i < this.shopBin.length; i++) {
+                    res += (this.shopBin[i].getSumPrice());
+
+                }
+                return res;
+            }
+        }
+        const backetCurrent = new backet();
+        backetCurrent.add(new backetUnit("Материнка", 10000, "RUB", 1));
+        backetCurrent.add(new backetUnit("Проц", 33000, "RUB", 1));
+        backetCurrent.add(new backetUnit("Плашка оперативы", 5000, "RUB", 2));
+        backetCurrent.add(new backetUnit("Видяха", 40000, "RUB", 1));
+        backetCurrent.add(new backetUnit("Блок питалова", 10000, "RUB", 1));
+        backetCurrent.add(new backetUnit("Корпус", 4000, "RUB", 1));
+        backetCurrent.add(new backetUnit("Кулер", 1500, "RUB", 1));
+        console.log("Корзина:", backetCurrent);
+        console.log("Цена компа=", backetCurrent.countBasketPrice());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
