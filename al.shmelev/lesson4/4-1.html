@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function chislo(item) {
+            this.units = item % 10;
+            this.tens = ((item - this.units) / 10) % 10;
+            this.hundreds = (item - (this.units + this.tens * 10)) / 100;
+        };
+        const item245 = new chislo(245);
+        console.log(item245);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
