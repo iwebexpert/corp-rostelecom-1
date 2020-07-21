@@ -1,0 +1,205 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.products {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &.cart {
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid lightgrey;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        & .row {
+            width: 100%;
+            border-bottom: 1px solid lightgrey;
+            padding: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            transition: box-shadow 0.5s;
+
+            &:hover {
+                box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+            }
+    
+            & .product {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+    
+                & > .product__name {
+                    font-weight: bold;
+                    padding: 5px;
+                    flex-grow: 1;
+                }
+        
+                & > .product__price {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+        
+                    & > .price__text {
+                        color: orange;
+                        font-weight: bold;
+                        padding: 5px;
+                    }
+                    & > .price__currency {
+                        padding: 5px;
+                    }
+                }
+            }
+    
+            & .row__actions {
+                margin-left: 20px;
+            }
+        }
+
+        & .cart__summary {
+            width: 100%;
+            padding-top: 10px;
+            text-align: right;
+        }
+    }
+
+    & .card {
+        width: 100%;
+        margin: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 6px 3px 14px -7px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 0.5s;
+
+        &:hover {
+            box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        & .product {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+            & > .product__name {
+                font-weight: bold;
+                padding: 5px;
+                flex-grow: 1;
+            }
+    
+            & > .product__price {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+    
+                & > .price__text {
+                    color: orange;
+                    font-size: 50px;
+                    font-weight: bold;
+                    padding: 5px;
+                }
+                & > .price__currency {
+                    padding: 5px;
+                }
+            }
+        }
+    }
+
+    & .cart__currency {
+        margin-top: 10px;
+    }
+}
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: auto;
+    border-radius: 5px;
+    background-color: darken(white, 10%);
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+    &.btn-round {
+        border-radius: 30px;
+        margin: 0 2px;
+    }
+
+    &.btn-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 0;
+    }
+
+    &.btn-block {
+        width: 100%;
+    }
+
+    &:hover {
+        background-color: darken(lightgrey, 20%);
+    }
+    &:active {
+        background-color: darken(lightgrey, 20%);
+    }
+
+    &.btn-red {
+        background-color: red;
+        color: white;
+
+        &:hover {
+            background-color: darken(red, 10%);
+        }
+        &:active {
+            background-color: darken(red, 20%);
+        }
+    }
+
+    &.btn-orange {
+        background-color: orange;
+        color: white;
+
+        &:hover {
+            background-color: darken(orange, 10%);
+        }
+        &:active {
+            background-color: darken(orange, 20%);
+        }
+    }
+}
+
+// Шахматная доска
+.chess-table {
+    & td {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+
+        &.white {
+            background-color: #ffe0ad;
+            color: #efcc92;
+        }
+        &.black {
+            background-color: #964e2f;
+            color: #803d20;
+        }
+    }
+}
