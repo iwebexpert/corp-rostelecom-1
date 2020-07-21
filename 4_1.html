@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit_to_string</title>
+    <script>
+        let digit = prompt('Введите положительное трехзначное число', '');
+
+        function show_symbols(dig) {
+                            console.log('Единицы', dig[0]);
+                            console.log('Десятки', dig[1]);
+                            console.log('Сотни', dig[2]);
+                            }
+
+        function check(dig) {
+            if (dig == '') {
+                console.log('Вы не ввели число');
+                dig = null;
+                return (dig);
+                } else if (Number(dig) < 0 || Number(dig) > 999) {
+                    console.log('Вы ввели не трехзначное число или число отрицательное');
+                    dig = null;
+                    return (dig);
+                    }
+            return(dig);
+        }
+
+        if (check(digit)) {
+            show_symbols(digit);
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bsket_object</title>
+    <script>
+        class Basket{
+            constructor(item, price, quantity){
+            this.item = item;
+            this.price = price;
+            this.quantity = quantity;
+            }
+            show(){
+            console.log(this.item, this.price, this.quantity);
+            }
+        }
+
+        function finalPrice(basket){
+            let sum = 0;            
+            for (i in basket){
+                sum += basket[i].price * basket[i].quantity;
+            }
+            return (sum);
+        }
+
+
+        const item1 = new Basket('chair', 100, 2);
+        const item2 = new Basket('table', 400, 1);
+        const item3 = new Basket('lamp', 200, 1);
+        let siteBasket = [item1, item2, item3];
+
+        console.log(finalPrice(siteBasket));
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
