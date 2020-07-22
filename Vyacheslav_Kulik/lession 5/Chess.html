@@ -61,21 +61,24 @@
 
     </script>
     <style>
+        .body {
+            margin: 0;
+        }
         .container {
             width: 1300px;
             margin: 0 auto;
         }
 
         .chessBoard {
-            width: 1000px;
+            width: 100vh;
             border: 1px solid #000;
             margin: 0 auto;
         }
 
         .cell {
             border: 1px solid #000;
-            height: 100px;
-            width: 100px;
+            height: calc(100vh/10);
+            width: calc(100vh/10);
             display: flex;
             justify-content: center;
             align-items: center;
