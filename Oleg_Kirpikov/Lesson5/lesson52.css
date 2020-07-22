@@ -42,6 +42,10 @@
     background-color: beige;
 
 }
+#productId {
+    background-color: beige;
+}
+
 .errorMessage {
     color: red;
     font-size: 50px;
