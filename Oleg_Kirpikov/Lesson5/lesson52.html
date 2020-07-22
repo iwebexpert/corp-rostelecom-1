@@ -62,20 +62,36 @@
             this.htmlObj = htmlObj;
             this.products = [];
             this.updateView = function () {
-                this.htmlObj.innerHtml = '';
-                let select = document.createElement('select');
-                select.id = 'productList';
-                select.size = 1;
-                this.htmlObj.appendChild(select);
-                for (let product of this.products) {
-                    let option = document.createElement('option');
-                    option.value = product.id;
-                    option.innerText = product.name + '  Цена:' + product.price + ' руб';
-                    option.selected = false;
-                    select.appendChild(option);
-                    select.size += 1;
-                }
+                let catalogTable = document.createElement('table');
+                let titleRow = document.createElement('tr');
+                titleRow.id = 'titleCatalog';
+                let thd1 = document.createElement('th');
+                thd1.innerText = 'id';
+                let thd2 = document.createElement('th');
+                thd2.innerText = 'Наименование';
+                let thd3 = document.createElement('th');
+                thd3.innerText = 'Цена';
+                titleRow.appendChild(thd1);
+                titleRow.appendChild(thd2);
+                titleRow.appendChild(thd3);
+                catalogTable.appendChild(titleRow);
 
+                for (let product of this.products) {
+                    let productRow = document.createElement('tr');
+                    productRow.id = 'rowCatalog';
+                    let td1 = document.createElement('td');
+                    td1.innerText = product.id;
+                    let td2 = document.createElement('td');
+                    td2.innerText = product.name;
+                    let td3 = document.createElement('td');
+                    td3.innerText = product.price;
+
+                    productRow.appendChild(td1);
+                    productRow.appendChild(td2);
+                    productRow.appendChild(td3);
+                    catalogTable.appendChild(productRow);
+                };
+                this.htmlObj.appendChild(catalogTable);
             };
             this.addItem = function (item) {
                 this.products.push(item)
@@ -87,13 +103,6 @@
                     }
                 }
             }
-            this.getSelectedProduct = function () {
-                var selind = this.htmlObj.firstChild.options.selectedIndex;
-                var productId = this.htmlObj.firstChild.options[selind].value;
-                this.htmlObj.firstChild.options[selind].selected = false;
-                return this.getProductById(productId)
-            }
-
         };
 
         function init() {
@@ -116,14 +125,36 @@
             let clearButton = document.getElementById('clearBasketButton');
             clearButton.onclick = function () {
                 shoppingCart.items = [];
+                let alert = document.getElementById('alert');
+                alert.display = 'none';
+                alert.innerText = '';
                 shoppingCart.updateView();
             };
             let addProductButton = document.getElementById('addToBasketButton');
             addProductButton.onclick = function () {
-                shoppingCart.addItem(catalog.getSelectedProduct(), 1)
-                shoppingCart.updateView();
-            };
-        }
+                let id = document.getElementById('productId');
+                let alert = document.getElementById('alert');
+                alert.className = 'errorMessage';
+                if (id.value) {
+                    let product = catalog.getProductById(id.value);
+                    if (product) {
+                        alert.display = 'none';
+                        alert.innerText = '';
+                        id.value = '';
+                        shoppingCart.addItem(product, 1)
+                        shoppingCart.updateView();
+                    } else {
+                        alert.innerText = 'Id продукта не найден в каталоге';
+                        alert.display = 'block';
+                        id.value = '';
+                    }
+                } else {
+                    alert.innerText = 'Id продукта не может быть пустым';
+                    alert.display = 'block';
+                }
+            }
+
+        };
         window['catalogGlobal'] = null;
         window.onload = init;
     </script>
@@ -133,6 +164,8 @@
     <div class="container">
         <div id="catalog"></div>
         <div id="controls">
+            <div id="alert"></div>
+            <input id="productId" type=text size=30 placeholder="Введите Id продукта">
             <button id="addToBasketButton">Добавить в корзину</button>
             <button id="clearBasketButton">Очистить корзину</button>
         </div>
