@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.chessField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.TitleCell  {
+   background-color:white;
+   font-size: 40px;
+   font-weight: 300;
+   line-height: 26px;
+   color: black;     
+   width: 100px;
+   height: 100px;
+}
+.vertical  {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+
+ }
+
+ .horisontal  {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+    padding-bottom: 10px;
+ }
+ 
+.whiteCell {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: black;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+
+    background-color: beige;
+    width: 100px;
+    height: 100px;
+}
+.blackCell {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: black;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    background-color: black;
+    width: 100px;
+    height: 100px;
+}

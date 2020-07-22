@@ -1,0 +1,143 @@
+<!doctype html>
+
+<html lang="ru">
+
+<head>
+    <title>Lesson 5.2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./lesson52.css" />
+    <script>
+        var shoppingCart = {
+            items: [],
+            htmlObj: null,
+            getItems: function () {
+                return this.items
+            },
+
+            addItem: function (product, count) {
+                let Item = {
+                    product: product,
+                    count: count,
+                };
+                this.items.push(Item)
+            },
+            updateView: function () {
+                if (this.htmlObj.firstChild) {
+                    this.htmlObj.removeChild(this.htmlObj.firstChild);
+                };
+                if (this.items.length < 1) {
+                    let p = document.createElement('p');
+                    p.className = 'errorMessage';
+                    p.innerText = 'Корзина пуста';
+                    this.htmlObj.appendChild(p);
+                } else {
+                    let p = document.createElement('p');
+                    p.className = 'Message';
+                    let total = this.countBasketPrice();
+                    p.innerText = 'В корзине: ' + total.count + ' товаров на сумму ' + total.sum + ' рублей';
+                    this.htmlObj.appendChild(p);
+                }
+            },
+
+            countBasketPrice: function () {
+                let totalSum = 0;
+                let totalItems = 0;
+                for (let item of this.items) {
+                    totalSum += item.count * item.product.price;
+                    totalItems += item.count;
+                };
+                return { sum: totalSum, count: totalItems };
+            },
+        };
+
+        function productClass(id, name, price, currency) {
+            this.id = id;
+            this.name = name;
+            this.price = price;
+            this.currency = currency;
+        };
+
+        function catalogClass(htmlObj) {
+            this.htmlObj = htmlObj;
+            this.products = [];
+            this.updateView = function () {
+                this.htmlObj.innerHtml = '';
+                let select = document.createElement('select');
+                select.id = 'productList';
+                select.size = 1;
+                this.htmlObj.appendChild(select);
+                for (let product of this.products) {
+                    let option = document.createElement('option');
+                    option.value = product.id;
+                    option.innerText = product.name + '  Цена:' + product.price + ' руб';
+                    option.selected = false;
+                    select.appendChild(option);
+                    select.size += 1;
+                }
+
+            };
+            this.addItem = function (item) {
+                this.products.push(item)
+            };
+            this.getProductById = function (id) {
+                for (let item of this.products) {
+                    if (item.id == id) {
+                        return item
+                    }
+                }
+            }
+            this.getSelectedProduct = function () {
+                var selind = this.htmlObj.firstChild.options.selectedIndex;
+                var productId = this.htmlObj.firstChild.options[selind].value;
+                this.htmlObj.firstChild.options[selind].selected = false;
+                return this.getProductById(productId)
+            }
+
+        };
+
+        function init() {
+            product1 = new productClass(1, 'Item1', 100, 'RUB');
+            product2 = new productClass(2, 'Item2', 200, 'RUB');
+            product3 = new productClass(3, 'Item3', 250, 'RUB');
+
+            const catalog = new catalogClass(document.getElementById('catalog'));
+            window['catalogGlobal'] = catalog;
+            shoppingCart.htmlObj = document.getElementById('basket');
+            console.log(shoppingCart.htmlObj);
+
+            catalog.addItem(product1);
+            catalog.addItem(product2);
+            catalog.addItem(product3);
+            catalog.updateView();
+            shoppingCart.updateView();
+
+
+            let clearButton = document.getElementById('clearBasketButton');
+            clearButton.onclick = function () {
+                shoppingCart.items = [];
+                shoppingCart.updateView();
+            };
+            let addProductButton = document.getElementById('addToBasketButton');
+            addProductButton.onclick = function () {
+                shoppingCart.addItem(catalog.getSelectedProduct(), 1)
+                shoppingCart.updateView();
+            };
+        }
+        window['catalogGlobal'] = null;
+        window.onload = init;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="catalog"></div>
+        <div id="controls">
+            <button id="addToBasketButton">Добавить в корзину</button>
+            <button id="clearBasketButton">Очистить корзину</button>
+        </div>
+        <div id="basket"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+* {
+    margin:0;
+    padding:0;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#catalog {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: black;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+
+    background-color: beige;
+
+}
+#catalog select {
+    width:500px;
+    background-color: beige;
+    appearance: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#basket {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: lightgreen;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    width:500px;
+    background-color: beige;
+
+}
+.errorMessage {
+    color: red;
+    font-size: 50px;
+}
+.Message {
+    color: black;
+    font-size: 25px;
+}
