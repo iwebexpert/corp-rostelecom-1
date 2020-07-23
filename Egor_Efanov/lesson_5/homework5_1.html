@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chessBoard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 800px;
+            height: 800px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        .row {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .board {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cell {
+            border: 2px black solid;
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        .cellHidden {
+            width: 35px;
+            border: none;
+            flex-grow: 1;
+        }
+
+        .cellCol {
+            border: none;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .cellRow {
+            display: flex;
+            align-items: center;
+
+            border: none;
+            flex-grow: 1;
+        }
+
+        .num {
+            width: 100%;
+            text-align: right;
+            font-size: 20px;
+            padding-right: 10px;
+        }
+
+        .char {
+            padding-top: 20px;
+            width: 100%;
+            text-align: center;
+            padding-right: 10px;
+            font-size: 20px;
+        }
+
+        .white {
+            background-color: white;
+        }
+
+        .black {
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container"></div>
+
+
+    <script>
+        window.onload = function () {
+            document.querySelector('.container').appendChild(getBoard(count));
+        }
+        const count = 8;
+
+        function getChar(i) {
+            let char = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+            return char[i];
+        }
+
+        function getBoard(count) {
+            let board = document.createElement('div');
+            board.className = "board";
+
+            for (let i = 0; i <= count; i++) {
+                let row = document.createElement('div');
+                row.className = "row";
+
+                for (let j = 0; j <= count; j++) {
+                    let col = document.createElement('div');
+                    col.className = "cell";
+
+                    if (i == 0 && j == 0) {
+                        col.classList.add("cellHidden");
+                    }
+                    if (i != 0 && j == 0) {
+                        col.classList.add("cellCol");
+                        col.innerHTML = '<div class = "num">' + (count - i + 1) + '</div>';
+                    }
+                    if (i == 0 && j != 0) {
+                        col.classList.add("cellRow");
+                        col.innerHTML = '<div class = "char">' + getChar(j - 1) + '</div>';
+
+                    }
+
+
+
+                    if (j != 0 & i != 0) {
+                        if ((i + j) % 2 == 0)
+                            col.classList.add("white");
+                        else
+                            col.classList.add("black");
+                    }
+                    row.appendChild(col);
+                }
+                board.appendChild(row);
+            }
+            return board;
+        }
+    </script>
+</body>
+
+</html>
