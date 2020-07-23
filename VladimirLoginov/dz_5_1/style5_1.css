@@ -1,0 +1,43 @@
+
+.conteiner{
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.square {
+    /* border: 1px solid black; */
+    height: 30px;
+    width: 30px;
+    text-align: center;
+}
+
+.line__one>.square:nth-child(2n) {
+  background-color: brown;
+}
+
+.line__two>.square:nth-child(2n+1) {
+  background-color: brown;
+}
+
+.line__one>.square:nth-child(1), .line__two>.square:nth-child(1) {
+  color: blanchedalmond;
+  background-color: darkred;
+}
+
+.line__one>.square:nth-child(10), .line__two>.square:nth-child(10) {
+  color: blanchedalmond;
+  background-color: darkred;
+
+  transform: rotate(180deg);
+}
+
+.line__top>.square, .line__foot>.square {
+  color: blanchedalmond;
+  background-color: darkred;
+
+}
+.line__top>.square {
+
+  transform: rotate(180deg);
+}
