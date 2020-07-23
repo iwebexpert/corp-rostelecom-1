@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>Chess</title>
+    <script>
+        window.onload = function () {
+
+            function generateChessBoard() {
+                let container = document.querySelector(".chessBoard");
+                console.log(container);
+                let letters = 'ABCDEFGH';
+
+                for (let i = 0; i < 10; i++) {
+                    let parentCellChess = document.createElement('div');
+                    parentCellChess.className = 'parentCell';
+                    container.appendChild(parentCellChess);
+                    console.log(parentCellChess);
+
+                    if (i === 0 || i === 9) { // letters ABCDEFG
+                        for (let j = 0; j < 10; j++) {
+                            let cellChess = document.createElement("div");
+                            cellChess.className = 'cell';
+                            cellChess.classList.add('cellWithoutBD'); // no border
+                            parentCellChess.appendChild(cellChess);
+                            if (j > 0 && j < 9) {
+                                let cellChessP = document.createElement("p");
+                                cellChessP.className = 'symbol';
+                                cellChessP.textContent = `${letters[j - 1]}`;  // define letters ABCDEFG
+                                cellChess.appendChild(cellChessP);
+                            }
+                        }
+                    } else { // cell
+                        for (let j = 0; j < 10; j++) {
+                            let cellChess = document.createElement("div");
+                            cellChess.className = 'cell';
+                            if (j === 0 || j === 9) { // Numbers 12345678
+                                cellChess.classList.add('cellWithoutBD'); // no border
+                                parentCellChess.appendChild(cellChess);
+                                let cellChessP = document.createElement("p");
+                                cellChessP.className = 'symbol';
+                                cellChessP.textContent = `${i}`;  // define numbers 12345678
+                                cellChess.appendChild(cellChessP);
+                            } else { // black or white cell
+                                if (j % 2 === 1 && i % 2 === 0) {
+                                    cellChess.classList.add('black');
+                                } else if (j % 2 === 0 && i % 2 === 1) {
+                                    cellChess.classList.add('black');
+                                }
+                                parentCellChess.appendChild(cellChess);
+                            }
+                        }
+                    }
+                }
+            }
+            generateChessBoard();
+        }
+
+
+    </script>
+    <style>
+        body {
+            margin: 0;
+        }
+        .container {
+            width: 1300px;
+            margin: 10px auto;
+        }
+
+        .chessBoard {
+            width: 100vh;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+
+        .cell {
+            border: 1px solid #000;
+            height: calc(100vh/10 - 4px);
+            width: calc(100vh/10 - 4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cellWithoutBD {
+            border: 0;
+        }
+
+        .parentCell {
+            display: flex;
+            justify-content: center;
+        }
+
+        .symbol {
+            font-size: 34px;
+        }
+
+        .black {
+            background-color: black;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="chessBoard"></div>
+</div>
+</body>
+</html>

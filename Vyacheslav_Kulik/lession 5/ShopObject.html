@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>ShopObject</title>
+    <script>
+
+        window.onload = function () {
+
+            class Item { // Item
+                constructor(type, price, currency) {
+                    this.type = type;
+                    this.price = price;
+                    this.currency = currency;
+                }
+
+                show() {
+                    return this.type + '\t' + this.price + '\t' + this.currency;
+                }
+            }
+
+            const itemsFull = { // All Items for 3* task
+                items: [],
+                checkInItems(objectItems) { //check item (object) into items
+                    let checkResult = false;
+                    if (this.items.length === 0) { // check empty
+                        return checkResult;
+                    } else for (let i = 0; i < this.items.length; i++) {
+                        if (JSON.stringify(this.items[i][0]) === JSON.stringify(objectItems)) {
+                            checkResult = true;
+                        }
+                    }
+                    return checkResult;
+                },
+                addItems(objectItems) { // add
+                    if (!this.checkInItems(objectItems)) {
+                        this.items.push(objectItems);
+                    }
+                },
+                searchItemsId(type) { //search Item
+                    for (let i = 0; i < this.items.length; i++) {
+                        //console.log(this.items[i])
+                        if (this.items[i].type === type) {
+                            return i;
+                        }
+                    }
+                }
+            }
+
+            const shoppingCart = {
+                items: [],
+                checkInItems(objectItems) { //check item (object) into items
+                    let checkResult = false;
+                    if (!this.items.length) { // check empty
+                        return checkResult;
+                    } else for (let i = 0; i < this.items.length; i++) {
+                        if (JSON.stringify(this.items[i][0]) === JSON.stringify(objectItems)) {
+                            checkResult = i;
+                        }
+                    }
+                    return checkResult;
+                },
+                addItems(objectItems) { // add
+                    if (this.checkInItems(objectItems) !== false) {
+                        this.items[this.checkInItems(objectItems)][1]++;
+                    } else {
+                        this.items.push([objectItems, 1]);
+                    }
+                },
+                deleteItems(objectItems) { // delete
+                    if (this.items[this.checkInItems(objectItems)][1]) {
+                        if (this.items[this.checkInItems(objectItems)][1] > 1) {
+                            this.items[this.checkInItems(objectItems)][1]--;
+                        } else {
+                            this.items.splice(this.checkInItems(objectItems), 1);
+                        }
+                    } else return 0;
+                },
+                deleteItemsAll(objectItems) { // Delete All Quantity Item
+                    if (this.checkInItems(objectItems) !== false) {
+                        this.items.splice(this.checkInItems(objectItems), 1);
+                    } else {
+                        return false;
+                    }
+                },
+                getQuantity(objectItems) { // get Quantity Item
+                    if (this.checkInItems(objectItems) !== false) {
+                        return this.items[this.checkInItems(objectItems)][1];
+                    } else {
+                        return false;
+                    }
+                },
+                show() {
+                    for (let i = 0; i < this.items.length; i++) {
+                        console.log(this.items[i][0].show(), `\t|\tQuantity: ${this.items[i][1]}`);
+                        //console.log(this.items[i][0].show(), `Quantity: ${shoppingCart.items[i][1]}`);
+                    }
+                },
+                showItem(id) { // show one item
+                    return this.items[id][0].show() + `\tQuantity: ${shoppingCart.items[id][1]}`
+                },
+                countBasketPrice() { // count Price
+                    let amountPrice = 0;
+                    for (let i = 0; i < this.items.length; i++) {
+                        amountPrice += this.items[i][0].price * this.items[i][1];
+                    }
+                    return amountPrice;
+                },
+                countQuantityItems() { // count all Quantity Items
+                    let amountQuantityItems = 0;
+                    for (let i = 0; i < this.items.length; i++) {
+                        amountQuantityItems += this.items[i][1];
+                    }
+                    return amountQuantityItems;
+                }
+
+            }
+            //Add item
+            const keyboard = new Item("Keyboard", 1500, "RUB");
+            const mouse = new Item("Mouse", 500, "RUB");
+            const monitor = new Item("Monitor", 10000, "RUB");
+            const cover = new Item("Cover", 750, "RUB");
+            const table = new Item("Table", 6500, "RUB");
+            const bucket = new Item("Bucket", 1100, "RUB");
+            const speakers = new Item("Speakers", 3000, "RUB");
+            const videoCard = new Item("Video card", 27000, "RUB");
+            const processor = new Item("Processor", 30000, "RUB");
+            const audioCard = new Item("Audio card", 5000, "RUB");
+            const networkCard = new Item("Network card", 3500, "RUB");
+
+            //Show item
+            // console.log(keyboard.show());
+            // console.log(audioCard.show());
+            // console.log(networkCard.show());
+
+            //All items
+            itemsFull.addItems(keyboard);
+            itemsFull.addItems(mouse);
+            itemsFull.addItems(monitor);
+            itemsFull.addItems(cover);
+            itemsFull.addItems(table);
+            itemsFull.addItems(bucket);
+            itemsFull.addItems(speakers);
+            itemsFull.addItems(videoCard);
+            itemsFull.addItems(processor);
+            itemsFull.addItems(audioCard);
+            itemsFull.addItems(networkCard);
+
+
+            //console.log(itemsFull);
+
+            // Add items in Shopping Cart
+            // shoppingCart.addItems(keyboard);
+            // shoppingCart.addItems(keyboard);
+            // shoppingCart.addItems(keyboard);
+            // shoppingCart.addItems(keyboard);
+            // shoppingCart.addItems(monitor);
+            // shoppingCart.addItems(monitor);
+            // shoppingCart.addItems(table);
+            // shoppingCart.addItems(table);
+            // shoppingCart.addItems(table);
+            // shoppingCart.addItems(bucket);
+            // shoppingCart.addItems(processor);
+            // shoppingCart.deleteItems(processor);
+            // shoppingCart.deleteItems(table);
+            // shoppingCart.deleteItems(table);
+            // shoppingCart.deleteItems(table);
+
+            function showAllItems(itemsFull) { //3* task
+
+                const itemsDiv = document.querySelector('.items'); // items div
+
+                const itemsHeader = document.createElement('h2');
+                itemsHeader.classList.add("itemsH2"); // h2
+                itemsHeader.textContent = 'Products'
+                itemsDiv.appendChild(itemsHeader);
+
+                for (let i = 0; i < itemsFull.items.length; i++) { // add all items from itemsFull
+
+                    const addItemDiv = document.createElement('div');
+                    addItemDiv.classList.add("itemDiv"); // div for one Item
+                    itemsDiv.appendChild(addItemDiv);
+                    const addItemP = document.createElement('p');
+                    addItemP.classList.add("itemP"); // p for one Item
+                    addItemP.textContent = `${itemsFull.items[i].type} ${itemsFull.items[i].price} ${itemsFull.items[i].currency}`
+                    addItemDiv.appendChild(addItemP);
+                    const addItemButton = document.createElement('button');
+                    addItemButton.classList.add("itemButton"); // div for one Item
+                    addItemButton.setAttribute('id', `items-${i}`) // for add to shoppingCart
+                    addItemButton.textContent = 'Buy'
+                    addItemDiv.appendChild(addItemButton);
+                }
+
+            }
+
+            function showShoppingCart(shoppingCart) { // Show Shopping Cart
+
+                const shoppingCartDiv = document.querySelector('.shoppingCart'); // shoppingCart div
+
+                const shoppingCartH2 = document.createElement('h2');
+                shoppingCartH2.classList.add("shoppingCarH2"); // h2
+                shoppingCartH2.textContent = 'Shopping Cart'
+                shoppingCartDiv.appendChild(shoppingCartH2);
+
+                const shoppingCartEmpty = document.createElement('h2');
+                shoppingCartEmpty.classList.add('shoppingCartEmpty'); // info about Empty shopping Cart
+                shoppingCartEmpty.textContent = 'Shopping Cart is empty!'
+                shoppingCartDiv.appendChild(shoppingCartEmpty);
+                if (shoppingCart.items.length !== 0) { // when shopping Cart is empty hide h2 info
+                    shoppingCartEmpty.style.display = 'none';
+                }
+
+                for (let i = 0; i < shoppingCart.items.length; i++) { // show all items from shoppingCart.items
+
+                    const addShoppingCartDiv = document.createElement('div');
+                    addShoppingCartDiv.classList.add("shoppingCartDiv"); // div for one shoppingCart
+                    shoppingCartDiv.appendChild(addShoppingCartDiv);
+                    const addShoppingCartP = document.createElement('p');
+                    addShoppingCartP.classList.add("shoppingCartP"); // p for one shoppingCart
+                    addShoppingCartP.textContent = shoppingCart.showItem(i);
+                    addShoppingCartDiv.appendChild(addShoppingCartP);
+                    const addShoppingCartButton = document.createElement('button');
+                    addShoppingCartButton.classList.add("shoppingCartButton"); // div for one shoppingCart
+                    //console.log(shoppingCart.items[i][0].type);
+                    addShoppingCartButton.setAttribute('id', `shoppingCarts-${itemsFull.searchItemsId(shoppingCart.items[i][0].type)}`) // for delete from shoppingCart
+                    addShoppingCartButton.textContent = 'Delete'
+                    addShoppingCartDiv.appendChild(addShoppingCartButton);
+                    const addShoppingCartButtonAll = document.createElement('button');
+                    addShoppingCartButtonAll.classList.add("shoppingCartButtonAll"); // div for one shoppingCart
+                    addShoppingCartButtonAll.setAttribute('id', `shoppingCartsAll-${itemsFull.searchItemsId(shoppingCart.items[i][0].type)}`) // for delete All from shoppingCart
+                    addShoppingCartButtonAll.textContent = 'Delete All'
+                    addShoppingCartDiv.appendChild(addShoppingCartButtonAll);
+                }
+
+                const amountPrice = document.createElement("p"); // total items + price
+                amountPrice.textContent = `Total: ${shoppingCart.countQuantityItems()} items worth ${shoppingCart.countBasketPrice()} RUB`;
+                amountPrice.classList.add('shoppingCartAmountPrice');
+                shoppingCartDiv.appendChild(amountPrice);
+                const deleteAllItemsFromSC = document.createElement("button"); // clear shopping cart
+                deleteAllItemsFromSC.classList.add("shoppingCartButtonDeleteAll");
+                deleteAllItemsFromSC.textContent = 'Clear Shopping Cart';
+                shoppingCartDiv.appendChild(deleteAllItemsFromSC);
+
+            }
+
+            function deleteButton() {  // Delete Button
+                const allButtonDelete = document.getElementsByClassName("shoppingCartButton"); //  get all button
+                for (let i = 0; i < allButtonDelete.length; i++) {  // click on Delete
+                    allButtonDelete[i].addEventListener('click', function () {
+                        shoppingCart.deleteItems(itemsFull.items[allButtonDelete[i].getAttribute('id').replace('shoppingCarts-', '')]);// delete from Shopping Cart
+                        reloadShoppingCart(); // reload Shopping Cart //// i don't understand how this work, but i tried it, and this works // After 10 minutes I understood how it works
+                    })
+                }
+            }
+
+            function buyButton() { // Buy Button
+                const allButtonBuy = document.getElementsByClassName("itemButton"); //  get all button
+                for (let i = 0; i < allButtonBuy.length; i++) {  // click  on Buy
+                    allButtonBuy[i].addEventListener('click', function () {
+                        shoppingCart.addItems(itemsFull.items[allButtonBuy[i].getAttribute('id').replace('items-', '')]); // тут можно было использовать просто i, но я подумал, что i может не совпадать с id товара, а класс явно указывает какой номер имеет товар внутри itemsFull.items
+                        reloadShoppingCart(); // reload
+                    })
+                }
+
+            }
+
+            function deleteAllButton() { //Delete All Button
+                const allDeleteAllButton = document.getElementsByClassName('shoppingCartButtonAll');
+                for (let i = 0; i < allDeleteAllButton.length; i++) {  // click on Delete all
+                    allDeleteAllButton[i].addEventListener('click', function () {
+                        shoppingCart.deleteItemsAll(itemsFull.items[allDeleteAllButton[i].getAttribute('id').replace('shoppingCartsAll-', '')]);// delete from Shopping Cart
+                        reloadShoppingCart(); // reload
+                    })
+                }
+
+            }
+
+            function clearShoppingCart() {
+                const clearShoppingCartButton = document.querySelector('.shoppingCartButtonDeleteAll'); // Button shoppingCartButtonDeleteAll
+                clearShoppingCartButton.addEventListener('click', function () {
+                    const getAllShoppingCartDiv = document.getElementsByClassName('shoppingCartDiv'); // Get All Div Shopping Cart
+                    for (let i = 0; i < getAllShoppingCartDiv.length; i++) {
+                        const idItems = getAllShoppingCartDiv[i].childNodes[1].getAttribute('id').replace('shoppingCarts-', ''); // Get ID Items
+                        shoppingCart.deleteItemsAll(itemsFull.items[idItems]); // Delete All Items  from Shopping Cart
+
+                    }
+                    reloadShoppingCart(); // reload
+
+                })
+
+
+            }
+
+            function reloadShoppingCart() {
+                const shoppingCartDelete = document.querySelector('.shoppingCart');
+                const shoppingCartDeleted = document.querySelectorAll('.shoppingCart > *') // delete all div Items in Shopping Cart
+                for (let j = 0; j < shoppingCartDeleted.length; j++) { //  delete old Shopping Cart
+                    shoppingCartDelete.removeChild(shoppingCartDeleted[j]);
+                }
+                showShoppingCart(shoppingCart); // Shopping Cart
+                // reload ended, but next code needed for work button "Delete" and "Delete all"
+
+                deleteButton(); // i don't understand how this work, but i tried it, and this works // After 10 minutes I understood how it works
+                deleteAllButton();
+                clearShoppingCart();
+            }
+
+            showAllItems(itemsFull);
+            reloadShoppingCart();
+            buyButton();
+
+        }
+
+
+    </script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .container {
+            width: 1300px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .itemDiv, .shoppingCartDiv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 19vw;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: beige;
+            border: 1px solid #000;
+
+        }
+
+        .itemButton {
+            margin-left: 50px;
+        }
+
+        .itemsH2, .shoppingCarH2, .shoppingCartEmpty {
+            text-align: center;
+        }
+
+        .shoppingCart {
+            margin-left: 40px;
+            align-self: flex-start;
+            width: 20vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shoppingCartDiv {
+            background-color: lightgreen;
+        }
+
+        .shoppingCartButtonDeleteAll {
+            margin-top: 40px;
+            align-self: center;
+        }
+
+        .shoppingCartAmountPrice {
+            background-color: yellow;
+            border: 1px solid #000;
+            padding: 10px;
+            width: 20vw;
+            text-align: center;
+
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <div class="items"></div>
+        <div class="shoppingCart"></div>
+    </div>
+</div>
+</body>
+</html>
