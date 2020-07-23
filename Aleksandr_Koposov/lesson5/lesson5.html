@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson5 - DOM</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./lesson5.js"></script>
+    <script>
+        window.onload = () => {
+            generateChessBoard();
+
+            initCart();
+            initProducts();
+
+            generateCart();
+            generateCatalog();
+        }
+    </script>
+</head>
+
+<body>
+    <h1>ДЗ 5</h1>
+
+    <h2>1. Генерация шахматной доски</h2>
+    <div id="chess-board"></div>
+
+    <h2>3. Генерация каталога</h2>
+    <div id="catalog"></div>
+
+    <h2>2. Генерация корзины</h2>
+    <div id="cart"></div>
+</body>
+
+</html>
