@@ -1,0 +1,39 @@
+#content
+{
+    display: block;
+    box-sizing: border-box;
+
+}
+.square{
+    flex-basis: 100px;
+    height: 100px;
+    background-color: black;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.square2{
+    flex-basis: 100px;
+    height: 100px;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row{
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+}
+.label{
+    display: block;
+    vertical-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+.catalog-item{
+    display: flex;
+    justify-content: space-between;
+}
