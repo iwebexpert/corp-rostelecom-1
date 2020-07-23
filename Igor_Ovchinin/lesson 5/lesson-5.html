@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            height: 35px;
+            width: 35px;
+        }
+
+        .chess {}
+
+        .cart {
+            padding-top: 100px;
+        }
+
+        .catalog {
+            padding-top: 100px;
+        }
+
+        .coordinates {
+            text-align: -webkit-center;
+        }
+
+        .black {
+            background-color: black;
+            border: 1px solid black;
+        }
+
+        .white {
+            background-color: white;
+            border: 1px solid black;
+        }
+
+        .product {
+            display: flex;
+            width: 400px;
+            justify-content: space-between;
+        }
+
+        .productName {}
+
+        .productCount {}
+
+        .productPrise {}
+
+        .productSum {}
+
+        .productHeadline {
+            font-size: x-large;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="chess"></div>
+    <div id="cart"></div>
+
+    <script>
+
+        function chess(num) {
+
+            var $chess = document.getElementById("chess");
+            var $table = document.createElement("table");
+
+            // массив координат столбцов
+            var rows = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p"];
+
+            for (var i = 0; i <= num; i++) {
+                var $tr = document.createElement("tr");
+                for (var j = 0; j <= num; j++) {
+                    var $td = document.createElement("td");
+                    // выводим координаты колонок в последней строке таблицы
+                    if (i == num && j > 0) {
+                        $td.classList.add("coordinates");
+                        $td.textContent = rows[j - 1];
+                        // выводим координаты строк в первой колонке таблицы
+                    } else if (i != num && j == 0) {
+                        $td.classList.add("coordinates");
+                        $td.textContent = num - i;
+                        // раскрасим ячейки основного поля.
+                    } else if (i != num) {
+                        if ((i + j) % 2 == 0) {
+                            $td.classList.add("white");
+                        } else {
+                            $td.classList.add("black");
+                        }
+                    }
+
+                    $tr.appendChild($td);
+                }
+                $table.appendChild($tr);
+            }
+
+            $chess.appendChild($table);
+        }
+
+        // вывод шахматной доски 8х8
+        chess(8);
+        // вывод доски 16хх16
+        //chess(16);
+
+
+
+
+        // объект корзина
+        var basket = {
+            // массив товаров в корзине
+            products: [],
+            // возвращент текущее представление корзины
+            basketText: function () {
+                if (this.products.length == 0) {
+                    return "Корзина пуста";
+                } else {
+                    return "В корзине: " + this.countBasketCount() + " товаров на сумму " + this.countBasketPrice() + " рублей";
+                }
+            },
+            // возвращает сумму корзины
+            countBasketPrice: function () {
+                var sum = 0;
+                for (var i = 0; i < this.products.length; i++) {
+                    sum = sum + this.products[i].price * this.products[i].count;
+                }
+                return sum;
+            },
+            // возвращает количество товара в корзине
+            countBasketCount: function () {
+                var sum = 0;
+                for (var i = 0; i < this.products.length; i++) {
+                    sum = sum + this.products[i].count;
+                }
+                return sum;
+            }
+        }
+        // функция выводит текст в заданный элемент
+        function displayText($dom, text) {
+            $dom.textContent = text;
+        }
+
+        var products = [
+            { name: 'Куртка', price: 5000, count: 2 },
+            { name: 'Штаны', price: 3000, count: 1 },
+            { name: 'Футболка', price: 1000, count: 1 },
+        ];
+        basket.products = products;
+
+        $cart = document.getElementById("cart");
+        $cart.classList.add("cart");
+
+        displayText($cart, basket.basketText());
+
+    </script>
+</body>
+
+</html>
