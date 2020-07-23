@@ -1,0 +1,31 @@
+.container {
+    width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.label, .whitebox, .blackbox {
+    width: 95px;
+    height: 95px;
+    box-sizing: border-box;
+}
+
+.label {
+    background-color: lightgray;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whitebox {
+    background-color: white;
+    border: solid black 1px;
+}
+
+.blackbox {
+    background-color: black;
+    border: solid whitesmoke 1px;
+}
