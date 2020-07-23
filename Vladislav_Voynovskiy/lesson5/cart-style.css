@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.cart {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cart-empty {
+  color: darkred;
+}
+
+.clear-button {
+  display: block;
+  margin: 0 auto;
+}
