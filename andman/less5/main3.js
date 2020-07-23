@@ -73,7 +73,8 @@ drawBasket(basket);
 /* Для 3-го задания */
 function drawCatalog(product) {
 
-    const body = document.querySelector('.catalog');
+    const body = document.querySelector('#catalog');
+    body.classList.add('catalog');
     const divCatalog = document.createElement('div');
     divCatalog.classList.add('price-list');
     const divH3 = document.createElement('h3');
