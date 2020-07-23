@@ -8,7 +8,7 @@
     <script>
 
         class Goods {
-            constructor(mfr, category, model, description, price) {
+            constructor(mfr, category, model, description, price, count) {
                 this.mfr = mfr;
                 this.category = category;
                 this.model = model;
@@ -22,7 +22,7 @@
             items: [],
             countBasketPrice: function () {
                 let ammount = 0;
-                for (let i = 1; i < basket.length; i++) {
+                for (let i = 1; i <= basket.length; i++) {
                     ammount += (item.price * item.count);
                 };
                 return console.log('Общая стоимость товаров: ', ammount);
