@@ -99,7 +99,7 @@
                     }
                 },
                 showItem(id) { // show one item
-                    return this.items[id][0].show() + `\tQuantity: ${shoppingCart.items[id][1]}`
+                    return this.items[id][0].show() + `\tQuantity: ${shoppingCart.items[id][1]}`;
                 },
                 countBasketPrice() { // count Price
                     let amountPrice = 0;
@@ -174,7 +174,7 @@
 
                 const itemsHeader = document.createElement('h2');
                 itemsHeader.classList.add("itemsH2"); // h2
-                itemsHeader.textContent = 'Products'
+                itemsHeader.textContent = 'Products';
                 itemsDiv.appendChild(itemsHeader);
 
                 for (let i = 0; i < itemsFull.items.length; i++) { // add all items from itemsFull
@@ -184,12 +184,12 @@
                     itemsDiv.appendChild(addItemDiv);
                     const addItemP = document.createElement('p');
                     addItemP.classList.add("itemP"); // p for one Item
-                    addItemP.textContent = `${itemsFull.items[i].type} ${itemsFull.items[i].price} ${itemsFull.items[i].currency}`
+                    addItemP.textContent = `${itemsFull.items[i].type} ${itemsFull.items[i].price} ${itemsFull.items[i].currency}`;
                     addItemDiv.appendChild(addItemP);
                     const addItemButton = document.createElement('button');
                     addItemButton.classList.add("itemButton"); // div for one Item
                     addItemButton.setAttribute('id', `items-${i}`) // for add to shoppingCart
-                    addItemButton.textContent = 'Buy'
+                    addItemButton.textContent = 'Buy';
                     addItemDiv.appendChild(addItemButton);
                 }
 
@@ -201,12 +201,12 @@
 
                 const shoppingCartH2 = document.createElement('h2');
                 shoppingCartH2.classList.add("shoppingCarH2"); // h2
-                shoppingCartH2.textContent = 'Shopping Cart'
+                shoppingCartH2.textContent = 'Shopping Cart';
                 shoppingCartDiv.appendChild(shoppingCartH2);
 
                 const shoppingCartEmpty = document.createElement('h2');
                 shoppingCartEmpty.classList.add('shoppingCartEmpty'); // info about Empty shopping Cart
-                shoppingCartEmpty.textContent = 'Shopping Cart is empty!'
+                shoppingCartEmpty.textContent = 'Shopping Cart is empty!';
                 shoppingCartDiv.appendChild(shoppingCartEmpty);
                 if (shoppingCart.items.length !== 0) { // when shopping Cart is empty hide h2 info
                     shoppingCartEmpty.style.display = 'none';
@@ -224,13 +224,13 @@
                     const addShoppingCartButton = document.createElement('button');
                     addShoppingCartButton.classList.add("shoppingCartButton"); // div for one shoppingCart
                     //console.log(shoppingCart.items[i][0].type);
-                    addShoppingCartButton.setAttribute('id', `shoppingCarts-${itemsFull.searchItemsId(shoppingCart.items[i][0].type)}`) // for delete from shoppingCart
-                    addShoppingCartButton.textContent = 'Delete'
+                    addShoppingCartButton.setAttribute('id', `shoppingCarts-${itemsFull.searchItemsId(shoppingCart.items[i][0].type)}`); // for delete from shoppingCart
+                    addShoppingCartButton.textContent = 'Delete';
                     addShoppingCartDiv.appendChild(addShoppingCartButton);
                     const addShoppingCartButtonAll = document.createElement('button');
                     addShoppingCartButtonAll.classList.add("shoppingCartButtonAll"); // div for one shoppingCart
-                    addShoppingCartButtonAll.setAttribute('id', `shoppingCartsAll-${itemsFull.searchItemsId(shoppingCart.items[i][0].type)}`) // for delete All from shoppingCart
-                    addShoppingCartButtonAll.textContent = 'Delete All'
+                    addShoppingCartButtonAll.setAttribute('id', `shoppingCartsAll-${itemsFull.searchItemsId(shoppingCart.items[i][0].type)}`); // for delete All from shoppingCart
+                    addShoppingCartButtonAll.textContent = 'Delete All';
                     addShoppingCartDiv.appendChild(addShoppingCartButtonAll);
                 }
 
@@ -295,7 +295,7 @@
 
             function reloadShoppingCart() {
                 const shoppingCartDelete = document.querySelector('.shoppingCart');
-                const shoppingCartDeleted = document.querySelectorAll('.shoppingCart > *') // delete all div Items in Shopping Cart
+                const shoppingCartDeleted = document.querySelectorAll('.shoppingCart > *'); // delete all div Items in Shopping Cart
                 for (let j = 0; j < shoppingCartDeleted.length; j++) { //  delete old Shopping Cart
                     shoppingCartDelete.removeChild(shoppingCartDeleted[j]);
                 }
