@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chessboard</title>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <!-- <script src="./main.js" defer></script> -->
+
+    <script>
+
+        //Функция, генерирующая шахматную доску
+
+        window.onload = function () {
+
+            let container = document.createElement('div');
+            container.className = "container";
+            document.body.appendChild(container);
+
+            arrVertical = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+            for (let i = 1; i < 9; i++) {
+                let divParent = document.createElement('div');
+                divParent.className = "parent";
+                divParent.id = "id" + i;
+                // document.body.append(divParent);
+                container.appendChild(divParent);
+
+                let parent = document.getElementById("id" + i);
+
+                for (let j = 1; j < 9; j++) {
+
+                    let divChild = document.createElement('div');
+
+                    if ((i % 2 != 0 && j % 2 == 0) || (i % 2 == 0 && j % 2 != 0)) {
+                        divChild.className = 'child black fontWhite';
+                    } else divChild.className = 'child';
+
+                    divChild.innerHTML = '<b>' + arrVertical[i - 1] + j + '</b>';
+
+                    parent.appendChild(divChild);
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        .container {
+            width: 804px;
+            /*background-color: black;*/
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .parent {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .child {
+            width: 100px;
+            height: 100px;
+            box-sizing: border-box;
+            background-color: rgb(247, 207, 77);
+        }
+
+        .fontWhite {
+            color: rgb(247, 207, 77);
+
+        }
+
+        .black {
+            background-color: black;
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
