@@ -1,0 +1,35 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    padding: 50px;
+}
+
+.cart
+{
+    text-align: center;
+    font-size: 20px;
+    color: black;
+}
+
+.cart-empty
+{
+    color: red;
+}
+
+.product
+{
+    background-color: darkgrey;
+    border: blue solid 1px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.button
+{
+    margin-top: 20px;
+}
