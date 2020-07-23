@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <!-- <script src="./main.js" defer></script> -->
+
+    <script>
+
+        const basket = {
+            shop: [
+                {
+                    product: "CPU AMD Ryzen 5 Pinnacle Ridge",
+                    price: 11990,
+                },
+                {
+                    product: "MB GIGABYTE B450M DS3H",
+                    price: 5390,
+                },
+                {
+                    product: "GPU SAPPHIRE AMD Radeon RX 580",
+                    price: 17990,
+                },
+                {
+                    product: "RAM CRUCIAL CT8G4DFS8266 DDR4 - 8Gb",
+                    price: 2590,
+                },
+                {
+                    product: "БП SEASONIC FOCUS Plus SSR-550PX",
+                    price: 9750,
+                },
+                {
+                    product: "SDD KINGSTON A400 SA400S37",
+                    price: 2795,
+                },
+                {
+                    product: "Монитор SAMSUNG C24RG50FQI 23.5",
+                    price: 13990,
+                },
+            ]
+        };
+
+        window.onload = function () {
+
+            let container = document.createElement('div');
+            container.className = "container";
+            document.body.appendChild(container);
+
+            let divBasket = document.createElement('div');
+            divBasket.className = "basket";
+            container.appendChild(divBasket);
+
+            let product = document.createElement("p")
+            product.className = "basket";
+            product.innerHTML = '<b>Корзина пуста:</b>';
+            divBasket.appendChild(product);
+
+            let button = document.createElement("button")
+            button.className = "basket";
+            button.innerHTML = "Очистить корзину";
+            divBasket.appendChild(button);
+            console.log(button);
+
+
+
+            for (let i = 0; i < basket.shop.length; i++) {
+                let divParent = document.createElement('div');
+                divParent.className = "parent";
+                divParent.id = i;
+                container.appendChild(divParent);
+
+                let parent = document.getElementById(i);
+
+                let product = document.createElement("p")
+                product.className = "product";
+                product.innerHTML = basket.shop[i].product + ' - ' + basket.shop[i].price + ' руб.';
+
+                let button = document.createElement("button")
+                button.className = "send";
+                button.id = i;
+                button.innerHTML = "Добавить товар";
+
+                parent.appendChild(product);
+                parent.appendChild(button);
+
+
+            }
+            /*
+                        const sendBtn = document.querySelectorAll('.send');
+            
+                        sendBtn[0].addEventListener('click', function () {
+                            console.log(sendBtn);
+                            shop.push(Number(basket.shop[0].price));
+                            const newMessage = getMessageMarkup(calculate());
+                            //console.log(shop);
+            
+                        });
+            
+            */
+
+            let btn = document.getElementsByClassName('send');
+            for (let i = 0; i < btn.length; i++)
+                btn[i].onclick = function () {
+                    //alert(this.innerHTML);
+                    amount.push(Number(basket.shop[this.id].price));
+                    const newMessage = getMessageMarkup(calculate());
+                }
+
+
+            let btnclear = document.getElementsByClassName('basket');
+            for (let i = 0; i < btnclear.length; i++)
+                btnclear[i].onclick = function () {
+                    amount.length = 0;
+                    const newMessage = getMessageMarkup(calculate());
+                }
+
+            const amount = [];
+
+            function calculate() {
+                let sum = 0;
+                let count = amount.length;
+
+                for (let i = 0; i < amount.length; i++) {
+                    sum = sum + amount[i];
+                }
+                let price = `В корзине: ${count} товаров на сумму ${sum} рублей:`;
+                return price;
+            }
+
+
+            function getMessageMarkup(price) {
+                const messagesConatiner = document.querySelector('b');
+                messagesConatiner.innerHTML = price;
+            }
+
+
+        }
+
+
+    </script>
+
+    <style type="text/css">
+        .container {
+            width: 700px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .parent {
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            margin: 10px;
+            box-sizing: border-box;
+            background: #efb55f;
+        }
+
+        .basket {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 20px;
+            box-sizing: border-box;
+        }
+
+
+        .product,
+        .send {
+            margin: 25px 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
