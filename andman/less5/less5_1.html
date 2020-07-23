@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson_5_1(ChessBoard)</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .board {
+        width: 480px;
+        height: 480px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cell {
+        width: 48px;
+        height: 48px;
+        font-size: 28px;
+        box-sizing: border-box;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cell-black {
+        background-color: black;
+    }
+
+    .border-left {
+        border-left: 1px solid black;
+    }
+
+    .border-top {
+        border-top: 1px solid black;
+    }
+
+    .border-right {
+        border-right: 1px solid black;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid black;
+    }
+</style>
+<script>
+    function drawChess() {
+        const body = document.querySelector('body');
+        const divBoard = document.createElement('div');
+        divBoard.classList.add('board');
+        const letters = 'ABCDEFGH';
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                const divCell = document.createElement('div');
+                divCell.classList.add('cell');
+                if (((i === 0) || (i === 9)) & ((j > 0) & (j < 9))) {//нумеруем столбцы                     
+                    divCell.innerHTML = letters[j - 1];
+                }
+                else if (((j === 0) || (j === 9)) & ((i > 0) & (i < 9))) //нумеруем строки    
+                    divCell.innerHTML = 9 - i; //обратная нумерация
+                else if ((i + j) % 2 === 1 & j != 0 & j != 9 & i != 0 & i != 9)
+                    divCell.classList.add('cell-black');//закрашиваем ячейку                                                                    
+                else if ((i + j) % 2 === 0 & i === 1 & j != 9 & j != 0) {
+                    divCell.classList.add('border-top');//закрашиваем верх
+                    if ((i === 1) & (j === 1))
+                        divCell.classList.add('border-left');//закрашиваем еще и слева
+                }
+                else if ((i + j) % 2 === 0 & i === 8 & j != 9 & j != 0) {
+                    divCell.classList.add('border-bottom');//закрашиваем низ 
+                    if ((i === 8) & (j === 8))
+                        divCell.classList.add('border-right');//закрашиваем еще и справа
+                }
+                else if ((i + j) % 2 === 0 & j === 1 & i != 9 & i != 0)
+                    divCell.classList.add('border-left');//закрашиваем слева                                   
+                else if ((i + j) % 2 === 0 & j === 8 & i != 9 & i != 0)
+                    divCell.classList.add('border-right');//закрашиваем справа
+
+                divBoard.appendChild(divCell);
+            }
+        }
+        body.appendChild(divBoard);
+    }
+
+    window.onload = drawChess;
+
+</script>
+
+<body>
+
+</body>
+
+</html>
