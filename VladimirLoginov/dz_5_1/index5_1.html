@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style5_1.css">
+    <title>dz_5-1</title>
+    <script>
+        const desk = function () {
+
+            heiding = '<h1>Шахматная доска JS</h1>',
+                contTop = '<div class="conteiner line__top">',
+                contOne = '<div class="conteiner line__one">',
+                contTwo = '<div class="conteiner line__two">',
+                contFoot = '<div class="conteiner line__foot">',
+                square = '<div class="square">',
+                div = '</div>',
+                squareContent = [
+                    [contTop, ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', '']],
+                    [contOne, ['8', '', '', '', '', '', '', '', '', '8']],
+                    [contTwo, ['7', '', '', '', '', '', '', '', '', '7']],
+                    [contOne, ['6', '', '', '', '', '', '', '', '', '6']],
+                    [contTwo, ['5', '', '', '', '', '', '', '', '', '5']],
+                    [contOne, ['4', '', '', '', '', '', '', '', '', '4']],
+                    [contTwo, ['3', '', '', '', '', '', '', '', '', '3']],
+                    [contOne, ['2', '', '', '', '', '', '', '', '', '2']],
+                    [contTwo, ['1', '', '', '', '', '', '', '', '', '1']],
+                    [contFoot, ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', '']]
+                ]
+
+
+            // console.log('start');
+            let html = heiding;
+
+            for (let i = 0; i <= 9; i++) {
+
+                html += squareContent[i][0];
+
+                for (let j = 0; j <= 9; j++) {
+
+                    html += square + squareContent[i][1][j] + '</div>';
+                }
+                html += '</div>';
+            }
+
+            return html;
+        }
+        chess = desk();
+
+        window.onload = function () {
+            alert("OK");
+            let div = document.createElement("div");
+            div.id = "second";
+            div.innerHTML = chess;
+            document.body.appendChild(div);
+        }
+
+    </script>
+</head>
+
+
+<body id="main">
+    <div id="first">
+        <h1>Шахматная доска</h1>
+        <div class="conteiner line__top">
+            <div class="square">#</div>
+            <div class="square">A</div>
+            <div class="square">B</div>
+            <div class="square">C</div>
+            <div class="square">D</div>
+            <div class="square">E</div>
+            <div class="square">F</div>
+            <div class="square">G</div>
+            <div class="square">H</div>
+            <div class="square">#</div>
+        </div>
+        <div class="conteiner line__one">
+            <div class="square">8</div>
+            <div class="square">1</div>
+            <div class="square">2</div>
+            <div class="square">3</div>
+            <div class="square">4</div>
+            <div class="square">5</div>
+            <div class="square">6</div>
+            <div class="square">7</div>
+            <div class="square">8</div>
+            <div class="square">8</div>
+        </div>
+        <div class="conteiner line__two">
+            <div class="square">7</div>
+            <div class="square">9</div>
+            <div class="square">10</div>
+            <div class="square">11</div>
+            <div class="square">12</div>
+            <div class="square">13</div>
+            <div class="square">14</div>
+            <div class="square">15</div>
+            <div class="square">16</div>
+            <div class="square">7</div>
+        </div>
+        <div class="conteiner line__one">
+            <div class="square">6</div>
+            <div class="square">17</div>
+            <div class="square">18</div>
+            <div class="square">19</div>
+            <div class="square">20</div>
+            <div class="square">21</div>
+            <div class="square">22</div>
+            <div class="square">23</div>
+            <div class="square">24</div>
+            <div class="square">6</div>
+        </div>
+        <div class="conteiner line__two">
+            <div class="square">5</div>
+            <div class="square">25</div>
+            <div class="square">26</div>
+            <div class="square">27</div>
+            <div class="square">28</div>
+            <div class="square">29</div>
+            <div class="square">30</div>
+            <div class="square">31</div>
+            <div class="square">32</div>
+            <div class="square">5</div>
+        </div>
+        <div class="conteiner line__one">
+            <div class="square">4</div>
+            <div class="square">33</div>
+            <div class="square">34</div>
+            <div class="square">35</div>
+            <div class="square">36</div>
+            <div class="square">37</div>
+            <div class="square">38</div>
+            <div class="square">39</div>
+            <div class="square">40</div>
+            <div class="square">4</div>
+        </div>
+        <div class="conteiner line__two">
+            <div class="square">3</div>
+            <div class="square">41</div>
+            <div class="square">42</div>
+            <div class="square">43</div>
+            <div class="square">44</div>
+            <div class="square">45</div>
+            <div class="square">46</div>
+            <div class="square">47</div>
+            <div class="square">48</div>
+            <div class="square">3</div>
+        </div>
+        <div class="conteiner line__one">
+            <div class="square">2</div>
+            <div class="square">49</div>
+            <div class="square">50</div>
+            <div class="square">51</div>
+            <div class="square">52</div>
+            <div class="square">53</div>
+            <div class="square">54</div>
+            <div class="square">55</div>
+            <div class="square">56</div>
+            <div class="square">2</div>
+        </div>
+        <div class="conteiner line__two">
+            <div class="square">1</div>
+            <div class="square">57</div>
+            <div class="square">58</div>
+            <div class="square">59</div>
+            <div class="square">60</div>
+            <div class="square">61</div>
+            <div class="square">62</div>
+            <div class="square">63</div>
+            <div class="square">64</div>
+            <div class="square">1</div>
+        </div>
+        <div class="conteiner line__foot">
+            <div class="square">#</div>
+            <div class="square">A</div>
+            <div class="square">B</div>
+            <div class="square">C</div>
+            <div class="square">D</div>
+            <div class="square">E</div>
+            <div class="square">F</div>
+            <div class="square">G</div>
+            <div class="square">H</div>
+            <div class="square">#</div>
+        </div>
+    </div>
+</body>
+
+</html>
