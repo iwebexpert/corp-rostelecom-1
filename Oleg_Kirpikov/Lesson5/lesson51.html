@@ -1,0 +1,74 @@
+<!doctype html>
+
+<html lang="ru">
+
+<head>
+    <title>Lesson 5.1</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./lesson51.css" />
+    <script>
+        function createCell(prefixClass) {
+            let cell = document.createElement("div");
+            cell.className = prefixClass + "Cell";
+            return cell
+        };
+        function createRow(parentEl) {
+            let row = document.createElement("div");
+            row.className = "row";
+            parentEl.appendChild(row)
+            return row
+        };
+
+
+        function createField() {
+            const chessField = document.querySelector('.chessField');
+            const alphabet = 'ABCDEFGH';
+            for (let rowNum = 0; rowNum < 9; rowNum++) {
+                let row = createRow(chessField);
+
+                /* первая клетка вертикальный заголовок   */
+                let vTitleEl = createCell('Title');
+                vTitleEl.className += ' vertical';
+                row.appendChild(vTitleEl);
+
+                /* горизонтальный заголовок   */
+                if (rowNum == 0) {
+                    vTitleEl.className += ' horisontal';
+                    for (let cellNum = 0; cellNum < 8; cellNum++) {
+                        let hTitleEl = row.appendChild(createCell('Title'))
+                        hTitleEl.className += ' horisontal';
+                        hTitleEl.innerText = alphabet[cellNum];
+                    };
+                    continue
+                };
+                /* чередование цветов клеток для столбцов и строк  */
+                let oddEl = 'white';
+                let evenEl = 'black';
+                if (rowNum % 2) {
+                    evenEl = 'white';
+                    oddEl = 'black';
+                };
+                /* пронумеровать первую клетку  в строке */
+                vTitleEl.innerText = rowNum;
+
+                /* заполнить поле  */
+                for (let cellNum = 0; cellNum < 8; cellNum++) {
+                    if (cellNum % 2) {
+                        row.appendChild(createCell(oddEl))
+                    } else {
+                        row.appendChild(createCell(evenEl))
+                    }
+
+                }
+            }
+        }
+        window.onload = createField
+    </script>
+</head>
+
+<body>
+    <div class="chessField"></div>
+</body>
+
+</html>
