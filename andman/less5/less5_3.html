@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson_5_3(Catalog)</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .basket {
+        width: 30%;
+        min-height: 80px;
+        min-width: 400px;
+        margin: 0 auto;
+        /* box-sizing: border-box; */
+        padding: 5px;
+        font-size: 24px;
+        font-family: sans-serif;
+        border: 1px solid black;
+        margin-top: 50px;
+        border-radius: 5px;
+
+    }
+
+    .message {
+        width: 100%;
+        background-color: #cdcdcd;
+        padding: 5px;
+        font-size: 24px;
+        font-family: sans-serif;
+        box-sizing: border-box;
+    }
+
+    .h3-basket {
+        text-align: center;
+    }
+
+    .h3-catalog {
+        text-align: center;
+        flex-basis: 100%;
+    }
+
+    .catalog {
+        width: 30%;
+        min-height: 80px;
+        margin: 0 auto;
+        /* box-sizing: border-box; */
+        padding: 5px;
+        font-size: 24px;
+        font-family: sans-serif;
+        border: 1px solid black;
+        margin-top: 50px;
+        border-radius: 5px;
+        min-width: 400px;
+    }
+
+    .price-list {
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .price-item {
+        flex-basis: 33.33%;
+        border-top: 1px solid grey;
+        text-align: center;
+    }
+
+    .price-name {
+        font-style: italic;
+        text-align: left;
+    }
+
+
+    .price-cost {
+        font-weight: 600;
+        background-color: #dcdcdc;
+
+    }
+
+    .price-curr {
+        color: red;
+    }
+</style>
+<script src="main3.js" defer></script>
+
+<body>
+    <div class="basket-container"></div>
+    <div id="catalog"></div>
+</body>
+
+</html>
