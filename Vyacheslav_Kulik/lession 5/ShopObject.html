@@ -93,7 +93,7 @@
                     }
                 },
                 show() {
-                    for (i = 0; i < this.items.length; i++) {
+                    for (let i = 0; i < this.items.length; i++) {
                         console.log(this.items[i][0].show(), `\t|\tQuantity: ${this.items[i][1]}`);
                         //console.log(this.items[i][0].show(), `Quantity: ${shoppingCart.items[i][1]}`);
                     }
@@ -103,14 +103,14 @@
                 },
                 countBasketPrice() { // count Price
                     let amountPrice = 0;
-                    for (i = 0; i < this.items.length; i++) {
+                    for (let i = 0; i < this.items.length; i++) {
                         amountPrice += this.items[i][0].price * this.items[i][1];
                     }
                     return amountPrice;
                 },
                 countQuantityItems() { // count all Quantity Items
                     let amountQuantityItems = 0;
-                    for (i = 0; i < this.items.length; i++) {
+                    for (let i = 0; i < this.items.length; i++) {
                         amountQuantityItems += this.items[i][1];
                     }
                     return amountQuantityItems;
