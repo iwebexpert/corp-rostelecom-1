@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашняя работа 4.2</title>
+    <script>
+
+        class Goods {
+            constructor(mfr, category, model, description, price) {
+                this.mfr = mfr;
+                this.category = category;
+                this.model = model;
+                this.description = description;
+                this.price = price;
+                this.count = count;
+            }
+        }
+
+        const basket = {
+            items: [],
+            countBasketPrice: function () {
+                let ammount = 0;
+                for (let i = 1; i < basket.length; i++) {
+                    ammount += (item.price * item.count);
+                };
+                return console.log('Общая стоимость товаров: ', ammount);
+            },
+        };
+
+        console.log(basket.countBasketPrice);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
