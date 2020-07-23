@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашняя работа 4.1</title>
+    <script>
+
+
+        function numberToObject(number) {
+            if (number < 0 || number > 999) {
+                console.log('Число', number, 'не удовлетворяет условиям. Оно должно быть положительным числом не больше 999.');
+                return {};
+            }
+
+            return {
+                units: number % 10,
+                tens: (number % 100 - number % 10) / 10,
+                hundreds: (number % 1000 - number % 100) / 100,
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
