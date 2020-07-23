@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    margin: 50px auto;
+    border-collapse: collapse;
+    border: 5px solid #000;
+}
+
+.white {
+    background-color: cornsilk;
+}
+
+.black {
+    background-color: #271904;
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+}
+
+td[id] {
+    border: 3px solid #000;
+    box-sizing: border-box;
+}
+
+td {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.basket {
+    width: 600px;
+    padding: 50px;
+    border: 3px solid #000;
+    box-sizing: border-box;
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+.basket p {
+    font-size: 24px;
+}
+
+.btn {
+    display: block;
+    padding: 5px 10px;
+    margin: 0 auto 20px;
+    font-size: 20px;
+    background-color: lightgreen;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
