@@ -1,0 +1,32 @@
+.conteiner{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    box-sizing: border-box;
+    align-self: center;
+    border: 1px solid darkred;
+}
+.basket {
+    flex-direction: row-reverse;
+}
+.basket__show{
+    border: 1px solid red;
+    min-height: 100px;
+    min-width: 200px;
+}
+.card{
+
+    border: 1px solid blueviolet;
+    min-height: 160px;
+    width: 150px;
+    margin: 20px auto;
+    padding: 5px;
+    background: lightsteelblue;
+}
+
+img {
+    
+    height: auto;
+    width: 100%;
+}       
