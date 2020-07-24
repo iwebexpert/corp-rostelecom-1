@@ -1,0 +1,47 @@
+/**
+ * Домашнее задание #5
+ * @author  Сорванов Михаил Леонидович [CorpRostelecom-1]
+ */
+
+/**
+2.  Сделать  генерацию  корзины  динамической:  верстка  корзины  не  должна  находиться  в  HTML-
+структуре. Там должен быть только div, в который будет вставляться корзина, сгенерированная на 
+базе JS: 
+a.  Пустая корзина должна выводить строку «Корзина пуста»; 
+b.  Наполненная должна выводить «В корзине: n товаров на сумму m рублей». 
+*/
+
+body {
+  font-size: 20px;
+}
+
+#content {
+  width: 600px;
+  margin: 0 auto;
+  /* чтобы выровнялось по центру */
+  min-height: 100%;
+  padding: 10px;
+}
+
+textarea {
+  margin-top: 20px;
+  width: 100%;
+  /* чтобы не считать отступы и рамку */
+  box-sizing: border-box;
+}
+
+input {
+  margin-top: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.basket-good {
+  margin: 7px;
+}
+
+.good, .basket-info {
+  padding: 2px;
+  width: 100%;
+  background-color: bisque;
+}

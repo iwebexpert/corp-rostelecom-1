@@ -1,0 +1,40 @@
+/**
+ * Домашнее задание #5
+ * @author  Сорванов Михаил Леонидович [CorpRostelecom-1]
+ */
+
+/**
+1.  Создать  функцию,  генерирующую  шахматную  доску.  Можно  использовать  любые  html-теги.  Доска
+должна быть верно разлинована на черные и белые ячейки. Строки должны нумероваться числами
+от 1 до 8, столбцы — латинскими буквами A, B, C, D, E, F, G, H.
+ */
+
+.tab {
+  display: table;
+  width: 400px;
+  height: 400px;
+}
+
+.tr {
+  display: table-row;
+}
+
+.kb, .kw, .td {
+  width: 10%;
+  height: 10%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle
+}
+
+.kb {
+  background-color: black;
+}
+
+.kw {
+  background-color: white;
+}
+
+.td {
+  background-color: burlywood;
+}
