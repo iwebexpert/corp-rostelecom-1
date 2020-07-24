@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.container {
+    width: 700px;
+    margin: 10px auto;
+    min-height: 100%;
+}
+
+.basket {
+    height: 50px;
+    text-align: center;
+    padding: 10px;
+}
+
+.basket-empty {
+    font-size: 30px;
+    color: red;
+}
+
+.card {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+.btn {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 3px 5px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    border-color: lightgray;
+}
+
+.btn-add {
+    color: darkgreen;
+}
+
+
+.btn-clear {
+    color: red;
+}
+
+
+
