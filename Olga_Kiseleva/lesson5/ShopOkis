@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Product {
+            constructor(name, price, currency, volume) {
+                this.name = name;
+                this.price = price;
+                this.currency = currency;
+                this.volume = volume;
+            };
+            cost() {
+                return this.price * this.volume;
+            }
+        };
+        const apple = new Product("Apple", 150, "RUB", 0);
+        const orange = new Product("Orange", 80, "RUB", 0);
+        const pear = new Product("Pear", 120, "RUB", 0);
+        const plum = new Product("Plum", 160, "RUB", 0);
+        const bascet_volume = [];
+        const bascet_item = [];
+        // const basket = {
+        //     items: bascet_item,
+        //     // items: [apple, orange, pear, plum],
+        //     countBasketPrice() {
+        //         let calcCost = 0;
+        //         basket.items.forEach(function (item) {
+        //             calcCost += item.cost();
+        //         });
+        //         console.log(calcCost);
+        //     },
+        // };
+
+        window.onload = function () {
+
+            document.body.style.margin = '0 auto';
+            let catalog = document.getElementById("catalog");
+            catalog.style.cssText = '\
+                box-sizing: border-box;\
+                max-width: 600px;\
+                margin: 0 auto;';
+
+            let catalog_header = document.createElement('h2');
+            catalog_header.textContent = 'catalog';
+            catalog_header.style.cssText = '\
+                text-transform: uppercase;\
+                text-align: center;';
+            catalog.insertAdjacentElement("beforeend", catalog_header);
+
+            const Products = [apple, orange, pear, plum];
+
+            let product_header0 = document.createElement('h4');
+            catalog.insertAdjacentElement("beforeend", product_header0);
+            product_header0.style.cssText = 'display: flex;\
+                margin: 10px 0;';
+
+            let product_header1 = document.createElement('h4');
+            product_header1.textContent = 'Описание и стоимость товара';
+            product_header0.insertAdjacentElement("beforeend", product_header1);
+            product_header1.style.cssText = 'width: 50%;\
+                box-sizing: border-box;\
+                flex-direction: row;';
+
+            let product_header2 = document.createElement('h4');
+            product_header2.textContent = 'Количество';
+            product_header0.insertAdjacentElement("beforeend", product_header2);
+            product_header2.style.cssText = 'width: 25%;\
+                box-sizing: border-box;\
+                flex-direction: row;';
+
+            let product_header3 = document.createElement('h4');
+            product_header3.textContent = 'Добавить в корзину';
+            product_header0.insertAdjacentElement("beforeend", product_header3);
+
+            Products.forEach(function (item) {
+                let product_cont = document.createElement('div');
+                product_cont.className = 'product';
+                product_cont.style.cssText = 'border: solid 1px;\
+                display: flex;\
+                margin: 10px 0;';
+                catalog.insertAdjacentElement("beforeend", product_cont);
+
+                let product_info = document.createElement('div');
+                product_info.className = 'product_info';
+                product_info.textContent = item.name + ': price: ' + item.price + ' ' + item.currency;
+                product_info.style.cssText = 'border: solid 1px;\
+                width: 50%;';
+                product_cont.insertAdjacentElement("afterbegin", product_info);
+
+                let product_volume = document.createElement('input');
+                product_volume.className = 'product_volume';
+                product_volume.type = 'number';
+                product_volume.value = '1';
+                product_volume.min = '1';
+                product_volume.placeholder = 'введите количество';
+                product_volume.style.cssText = 'border: solid 1px;\
+                width: 25%;';
+                product_cont.insertAdjacentElement("beforeend", product_volume);
+
+                const btnInput = document.createElement('button');
+                btnInput.className = "btnInput";
+
+                btnInput.onclick = function () {
+                    let calcCost = 0;
+
+                    (product_volume.value > 0) ? item.volume = product_volume.value : 0;
+                    bascet_item.push(item);
+                    bascet_volume.push(product_volume.value);
+
+                    let count = 0;
+                    bascet_item.forEach(function (item) {
+                        calcCost += item.price * bascet_volume[count];
+                        count += 1;
+                    });
+                    basket_empty.textContent = 'В корзине: ' + bascet_item.length + ' товар(ов) на сумму: ' + calcCost + ' рублей';
+                    return false;
+                };
+                btnInput.textContent = 'добавить в корзину';
+                product_cont.insertAdjacentElement("beforeend", btnInput);
+                btnInput.style.cssText = 'border: solid 1px;\
+                width: 25%;';
+            });
+
+            let basket_header = document.createElement('h2');
+            basket_header.textContent = 'basket';
+            basket_header.style.cssText = '\
+                text-transform: uppercase;\
+                text-align: center;';
+            catalog.insertAdjacentElement("beforeend", basket_header);
+
+            let basket_empty = document.createElement('p');
+            basket_empty.textContent = 'Корзина пуста';
+            basket_empty.className = 'basket_empty';
+            basket_empty.style.cssText = '\
+                // text-transform: uppercase;\
+                text-align: center;\
+                // width: 100%;';
+            catalog.insertAdjacentElement("beforeend", basket_empty);
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="catalog">
+
+    </div>
+</body>
+
+</html>
