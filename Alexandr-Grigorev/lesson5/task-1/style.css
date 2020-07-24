@@ -1,0 +1,27 @@
+
+.container{
+    display: flex;
+    width: 360px;
+    flex-wrap: wrap;
+  }
+  .white{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+  }
+  .black{
+    border: 1px solid black;
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    box-sizing: border-box;
+  }
+  .content-kletka{
+    border: 1px solid white;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    text-align: center;
+    padding-top: 10px;
+  }
