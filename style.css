@@ -1,17 +1,22 @@
-.cell {
-    height: 16px;
-    width: 16px;
-    text-align: center;
-}
-.field {
+.container {
+    width: 600px;
+    margin: 0 auto;
     border: solid;
-    height: 64px;
-    font-weight: 64px;
 }
-.black {
-    background-color: black;
+.backgroud {
+    padding: 20px;
 }
-
-.row {
+.items__parent{
     display: flex;
+    justify-content: space-between;
+}
+.item {
+    width: 80px;
+    border: solid;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+.basket__item {
+    margin-bottom: 15px;
 }
