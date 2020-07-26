@@ -146,6 +146,7 @@ function buyProduct(event) {
 };
 //функция показывает модальное окно с картинками продукта
 function showModalProductImgs(event) {
+
     //получаем id продукта из строки каталога
     const id = event.target.parentElement.firstChild.textContent;
     const product = catalog.getProductById(id);
@@ -154,6 +155,7 @@ function showModalProductImgs(event) {
     const imgContainer = document.querySelector('.imgContainer');
     imgContainer.innerHTML = '';
     const overlay = document.querySelector('.js-overlay-modal');
+    overlay.classList.add('active');
 
     //добавляем в окно все картинки из продукта
     //все скрываем кроме первого
@@ -171,7 +173,7 @@ function showModalProductImgs(event) {
     };
 
     modalElem.classList.add('active');
-    overlay.classList.add('active');
+
 };
 
 //по щелчку мыши циклический показ картинок в окне
