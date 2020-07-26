@@ -1,0 +1,17 @@
+.cell {
+    height: 16px;
+    width: 16px;
+    text-align: center;
+}
+.field {
+    border: solid;
+    height: 64px;
+    font-weight: 64px;
+}
+.black {
+    background-color: black;
+}
+
+.row {
+    display: flex;
+}
