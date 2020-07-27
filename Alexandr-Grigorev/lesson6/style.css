@@ -1,0 +1,49 @@
+body{
+    font-size: 20px;
+}
+.container{
+    margin: 0 auto;
+    max-width: 800px;
+    min-height: 100%;
+    background-color: azure;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.error-empty{
+    color: red;
+    text-align: center;
+}
+.showBasket{
+    align-self: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.catalog{
+    text-align: center;
+    color: blue;
+    font-size: 20px;
+}
+.oneProduct{
+    min-height: 40px;
+    background-color: rgb(144, 207, 236);
+    padding: 10px;
+    display: flex;
+}
+.oneProductName{
+    font-size: 24px;
+    align-self: center;
+}
+.oneProductPrice{
+    font-size: 24px;
+    margin-left: 20px;
+    align-self: center;
+}
+.addbtn{
+    margin-left: 40px;
+    height: 24px;
+    width: 120px;
+    align-self: center;
+    margin-left: auto;
+    
+}
