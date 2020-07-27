@@ -1,0 +1,22 @@
+.container {
+    width: 600px;
+    margin: 0 auto;
+    border: solid;
+}
+.backgroud {
+    padding: 20px;
+}
+.items__parent{
+    display: flex;
+    justify-content: space-between;
+}
+.item {
+    width: 80px;
+    border: solid;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+.basket__item {
+    margin-bottom: 15px;
+}
