@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДЗ без доп задания</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            margin-top: 150px;
+        }
+
+
+        .cart {
+            text-align: center;
+            font-size: 20px;
+            color: black;
+            margin-bottom: 50px;
+            border: 1px solid blue;
+        }
+
+        .empty {
+            color: red;
+            border: 1px solid red;
+
+        }
+
+        .product {
+            background-color: floralwhite;
+            border: black solid 1px;
+            padding: 30px;
+            margin-top: 15px;
+        }
+
+        .button {
+            margin-top: 30px;
+
+        }
+
+
+        .but_center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button_product {
+            margin-right: 30px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="cart-container"></div>
+    </div>
+
+
+    <script>
+        window.onload = function () {
+            createCart();
+        };
+
+        class product {
+            constructor(name, price, count) {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            }
+            get Count() {
+                return this.count;
+            }
+            get cost() {
+                return this.Count * this.price;
+            }
+        }
+
+        class basket {
+            constructor(basketIn) {
+                this.basketIn = basketIn;
+            }
+            get Counts() {
+                let counts = 0;
+                for (let i = 0; i < this.basketIn.length; i++) {
+                    counts += this.basketIn[i].Count;
+                }
+
+                return counts;
+            }
+            get basketPrice() {
+                let sum = 0;
+                for (let i = 0; i < this.basketIn.length; i++) {
+                    sum += this.basketIn[i].cost;
+                }
+
+                return sum;
+            }
+
+            add(basketIn) {
+                this.basketIn.push(basketIn);
+            }
+        }
+
+        let products = new basket([]);
+
+        function getCart() {
+            return document.querySelector('.cart');
+        }
+        function createCart() {
+            const contentCart = document.createElement('div');
+            contentCart.textContent = "Корзина пуста";
+            contentCart.className = "cart empty";
+            contentCart.className = "cart";
+            document.querySelector('.cart-container').appendChild(contentCart);
+
+
+
+            const but = document.createElement('button');
+            but.textContent = "Очистить корзину";
+            but.className = "button button-clear";
+
+            but.addEventListener('click', function () {
+                products = new basket([]);
+                getCart().classList.add("empty");
+                getCart().textContent = "Корзина пуста";
+            });
+            butCenter = document.createElement('div');
+            butCenter.className = "but_center";
+            document.querySelector('.cart-container').appendChild(butCenter);
+            document.querySelector('.but_center').appendChild(but);
+
+            addProduct("Оперативная память", 7500);
+            addProduct("Материнская плата", 12569);
+            addProduct("Блок питания", 12980);
+            addProduct("Видеокарта", 47630);
+        }
+        function addProduct(name, price) {
+
+
+            const contentProduct = document.createElement('div');
+            contentProduct.className = "product";
+
+
+            const nameProduct = document.createElement('h3');
+            nameProduct.textContent = `Название : ${name}`;
+            contentProduct.appendChild(nameProduct);
+
+            const priceProduct = document.createElement('h5');
+            priceProduct.textContent = `Цена за шт :  ${price}`;
+            contentProduct.appendChild(priceProduct);
+
+            const but = document.createElement('button');
+            but.textContent = "Добавить";
+            but.className = "button button_product";
+
+            const but1 = document.createElement('button');
+            but1.textContent = "Удалить";
+            but1.className = "button ";
+
+            but.addEventListener('click', function () {
+                products.add(new product("name", price, 1));
+                getCart().textContent = `Товаров в корзине   ${products.Counts}  шт на  сумму  ${products.basketPrice}`;
+                getCart().classList.remove("empty");
+            });
+
+            but1.addEventListener('click', function () {
+
+                if (products.basketPrice > 0 && products.Counts > 0) {
+                    products.add(new product("name", price, -1));
+                    getCart().textContent = `Товаров в корзине   ${products.Counts}  шт на  сумму  ${products.basketPrice}`;
+                    getCart().classList.remove("empty");
+                    if (products.basketPrice <= 0 || products.Counts <= 0) {
+                        getCart().classList.add("empty");
+                        getCart().textContent = "Корзина пуста";
+                        products = new basket([]);
+                    }
+                } else {
+                    getCart().classList.add("empty");
+                    getCart().textContent = "Корзина пуста";
+                    products = new basket([]);
+
+                }
+
+
+            });
+            contentProduct.appendChild(but);
+            contentProduct.appendChild(but1);
+
+            document.querySelector('.cart-container').appendChild(contentProduct);
+        }
+
+
+    </script>
+</body>
+
+</html>
