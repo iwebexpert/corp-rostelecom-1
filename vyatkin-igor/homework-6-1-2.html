@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basket</title>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <!-- <script src="./main.js" defer></script> -->
+
+    <script>
+
+        window.onload = function () {
+
+            const catalog = [];
+
+            class Product {
+                constructor(name, price, imgLink, bigImgLink) {
+                    this.name = name;
+                    this.price = price;
+                    this.imgLink = imgLink;
+                    this.bigImgLink = bigImgLink;
+                }
+            }
+
+            //добавление продуктов в catalog
+            catalog.push(new Product('CPU AMD Ryzen 5 Pinnacle Ridge', 11990, 'https://www.e-katalog.ru/jpg/1361917.jpg', 'https://avatars.mds.yandex.net/get-mpic/1362400/img_id5346570003457120657.jpeg/9hq'));
+            catalog.push(new Product('MB GIGABYTE B450M DS3H', 5390, 'https://www.e-katalog.ru/jpg/1392432.jpg', 'https://avatars.mds.yandex.net/get-mpic/1361544/img_id5999933867825933882.jpeg/orig'));
+            catalog.push(new Product('GPU SAPPHIRE AMD Radeon RX 580', 17990, 'https://www.e-katalog.ru/jpg/1097852.jpg', 'https://avatars.mds.yandex.net/get-mpic/195452/img_id1811082657304061327/orig'));
+            catalog.push(new Product('RAM CRUCIAL CT8G4DFS8266 DDR4 - 8Gb', 2590, 'https://www.e-katalog.ru/jpg_zoom1/1685432.jpg', 'https://www.e-katalog.ru/jpg_zoom1/1685432.jpg'));
+            catalog.push(new Product('БП SEASONIC FOCUS Plus SSR-550PX', 9750, 'https://www.e-katalog.ru/jpg/1226577.jpg', 'https://static.bhphoto.com/images/images750x750/1507055707_1365559.jpg'));
+            catalog.push(new Product('SDD KINGSTON A400 SA400S37', 2795, 'https://www.e-katalog.ru/jpg/1035813.jpg', 'https://media.kingston.com/kingston/product/ktc-product-ssd-a400-sa400s37-120gb-1-sm.jpg'));
+            catalog.push(new Product('Монитор SAMSUNG C24RG50FQI 23.5', 13990, 'https://www.e-katalog.ru/jpg/1600669.jpg', 'https://avatars.mds.yandex.net/get-mpic/331398/img_id2536084661909730884.jpeg/orig'));
+            console.log(catalog);
+
+
+            class Basket {
+                constructor() {
+                    this.product = [];
+                }
+
+                add(id, name, price) {
+                    let basketUnit = new BasketProduct(id, name, price);
+                    this.product.push(basketUnit); // добавление объекта продукт в массив product
+
+                }
+
+                del(id) {//удаление продукта из корзины
+                    const index = this.product.findIndex(item => item.id === id);
+                    (index !== -1) ? this.product.splice(index, 1) : null;
+                }
+
+                clear() {
+
+                    this.product.length = 0; //очищение корзины
+                }
+
+                get calculate() { //расчет стоимости корзины
+                    let totalValue = 0;
+                    for (let i = 0; i < this.product.length; i++) {
+                        //totalValue += this.product[i].cost;
+                        totalValue += this.product[i].price;
+                    }
+                    return totalValue;
+                }
+            }
+
+            //продукт выбранный в корзину
+            class BasketProduct {
+                constructor(id, name, price) {
+                    this.id = id;
+                    this.name = name;
+                    this.price = price;
+                };
+
+            }
+
+            // корзина
+            const basket = new Basket();
+            console.log(basket);
+
+            let forModalWindow = document.createElement('div');
+            forModalWindow.className = "forModalWindow";
+            document.body.appendChild(forModalWindow);
+
+            // ------------------- создание блока корзины  ------------------------------------
+
+            let container = document.createElement('div');
+            container.className = "container";
+            document.body.appendChild(container);
+
+            let basketBl = document.createElement('div');
+            basketBl.className = "basket";
+            container.appendChild(basketBl);
+
+            let basket_info = document.createElement("p")
+            basket_info.className = "basket";
+            basket_info.innerHTML = ' <h3 id = "basketInfo">Корзина пуста</h3>';
+            basketBl.appendChild(basket_info);
+
+            let btnClear = document.createElement("button")
+            btnClear.className = "basket";
+            btnClear.innerHTML = "Очистить корзину";
+            basketBl.appendChild(btnClear);
+
+            btnClear.addEventListener('click', function () {//обрабтчик события "Очистить корзину"
+                btnProductEvent(null, 'clear');
+            });
+
+            // ----------------------- генерация каталога ------------------------
+
+            for (let i = 0; i < catalog.length; i++) {
+                let directory = document.createElement('div');
+                directory.className = "directory";
+                //directory.id = i;
+                container.appendChild(directory);
+
+
+                let img = document.createElement("img");
+                img.className = "img";
+                img.src = catalog[i].imgLink;
+
+                let product = document.createElement("p")
+                product.className = "product";
+                product.innerHTML = catalog[i].name + ' - ' + catalog[i].price + ' RUB';
+
+                let btnAdd = document.createElement("button")
+                btnAdd.className = "btnAddProduct";
+                btnAdd.innerHTML = "Купить";
+
+
+                let btnDel = document.createElement("button")
+                btnDel.className = "btnDelProduct";
+                btnDel.innerHTML = "Удалить";
+
+                btnAdd.addEventListener('click', function () {//обрабтчик события "Добавить"
+                    btnProductEvent(i, 'add');
+                });
+
+                btnDel.addEventListener('click', function () {//обрабтчик события "Удалить"
+                    btnProductEvent(i, 'del');
+                });
+
+                img.addEventListener('click', function () {//обрабтчик события открытия закрытия изображения
+                    createModalWindow(i);
+                });
+
+                directory.appendChild(img);
+                directory.appendChild(product);
+                directory.appendChild(btnAdd);
+                directory.appendChild(btnDel)
+            }
+
+            function btnProductEvent(i, event) {
+                //добавление продукта из каталога в корзину, очищение корзины, удаление товара из корзины
+                event == 'add' ? basket.add(i, catalog[i].name, catalog[i].price) : null;
+                event == 'clear' ? basket.clear() : null;
+                event == 'del' ? basket.del(i) : null;
+                const newMessage = getMessage();
+                console.log(basket);
+            };
+
+            function getMessage() {
+                const messagesConatiner = document.getElementById('basketInfo');
+                basket.product.length > 0 ? messagesConatiner.innerHTML = 'В корзине товаров ' + basket.product.length + ' на сумму ' + basket.calculate + ' RUB' : messagesConatiner.innerHTML = 'Корзина пуста';
+            }
+
+
+            function createModalWindow(i) {
+                let img = document.createElement("img");
+                img.className = "bigImg";
+                img.src = catalog[i].bigImgLink;
+                forModalWindow.appendChild(img);
+                container.style.display = "none";
+                img.style.display = "block";
+
+                img.addEventListener('click', function () {
+                    closeModalWindow();
+                });
+
+                function closeModalWindow() {
+                    container.style.display = "block";
+                    img.remove();
+                }
+            }
+
+        }
+
+
+    </script>
+
+    <style type="text/css">
+        .container,
+        .forModalWindow {
+            width: 800px;
+            margin: 0 auto;
+            margin-top: 50px;
+
+        }
+
+        .directory {
+            display: flex;
+            justify-content: flex-end;
+            height: 80px;
+            margin-bottom: 10px;
+
+        }
+
+        .basket {
+            display: flex;
+            justify-content: space-between;
+            margin-right: 5px;
+            align-self: center;
+        }
+
+        p {
+            align-self: center;
+        }
+
+        button {
+            height: 40px;
+            width: 120px;
+            cursor: pointer
+        }
+
+        .product,
+        .btnAddProduct,
+        .btnDelProduct {
+            margin: 25px 10px;
+        }
+
+
+        .product {
+            flex-basis: 100%;
+        }
+
+        .img {
+            width: 70px;
+            object-fit: cover;
+            align-self: center;
+            cursor: pointer
+        }
+
+        .bigImg {
+            display: none;
+            cursor: pointer
+        }
+    </style>
+
+</head>
+
+<body>
+</body>
+
+</html>
