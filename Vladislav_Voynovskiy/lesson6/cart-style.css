@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.cart {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cart-empty {
+  color: darkred;
+}
+
+.clear-button {
+  display: block;
+  margin: 0 auto;
+}
+
+.item-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  background-color: cadetblue;
+  width: 200px;
+  height: 100px;
+  margin: 10px auto;
+}
