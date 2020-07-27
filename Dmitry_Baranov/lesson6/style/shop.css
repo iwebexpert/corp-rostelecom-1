@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+/*body {*/
+/*    position: relative;*/
+/*}*/
+
+.container {
+    position: relative;
+    width: 700px;
+    margin: 10px auto;
+    min-height: 100%;
+}
+
+.basket {
+    height: 50px;
+    text-align: center;
+    padding: 10px;
+}
+
+.basket-empty {
+    font-size: 30px;
+    color: red;
+}
+
+.card {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: lightgray;
+}
+
+.image {
+    width: 50px;
+}
+
+.btn {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 3px 5px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    border-color: lightgray;
+}
+
+.btn-add {
+    color: darkgreen;
+}
+
+
+.btn-clear {
+    color: red;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.modal-hide {
+    display: none;
+}
+
+.modal__items {
+    width: 60%;
+    background-color: #fff;
+    padding: 10px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 30%;
+    left: 50%;
+}
+
+
