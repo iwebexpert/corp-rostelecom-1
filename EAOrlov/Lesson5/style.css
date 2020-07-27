@@ -1,0 +1,48 @@
+/* Общие стили и сброс */
+
+* {
+  margin: 0;
+  padding: 0;  
+}  
+
+.body {
+  font-size: 16px;
+}
+
+.container {
+  margin: 0 auto;
+  width: 1140px;
+  padding-top: 30px;
+}
+
+.chess-box {
+
+}
+
+.box {
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+
+}
+
+.row {
+  display: flex;
+}
+
+.label {
+  border: 1px solid white;
+  padding-top: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.black {
+  background-color: black;
+  border: 1px solid black;
+}
+
+.white {
+  background-color:white;  
+  border: 1px solid black;}
+
