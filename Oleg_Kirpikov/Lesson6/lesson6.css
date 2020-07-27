@@ -1,0 +1,172 @@
+* {
+    margin:0;
+    padding:0;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#catalog {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: black;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+
+    background-color: beige;
+
+}
+#rowCatalog {
+    cursor: pointer;
+}
+.oddRow {
+    background-color: rgb(210, 227, 236);
+}
+.evenRow {
+    background-color: rgb(185, 236, 207);
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#basket {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: lightgreen;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    width:500px;
+    background-color: beige;
+
+}
+#productId {
+    background-color: beige;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 50px;
+}
+.Message {
+    color: black;
+    font-size: 25px;
+}
+
+/* Стили для подложки */
+
+.overlay {
+   
+    /* Скрываем подложку  */
+    opacity: 0;
+    visibility: hidden;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 20;
+    transition: .3s all;
+ }
+ 
+ 
+ /* Стили для модальных окон */
+ 
+ .modal {
+    
+    /* Скрываем окна  */
+    opacity: 0;
+    visibility: hidden;
+   
+    
+    
+    /*  Установаем ширину окна  */
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    
+    /*  Центрируем и задаем z-index */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30; /* Должен быть выше чем у подложки*/
+    
+    /*  Побочные стили   
+    box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2); 
+    text-align: center;
+    padding: 30px;
+    border-radius: 3px;
+    background-color: #fff;
+    transition: 0.3s all;
+    */
+    
+ }
+ 
+ 
+ /* Стили для активных классов подложки и окна */
+ 
+ .modal.active,
+ .overlay.active{
+    opacity: 1;
+    visibility: visible;
+ }
+ 
+ 
+ /* Стили для кнопки закрытия */
+ 
+ .modal__cross {
+    position: absolute;
+    text-align: right;
+    top:5px;
+    right: 5px;
+    fill: #444;
+    cursor: pointer;
+ }
+ 
+ 
+ /* Стили для кнопок. Мы ведь порядочные разработчики, негоже простые ссылки оставлять */
+ 
+ a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #414b52;
+    color: #fff;
+    border-radius: 3px;
+ }
+
+ #imgContainer {
+    height: 0;
+    padding-top: 80%;
+    position: relative;
+    display: block;
+    cursor: pointer;
+ }
+
+.imgContainer {
+    cursor: pointer;
+ }
+
+ .imgModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100%;
+    max-width: 100%;
+ }
+.imgHide {
+    visibility: hidden;
+}
+.imgShow {
+    visibility: visible;
+}
+
