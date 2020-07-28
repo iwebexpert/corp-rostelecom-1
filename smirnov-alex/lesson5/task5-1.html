@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5-1</title>
+    <script>
+        window.addEventListener('load', function () {
+            let flag = true;
+            for (let i = 8; i > 0; i--) {
+                for (let j = 0; j < 9; j++) {
+                    if (j == 0) {
+                        flag = !flag;
+                        let number = document.createElement('div');
+                        number.style.backgroundColor = 'none';
+                        number.style.float = 'left';
+                        number.style.width = '50px';
+                        number.style.height = '50px';
+                        number.style.border = 'none';
+                        number.innerText = i;
+                        number.style.textAlign = 'center';
+                        number.style.lineHeight = '50px';
+                        let content = document.getElementById('content');
+                        content.appendChild(number);
+                    };
+                    let block = document.createElement('div');
+                    block.style.border = '1px solid black';
+                    block.style.boxSizing = 'border-box';
+                    block.style.width = '50px';
+                    block.style.height = '50px';
+                    block.classList.add('block');
+                    //для переноса блоков на следующую строку не придумал ничего лучше
+                    if (j == 8) {
+                        block.style.float = 'none';
+                        block.style.backgroundColor = 'none';
+                        block.style.border = 'none';
+                        //block.style.borderRight = '1px solid black';
+                        //block.style.borderBottom = '1px solid black';
+                    }
+                    else {
+                        block.style.float = 'left';
+                        if (flag) {
+                            block.style.backgroundColor = 'black';
+                        }
+                        else {
+                            block.style.backgroundColor = 'white';
+                        }
+                    }
+                    //let content = document.getElementById('content');
+                    content.appendChild(block);
+
+                    flag = !flag;
+                }
+                flag = !flag;
+            }
+            for (let k = 0; k < 9; k++) {
+                const letters = [' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+                let letter = document.createElement('div');
+                letter.style.backgroundColor = 'none';
+                letter.style.float = 'left';
+                letter.style.width = '50px';
+                letter.style.height = '50px';
+                letter.style.border = 'none';
+                letter.innerText = letters[k];
+                letter.style.textAlign = 'center';
+                letter.style.lineHeight = '50px';
+                let content = document.getElementById('content');
+                content.appendChild(letter);
+            }
+        }
+        )
+    </script>
+
+
+</head>
+
+<body>
+
+    <body>
+        <div id="content">
+            <p id="link">Шахматная доска (не адаптивная)</p>
+        </div>
+
+    </body>
+
+</html>
