@@ -1,0 +1,23 @@
+/**
+ * Корзина
+ */
+
+@import './vars';
+
+.cart {
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid $color-lightgrey;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    & &__summary {
+        width: 100%;
+        padding-top: 10px;
+        text-align: right;
+    }
+
+    & &__currency {
+        margin-top: 10px;
+    }
+}

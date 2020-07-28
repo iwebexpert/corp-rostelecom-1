@@ -1,0 +1,68 @@
+/**
+ * Кнопки
+ */
+
+@import './vars';
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: auto;
+    border-radius: 5px;
+    background-color: darken(white, 10%);
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.5s;
+
+    &.btn-round {
+        border-radius: 30px;
+        margin: 0 2px;
+    }
+
+    &.btn-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 0;
+    }
+
+    &.btn-block {
+        width: 100%;
+    }
+
+    &:hover {
+        background-color: darken($color-lightgrey, 20%);
+    }
+    &:active {
+        background-color: darken($color-lightgrey, 30%);
+    }
+
+    &.btn-red {
+        background-color: $color-red;
+        color: white;
+
+        &:hover {
+            background-color: darken($color-red, 10%);
+        }
+        &:active {
+            background-color: darken($color-red, 20%);
+        }
+    }
+
+    &.btn-accent {
+        background-color: $color-accent;
+        color: white;
+
+        &:hover {
+            background-color: darken($color-accent, 10%);
+        }
+        &:active {
+            background-color: darken($color-accent, 20%);
+        }
+    }
+}

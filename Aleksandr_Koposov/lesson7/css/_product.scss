@@ -1,0 +1,107 @@
+/**
+ * Карточка товара
+ */
+
+@import './vars';
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    & > &__name {
+        font-weight: bold;
+        padding: 5px;
+    }
+
+    & > &__price {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        & > .price{
+            &__text {
+                color: $color-accent;
+                font-size: 50px;
+                font-weight: bold;
+                padding: 5px;
+            }
+            &__currency {
+                padding: 5px;
+            }
+        }
+    }
+
+    &__images {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 5px 0 10px 0;
+
+        & > .image__mini {
+            height: 50px;
+            margin: 0 5px;
+            transition: opacity 0.3s;
+
+            &:hover {
+                opacity: 0.6;
+            }
+        }
+    }
+}
+
+.card {
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid $color-border;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 6px 3px 14px -7px $color-shadow;
+    transition: box-shadow 0.5s;
+
+    &:hover {
+        box-shadow: 6px 6px 20px -2px $color-shadow;
+    }
+}
+
+.row {
+    width: 100%;
+    border-bottom: 1px solid $color-lightgrey;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    transition: box-shadow 0.5s;
+
+    &:hover {
+        box-shadow: 6px 6px 20px -2px $color-shadow;
+    }
+
+    & > .product {
+        width: 100%;
+        flex-direction: row;
+
+        & > .product__count {
+            flex-grow: 1;
+        }
+
+        & > .product__price {
+            background-color: #{&};
+            & > .price {
+                &__text {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    & &__actions {
+        margin-left: 20px;
+    }
+}

@@ -1,0 +1,40 @@
+/**
+ * Общие стили
+ */
+
+@import './vars';
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body.body__fixed {
+    overflow-y: hidden;
+}
+
+h1 {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+
+    &-center {
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+}
+
+.w-200 {
+    width: 200px !important;
+}
+
+.text {
+    &--accent {
+        color: $color-accent;
+    }
+    &--primary {
+        color: $color-primary;
+    }
+}

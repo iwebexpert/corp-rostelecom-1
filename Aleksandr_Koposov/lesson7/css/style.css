@@ -1,0 +1,469 @@
+@charset "UTF-8";
+/**
+ * Стили приложения
+ */
+/**
+ * Переменные
+ */
+/**
+ * Общие стили
+ */
+/**
+ * Переменные
+ */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.body__fixed {
+  overflow-y: hidden;
+}
+
+h1 {
+  text-align: center;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flex-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.w-200 {
+  width: 200px !important;
+}
+
+.text--accent {
+  color: #ee7400;
+}
+
+.text--primary {
+  color: #7700aa;
+}
+
+/**
+ * Карточка товара
+ */
+/**
+ * Переменные
+ */
+.product {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.product > .product__name {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.product > .product__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product > .product__price > .price__text {
+  color: #ee7400;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.product > .product__price > .price__currency {
+  padding: 5px;
+}
+
+.product__images {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px 0 10px 0;
+}
+
+.product__images > .image__mini {
+  height: 50px;
+  margin: 0 5px;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.product__images > .image__mini:hover {
+  opacity: 0.6;
+}
+
+.card {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background-color: white;
+  -webkit-box-shadow: 6px 3px 14px -7px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 3px 14px -7px rgba(0, 0, 0, 0.5);
+  -webkit-transition: -webkit-box-shadow 0.5s;
+  transition: -webkit-box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;
+}
+
+.card:hover {
+  -webkit-box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.row {
+  width: 100%;
+  border-bottom: 1px solid #d3d3d3;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transition: -webkit-box-shadow 0.5s;
+  transition: -webkit-box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;
+}
+
+.row:hover {
+  -webkit-box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.row > .product {
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.row > .product > .product__count {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.row > .product > .product__price {
+  background-color: .row > .product > .product__price;
+}
+
+.row > .product > .product__price > .price__text {
+  font-size: 16px;
+}
+
+.row .row__actions {
+  margin-left: 20px;
+}
+
+/**
+ * Корзина
+ */
+/**
+ * Переменные
+ */
+.cart {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #d3d3d3;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.cart .cart__summary {
+  width: 100%;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.cart .cart__currency {
+  margin-top: 10px;
+}
+
+/**
+ * Каталог товаров
+ */
+/**
+ * Переменные
+ */
+.products {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+/**
+ * Кнопки
+ */
+/**
+ * Переменные
+ */
+.btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px;
+  width: auto;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+.btn.btn-round {
+  border-radius: 30px;
+  margin: 0 2px;
+}
+
+.btn.btn-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 0;
+}
+
+.btn.btn-block {
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #a0a0a0;
+}
+
+.btn:active {
+  background-color: #878787;
+}
+
+.btn.btn-red {
+  background-color: #df0000;
+  color: white;
+}
+
+.btn.btn-red:hover {
+  background-color: #ac0000;
+}
+
+.btn.btn-red:active {
+  background-color: #790000;
+}
+
+.btn.btn-accent {
+  background-color: #ee7400;
+  color: white;
+}
+
+.btn.btn-accent:hover {
+  background-color: #bb5b00;
+}
+
+.btn.btn-accent:active {
+  background-color: #884200;
+}
+
+/**
+ * Модальное окно
+ */
+/**
+ * Переменные
+ */
+.modal {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  pointer-events: none;
+  -webkit-transition: opacity 200ms ease-in;
+  transition: opacity 200ms ease-in;
+}
+
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal > .modal__container {
+  position: relative;
+  width: 50%;
+  margin: 50px auto;
+  border-radius: 10px;
+  background: white;
+  padding: 10px;
+}
+
+.modal > .modal__container > .modal__close {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  z-index: 1;
+  width: 24px;
+  line-height: 25px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 12px;
+  -webkit-box-shadow: 1px 1px 3px black;
+          box-shadow: 1px 1px 3px black;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.modal > .modal__container > .modal__close:hover {
+  background-color: #ee7400;
+}
+
+.modal > .modal__container > .modal__content {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.modal > .modal__container > .modal__content > .image {
+  width: 100%;
+  height: 100%;
+}
+
+.modal > .modal__container > .modal__content > .image__prev, .modal > .modal__container > .modal__content > .image__next {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0;
+  background-color: black;
+  -webkit-transition: background-color 0.5s, opacity 0.3s;
+  transition: background-color 0.5s, opacity 0.3s;
+}
+
+.modal > .modal__container > .modal__content > .image__prev:after, .modal > .modal__container > .modal__content > .image__next:after {
+  color: #ee7400;
+  font-size: 72px;
+}
+
+.modal > .modal__container > .modal__content > .image__prev:hover, .modal > .modal__container > .modal__content > .image__next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+.modal > .modal__container > .modal__content > .image__prev {
+  left: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.modal > .modal__container > .modal__content > .image__prev:after {
+  content: '<';
+}
+
+.modal > .modal__container > .modal__content > .image__next {
+  right: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.modal > .modal__container > .modal__content > .image__next:after {
+  content: '>';
+}
+
+/**
+ * Кнопки
+ */
+/**
+ * Переменные
+ */
+.badge:after {
+  content: attr(data-after);
+  background-color: #ee7400;
+  display: block;
+  width: 20px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-left: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 21px;
+}
+/*# sourceMappingURL=style.css.map */
