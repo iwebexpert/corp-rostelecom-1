@@ -20,6 +20,40 @@
     </div>
 
     <hr>
+
+    <div id="stepper-container" class="stepper">
+        <ul class="stepper__steps">
+            <li class=active>Состав корзины</li>
+            <li>Адрес доставки</li>
+            <li>Комментарий</li>
+            <li class="success">Оформление заказа</li>
+        </ul>
+        <div class="stepper__content">
+            <div class="step cart active">
+                <div id="cart-container"></div>
+            </div>
+
+            <div class="step cart">
+                <div class="input__group full-width">
+                    <textarea id="delivery-address" class="input__field" rows="10" required></textarea>
+                    <span class="input__bar"></span>
+                    <label class="input__label">Адрес доставки</label>
+                </div>
+            </div>
+
+            <div class="step cart">
+                <div class="input__group full-width">
+                    <textarea id="delivery-comment" class="input__field" rows="10" required></textarea>
+                    <span class="input__bar"></span>
+                    <label class="input__label">Комментарий к заказу</label>
+                </div>
+            </div>
+
+            <div class="step cart">
+                <div id="delivery-order"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

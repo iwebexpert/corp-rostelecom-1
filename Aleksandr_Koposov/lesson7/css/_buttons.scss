@@ -65,4 +65,29 @@
             background-color: darken($color-accent, 20%);
         }
     }
+
+    &.btn-success {
+        background-color: $color-success;
+        color: white;
+
+        &:hover {
+            background-color: darken($color-success, 10%);
+        }
+        &:active {
+            background-color: darken($color-success, 20%);
+        }
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+        background-color: $color-disabled;
+        color: $color-lightgrey;
+
+        &:hover {
+            background-color: $color-disabled;
+        }
+        &:active {
+            background-color: $color-disabled;
+        }
+    }
 }

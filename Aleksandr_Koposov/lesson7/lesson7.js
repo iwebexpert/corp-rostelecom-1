@@ -58,10 +58,14 @@ class Dom {
         }
     }
     get el() { return this._el; }
+    set el(domElement) {
+        if (!domElement || !domElement instanceof HTMLElement) {
+            throw new Error('Элемент должен быть класса "HTMLElement"');
+        }
+        return this._el = domElement;
+    }
     get outer() { return (this.el || {}).outerHTML || ''; }
     get inner() { return (this.el || {}).innerHTML || ''; }
-    get classes() { return ((this.el || {}).className || '').split(' '); }
-    set classes(arr) { return (this.el || {}).className = arr.join(' '); }
     from(id) {
         if (!id) {
             throw new Error('Не передан ID DOM');
@@ -460,7 +464,7 @@ class Cart extends Printer {
         return `В корзине: ${this.products.length} товаров на сумму <b>${this.cost}</b>`;
     }
     print() {
-        const container = new Dom('div', 'products cart');
+        const container = new Dom('div', 'products-cart');
         if (this._items.length < 1) {
             container.html('<p>Корзина пуста</p>');
             this.mount(container);
@@ -507,6 +511,115 @@ class Cart extends Printer {
 
         // Выводим корзину
         this.mount(container);
+    }
+}
+
+// Пошаговая форма
+class Stepper {
+    constructor(domId, onOrderCallback) {
+        const el = document.getElementById(domId);
+        if (!el) {
+            throw new Error('Элемента с указанным ID не существует');
+        }
+        this._buttons = this._activate(el.querySelectorAll('.stepper__steps li') || []);
+        this._tabs = this._activate(el.querySelectorAll('div.step') || []);
+
+        // Отключаем лишние кнопки (если их больше, чем блоков контента), навешиваем на них событие нажатия
+        this._buttons.forEach((button, index) => {
+            if (index >= this._tabs.length) {
+                button.addClass('disabled');
+                return;
+            }
+            button.on('click', () => {
+                if (button.hasClass('disabled')) {
+                    return;
+                }
+                this.step(index);
+            });
+        });
+
+        // Отключаем лишние блоки контента (если их больше, чем блоков контента), добавляем к ним кнопку следующего шага
+        this._tabs.forEach((tab, index) => {
+            if (index >= this._buttons.length) {
+                tab.addClass.add('disabled');
+                return;
+            }
+            const isBeforeLastIndex = index === this._tabs.length - 2;
+            const isLastIndex = index === this._tabs.length - 1;
+            const nextStepButton = new Dom(
+                'a',
+                `btn ${isBeforeLastIndex ? 'btn-success' : 'btn-accent'} w-200`,
+                isBeforeLastIndex ? 'Оформить заказ' : 'Далее'
+            );
+            nextStepButton.on('click', () => {
+                if (nextStepButton.hasClass('disabled')) {
+                    return;
+                }
+                if (isBeforeLastIndex) {
+                    onOrderCallback(this._tabs.map((i) => {
+                        const input = i.el.querySelector('.input__field') || {};
+                        return {
+                            id: input.id,
+                            value: input.value
+                        };
+                    }).filter(i => !!i.id));
+                }
+                this.step(index + 1);
+            });
+
+            // Находим все обязательные поля ввода и навешиваем на них минимальную проверку заполненности
+            const inputs = tab.el.querySelectorAll('.input__field[required]') || [];
+            const stepButton = this._buttons[index + 1] || null;
+            if (inputs.length) {
+                nextStepButton.addClass('disabled');
+                if (stepButton) stepButton.addClass('disabled');
+            }
+            inputs.forEach((input) => {
+                const el = (new Dom());
+                el.el = input;
+                el.on('change', () => {
+                    if (el.el.value) {
+                        nextStepButton.removeClass('disabled');
+                        if (stepButton) stepButton.removeClass('disabled');
+                    } else {
+                        nextStepButton.addClass('disabled');
+                        if (stepButton) stepButton.addClass('disabled');
+                    }
+                });
+            });
+
+            // Далее добавляем кнопку перехода на следующий шаг в блок кнопок под контентом шага
+            const stepActions = new Dom('div', 'flex flex-right stepper__actions');
+            if (!isLastIndex) {
+                stepActions.addChild(nextStepButton);
+            }
+            stepActions.appendTo(tab);
+        });
+    }
+    _activate(nodeCollection) {
+        const items = [];
+        nodeCollection.forEach((i) => {
+            const el = new Dom();
+            el.el = i;
+            items.push(el);
+        });
+        return items;
+    }
+    step(selectedIndex) {
+        this._buttons.forEach((button, index) => {
+            if (index <= selectedIndex) {
+                button.addClass('active');
+            } else {
+                button.removeClass('active');
+            }
+        });
+        this._tabs.forEach((tab, index) => {
+            if (index === selectedIndex) {
+                tab.addClass('active');
+            } else {
+                tab.removeClass('active');
+            }
+        });
     }
 }
 
@@ -583,4 +696,13 @@ const initCart = () => {
         cart.print();
     });
     cart.print();
+
+    const stepper = new Stepper('stepper-container', (inputs) => {
+        (new Dom('#delivery-order')).html(
+            `<div>${cart.summary()}</div><br>` +
+            `<div><b>Адрес доставки</b>: ${inputs.find(i => i.id === 'delivery-address').value}</div>` +
+            `<div><b>Комментарий к заказу</b>: ${inputs.find(i => i.id === 'delivery-comment').value}</div>`
+        );
+        console.warn(inputs);
+    });
 };

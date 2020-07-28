@@ -1,0 +1,115 @@
+/**
+ * Пошаговый инструмент
+ */
+
+@import './vars';
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.stepper {
+    padding-top: 50px;
+
+    & > &__steps {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        padding: 0;
+        margin: 0 0 20px 0;
+        box-sizing: border-box;
+
+        & > li {
+            width: 100%;
+            display: block;
+            list-style-type: none;
+            text-align: center;
+            position: relative;
+
+            &:before {
+                content: " ";
+                line-height: 30px;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                border: 4px solid $color-lightgrey;
+                display: block;
+                text-align: center;
+                margin: 0 auto 10px;
+                background-color: white;
+                transition: background-color 500ms;
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 4px;
+                background-color: $color-lightgrey;
+                top: 17px;
+                left: -50%;
+                z-index: -1;
+                transition: background-color 500ms;
+            }
+            &:first-child:after {
+                content: none;
+            }
+            &.active {
+                color: $color-accent;
+
+                &:before {
+                    border-color: $color-accent;
+                    background-color: lighten($color-accent, 5%);
+                    color: white;
+                    content: '✔︎';
+                }
+                &:after {
+                    background-color: $color-accent;
+                }
+            }
+            &.active.success {
+                color: $color-success;
+
+                &:before {
+                    border-color: $color-success;
+                    background-color: lighten($color-success, 5%);
+                }
+            }
+            &.disabled {
+                cursor: not-allowed;
+                color: $color-disabled;
+
+                &:before {
+                    border-color: $color-disabled;
+                }
+                &:after {
+                    background-color: $color-disabled;
+                }
+            }
+        }
+    }
+
+    & > &__content {
+
+        & .step {
+            display: none;
+            animation: fadeIn 1s;
+            transition: opacity 400ms ease-in;
+
+            &.active {
+                display: block;
+                animation: fadeIn 1s;
+                opacity: 1;
+            }
+        }
+    }
+
+    & &__actions {
+        margin-top: 20px;
+    }
+}
