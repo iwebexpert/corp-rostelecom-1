@@ -1,0 +1,88 @@
+body {
+    background-color: #2e373d;
+}
+
+button {
+    width: 170px;
+    padding: 12px;
+    margin: 10px;
+    color: white;
+    background-color: green;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(89, 143, 8);
+}
+
+button:active {
+    background-color: orange;
+    color: black;
+}
+
+#game {
+    border-collapse: collapse;
+}
+
+#game td {
+    width: 20px;
+    height: 20px;
+    border: 1px solid grey;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#game tr {
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    display: block;
+    box-sizing: border-box;
+}
+
+.food {
+    background-color: lightgreen;
+}
+
+.snake {
+    background-color: lightgrey;
+}
+
+#message {
+    color: orangered;
+    font-size: 26px;
+}
+
+.game__table,
+.game__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon--left {
+    width: 50px;
+    height: 50px;
+    background-image: url(./img/arrows.png);
+    background-position: 0 0;
+}
+.icon--right {
+    width: 50px;
+    height: 50px;
+    background-image: url(./img/arrows.png);
+    background-position: -70px 0;
+}
+.icon--up {
+    width: 50px;
+    height: 50px;
+    background-image: url(./img/arrows.png);
+    background-position: -140px 0;
+}
+.icon--down {
+    width: 50px;
+    height: 50px;
+    background-image: url(./img/arrows.png);
+    background-position: -211px 0;
+}
