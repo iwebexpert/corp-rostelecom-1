@@ -1,0 +1,50 @@
+/* Задание 1*/
+.chess-board {
+    width: 16em;
+    height: 16em;
+    outline: solid 2px black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.chess-board__white {
+    width: 2em;
+    height: 2em;
+    background-color: white;
+    text-align: center;
+}
+
+.chess-board__black {
+    width: 2em;
+    height: 2em;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+/* Задание 2*/
+
+.shop__list {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.shop__basket {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.btn {
+    padding: 5px;
+    background-color: rgb(174, 213, 214);
+    font-size: 16px;
+    font-weight: 600;
+    border: rgb(138, 169, 170) 1px solid;
+    cursor: pointer;
+}
