@@ -47,7 +47,7 @@ class Snake {
         return false;
     }
 
-    performStep() {
+    performStep(settings) {
         let currentHeadCoords = this.body[0];
         let newHeadCoords = {
             x: currentHeadCoords.x,
@@ -56,29 +56,26 @@ class Snake {
 
         switch (this.direction) {
             case 'down':
-                newHeadCoords.y++;
+                newHeadCoords.y = (newHeadCoords.y >= settings.rowsCount) ? 1 : newHeadCoords.y + 1;
                 break;
             case 'up':
-                newHeadCoords.y--;
+                newHeadCoords.y = (newHeadCoords.y <= 1) ? settings.rowsCount : newHeadCoords.y - 1;
                 break;
             case 'left':
-                newHeadCoords.x--;
+                newHeadCoords.x = (newHeadCoords.x <= 1) ? settings.colsCount : newHeadCoords.x - 1;
                 break;
             case 'right':
-                newHeadCoords.x++;
+                newHeadCoords.x = (newHeadCoords.x >= settings.colsCount) ? 1 : newHeadCoords.x + 1;
                 break;
         }
         this.body.unshift(newHeadCoords);
         this.body.pop();
     }
 
-    increaseBody() {
-        let bodyLastCell = this.body[this.body.length - 1];
-        let newBodyLastCell = {
-            x: bodyLastCell.x,
-            y: bodyLastCell.y,
-        };
-
-        this.body.push(newBodyLastCell);
+    increaseBody(food) {
+        this.body.push({
+            x: food.x,
+            y: food.y,
+        });
     }
 }

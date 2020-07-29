@@ -1,3 +1,7 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
     background-color: #2e373d;
 }
@@ -54,6 +58,7 @@ button:active {
 #message {
     color: orangered;
     font-size: 26px;
+    text-align: center;
 }
 
 .game__table,

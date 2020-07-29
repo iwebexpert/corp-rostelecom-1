@@ -31,7 +31,7 @@ class Game {
 
     //1 шаг таймера
     doTick(){
-        this.snake.performStep();
+        this.snake.performStep(this.settings);
         if(this.isGameLost()){
             return;
         }
@@ -39,7 +39,7 @@ class Game {
             return;
         }
         if(this.board.isHeadOnFoodSnake()){
-            this.snake.increaseBody();
+            this.snake.increaseBody(this.food);
             this.food.setNewFood();
         }
 
@@ -60,12 +60,7 @@ class Game {
 
     //Проигрыш ли
     isGameLost(){
-        if(this.board.isNextStepWall(this.snake.body[0])){
-            clearInterval(this.timer);
-            this.setMessage('Вы проиграли!');
-            return true;
-        }
-        return false;
+        return false; // iddqd
     }
 
     setMessage(message){
