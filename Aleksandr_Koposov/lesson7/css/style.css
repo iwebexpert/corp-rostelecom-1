@@ -1,0 +1,719 @@
+@charset "UTF-8";
+/**
+ * Стили приложения
+ */
+/**
+ * Переменные
+ */
+/**
+ * Общие стили
+ */
+/**
+ * Переменные
+ */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body.body__fixed {
+  overflow-y: hidden;
+}
+
+h1 {
+  text-align: center;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flex-center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.flex-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.w-200 {
+  width: 200px !important;
+}
+
+.text--accent {
+  color: #ee7400;
+}
+
+.text--primary {
+  color: #7700aa;
+}
+
+/**
+ * Карточка товара
+ */
+/**
+ * Переменные
+ */
+.product {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.product > .product__name {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.product > .product__price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product > .product__price > .price__text {
+  color: #ee7400;
+  font-size: 50px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.product > .product__price > .price__currency {
+  padding: 5px;
+}
+
+.product__images {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px 0 10px 0;
+}
+
+.product__images > .image__mini {
+  height: 50px;
+  margin: 0 5px;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.product__images > .image__mini:hover {
+  opacity: 0.6;
+}
+
+.card {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  background-color: white;
+  -webkit-box-shadow: 6px 3px 14px -7px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 3px 14px -7px rgba(0, 0, 0, 0.5);
+  -webkit-transition: -webkit-box-shadow 0.5s;
+  transition: -webkit-box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;
+}
+
+.card:hover {
+  -webkit-box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.row {
+  width: 100%;
+  border-bottom: 1px solid #d3d3d3;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transition: -webkit-box-shadow 0.5s;
+  transition: -webkit-box-shadow 0.5s;
+  transition: box-shadow 0.5s;
+  transition: box-shadow 0.5s, -webkit-box-shadow 0.5s;
+}
+
+.row:hover {
+  -webkit-box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 6px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.row > .product {
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.row > .product > .product__count {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.row > .product > .product__price {
+  background-color: .row > .product > .product__price;
+}
+
+.row > .product > .product__price > .price__text {
+  font-size: 16px;
+}
+
+.row .row__actions {
+  margin-left: 20px;
+}
+
+/**
+ * Корзина
+ */
+/**
+ * Переменные
+ */
+.cart {
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #d3d3d3;
+}
+
+.products-cart {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.products-cart .cart__summary {
+  width: 100%;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.products-cart .cart__currency {
+  margin-top: 10px;
+}
+
+/**
+ * Каталог товаров
+ */
+/**
+ * Переменные
+ */
+.products {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+/**
+ * Кнопки
+ */
+/**
+ * Переменные
+ */
+.btn {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px;
+  width: auto;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+}
+
+.btn.btn-round {
+  border-radius: 30px;
+  margin: 0 2px;
+}
+
+.btn.btn-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  padding: 0;
+}
+
+.btn.btn-block {
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #a0a0a0;
+}
+
+.btn:active {
+  background-color: #878787;
+}
+
+.btn.btn-red {
+  background-color: #df0000;
+  color: white;
+}
+
+.btn.btn-red:hover {
+  background-color: #ac0000;
+}
+
+.btn.btn-red:active {
+  background-color: #790000;
+}
+
+.btn.btn-accent {
+  background-color: #ee7400;
+  color: white;
+}
+
+.btn.btn-accent:hover {
+  background-color: #bb5b00;
+}
+
+.btn.btn-accent:active {
+  background-color: #884200;
+}
+
+.btn.btn-success {
+  background-color: green;
+  color: white;
+}
+
+.btn.btn-success:hover {
+  background-color: #004d00;
+}
+
+.btn.btn-success:active {
+  background-color: #001a00;
+}
+
+.btn.disabled {
+  cursor: not-allowed;
+  background-color: #ececec;
+  color: #d3d3d3;
+}
+
+.btn.disabled:hover {
+  background-color: #ececec;
+}
+
+.btn.disabled:active {
+  background-color: #ececec;
+}
+
+/**
+ * Модальное окно
+ */
+/**
+ * Переменные
+ */
+.modal {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  pointer-events: none;
+  -webkit-transition: opacity 200ms ease-in;
+  transition: opacity 200ms ease-in;
+}
+
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal > .modal__container {
+  position: relative;
+  width: 50%;
+  margin: 50px auto;
+  border-radius: 10px;
+  background: white;
+  padding: 10px;
+}
+
+.modal > .modal__container > .modal__close {
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  z-index: 1;
+  width: 24px;
+  line-height: 25px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 12px;
+  -webkit-box-shadow: 1px 1px 3px black;
+          box-shadow: 1px 1px 3px black;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.modal > .modal__container > .modal__close:hover {
+  background-color: #ee7400;
+}
+
+.modal > .modal__container > .modal__content {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.modal > .modal__container > .modal__content > .image {
+  width: 100%;
+  height: 100%;
+}
+
+.modal > .modal__container > .modal__content > .image__prev, .modal > .modal__container > .modal__content > .image__next {
+  position: absolute;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  opacity: 0;
+  background-color: black;
+  -webkit-transition: background-color 0.5s, opacity 0.3s;
+  transition: background-color 0.5s, opacity 0.3s;
+}
+
+.modal > .modal__container > .modal__content > .image__prev:after, .modal > .modal__container > .modal__content > .image__next:after {
+  color: #ee7400;
+  font-size: 72px;
+}
+
+.modal > .modal__container > .modal__content > .image__prev:hover, .modal > .modal__container > .modal__content > .image__next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+.modal > .modal__container > .modal__content > .image__prev {
+  left: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.modal > .modal__container > .modal__content > .image__prev:after {
+  content: '<';
+}
+
+.modal > .modal__container > .modal__content > .image__next {
+  right: 0;
+  border-radius: 0 10px 10px 0;
+}
+
+.modal > .modal__container > .modal__content > .image__next:after {
+  content: '>';
+}
+
+/**
+ * Кнопки
+ */
+/**
+ * Переменные
+ */
+.badge:after {
+  content: attr(data-after);
+  background-color: #ee7400;
+  display: block;
+  width: 20px;
+  height: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-left: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+/**
+ * Пошаговый инструмент
+ */
+/**
+ * Переменные
+ */
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.stepper {
+  padding-top: 50px;
+}
+
+.stepper > .stepper__steps {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  padding: 0;
+  margin: 0 0 20px 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.stepper > .stepper__steps > li {
+  width: 100%;
+  display: block;
+  list-style-type: none;
+  text-align: center;
+  position: relative;
+}
+
+.stepper > .stepper__steps > li:before {
+  content: " ";
+  line-height: 30px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 4px solid #d3d3d3;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px;
+  background-color: white;
+  -webkit-transition: background-color 500ms;
+  transition: background-color 500ms;
+}
+
+.stepper > .stepper__steps > li:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: #d3d3d3;
+  top: 17px;
+  left: -50%;
+  z-index: -1;
+  -webkit-transition: background-color 500ms;
+  transition: background-color 500ms;
+}
+
+.stepper > .stepper__steps > li:first-child:after {
+  content: none;
+}
+
+.stepper > .stepper__steps > li.active {
+  color: #ee7400;
+}
+
+.stepper > .stepper__steps > li.active:before {
+  border-color: #ee7400;
+  background-color: #ff8109;
+  color: white;
+  content: '✔︎';
+}
+
+.stepper > .stepper__steps > li.active:after {
+  background-color: #ee7400;
+}
+
+.stepper > .stepper__steps > li.active.success {
+  color: green;
+}
+
+.stepper > .stepper__steps > li.active.success:before {
+  border-color: green;
+  background-color: #009a00;
+}
+
+.stepper > .stepper__steps > li.disabled {
+  cursor: not-allowed;
+  color: #ececec;
+}
+
+.stepper > .stepper__steps > li.disabled:before {
+  border-color: #ececec;
+}
+
+.stepper > .stepper__steps > li.disabled:after {
+  background-color: #ececec;
+}
+
+.stepper > .stepper__content .step {
+  display: none;
+  -webkit-animation: fadeIn 1s;
+          animation: fadeIn 1s;
+  -webkit-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+}
+
+.stepper > .stepper__content .step.active {
+  display: block;
+  -webkit-animation: fadeIn 1s;
+          animation: fadeIn 1s;
+  opacity: 1;
+}
+
+.stepper .stepper__actions {
+  margin-top: 20px;
+}
+
+/**
+ * Поля ввода
+ */
+/**
+ * Переменные
+ */
+.input__group {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.input__field {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.input__field:focus {
+  outline: none;
+}
+
+.input__field:focus ~ .input__label,
+.input__field:valid ~ .input__label {
+  top: -15px;
+  font-size: 14px;
+  color: #ee7400;
+}
+
+.input__field:focus ~ .input__bar:before,
+.input__field:focus ~ .input__bar:after {
+  width: 50%;
+}
+
+.input__bar {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+.input__bar:before, .input__bar:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 0;
+  position: absolute;
+  background: #ee7400;
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+.input__bar:before {
+  left: 50%;
+}
+
+.input__bar:after {
+  right: 50%;
+}
+
+.input__label {
+  width: 100%;
+  color: #999;
+  font-size: 16px;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 15px;
+  -webkit-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,18 @@
+/**
+ * Кнопки
+ */
+
+@import './vars';
+
+.badge:after {
+    content: attr(data-after);
+    background-color: $color-accent;
+    display: block;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    margin-left: 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    line-height: 21px;
+}

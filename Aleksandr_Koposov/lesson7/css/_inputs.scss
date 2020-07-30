@@ -1,0 +1,67 @@
+/**
+ * Поля ввода
+ */
+
+@import './vars';
+
+.input {
+    &__group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+    &__field {
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 16px;
+        padding: 10px;
+        display: block;
+        border: none;
+        border-bottom: 1px solid #ccc;
+
+        &:focus {
+            outline: none;
+        }
+        &:focus ~ .input__label,
+        &:valid ~ .input__label {
+            top: -15px;
+            font-size: 14px;
+            color: $color-accent;
+        }
+        &:focus ~ .input__bar:before,
+        &:focus ~ .input__bar:after {
+            width: 50%;
+        }
+    }
+    &__bar {
+        width: 100%;
+        position: relative;
+        display: block;
+
+        &:before,
+        &:after {
+            content: "";
+            height: 2px;
+            width: 0;
+            bottom: 0;
+            position: absolute;
+            background: $color-accent;
+            transition: 0.2s ease all;
+        }
+        &:before {
+            left: 50%;
+        }
+        &:after {
+            right: 50%;
+        }
+    }
+    &__label {
+        width: 100%;
+        color: #999;
+        font-size: 16px;
+        position: absolute;
+        pointer-events: none;
+        left: 10px;
+        top: 15px;
+        transition: 0.2s ease all;
+    }
+}

@@ -1,0 +1,11 @@
+/**
+ * Каталог товаров
+ */
+
+@import './vars';
+
+.products {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
