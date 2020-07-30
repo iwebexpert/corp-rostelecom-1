@@ -1,0 +1,44 @@
+body {
+    font-size: 20px;
+}
+
+#content {
+    width: 900px;
+    margin: 0 auto;
+    min-height: 100%;
+    padding: 10px;
+}
+
+#catalog {
+    width: 900px;
+    margin: 0 auto;
+    min-height: 100%;
+    padding: 10px;
+}
+
+.block {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 250px;
+    height: 100px;
+    text-align: center;
+    line-height: 50px;
+    float: bottom;
+}
+
+[class^="add"]{
+    width: 250px;
+    margin-bottom: 15px;
+}
+
+.basket{
+    margin-bottom: 15px;
+}
+
+.basketClear{
+    margin-bottom: 15px;
+}
+
+.empty-basket{
+    color: red;
+}
