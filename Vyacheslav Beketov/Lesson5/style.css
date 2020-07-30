@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    width: 1200px;
+    background-color: #ccc;
+    margin: 50px auto;
+}
+
+.products {
+    width: 1200px;
+    background-color: #eee;
+    margin: 0 auto;
+}
+
+.summary {
+    width: 1200px;
+    background-color: rgb(54, 158, 45);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    font: bold;
+    justify-content: left;
+}
+
+.number__products {
+    font-size: 16px;
+    padding: 10px;
+
+}
+
+.number__products__val {
+    font-size: 16px;
+    padding: 10px 0px;
+
+}
+
+.total {
+    font-size: 16px;
+    padding: 10px;
+}
+
+.total__cost {
+    font-size: 16px;
+    padding: 10px;
+
+}
+
+.total__cost__val {
+    font-size: 16px;
+    padding: 10px 0px;
+}
+
+.load__cart {
+    padding: 10px;
+    margin: 16px;
+    border: outset;
+    
+}
+
+.clear__cart {
+    padding: 10px;
+    margin: 16px;
+    border: outset;
+
+}
+
+.chess__board__btn {
+    padding: 10px;
+    margin: 16px;
+    border: outset;
+}
+
+.main__col__title {
+    display: flex;
+    width: 807px;
+    height: 20px;
+    
+  }
