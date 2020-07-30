@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина товаров</title>
+    <link rel="stylesheet" href="mein.css">
+    <link rel="stylesheet" href="webModal.css">
+    <link rel="stylesheet" href="webСatalog.css">
+    <link rel="stylesheet" href="webBasket.css">
+    <script src="Helper.js"></script>
+    <script src="Product.js"></script>
+    <script src="Products.js"></script>
+    <script src="Basket.js"></script>
+    <script src="Main.js"></script>
+    <script src="webBasket.js"></script>
+    <script src="webСatalog.js"></script>
+    <script src="webModal.js"></script>
+    <script>
+        window.onload = Show;
+    </script>
+
+</head>
+
+<body>
+    <div id="modal" class="modal">
+        <div class="modalwindow">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Просмотр товара</h3>
+                    <a href="#" title="Закрыть" class="modal-close" onclick="closeModal()">×</a>
+                </div>
+                <div class="modal-body">
+                    <div class="product-image">
+                        <div class="modal-button_border">
+                            <div class="modal-button_prev" id="modal-button_prev"></div>
+                        </div>
+                        <div class="productFullImg">
+                            <img src="" alt="" id="img_productFullImg" class="img_productFullImg">
+                        </div>
+                        <div class="modal-button_border">
+                            <div class="modal-button_next" id="modal-button_next"></div>
+                        </div>
+                    </div>
+                    <div id="modal_productListImg" class="productListImg modal_productListImg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="catalog-container" class="catalog-container"></div>
+        <div id="basket" class="basket"></div>
+    </div>
+</body>
+
+</html>
