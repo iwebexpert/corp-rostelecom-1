@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        class Product {
+            constructor(name, price, currency, volume) {
+                this.name = name;
+                this.price = price;
+                this.currency = currency;
+                this.volume = volume;
+            };
+            cost() {
+                return this.price * this.volume;
+            }
+        };
+        const apple = new Product("Apple", 150, "RUB", 0);
+        const orange = new Product("Orange", 80, "RUB", 0);
+        const pear = new Product("Pear", 120, "RUB", 0);
+        const plum = new Product("Plum", 160, "RUB", 0);
+
+        window.onload = function () {
+            const Products = [apple, orange, pear, plum];
+            let modal_body = document.querySelector('.modal_body');
+            let modal_sum = document.querySelector('.modal_sum');
+            let btn_address = document.querySelector('.btn_address');
+
+            // Обработка части кнопок
+
+            document.addEventListener('click', function (event) {
+                if (event.target.dataset.action == 'close') {
+                    let modals = document.getElementsByClassName("modal");
+                    for (const modal of modals) {
+                        modal.style.display = "none";
+                    }
+                };
+                if (event.target.dataset.action == 'next') {
+                    event.target.closest('.modal').nextElementSibling.style.display = "block";
+                };
+                if (event.target.dataset.action == 'nextBasket') {
+                    document.getElementById('modal').style.display = "block";
+                };
+            });
+
+            // заголовок таблицы каталога 
+            document.body.style.margin = '0 auto';
+            let catalog = document.getElementById("catalog");
+            catalog.className = 'container';
+
+            let catalog_header = document.createElement('h2');
+            catalog_header.textContent = 'catalog';
+            document.body.insertAdjacentElement("afterbegin", catalog_header);
+
+            let product_header = document.createElement('h4');
+            catalog.insertAdjacentElement("beforeend", product_header);
+            product_header.style.cssText = 'display: flex';
+
+            let product_header1 = document.createElement('h4');
+            product_header1.className = 'product_name';
+            product_header1.textContent = 'Товар';
+            product_header.insertAdjacentElement("beforeend", product_header1);
+
+            let product_header2 = document.createElement('h4');
+            product_header2.className = 'product_number';
+            product_header2.textContent = 'Цена, руб.';
+            product_header.insertAdjacentElement("beforeend", product_header2);
+
+            let product_header3 = document.createElement('h4');
+            product_header3.textContent = 'Количество';
+            product_header3.className = 'product_number';
+            product_header.insertAdjacentElement("beforeend", product_header3);
+
+            let product_header4 = document.createElement('h4');
+            product_header4.className = 'product_number';
+            product_header4.textContent = 'Корзина';
+            product_header.insertAdjacentElement("beforeend", product_header4);
+
+            let basket_header = document.createElement('h2');
+            basket_header.textContent = 'basket';
+            document.body.insertAdjacentElement("beforeend", basket_header);
+
+
+            let basket_empty = document.createElement('p');
+            basket_empty.textContent = 'Корзина пуста';
+            basket_empty.className = 'basket_empty';
+            basket_empty.style.cssText = 'text-align: center;';
+            document.body.insertAdjacentElement("beforeend", basket_empty);
+
+            let basket_container = document.createElement('div');
+            basket_container.className = 'container';
+            document.body.insertAdjacentElement("beforeend", basket_container);
+
+            Products.forEach(function (item) {
+                let product_cont = document.createElement('div');
+                product_cont.className = 'product';
+                catalog.insertAdjacentElement("beforeend", product_cont);
+
+                let product_name = document.createElement('div');
+                product_name.className = 'product_name';
+                product_name.textContent = item.name;
+                product_cont.insertAdjacentElement("afterbegin", product_name);
+
+                let product_price = document.createElement('div');
+                product_price.className = 'product_number';
+                product_price.textContent = item.price;
+                product_cont.insertAdjacentElement("beforeend", product_price);
+
+                let product_volume = document.createElement('input');
+                product_volume.className = 'product_number';
+                product_volume.type = 'number';
+                product_volume.value = '1';
+                product_volume.min = '1';
+                product_cont.insertAdjacentElement("beforeend", product_volume);
+
+                const btnInput = document.createElement('button');
+                btnInput.setAttribute('data-action', 'addBasket');
+                btnInput.className = "btn";
+                btnInput.textContent = 'купить';
+                product_cont.insertAdjacentElement("beforeend", btnInput);
+                btnInput.style.cssText = 'border: solid 1px;\
+                width: 25%;';
+
+                styleCSS();
+
+                // формирование корзины
+
+                btnInput.addEventListener('click', function (event) {
+                    item.volume = (product_volume.value > 0) ? product_volume.value : 0;
+                    if (item.volume) {
+                        addItem(item);
+                        let basketItems = document.querySelectorAll('.basket_volume')
+                        let basketItemsPrice = document.querySelectorAll('.basket_price')
+                        calcCost = 0
+                        for (let i = 0; i < basketItems.length; i++) {
+                            calcCost += basketItemsPrice[i].textContent * basketItems[i].textContent;
+                        }
+                        product_volume.textContent = basketItems.length;
+                        forward.style.cssText = 'border: solid 1px; width: 25%; display: flex; \
+                margin: auto; justify-content: center;';
+                        message(basketItems, calcCost);
+                        return false;
+                    }
+                });
+
+                function addItem(item) {
+
+                    let product_cont = document.createElement('div');
+                    product_cont.className = 'product';
+                    modal_body.insertAdjacentElement("beforeend", product_cont);
+
+                    let product_name = document.createElement('div');
+                    product_name.className = 'product_name';
+                    product_name.textContent = item.name;
+                    product_cont.insertAdjacentElement("afterbegin", product_name);
+
+                    let product_price = document.createElement('div');
+                    product_price.className = 'product_number basket_price';
+                    product_price.textContent = item.price;
+                    product_cont.insertAdjacentElement("beforeend", product_price);
+
+                    let product_volume = document.createElement('div');
+                    product_volume.className = 'product_number basket_volume';
+                    product_volume.textContent = item.volume;
+                    product_cont.insertAdjacentElement("beforeend", product_volume);
+
+                    let product_sum = document.createElement('div');
+                    product_sum.className = 'product_number basket_sum';
+                    product_sum.textContent = item.price * item.volume;
+                    product_cont.insertAdjacentElement("beforeend", product_sum);
+
+                    const btnReset = document.createElement('button');
+                    btnReset.className = "btn";
+                    btnReset.textContent = 'удалить';
+                    product_cont.insertAdjacentElement("beforeend", btnReset);
+                    btnReset.style.cssText = 'border: solid 1px;\
+                width: 25%;';
+                    styleCSS();
+
+
+                    btnReset.addEventListener('click', function (event) {
+                        calcCost -= product_sum.textContent;
+                        this.parentNode.parentNode.removeChild(this.parentNode)
+                        basketItems = document.querySelectorAll('.basket_volume')
+                        message(basketItems, calcCost)
+                    });
+                };
+                function message(basketItems, calcCost) {
+                    if (!basketItems.length) {
+                        basket_table.style.display = "none";
+                        btn_address.style.display = "none";
+                        basket_empty.textContent = 'Корзина пуста';
+                        modal_sum.textContent = 'Корзина пуста';
+                    } else {
+                        let message = 'В корзине: ' + basketItems.length + ' товар(ов) на сумму: ' + calcCost + ' рублей';
+                        basket_empty.textContent = message;
+                        modal_sum.textContent = message;
+                        return false;
+                    };
+                }
+
+            });
+
+            // Заголовок таблицы в корзине
+            let basket_table = document.createElement('div');
+            modal_body.insertAdjacentElement("beforeend", basket_table);
+            basket_table.style.cssText = 'font-size: smaller; display: flex;';
+
+            let basket_table1 = document.createElement('h4');
+            basket_table1.className = 'product_name';
+            basket_table1.textContent = 'Товар';
+            basket_table.insertAdjacentElement("beforeend", basket_table1);
+
+            let basket_table2 = document.createElement('h4');
+            basket_table2.className = 'product_number';
+            basket_table2.textContent = 'Цена, руб.';
+            basket_table.insertAdjacentElement("beforeend", basket_table2);
+
+            let basket_table3 = document.createElement('h4');
+            basket_table3.textContent = 'Количество';
+            basket_table3.className = 'product_number';
+            basket_table.insertAdjacentElement("beforeend", basket_table3);
+
+            let basket_table4 = document.createElement('h4');
+            basket_table4.textContent = 'Сумма';
+            basket_table4.className = 'product_number';
+            basket_table.insertAdjacentElement("beforeend", basket_table4);
+
+            let basket_table5 = document.createElement('h4');
+            basket_table5.className = 'product_number';
+            basket_table5.textContent = 'Корзина';
+            basket_table.insertAdjacentElement("beforeend", basket_table5);
+
+            const forward = document.createElement('button');
+            forward.setAttribute('data-action', 'nextBasket');
+            forward.textContent = 'перейти в корзину';
+            basket_container.insertAdjacentElement("afterbegin", forward);
+            forward.style.cssText = 'display: none;';
+
+            styleCSS();
+
+            // стили
+            function styleCSS() {
+
+                let products_containerCSS = document.querySelectorAll('.container')
+                products_containerCSS.forEach(function (item) {
+                    item.style.cssText = 'box-sizing: border-box;max-width: 600px;\
+                margin: 0 auto;';
+                });
+
+                let productsCSS = document.querySelectorAll('.product')
+                productsCSS.forEach(function (item) {
+                    item.style.cssText = 'border: solid 1px; display: flex;margin-top: 10px;';
+                });
+
+                let products_nameCSS = document.querySelectorAll('.product_name')
+                products_nameCSS.forEach(function (item) {
+                    item.style.cssText = 'flex-grow: 1; margin: 0';
+                });
+
+                let products_numberCSS = document.querySelectorAll('.product_number')
+                products_numberCSS.forEach(function (item) {
+                    item.style.cssText = 'width:20%; margin: 0; text-align: center;';
+                });
+
+                let btn_CSS = document.querySelectorAll('.btn')
+                btn_CSS.forEach(function (item) {
+                    item.style.cssText = 'width:20%; margin:0; text-align: center;';
+                });
+
+                let headerH2_CSS = document.querySelectorAll('h2')
+                headerH2_CSS.forEach(function (item) {
+                    item.style.cssText = 'text-transform: uppercase;text-align: center;';
+                });
+            };
+
+        };
+    </script>
+</head>
+
+<body>
+    <div id="catalog">
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal_box">
+            <div data-action="close" class="close"> × </div>
+            <h2>Basket</h2>
+            <div class="modal_body"></div>
+            <div class="modal_sum"></div>
+            <button data-action="next" class="btn_modal btn_address">Далее</button>
+        </div>
+    </div>
+    <div id="modal_address" class="modal">
+        <div class="modal_box">
+            <div data-action="close" class="close"> × </div>
+            <h2>Адрес доставки</h2>
+            <textarea id="address" class="modal_body" cols="40" rows="10"></textarea>
+            <button data-action="next" class="btn_modal">Далее</button>
+        </div>
+    </div>
+    <div id="modal_comment" class="modal">
+        <div class="modal_box">
+            <div data-action="close" class="close"> × </div>
+            <h2>комментарий</h2>
+            <textarea id="comment" class="modal_body" cols="40" rows="20"></textarea>
+            <!-- <button id="modal_comment" data-action="next" class="btn_modal">Далее</button> -->
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
