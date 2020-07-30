@@ -31,7 +31,7 @@ class backetUnit {
 class backet {
 
     constructor() {
-        this.shopBin = new Array(0);
+        this.shopBin = [];
     }
     add(_backetUnit) {
         for (let i = 0; i < this.shopBin.length; i++) {
