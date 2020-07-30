@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson_7 очень плохого качества</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            margin-top: 150px;
+        }
+
+
+        .cart {
+            text-align: center;
+            font-size: 20px;
+            color: black;
+            margin-bottom: 50px;
+            border: 1px solid blue;
+        }
+
+        .empty {
+            color: red;
+            border: 1px solid red;
+
+        }
+
+        .product {
+            background-color: floralwhite;
+            border: black solid 1px;
+            padding: 30px;
+            margin-top: 15px;
+        }
+
+        .button {
+            margin-top: 30px;
+
+        }
+
+
+        .but_center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button_product {
+            margin-right: 30px;
+        }
+
+        .basket {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .basket p {
+            text-align: center;
+            margin: auto;
+        }
+
+        .modalW {
+            background-color: rgb(206, 202, 202);
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            /* display: flex;
+            flex-direction: column;
+             */
+            z-index: 99999;
+
+        }
+
+        .emptyBc {
+            display: none;
+        }
+
+        .formBasket {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+        }
+
+        .basketcheck {
+            margin: 15px;
+        }
+
+        .addres {
+            margin-bottom: 15px;
+
+        }
+
+        .sendForm {
+            border: 1px solid gray;
+            background-color: gray;
+            text-decoration: none;
+            margin-top: 50px;
+            padding: 15px;
+        }
+
+        .close_modal {
+            color: #BFE2FF;
+            font-size: 40px;
+            font-weight: bold;
+            font-family: Times, sans-serif;
+            border-radius: 50%;
+            border: 4px solid #BFE2FF;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin: 20px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            box-sizing: content-box;
+        }
+
+        .comm_hid {
+            display: none;
+
+        }
+
+        .comm {
+            transition: all 0.6s;
+            transform: rotateY(300);
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class=" modalW " hidden="true">
+        <form class="formBasket">
+            <div class="basketcheck">
+                <p>Состав корзины:</p>
+                <div class="basketList">
+
+                </div>
+            </div>
+            <div class="addres">
+                <p>Адрес доставки:</p>
+                <input type="text">
+                <button class='addres_next'>Далее</button>
+            </div>
+            <div class="comm comm_hid">
+                <p>Комментарий:</p>
+                <textarea cols="40" rows="20"></textarea>
+            </div>
+            <!-- <a class="sendForm" href="#">Отправить</a> -->
+            <button class="sendForm">Send</button>
+        </form>
+        <div class="close_modal">+</div>
+    </div>
+    <div class="container">
+
+        <div class="cart-container"></div>
+    </div>
+
+
+    <script>
+        window.onload = function () {
+            createCart();
+            modalView();
+        };
+
+        class product {
+            constructor(name, price, count) {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            }
+            get Count() {
+                return this.count;
+            }
+            get cost() {
+                return this.Count * this.price;
+            }
+
+        }
+
+        class basket {
+            constructor(basketIn) {
+                this.basketIn = basketIn;
+            }
+            get Counts() {
+                let counts = 0;
+                for (let i = 0; i < this.basketIn.length; i++) {
+                    counts += this.basketIn[i].Count;
+                }
+
+                return counts;
+            }
+
+            get basketPrice() {
+                let sum = 0;
+                for (let i = 0; i < this.basketIn.length; i++) {
+                    sum += this.basketIn[i].cost;
+                }
+
+                return sum;
+
+            }
+
+            add(basketIn) {
+                this.basketIn.push(basketIn);
+            }
+
+
+        }
+
+        let products = new basket([]);
+
+        function getCart() {
+            return document.querySelector('.emptyB');
+
+        }
+        //модальное окно
+        function getModal() {
+            return document.querySelector('.img');
+        }
+        function modalView() {
+            getModal().addEventListener('click', function () {
+                if (document.querySelector('.modalW').hidden === true) {
+                    document.querySelector('.modalW').hidden = false;
+
+                } else {
+                    document.querySelector('.modalW').hidden = true;
+
+                }
+
+            });
+            document.querySelector('.close_modal').addEventListener('click', function () {
+                if (document.querySelector('.modalW').hidden === false) {
+                    document.querySelector('.modalW').hidden = true;
+
+                } else {
+                    document.querySelector('.modalW').hidden = false;
+                }
+                document.querySelector('.comm').classList = "comm_hid";
+            });
+        }
+
+
+
+        document.querySelector('.addres_next').addEventListener('click', function () {
+            const com = document.querySelector('.comm');
+            com.classList.remove("comm_hid");
+
+        })
+
+
+        function createCart() {
+            const contentCart = document.createElement('div');
+            const contentCartP = document.createElement('p');
+            const linkBasket = document.createElement('a');
+            const basketOn = document.createElement('img');
+
+            contentCartP.textContent = "Корзина пуста";
+            contentCart.className = "cart  basket ";
+            contentCartP.className = "cart empty emptyB";
+
+            linkBasket.className = "img";
+
+            document.querySelector('.cart-container').appendChild(contentCart);
+            document.querySelector('.basket').appendChild(contentCartP);
+
+            document.querySelector('.basket').appendChild(linkBasket)
+
+            linkBasket.href = '#';
+            document.querySelector('.img').appendChild(basketOn);
+            basketOn.src = './Line_ui_icons_Svg-10_icon-icons.com_72171.svg';
+
+
+
+
+
+
+
+
+
+            const but = document.createElement('button');
+            but.textContent = "Очистить корзину";
+            but.className = "button button-clear";
+
+            but.addEventListener('click', function () {
+                products = new basket([]);
+                getCart().classList.add("empty");
+                getCart().textContent = "Корзина пуста";
+            });
+            butCenter = document.createElement('div');
+            butCenter.className = "but_center";
+            document.querySelector('.cart-container').appendChild(butCenter);
+            document.querySelector('.but_center').appendChild(but);
+
+            addProduct("Оперативная память", 7500);
+            addProduct("Материнская плата", 12569);
+            addProduct("Блок питания", 12980);
+            addProduct("Видеокарта", 47630);
+        }
+        function addProduct(name, price) {
+
+
+            const contentProduct = document.createElement('div');
+            contentProduct.className = "product";
+
+
+            const nameProduct = document.createElement('h3');
+            nameProduct.textContent = `Название : ${name}`;
+            contentProduct.appendChild(nameProduct);
+
+            const priceProduct = document.createElement('h5');
+            priceProduct.textContent = `Цена за шт :  ${price}`;
+            contentProduct.appendChild(priceProduct);
+
+            const but = document.createElement('button');
+            but.textContent = "Добавить";
+            but.className = "button button_product";
+
+            const but1 = document.createElement('button');
+            but1.textContent = "Удалить";
+            but1.className = "button ";
+
+            but.addEventListener('click', function () {
+                if (`${name}` == null) {
+                    products.add(new product(`${name}`, price, 1));
+                } else {
+                    products.add(new product(`${name}`, price, 1));
+                }
+
+                getCart().textContent = `Товаров в корзине   ${products.Counts}  шт на  сумму  ${products.basketPrice}`;
+                getCart().classList.remove("empty");
+
+                document.querySelector('.basketList').textContent = `Товаров в корзине   ${products.Counts}  шт на  сумму  ${products.basketPrice}`;
+
+
+                console.log(products);
+            });
+
+            but1.addEventListener('click', function () {
+
+                if (products.basketPrice > 0 && products.Counts > 0) {
+                    products.add(new product(`${name}`, price, -1));
+                    getCart().textContent = `Товаров в корзине   ${products.Counts}  шт на  сумму  ${products.basketPrice}`;
+                    document.querySelector('.basketList').textContent = `Товаров в корзине   ${products.Counts}  шт на  сумму  ${products.basketPrice}`;
+                    getCart().classList.remove("empty");
+                    if (products.basketPrice <= 0 || products.Counts <= 0) {
+                        getCart().classList.add("empty");
+                        getCart().textContent = "Корзина пуста";
+                        document.querySelector('.basketList').textContent = "Корзина пуста";
+                        products = new basket([]);
+                    }
+                } else {
+                    getCart().classList.add("empty");
+                    getCart().textContent = "Корзина пуста";
+                    products = new basket([]);
+                    document.querySelector('.basketList').textContent = "Корзина пуста";
+
+                }
+
+
+            });
+            contentProduct.appendChild(but);
+            contentProduct.appendChild(but1);
+
+            document.querySelector('.cart-container').appendChild(contentProduct);
+
+
+
+
+        }
+
+
+    </script>
+</body>
+
+</html>
