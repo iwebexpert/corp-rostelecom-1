@@ -151,7 +151,9 @@
     /*height: 100%;*/
     max-width: 500px;
     min-height: 500px;
-    
+    max-height: 800px;
+    overflow-y: auto;
+
     /*  Центрируем и задаем z-index */
     position: fixed;
     top: 50%;
