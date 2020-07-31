@@ -148,9 +148,9 @@
     
     /*  Установаем ширину окна  */
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     max-width: 500px;
-    max-height: 500px;
+    min-height: 500px;
     
     /*  Центрируем и задаем z-index */
     position: fixed;
