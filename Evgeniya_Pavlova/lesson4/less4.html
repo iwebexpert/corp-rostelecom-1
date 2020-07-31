@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    
+        //Задание 1 
+        
+        class Number {
+            constructor(unit, ten, hund) {
+                this.hund = hund;
+                this.ten = ten;
+                this.unit = unit;
+            }
+            show() {
+                console.log("единицы:", this.unit);
+                console.log("десятки:", this.ten);
+                console.log("сотни:", this.hund);
+            }
+        }
+
+        function numToObj(num) {
+            let obj_num = {};
+            if (num > 999 || num < 0) {
+                console.log('Некорректное число');
+                return obj_num;
+            }
+            let units = Math.floor(num % 10);
+            let tens = Math.floor((num / 10) % 10);
+            let hunds = Math.floor((num / 100) % 10);
+            obj_num = new Number(units, tens, hunds);
+            obj_num.show();
+        }
+
+        let num = prompt('Введите число от 0 до 999', '');
+        numToObj(num);
+
+        //Задание 2
+
+        class Product {
+            constructor(name, price, how_much) {
+                this.name = name;
+                this.price = price;
+                this.how_much = how_much;
+            }
+        }
+
+        const basket = {
+            items: [],
+            basketPrice() {
+                let sum = 0;
+                for (let i = 0; i < this.items.length; i++) {
+                    sum += this.items[i].price * this.items[i].how_much;
+                }
+                return sum;
+            },
+            addItem(products) {
+                this.items.push(products);
+            },
+        }
+        basket.addItem(new Product('prod1', 100, 2));
+        basket.addItem(new Product('prod2', 300, 1));
+        basket.addItem(new Product('prod3', 50, 3));
+        console.log('Продуктов в корзине на сумму', basket.basketPrice());
+
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
