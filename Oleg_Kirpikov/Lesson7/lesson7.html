@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html lang="ru">
+
+<head>
+    <title>Lesson 7</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./lesson7.css" />
+    <script type="text/javascript" src="./lesson7.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrap">
+            <div class="basket_container">
+                <div id="basket">
+                </div>
+            </div>
+            <button id="clearBasketButton">Очистить корзину</button>
+        </div>
+
+        <div id="catalog"></div>
+    </div>
+
+    <div class="modal"></div>
+    <div class="overlay js-overlay-modal"></div>
+
+    <div class="imgContainer hide"></div>
+
+    <div class="listBasket hide">
+        <h2>Состав корзины</h2>
+    </div>
+    <div class="adress_delivery hide">
+        <h2>Адрес доставки</h2>
+        <div class="row right">
+            <label>Фамилия<input class="input_class" type="text" size="15" placeholder="Фамилия"></label>
+            <label>Имя<input class="input_class" type="text" size="15" placeholder="Имя"></label>
+            <label>Отчество<input class="input_class" type="text" size="15" placeholder="Отчество"></label>
+        </div>
+        <div class="row right">
+            <label>Страна<input class="input_class" type="text" size="15" placeholder="Страна">
+        </div>
+        <div class="row right">
+            <label>Регион<input class="input_class" type="text" size="15" placeholder="Регион"></label>
+            <label>Город<input class="input_class" type="text" size="15" placeholder="Город"></label>
+        </div>
+        <div class="row right">
+            <label>Улица<input class="input_class" type="text" size="15" placeholder="Улица"></label>
+            <label>Дом<input class="input_class" type="text" size="15" placeholder="Дом"></label>
+            <label>Корпус<input class="input_class" type="text" size="15" placeholder="Корпус"></label>
+            <label>Квартира<input class="input_class" type="text" size="15" placeholder="Квартира"></label>
+        </div>
+    </div>
+    <div class="comment hide">
+        <h2>Комментарий</h2>
+        <div class="row right">
+            <textarea class="textarea_class" rows="10" cols="45" placeholder="Комментарий"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>
