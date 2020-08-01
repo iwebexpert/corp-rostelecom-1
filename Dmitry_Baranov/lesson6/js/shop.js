@@ -32,7 +32,7 @@ class Product {
 class Catalog {
     constructor(items) {
         this.items = items;
-        this.userBasket = [];
+        this.items = [];
         this.sum = 0;
     }
 
@@ -106,9 +106,9 @@ class Catalog {
             price: this.items[id].price,
             quantity: 1,
         };
-        this.userBasket.push(tradeGoods);
+        this.items.push(tradeGoods);
         this.sum += this.items[id].price;
-        basketDiv.textContent = `В корзине: ${this.userBasket.length} товаров на сумму ${this.sum} рублей`;
+        basketDiv.textContent = `В корзине: ${this.items.length} товаров на сумму ${this.sum} рублей`;
         basketDiv.classList.remove('basket-empty');
     }
 
@@ -118,16 +118,16 @@ class Catalog {
         const modalItems = document.createElement('div');
         modalItems.textContent = 'Корзина:';
         modalItems.className = 'modal__items';
-        for (let i = 0; i < this.userBasket.length; i++) {
+        for (let i = 0; i < this.items.length; i++) {
             const modalItemsName = document.createElement('p');
-            modalItemsName.innerHTML = `<b>Наименование:</b> ${this.userBasket[i].name}`;
+            modalItemsName.innerHTML = `<b>Наименование:</b> ${this.items[i].name}`;
             modalItems.appendChild(modalItemsName);
 
             const modalItemsPrice = document.createElement('p');
-            modalItemsPrice.innerHTML = `<b>Цена:</b> ${this.userBasket[i].price}`;
+            modalItemsPrice.innerHTML = `<b>Цена:</b> ${this.items[i].price}`;
             modalItems.appendChild(modalItemsPrice);
 
-            totalSum+= this.userBasket[i].price;
+            totalSum+= this.items[i].price;
         }
         const modalTotalCoast = document.createElement('p')
         modalTotalCoast.innerHTML = `<b> Полная стоимость корзины:</b> ${totalSum}`;
