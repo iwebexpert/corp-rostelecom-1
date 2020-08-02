@@ -9,6 +9,7 @@
 .items__parent{
     display: flex;
     justify-content: space-between;
+    margin: 25px 0;
 }
 .item {
     width: 80px;
@@ -18,5 +19,26 @@
     box-sizing: border-box;
 }
 .basket__item {
-    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+
+}
+.link {
+    text-decoration: none;
+}
+
+.hide {
+    display: none;
+}
+
+.main__page {
+    display: block;
+}
+
+.basket__parent{
+    margin: 15px 0;
+}
+
+.summary {
+    margin: 15px 0;
 }
