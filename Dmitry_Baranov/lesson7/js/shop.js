@@ -15,7 +15,7 @@ const basketDiv = document.querySelector('.basket');
 const modalDiv = document.querySelector('.modal');
 
 class Product {
-    constructor(name, price, quantity, image = '', currency = 'RUB') {
+    constructor(name, price, quantity, image = [], currency = 'RUB') {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -64,11 +64,11 @@ class Catalog {
         }
 
         if (event.target.classList.contains('image')) {
-            this.addModal();
+            modal.addModal(event.target);
         }
 
         if (event.target.classList.contains('btn-modal-close') || event.target.classList.contains('modal')) {
-            this.closeModal();
+            modal.closeModal();
         }
     }
 
@@ -107,10 +107,16 @@ class Catalog {
             nameCard.innerHTML = `<b>Наименование:</b> ${this.items[i].name}`;
             containerCard.appendChild(nameCard);
 
+            const imgWrap = document.createElement('div');
+            imgWrap.className = 'productListImg';
+
+            for (let j = 0; j < this.items[i].image.length; j++) {
             const imgCard = document.createElement('img');
-            imgCard.className = 'image';
-            imgCard.src = `${this.items[i].image}`;
-            containerCard.appendChild(imgCard);
+                imgCard.className = 'image';
+                imgCard.src = `${this.items[i].image[j]}`;
+                imgWrap.appendChild(imgCard);
+            }
+            containerCard.appendChild(imgWrap);
 
             const priceCard = document.createElement('p');
             priceCard.innerHTML = `<b>Цена:</b> ${this.items[i].price}`;
@@ -329,39 +335,21 @@ class Catalog {
             e.parentElement.previousElementSibling.style.display = 'none';
         }
     }
-
-    // Модальное окно
-    addModal() {
-        modalDiv.innerHTML = '';
-        const modalContent = document.createElement('div');
-        modalContent.className = 'modal__content';
-        modalContent.textContent = 'Тут должен быть слайдер';
-
-        const modalClose = document.createElement('button');
-        modalClose.className = 'btn-modal-close';
-        modalClose.textContent = 'X';
-        modalContent.appendChild(modalClose);
-
-        modalDiv.className = 'modal';
-        modalDiv.appendChild(modalContent);
-    }
-
-    closeModal() {
-        modalDiv.className = 'modal modal-hide';
-    }
 }
 
-const keyboard = new Product('Keyboard', 1250, 10, 'https://c.dns-shop.ru/thumb/st4/fit/320/250/b162eada74b2b75d159a908301802775/37ab7810c4ee7f91b21a0abf6d9741401d1c8093b3d651d71484517b929c36d0.jpg');
-const mouse = new Product('Mouse', 720, 10, 'https://c.dns-shop.ru/thumb/st1/fit/190/190/f298582eb4fda0ec698a6cc435d8d1f9/8d90790d759192ab12372c552abb03107538abce9c282bb63bfa34ae023fc98a.jpg.webp');
-const speaker = new Product('Speaker', 2200, 10, 'https://c.dns-shop.ru/thumb/st4/fit/190/190/05f384d5f53d7e60c05d33d853a32ad4/215a31ad152639079e3b1aa61d7615b12bdc7b5148bcbee1671e32550f8d6a7f.jpg.webp');
-const monitor = new Product('Monitor', 7800, 10, 'https://c.dns-shop.ru/thumb/st1/fit/190/190/10c138b562fdf6b96402de347311a8ea/80af3c7a05eaa24919060758c1f1f4b80e0d32b29e8ee2ed33d0e11a57603a68.jpg.webp');
-const flash = new Product('Flash USB', 440, 10, 'https://c.dns-shop.ru/thumb/st1/fit/190/190/f05d18d082a54ef24f9b44b8c0866918/f55ad21d2e23d53a3a37ea6964a94bedb84b325df1caf2708f36d3f4cb739b91.jpg.webp');
+const keyboard = new Product('Keyboard', 1250, 10, ['https://c.dns-shop.ru/thumb/st4/fit/320/250/b162eada74b2b75d159a908301802775/37ab7810c4ee7f91b21a0abf6d9741401d1c8093b3d651d71484517b929c36d0.jpg', 'https://c.dns-shop.ru/thumb/st4/fit/wm/2000/2000/97109bc36d8da53d6d1273f4eea2bdad/fefb1df74f0c66ace4e281f940e92bfddbb581e76e01f365903fb72e0024cc16.jpg', 'https://c.dns-shop.ru/thumb/st4/fit/wm/2000/2000/b27f07192dad243c939c4d7230a25acc/6965a0b6c3704878432c9171da95c6ed86fb30897f589cdd4e67abe43e9c8bff.jpg']);
+const mouse = new Product('Mouse', 720, 10, ['https://c.dns-shop.ru/thumb/st1/fit/wm/2000/1500/8fe42a7ddfdfef68efc63f8b41fd8eb6/4973b10d1d26ba298b7d7dfad7cabac6671ba1b9cd54f28aec56ba18fd933b1d.jpg', 'https://c.dns-shop.ru/thumb/st1/fit/wm/2000/1727/7ea89fef88456f1738e9ebac4b616949/64371e7340681ab2575c938cf02ec9688edd530bbfc92f937ab321ed9eee976f.jpg', 'https://c.dns-shop.ru/thumb/st1/fit/wm/2000/1500/938de87a7f222338986e7035e4dfc030/87f1a9e6b02a297793241604694ebf78dec1b54f4d197c49485752bd51819e5b.jpg']);
+const speaker = new Product('Speaker', 2200, 10, ['https://c.dns-shop.ru/thumb/st4/fit/190/190/05f384d5f53d7e60c05d33d853a32ad4/215a31ad152639079e3b1aa61d7615b12bdc7b5148bcbee1671e32550f8d6a7f.jpg.webp', 'https://c.dns-shop.ru/thumb/st1/fit/wm/2000/1500/0b4e06a50aa1fe992d0b08cf73260c8f/a6bad08c831e477bbcdffaffc96195b97723403d4509430f82aafc2b5d927b4c.jpg', 'https://c.dns-shop.ru/thumb/st1/fit/wm/2000/1500/e7d94183d758c5fe4c401d68e6b3383d/469dcd10a2bc5adf18dd08cc58b009ddfd766d08524d81d1a889da4b8e394f04.jpg']);
+const monitor = new Product('Monitor', 7800, 10, ['https://c.dns-shop.ru/thumb/st1/fit/190/190/10c138b562fdf6b96402de347311a8ea/80af3c7a05eaa24919060758c1f1f4b80e0d32b29e8ee2ed33d0e11a57603a68.jpg.webp', 'https://c.dns-shop.ru/thumb/st4/fit/wm/2000/2000/d082abced587f0178259f5c1769dcb3a/022f859d3df71ffad3a553ffe97569c05f347c5bb4a735197797fd2ee4e9830b.jpg', 'https://c.dns-shop.ru/thumb/st4/fit/wm/2000/2000/3a8eb86deb5f3890e02f6b372e3a651a/1a2de033358c3a8384c314ded6cc6ebcc5468a728bfb6e44aa0abb687a344115.jpg']);
+const flash = new Product('Flash USB', 440, 10, ['https://c.dns-shop.ru/thumb/st1/fit/190/190/f05d18d082a54ef24f9b44b8c0866918/f55ad21d2e23d53a3a37ea6964a94bedb84b325df1caf2708f36d3f4cb739b91.jpg.webp', 'https://c.dns-shop.ru/thumb/st1/fit/wm/2000/2000/6bbb134d672eb9330051a471ff8951df/18ffde1e4c9630bc67d7e583aee130a0b43c01eb9d5d783e5f6f35a7726f8510.jpg', 'https://c.dns-shop.ru/thumb/st1/fit/190/190/f05d18d082a54ef24f9b44b8c0866918/f55ad21d2e23d53a3a37ea6964a94bedb84b325df1caf2708f36d3f4cb739b91.jpg.webp']);
 
 const items = [keyboard, mouse, speaker, monitor, flash];
 const shop = new Catalog(items);
 
 const userBasket = new Catalog([]);
-
+const modal = new Modal();
 
 shop.init();
 userBasket.initBasket();
+
+
