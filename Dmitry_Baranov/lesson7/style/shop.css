@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    max-width: 1200px;
+}
+
+.catalog {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.basket {
+    padding: 20px;
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.basket-empty {
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}
+
+.card {
+    background-color: lightgray;
+    border: 1px solid darkgreen;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    width: 500px;
+}
+
+.image {
+    width: 50px;
+    margin: 6px;
+}
+
+.image-modal {
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.btn {
+    font-size: 16px;
+    padding: 3px 5px;
+}
+
+.btn:hover {
+    cursor: pointer;
+    border-color: lightgray;
+}
+
+.btn-add {
+    color: darkgreen;
+}
+
+.btn-clear {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.btn-next {
+    display: block;
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .6), rgba(255, 255, 255, .4), rgba(0, 0, 0, .6));
+}
+
+.modal-hide {
+    display: none;
+}
+
+.modal__content {
+    width: 500px;
+    height: 400px;
+    background-color: #fff;
+    padding: 10px;
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    border: 3px solid green;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.btn-modal {
+    margin: 5px;
+    font-size: 15px;
+}
+
+.btn-modal-prev {
+    position: absolute;
+    bottom: 3%;
+    left: 3%;
+}
+
+.btn-modal-next {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+}
+
+.btn-minus {
+    font-size: 14px;
+    padding: 2px 7px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.btn-modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 2px 7px;
+    border-radius: 50%;
+}
+
+.basket-menu {
+    padding: 10px;
+    text-align: center;
+}
+
+.basket-link {
+    margin-right: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.basket-link:hover {
+    color: darkblue;
+}
+
+.basket-content-title {
+
+}
+
+.basket-tab {
+    padding: 20px;
+    display: none;
+}
+
+.basket-tab-active {
+    display: inline-block;
+}
+
+.basket-content-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.basket-content-wrap {
+    margin-bottom: 10px;
+}
+
+.basket-items-wrap {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: lightgray;
+    border: 1px solid green;
+    border-radius: 10px;
+}
+
+textarea {
+    margin: 10px 0;
+}
+
+img {
+    cursor: pointer;
+}
+
