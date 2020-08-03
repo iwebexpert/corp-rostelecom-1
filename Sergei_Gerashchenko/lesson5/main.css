@@ -70,3 +70,68 @@
      color: grey;
      font-size: 40px;
  }
+
+.basket-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.basket{
+    display: block;
+    padding: 5px;
+
+}
+.basket-item-list{
+    margin: 0 auto;
+    display: block;
+    width: 550px;
+}
+.basket-item-name{
+    color: cadetblue;
+    width: 250px;
+}
+.basket-item-price{
+    color: cadetblue;
+    text-align: center;
+    width: 100px;
+}
+.basket-item-cost{
+    color: cadetblue;
+    text-align: center;
+    width: 100px;
+}
+.basket-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    font-weight: bold ;
+}
+.basket-header-name{
+    color: cadetblue;
+    width: 250px;
+}
+.basket-header-price{
+    color: cadetblue;
+    text-align: center;
+    width: 100px;
+}
+.basket-header-cost{
+    color: cadetblue;
+    text-align: center;
+    width: 100px;
+}
+.basket-item-input{
+    width: 5em;
+}
+#basket-addr-container, #basket-comment-container{
+    margin: 0 auto;
+    width: 550px;
+    display: none;
+}
+#basket-navigator{
+    margin: 0 auto;
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    visibility: hidden;
+}
