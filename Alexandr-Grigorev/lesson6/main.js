@@ -65,7 +65,7 @@ products.addEventListener('click', function (event) {   //добавление �
         }
         console.log(productsBasket);
         korzina = 0;
-        for (i = 0; i < productsBasket.length; i++) {              //подсчет суммы товаров в корзине
+        for (let i = 0; i < productsBasket.length; i++) {              //подсчет суммы товаров в корзине
             korzina = korzina + productsBasket[i].price;
         }
         basket.textContent = 'Товаров на сумму ' + korzina + ' рублей';

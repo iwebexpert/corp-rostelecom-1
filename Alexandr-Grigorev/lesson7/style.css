@@ -1,0 +1,73 @@
+body{
+    font-size: 20px;
+}
+.container{
+    margin: 0 auto;
+    max-width: 800px;
+    min-height: 100%;
+    background-color: azure;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+.error-empty{
+    color: red;
+    text-align: center;
+}
+.showBasket{
+    align-self: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.commentArea{
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+    max-width: 792px;
+}
+.gotoBasket, .btnSendAddress, .btnBuy{
+    align-self: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.addressInput{
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+.catalog{
+    text-align: center;
+    color: blue;
+    font-size: 20px;
+}
+.oneProduct{
+    min-height: 40px;
+    background-color: rgb(144, 207, 236);
+    padding: 10px;
+    display: flex;
+}
+.oneProductInBasket{
+    min-height: 40px;
+    background-color: rgb(223, 203, 203);
+    padding: 10px;
+    display: flex;
+}
+.oneProductName{
+    font-size: 24px;
+    align-self: center;
+}
+.oneProductPrice{
+    font-size: 24px;
+    margin-left: 20px;
+    align-self: center;
+}
+.addbtn, .dellbtn{
+    margin-left: 40px;
+    height: 24px;
+    width: 120px;
+    align-self: center;
+    margin-left: auto;
+    
+}
