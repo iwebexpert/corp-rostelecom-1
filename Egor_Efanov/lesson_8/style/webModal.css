@@ -1,0 +1,114 @@
+.modal {
+    margin: 0; 
+    padding: 0; 
+    position: fixed; 
+    top:0; 
+    bottom:0;
+    left:0;
+    right:0;
+    background: rgba(0,0,0,0.5); 
+    z-index:100; 
+    opacity:0; 
+    pointer-events: none; 
+
+    display: flex;
+    }   
+
+    .modal.open {
+        opacity: 1;  
+        pointer-events: auto;
+    }
+
+
+    .modalwindow {
+        width: 900px;
+  
+        margin: auto;         
+        padding: 10px;
+        background: #fff;
+        border-radius: 3px;
+    }       
+
+
+    .modal-header {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+
+        border-bottom: 1px solid #eceeef;
+  }
+
+  .modal-title {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 1.5;
+        font-size: 1.25rem;
+        font-weight: 500;
+  }
+
+  .modal-close {
+        float: right;
+        font-family: sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: .5;
+        text-decoration: none;
+  }
+
+
+  .modal-close:focus,
+  .modal-close:hover {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: .75;
+  }
+
+  .modal-body {
+        position: relative;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;      
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  } 
+
+  .modal-button_prev, .modal-button_next
+    {
+        width: 100px;
+        height: 100%;
+        background-image: url("https://yastatic.net/images-islands/_/p3YnSjDlHKoCKqT6vUGqu6dByWE.svg");
+        background-repeat: no-repeat;
+        background-position: center;   
+    }
+
+.modal-button_next
+{    
+    transform: scale(-1, 1);
+}
+
+.modal-button_border
+{
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.modal-button_border:hover
+{
+    background: ghostwhite;
+} 
