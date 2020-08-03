@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        //a -undefined: сначала сканируется var a и делает его undefined 
+        //тем самым параметр а есть в window  потому условие не сработает и а останется неопределенным
+        /* console.log(window);
+         if (!("a" in window)) {
+             var a = 1;
+         }
+         alert(a);*/
+
+        //а не задано. функция будет сразу присвоена переменной b так как это функциональное выражение. alert(a) выдаст ошибку
+        // var b = function a(x) {
+        //     x && a(--x);
+        // };
+        // console.log(b);
+        // console.log(a);
+        // alert(a);
+
+        //сначала сканируется var и a присваивается undefined потом function и a присваивается значение функции. В итоге а =функции
+        // function a(x) {
+        //     return x * 2;
+        // }
+        // var a;
+        // alert(a);
+
+        // arguments[2]=a  потому выдаст 10
+        // function b(x, y, a) {
+        //     arguments[2] = 10;
+        //     alert(a);
+        // }
+        // b(1, 2, 3);
+
+        //.call(null) передает в качестве this null,  тоесть this для функции не задан,  но если this не задан то он ссылается на window
+        // function a() {
+        //     alert(this);
+        // }
+        // a.call(null);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
