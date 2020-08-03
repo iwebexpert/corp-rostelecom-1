@@ -120,3 +120,18 @@
     text-align: center;
     width: 100px;
 }
+.basket-item-input{
+    width: 5em;
+}
+#basket-addr-container, #basket-comment-container{
+    margin: 0 auto;
+    width: 550px;
+    display: none;
+}
+#basket-navigator{
+    margin: 0 auto;
+    width: 550px;
+    display: flex;
+    justify-content: space-between;
+    visibility: hidden;
+}

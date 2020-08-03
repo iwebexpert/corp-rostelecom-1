@@ -84,31 +84,112 @@ function clearBusket() {
 }
 
 function loadBasket() {
-    let b = document.createElement('div')
+    let basketContent = document.createElement('div');
+    basketContent.className = 'basket-content';
+    basketContent.id = 'basket-content';
+    let b = document.createElement('table');
     b.className='basket-item-list';
     b.id='basket-item-list';
-    basketContainer.appendChild(b);
+    let tr = document.createElement('tr');
+    let td = document.createElement('td');
+    td.colSpan=4;
+    tr.appendChild(td);
+    b.appendChild(tr);
+    basketContent.appendChild(b);
+    basketContainer.appendChild(basketContent);
+
+    basketContainer.appendChild(createAddrDiv());
+    basketContainer.appendChild(createCommentDiv());
+    basketContainer.appendChild(createBasketNav());
+
     let e = document.createElement('span');
     e.id = 'basket-empty';
     e.innerText='Корзина пуста';
-    basketContainer.appendChild(e)
+    td.appendChild(e)
     e = document.createElement('span');
     e.id = 'basket-items-total';
     e.innerText='';
-    basketContainer.appendChild(e)
+    td.appendChild(e)
 
-    e = document.createElement('button');
-    e.type='submit';
-    e.innerText='Очистить';
-    e.addEventListener('click', function () {
-        clearBusket();
-    })
+    // e = document.createElement('button');
+    // e.type='submit';
+    // e.innerText='Очистить';
+    // e.addEventListener('click', function () {
+    //     clearBusket();
+    // })
 
-    basketContainer.appendChild(e);
+    //basketContainer.appendChild(e);
     addBasketItemHeader();
     renderBasketCaption();
 }
 
+function createAddrDiv() {
+    let basketAddrDiv = document.createElement('div');
+    basketAddrDiv.id='basket-addr-container';
+    let lb = document.createElement('label');
+    lb.textContent = 'Введите адрес доставки';
+    basketAddrDiv.appendChild(lb);
+    basketAddrDiv.appendChild(document.createElement('br'));
+    let txt = document.createElement('textarea');
+    txt.cols = 50;
+    txt.rows = 10;
+    txt.id = 'address-text';
+    basketAddrDiv.appendChild(txt);
+    return basketAddrDiv;
+}
+
+function createCommentDiv() {
+    let basketCommentDiv = document.createElement('div');
+    basketCommentDiv.id='basket-comment-container';
+    let lb = document.createElement('label');
+    lb.textContent = 'Введите комментарий';
+    basketCommentDiv.appendChild(lb);
+    basketCommentDiv.appendChild(document.createElement('br'));
+    let txt = document.createElement('textarea');
+    txt.cols = 50;
+    txt.rows = 10;
+    txt.id = 'comment-text';
+    basketCommentDiv.appendChild(txt);
+    return basketCommentDiv;
+}
+
+function sendOrder(){
+    console.log(document.getElementById('address-text').value);
+    console.log(document.getElementById('comment-text').value);
+}
+
+let basketStep = 0;
+function gotoStep(step) {
+    if(step == 3){
+        sendOrder();
+        basketStep=0;
+    }
+    else
+        basketStep=step;
+    setNavigatorVisibility(true);
+}
+
+function createBasketNav() {
+    let navDiv = document.createElement('div');
+    navDiv.id = 'basket-navigator';
+    let prevStep = document.createElement('input');
+    prevStep.id = 'prev-step';
+    prevStep.type = 'button';
+    prevStep.value = 'Назад';
+    prevStep.addEventListener('click', function () {
+        gotoStep(basketStep-1);
+    });
+    navDiv.appendChild(prevStep);
+    let nextStep = document.createElement('input');
+    nextStep.id = 'next-step';
+    nextStep.type = 'button';
+    nextStep.value = 'Вперед';
+    nextStep.addEventListener('click', function () {
+        gotoStep(basketStep+1);
+    });
+    navDiv.appendChild(nextStep);
+    return navDiv;
+}
 
 function loadCatalog() {
     let e = null;
@@ -166,17 +247,53 @@ function addItem(index) {
     renderBasketCaption();
 
 }
+
+function setNavigatorVisibility(val) {
+    if(!val){
+        document.getElementById('basket-navigator').style.visibility = 'hidden';
+        document.getElementById('prev-step').style.visibility = 'hidden';
+        document.getElementById('next-step').style.visibility = 'hidden';
+        return;
+    }
+    document.getElementById('basket-navigator').style.visibility = 'visible';
+    if(basketStep>0)
+        document.getElementById('prev-step').style.visibility = 'visible';
+    else
+        document.getElementById('prev-step').style.visibility = 'hidden';
+    if(basketStep<3)
+        document.getElementById('next-step').style.visibility = 'visible';
+    else
+        document.getElementById('next-step').style.visibility = 'hidden';
+    if(basketStep == 0){
+        document.getElementById('basket-content').style.display='flex';
+        document.getElementById('basket-addr-container').style.display='none';
+        document.getElementById('basket-comment-container').style.display='none';
+    }
+    else if(basketStep == 1){
+        document.getElementById('basket-content').style.display='none';
+        document.getElementById('basket-addr-container').style.display='block';
+        document.getElementById('basket-comment-container').style.display='none';
+    }
+    else if(basketStep == 2){
+        document.getElementById('basket-content').style.display='none';
+        document.getElementById('basket-addr-container').style.display='none';
+        document.getElementById('basket-comment-container').style.display='block';
+    }
+
+}
 function renderBasketCaption(){
     if(basket.items.length == 0){
         document.getElementById('basket-empty').style.visibility = 'visible';
         document.getElementById('basket-items-total').style.visibility = 'hidden';
         document.getElementById('basket-item-list').style.visibility = 'hidden';
+        setNavigatorVisibility(false);
     }
     else{
         document.getElementById('basket-empty').style.visibility = 'hidden';
         document.getElementById('basket-items-total').style.visibility = 'visible ';
         document.getElementById('basket-items-total').innerText = 'В корзине '+basket.items.length+' товаров на сумму '+basket.total_cost;
         document.getElementById('basket-item-list').style.visibility = 'visible';
+        setNavigatorVisibility(true);
     }
 }
 function showImage(id) {
@@ -213,22 +330,22 @@ function changeItemCount(index, newCount) {
 }
 function addBasketItemHeader(index, name, price){
     // Создаем контейнер для строки корзины
-    let itemContainer = document.createElement("div")
+    let itemContainer = document.createElement("tr");
     itemContainer.className = 'basket-header';
-    let itemName = document.createElement('div');
+    let itemName = document.createElement('td');
     itemName.className = 'basket-header-name';
     itemName.textContent = 'Название';
     itemContainer.appendChild(itemName);
-    let itemPrice = document.createElement('div');
+    let itemPrice = document.createElement('td');
     itemPrice.className = 'basket-header-price';
     itemPrice.textContent = 'Цена за шт.';
     itemContainer.appendChild(itemPrice);
 
-    let itemCount = document.createElement('div');
+    let itemCount = document.createElement('td');
     itemCount.textContent = 'Количество';
     itemContainer.appendChild(itemCount);
 
-    let itemCost = document.createElement('div');
+    let itemCost = document.createElement('td');
     itemCost.className = 'basket-header-cost';
     itemCost.textContent = 'Стоимость';
     itemContainer.appendChild(itemCost);
@@ -237,31 +354,34 @@ function addBasketItemHeader(index, name, price){
 }
 function addBasketItem(index, name, price){
     // Создаем контейнер для строки корзины
-    let itemContainer = document.createElement("div")
+    let itemContainer = document.createElement("tr")
     itemContainer.className = 'basket-item';
     itemContainer.id = 'basket-item-'+index;
     // Добавляем название товара
-    let itemName = document.createElement('div');
+    let itemName = document.createElement('td');
     itemName.className = 'basket-item-name';
     itemName.textContent = name;
     itemContainer.appendChild(itemName);
     // Добваляем цену товара
-    let itemPrice = document.createElement('div');
+    let itemPrice = document.createElement('td');
     itemPrice.className = 'basket-item-price';
     itemPrice.textContent = price;
     itemContainer.appendChild(itemPrice);
 
     //Добавляем поле ввода с количеством товара
+    let inputCell = document.createElement('td');
     let itemCount = document.createElement('input');
     itemCount.id='basket-item-count'+index;
     itemCount.type = 'number';
+    itemCount.className = 'basket-item-input';
     itemCount.value = '1';
     itemCount.width = 5;
     itemCount.addEventListener('change', onItemCountChange)
     itemCount.dataset.id = index;
-    itemContainer.appendChild(itemCount);
+    inputCell.appendChild(itemCount)
+    itemContainer.appendChild(inputCell);
 
-    let itemCost = document.createElement('div');
+    let itemCost = document.createElement('td');
     itemCost.className = 'basket-item-cost';
     itemCost.textContent = price;
     itemContainer.appendChild(itemCost);
