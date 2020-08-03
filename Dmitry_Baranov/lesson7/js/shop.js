@@ -67,9 +67,18 @@ class Catalog {
             modal.addModal(event.target);
         }
 
+        if (event.target.classList.contains('btn-modal-prev')) {
+            modal.imgPrev(event.target);
+        }
+
+        if (event.target.classList.contains('btn-modal-next')) {
+            modal.imgNext(event.target);
+        }
+
         if (event.target.classList.contains('btn-modal-close') || event.target.classList.contains('modal')) {
             modal.closeModal();
         }
+
     }
 
     get count() {
