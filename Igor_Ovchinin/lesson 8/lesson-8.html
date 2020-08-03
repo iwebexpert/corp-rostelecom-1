@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //a: вернет undefined
+        //   "если a не объявлен, то инициализировать, a значением 1"
+        if (!("a" in window)) {
+            var a = 1;
+        }
+        alert(a);
+
+        //b: будет ошибка, переменная а не задана
+        var b = function a(x) {
+            x && a(--x);
+        };
+        alert(a);
+
+        //c: объявления функций имеют преимущество 
+        //   перед объявлениями переменных, 
+        //   если нет инициализации. 
+        //   Здесь нет инициализации, 
+        //   поэтому предупреждение отображает исходный код функции.
+        function a(x) {
+            return x * 2;
+        }
+        var a;
+        alert(a);
+
+        //d: выведет 10
+        //   аргумент а всегда имеет значение = 10
+        function b(x, y, a) {
+            arguments[2] = 10;
+            alert(a);
+        }
+        b(1, 2, 3);
+
+        //e: выведет [object Window]
+        //   при указании первого аргумента null или undefined в call/apply, 
+        //   функция получает this = window
+        function a() {
+            alert(this);
+        }
+        a.call(null);
+    </script>
+</body>
+
+</html>
