@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 9</title>
+  <script src="./src/dom.js"></script>
+  <script src="./src/burger.js"></script>
+  <script src="./src/toppings.js"></script>
+  <script src="./lesson9.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <h1>ДЗ №9</h1>
+  <h2>Гамбургер</h2>
+
+  <div class="burger__constructor">
+    <div class="constructor__items">
+      <h3>Размер бургера</h3>
+      <div class="items">
+        <div class="item selected" id="burger-small"></div>
+        <div class="item" id="burger-big"></div>
+      </div>
+
+      <h3>Начинка</h3>
+      <div class="items" id="burger-stuffings"></div>
+
+      <h3>Добавки</h3>
+      <div class="items" id="burger-additional"></div>
+    </div>
+    <div class="constructor__preview">
+      <h3>Что получилось</h3>
+      <div class="preview">
+        <div class="burger__top"></div>
+        <div class="burger__content" id="burger-content"></div>
+        <div class="burger__bottom"></div>
+        <div class="burger__summary" id="burger-summary"></div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
