@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Less9_3(DonMacalds</title>
+    <script src="Hamburger.js" defer></script>
+    <script src="main3.js" defer></script>
+</head>
+<style>
+    * {
+        font-family: sans-serif;
+    }
+
+    .container {
+        margin: 100px auto;
+        width: 50%;
+        min-height: 450px;
+        border: 1px solid forestgreen;
+        padding-left: 50px;
+    }
+
+    .radio-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .check-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    .check-item {
+        align-items: flex-start;
+        margin-top: 15px;
+        margin-left: 15px;
+    }
+
+    .send-button {
+        margin-top: 20px;
+        max-width: 120px;
+    }
+
+    .message {
+        width: 100%;
+        min-height: 50px;
+        margin-top: 30px;
+        color: forestgreen;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <form id="hamburger" action="#">
+            <div class="radio-div">
+                <h3>Гамбургер:</h3>
+                <div class="check-items"><input type="radio" name="size" id="size-s" value="small" checked>
+                    <label for="size-s">Маленький (50 рублей, 20 калорий)</label>
+                </div>
+                <div class="check-items"><input type="radio" name="size" id="size-l" value="large">
+                    <label for="size-l">Большой (100 рублей, 40 калорий)</label>
+                </div>
+            </div>
+            <div class="radio-div">
+                <h3>Начинка:</h3>
+                <div class="check-items"><input type="radio" name="stuff" id="stuff1" value="chiss" checked><label
+                        for="stuff1"> С сыром (+10 рублей, +20 калорий)</label></div>
+                <div class="check-items"><input type="radio" name="stuff" id="stuff2" value="salat"><label for="stuff2">
+                        С салатом (+20 рублей, +5 калорий)</label></div>
+                <div class="check-items"><input type="radio" name="stuff" id="stuff3" value="potatos"><label
+                        for="stuff3"> С картофелем (+15 рублей, +10 калорий)</label></div>
+            </div>
+            <div class="check-div">
+                <h3>Добавки:</h3>
+                <div class="check-items"><input type="checkbox" name="spec" id="spec"><label for="spec"> Приправа (+15р,
+                        +0
+                        ккал)</label></div>
+                <div class="check-items"><input type="checkbox" name="mayonez" id="mayonez"><label for="mayonez">
+                        Майонез (+20р, +5
+                        ккал)</label></div>
+                <button type="button" class="send-button">Рассчитать</button>
+            </div>
+        </form>
+        <div class="message"></div>
+    </div>
+</body>
+
+</html>
