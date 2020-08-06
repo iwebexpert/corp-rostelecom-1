@@ -18,13 +18,38 @@ class Basket{
         this.items = [];
     }
 
+
     addItem(item) {
 
         this.items.push(item);
     }
 
     add(id, name, price, currency, count){
+        for(let i=0;i<this.items.length;i++)
+            if(this.items[i].id == id) {
+                this.items[i].count += count;
+                return;
+            }
         this.addItem(new BasketItem(id, name, price, currency, count));
+    }
+
+    changeItemCount(id, newCount){
+        for(let i=0;i<this.items.length;i++)
+            if(this.items[i].id == id) {
+                this.items[i].count = count;
+                return;
+            }
+    }
+
+    removeItem(item){
+        this.remove(item.id)
+    }
+    remove(id){
+        for(let i=0;i<this.items.length;i++)
+            if(this.items[i].id == id) {
+                this.items.splice(i, 1);
+            }
+
     }
 
     get total_cost(){
