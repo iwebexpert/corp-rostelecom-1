@@ -1,0 +1,318 @@
+* {
+    margin:0;
+    padding:0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 20px  10px 20px;
+}
+#catalog {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: black;
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: rgb(159, 151, 172);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.basket_container {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+#basket {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-color: lightgreen;
+    border-collapse: collapse;
+    border-spacing: 0;
+   
+    cursor: pointer;
+    height: 100px;
+    width:120px;
+    background-color: beige;
+
+}
+
+.product {
+    /*  border: 2px solid #000;
+     border-color: violet;
+     border-collapse: collapse;
+     border-spacing: 0; */
+ 
+     max-width: 150px;
+     min-height: 200px;
+     background: #FFFFFF;
+     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+     border-radius: 10px;    
+     height: 100%;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-right: 30px;
+ }
+ 
+ .thumbnail {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;    
+    margin-top: 5px;
+    cursor:pointer;
+ }
+
+ .thumbnail >  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+ }
+
+ .buyButton {
+     background: #5A98D0;
+     padding: 5px 5px;
+     text-decoration: none;
+     text-align: center;
+     letter-spacing: 0.04em;
+     color: #FFFFFF;    
+     margin-top: 10px;
+     margin-bottom: 10px;
+     border-radius: 5px;
+     cursor:pointer;
+ }
+ .buyButton:active {
+    background: #e7ecf0;
+    color: black;    
+ }
+
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#productId {
+    background-color: beige;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 18px;
+}
+.Message {
+    color: black;
+    font-size: 18px;
+}
+
+/* Стили для подложки */
+
+.overlay {
+   
+    /* Скрываем подложку  */
+    opacity: 0;
+    visibility: hidden;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 20;
+    transition: .3s all;
+ }
+ 
+ 
+ /* Стили для модальных окон */
+ 
+ .modal {
+    
+    /* Скрываем окна  */
+    opacity: 0;
+    visibility: hidden;
+   
+    
+    
+    /*  Установаем ширину окна  */
+    width: 100%;
+    /*height: 100%;*/
+    max-width: 500px;
+    min-height: 500px;
+    max-height: 800px;
+    overflow-y: auto;
+
+    /*  Центрируем и задаем z-index */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30; /* Должен быть выше чем у подложки*/
+    
+    /*  Побочные стили   */
+    box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2); 
+    text-align: center;
+    padding: 30px;
+    border-radius: 3px;
+    background-color: #fff;
+    transition: 0.3s all;
+    
+    
+ }
+ 
+ 
+ /* Стили для активных классов подложки и окна */
+ 
+ .modal.active,
+ .overlay.active{
+    opacity: 1;
+    visibility: visible;
+ }
+ 
+ 
+ /* Стили для кнопки закрытия */
+ 
+ .modal__cross {
+    position: absolute;
+    text-align: right;
+    top:5px;
+    right: 5px;
+    fill: #444;
+    cursor: pointer;
+ }
+ 
+ 
+ /* Стили для кнопок. */
+ 
+ a {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #414b52;
+    color: #fff;
+    border-radius: 3px;
+ }
+
+ #imgContainer {
+    height: 0;
+    padding-top: 80%;
+    position: relative;
+    display: block;
+    cursor: pointer;
+ }
+
+.imgContainer {
+    cursor: pointer;
+ }
+
+ .imgModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 100%;
+    max-width: 100%;
+ }
+.hide {
+    visibility: hidden;
+}
+.show {
+    visibility: visible;
+}
+
+.listBasket {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.total {
+    text-align: right;
+}
+
+.left {
+    justify-content: flex-end;
+}
+.right {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.nextButton {
+     background: #5A98D0;
+     padding: 5px 5px;
+     text-decoration: none;
+     text-align: center;
+     letter-spacing: 0.04em;
+     color: #FFFFFF;    
+     margin-top: 10px;
+     margin-bottom: 10px;
+     border-radius: 5px;
+     max-width: 200px;
+     cursor:pointer;
+ }
+.nextButton:active {
+    background: #e7ecf0;
+    color: black;    
+ }
+ .adress_delivery {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+ .input_class  {
+    border: 1px solid #356EAD;
+    box-sizing: border-box;
+    border-radius: 10px;
+    /*opacity: 0.4;*/
+    margin-top: 8px;;    
+    max-width: 430px;
+    height: 32px;
+}
+
+.textarea_class {
+    border: 1px solid #356EAD;
+    box-sizing: border-box;
+    border-radius: 10px;
+    /*opacity: 0.4;*/
+    margin-top: 8px;;
+    width: 100%;    
+}
+.comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+label {
+    width:150px;
+    margin-top: 3px;
+    display:    inline-block;
+    padding:3px;    
+}
+h2 {
+    margin-bottom: 10px;
+}
+legend {
+    color: rgb(95, 93, 233);
+}
