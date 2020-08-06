@@ -1,0 +1,135 @@
+<!doctype html>
+
+<html lang="ru">
+
+<head>
+    <title>Lesson 9.3</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./lesson9.css" />
+    <script type="text/javascript" src="./modal.js" defer></script>
+    <script>
+
+        class Hamburger {
+            constructor() {
+                this.size = null;
+                this.stuffing = null;
+                this.topping = [];
+                this.propertiesMap = {
+                    'big': { price: 100, calories: 40 },
+                    'small': { price: 50, calories: 20 },
+                    'cheez': { price: 10, calories: 20 },
+                    'salad': { price: 20, calories: 5 },
+                    'potato': { price: 15, calories: 10 },
+                    'spice': { price: 15, calories: 0 },
+                    'mayo': { price: 20, calories: 5 }
+                };
+                document.getElementById('size').addEventListener('click', this.setSize.bind(this));
+                document.getElementById('stuffing').addEventListener('click', this.addStuffing.bind(this));
+                document.getElementById('topping').addEventListener('click', this.updateToppings.bind(this));
+            };
+            setSize() {
+                this.size = document.querySelector('input[name=sizeHam]:checked').value;
+                this.calculateView();
+            };
+            addStuffing() {
+                this.stuffing = document.querySelector('input[name=stuffing]:checked').value;
+                this.calculateView();
+            };
+            updateToppings() {
+                this.topping = [];
+                let toppings = document.querySelectorAll('input[name=topping]:checked');
+                toppings.forEach(element => this.topping.push(element.value));
+                this.calculateView();
+            };
+            getToppings() { return this.topping };
+            getSize() { return this.size };
+            getStuffing() { return this.stuffing };
+            calculate() {
+                let consist = [];
+                let price = 0;
+                let calories = 0;
+                const outResult = document.querySelector('.result');
+                if (!this.size) {
+                    outResult.innerHTML = 'Выберите размер гамбургера';
+                    return { 'price': 0, 'calories': 0 };
+                };
+                consist.push(this.size);
+                if (!this.stuffing) {
+                    outResult.innerHTML = 'Выберите начинку гамбургера';
+                    return { 'price': 0, 'calories': 0 };
+                };
+                consist.push(this.stuffing);
+                consist.push(...this.topping);
+                for (let element = 0; element < consist.length; element++) {
+                    price += this.propertiesMap[consist[element]].price;
+                    calories += this.propertiesMap[consist[element]].calories;
+                };
+                return { 'price': price, 'calories': calories };
+            };
+            calculateView() {
+                let total = this.calculate();
+                const modalElem = document.querySelector('.modal');
+                const outResult = document.querySelector('.result');
+                if (total.price && total.calories) {
+                    outResult.innerHTML = `Цена: ${total.price}, Калорий: ${total.calories}`;
+                }
+
+            };
+
+        };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let modalElem = createModal();
+            var hamburger = new Hamburger();
+            let choiceHam = document.querySelector('.hamburger');
+            //подробный вид корзины в модальное окно и отрисовать
+            modalElem.appendChild(choiceHam);
+
+            modalElem.appendChild(document.querySelector('.result'));
+
+            const overlay = document.querySelector('.js-overlay-modal');
+            choiceHam.classList.remove('hide');
+
+            //показать окно и отрисованную корзину
+            showModal(modalElem);
+
+        })
+    </script>
+
+</head>
+
+<body>
+    <div class="modal"></div>
+    <div class="overlay js-overlay-modal"></div>
+
+    <div class="hamburger hide">
+        <h2>Выберите гамбургер</h2>
+        <div class="row right" id='size'>
+            <fieldset>
+                <legend>Размер гамбургера</legend>
+                <label>Большой <input type="radio" value="big" name="sizeHam"></label>
+                <label>Маленький <input type="radio" value="small" name="sizeHam"></label>
+            </fieldset>
+        </div>
+        <div class="row right" id='stuffing'>
+            <fieldset>
+                <legend>Начинка</legend>
+                <label>с сыром <input type="radio" value="cheez" name="stuffing"></label>
+                <label>с салатом <input type="radio" value="salad" name="stuffing"></label>
+                <label>с картофелем <input type="radio" value="potato" name="stuffing"></label>
+            </fieldset>
+        </div>
+        <div class="row right" id="topping">
+            <fieldset>
+                <legend>Топпинг</legend>
+                <label>Приправа <input type="checkbox" value="spice" name="topping"></label>
+                <label>Майонез <input type="checkbox" value="mayo" name="topping"></label>
+            </fieldset>
+        </div>
+    </div>
+    <div class="result"></div>
+
+</body>
+
+</html>
