@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сеть фастфуда</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="helper.js"></script>
+    <script src="hamburger​.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="container2">
+            <h3>Выберите размер гамбургера:</h3>
+            <div>
+                <p>
+                    <input type="radio" id="size_small" name="size" value="small" checked>
+                    <label for="size_small">Маленький</label>
+                </p>
+                <p>
+                    <input type="radio" id="size_large" name="size" value="big">
+                    <label for="size_large">Большой</label>
+                </p>
+
+            </div>
+
+            <h3>Выберите начинку:</h3>
+            <div>
+                <p>
+                    <input type="radio" id="stuffing_cheese" name="stuffing" value="cheese" checked>
+                    <label for="stuffing_cheese">С сыром</label>
+                </p>
+                <p>
+                    <input type="radio" id="stuffing_salad" name="stuffing" value="salad">
+                    <label for="stuffing_salad">С салатом</label>
+                </p>
+                <p>
+                    <input type="radio" id="stuffing_potato" name="stuffing" value="potato">
+                    <label for="stuffing_potato">С картофелем</label>
+                </p>
+
+            </div>
+
+            <h3>Выберите добавку:</h3>
+            <div>
+                <p>
+                    <input type="checkbox" id="topping_spice" name="toppings" value="spice" checked>
+                    <label for="topping_spice">Посыпать приправой</label>
+                </p>
+                <p>
+                    <input type="checkbox" id="topping_mayonnaise" name="toppings" value="mayonnaise">
+                    <label for="topping_mayonnaise">Полить майонезом</label>
+                </p>
+
+            </div>
+
+
+            <div>
+                <button onclick="calculate()">Рассчитать стоимость и калорийность</button>
+            </div>
+
+            <h3>Итого:</h3>
+            <div id="total">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
