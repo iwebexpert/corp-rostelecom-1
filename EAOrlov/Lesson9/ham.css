@@ -1,0 +1,81 @@
+.container {
+    position: relative;
+    margin 0 auto;
+    min-height: 500px;
+    overflow: hidden;
+  }
+  
+  .item {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-self: stretch;
+  }
+  
+  a {
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    padding-top: 10px;
+    transition: .3s ease-in-out;
+    color: #000;
+    text-transform: uppercase;
+    width: 100px;
+    height: 25px;
+    text-align: center;
+  }
+  
+  
+  .level {
+    box-sizing: border-box;
+    min-width: 600px;
+    min-height: 300px;
+    position: absolute;
+    top: 30px;
+    transition: all 1s;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .block {
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .active {
+    left: 35%;
+  }
+  
+  .right {
+    left: 135%;
+  }
+  
+  .block:hover {
+    cursor: pointer;
+  }
+  
+  .left {
+    left: -135%;
+  }
+  
+  .nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+  }
+
+  .choice {
+   border: 1px solid red;
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+  }
