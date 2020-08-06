@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamburger</title>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <!-- <script src="./main.js" defer></script> -->
+
+    <script>
+
+        window.onload = function () {
+
+            let form = document.querySelector('form');
+            let size = document.getElementsByName('size');
+            let stuffing = document.getElementsByName('stuffing');
+            let ch1 = document.getElementById('ch1');
+            let ch2 = document.getElementById('ch2');
+            let rez = document.querySelector('b');
+
+
+            form.addEventListener('submit', function (event) {
+                let size, stuffing, topping1, topping2;
+
+                if (form.size.value == 'small') size = 'small';
+                if (form.size.value == 'big') size = 'big';
+
+                if (form.stuffing.value == '1') stuffing = 1;
+                if (form.stuffing.value == '2') stuffing = 2;
+                if (form.stuffing.value == '3') stuffing = 3;
+
+                if (form.ch1.checked) topping1 = 1;
+                if (form.ch2.checked) topping2 = 1;
+
+                calculate(size, stuffing, topping1, topping2);
+
+                event.preventDefault();
+            }, false);
+
+
+            function calculate(size, stuffing, topping1, topping2) {
+                const gamburger = new Gamburger(size, stuffing, topping1, topping2);
+                rez.innerHTML = `Стоимость: ${gamburger.calculate.valuePrice} Каллорийность: ${gamburger.calculate.valueCalories}`
+            }
+
+
+            class Gamburger {
+                constructor(size, stuffing, topping1 = 0, topping2 = 0) {
+                    this.size = size;
+                    this.stuffing = stuffing;
+                    this.topping1 = topping1;
+                    this.topping2 = topping2;
+                }
+
+                get calculate() {
+                    let valuePrice = 0;
+                    let valueCalories = 0;
+
+                    if (this.stuffing == 1) { valuePrice += 10; valueCalories += 20 };
+                    if (this.stuffing == 2) { valuePrice += 20; valueCalories += 5 };
+                    if (this.stuffing == 3) { valuePrice += 15; valueCalories += 10 };
+                    if (this.topping1 != 0) { valuePrice += 15; valueCalories += 0 };
+                    if (this.topping2 != 0) { valuePrice += 20; valueCalories += 5 };
+
+                    if (this.size == 'small') { valuePrice += 50; valueCalories += 20 }
+                    else
+                        if (this.size == 'big') { valuePrice += 100; valueCalories += 40 }
+                        else { valuePrice = 0; valueCalories = 0 }
+
+                    return { valuePrice, valueCalories }
+                }
+            }
+        }
+
+    </script>
+
+    <style type="text/css">
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <form>
+
+            <div>
+                <h3>Выбор гамбургера:</h3>
+
+                <input type="radio" id="small" name="size" value="small">
+                <label for="small">Маленький (50 рублей, 20 калорий)</label><br>
+
+                <input type="radio" id="big" name="size" value="big">
+                <label for="big">Большой (100 рублей, 40 калорий)</label>
+
+            </div>
+            <br>
+
+            <div>
+                <h3>Выбор начинки:</h3>
+                <input type="radio" id="1" name="stuffing" value="1">
+                <label for="1">С сыром (+10 рублей, +20 калорий)</label><br>
+
+                <input type="radio" id="2" name="stuffing" value="2">
+                <label for="2">С салатом (+20 рублей, +5 калорий)</label><br>
+
+                <input type="radio" id="3" name="stuffing" value="3">
+                <label for="3">С картофелем (+15 рублей, +10 калорий)</label>
+            </div>
+            <br>
+
+            <div>
+                <h3>Дополнительно:</h3>
+                <input type="checkbox" id="ch1">
+                <label for="ch1">Посыпать приправой (+15 рублей, +0 калорий)</label><br>
+
+                <input type="checkbox" id="ch2">
+                <label for="ch2">Полить майонезом (+20 рублей, +5 калорий)</label>
+            </div>
+            <br>
+
+            <b>Стоимость: 0 Каллорийность: 0</b>
+            <br><br>
+            <div>
+                <button type="submit">Рассчитать</button>
+            </div>
+
+        </form>
+        <pre id="log"> </pre>
+    </div>
+
+</body>
+
+</html>
