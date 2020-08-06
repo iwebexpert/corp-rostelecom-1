@@ -1,0 +1,58 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.catalog-container {
+  width: 700px;
+  min-height: 80px;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid black;
+  margin-top: 50px;
+}
+
+
+
+.catalog-header {
+  text-align: center;
+}
+
+.item {
+  display: flex;
+}
+
+.item-property {
+  flex-basis: 25%;
+  background-color: lightblue;
+  border: 1px solid gray;
+  margin-top: 2px;
+}
+
+.add-item-button {
+  padding: 5px;
+  background-color: darkgreen;
+  color: #fff;
+}
+
+.basket-container {
+  width: 700px;
+  min-height: 80px;
+  margin: 0 auto;
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid black;
+  margin-top: 50px;
+}
+
+.basket-header {
+  text-align: center;
+}
+
+.del-item-button {
+  padding: 5px;
+  background-color: darkred;
+  color: #fff;
+}
