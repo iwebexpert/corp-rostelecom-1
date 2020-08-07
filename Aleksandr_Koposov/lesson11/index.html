@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 11</title>
+    <link rel="stylesheet" href="../lesson7/css/style.css">
+    <script src="./index.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 30px;
+        }
+
+        .input__group.invalid>.input__field {
+            border-color: red;
+            color: red;
+        }
+
+        .input__group.invalid:after {
+            border-color: red;
+            color: red;
+            content: '!';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 0;
+            top: 10px;
+            font-weight: bold;
+        }
+
+        .input__group.invalid>.input__bar {
+            border-color: red;
+            color: red;
+        }
+
+        .input__group.invalid>.input__label {
+            border-color: red;
+            color: red;
+        }
+
+        .error {
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 6px solid darkred;
+            background-color: red;
+            color: white;
+            width: 100%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ДЗ 11</h1>
+
+    <div class="container">
+        <h2>Задания 1 и 2 &ndash; Замена кавычек</h2>
+        <div class="input__group full-width">
+            <textarea id="task-1" class="input__field" rows="6" required></textarea>
+            <span class="input__bar"></span>
+            <label class="input__label">Адрес доставки</label>
+        </div>
+        <a onclick="replaceQuotes()" class="btn btn-accent btn-block">Заменить кавычки в прямой речи</a>
+        <br>
+
+        <h2>Задание 3 &ndash; Валидация формы</h2>
+        <form action="" method="GET">
+            <div class="input__group full-width">
+                <input id="name" class="input__field" type="text" required />
+                <span class="input__bar"></span>
+                <label class="input__label">Имя</label>
+            </div>
+            <div class="input__group full-width">
+                <input id="phone" class="input__field" type="text" required />
+                <span class="input__bar"></span>
+                <label class="input__label">Телефон</label>
+            </div>
+            <div class="input__group full-width">
+                <input id="email" class="input__field" type="text" required />
+                <span class="input__bar"></span>
+                <label class="input__label">Email</label>
+            </div>
+            <a onclick="validate()" class="btn btn-accent btn-block">Проверить форму</a>
+        </form>
+        <div id="error-list"></div>
+    </div>
+</body>
+
+</html>
