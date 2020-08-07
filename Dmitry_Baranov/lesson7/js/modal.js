@@ -2,7 +2,7 @@
 
 class Modal {
     constructor() {
-        this.imgArr = [];
+        // this.imgArr = [];
         this.curImg = '';
     }
 
@@ -47,7 +47,7 @@ class Modal {
         imgModal.id = 'image-modal';
         imgModal.src = el.getAttribute('src');
         imgModalWrap.appendChild(imgModal);
-        this.imgArr = el.parentElement.childNodes;
+        // this.imgArr = el.parentElement.childNodes;
         this.curImg = el;
     }
 
