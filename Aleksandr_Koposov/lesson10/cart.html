@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10 - Cart</title>
+    <link rel="stylesheet" href="../lesson7/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./src/ajax.js"></script>
+    <script src="./src/good.js"></script>
+    <script src="./src/cart.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const cart = new GoodsCart();
+            cart.fetchGoods(() => cart.render('products-cart'));
+        });
+    </script>
+</head>
+
+<body>
+    <h1>ДЗ 10 - Корзина</h1>
+
+    <div class="flex flex-center">
+        <a class="btn btn-red btn-block w-200" href="index.html">Перейти в каталог</a>
+    </div>
+
+    <hr>
+    <div class="cart">
+        <div class="fullscreen-loader" id="loader">
+            <div class="loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div id="products-cart" class="products-cart"></div>
+    </div>
+</body>
+
+</html>
