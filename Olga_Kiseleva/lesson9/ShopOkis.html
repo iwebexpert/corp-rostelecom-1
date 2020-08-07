@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="shop.js" defer></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const apple = new Product("Apple", 150);
+            const orange = new Product("Orange", 80);
+            const pear = new Product("Pear", 120);
+            const plum = new Product("Plum", 160);
+
+            const catalog = new Catalog([apple, orange, pear, plum]);
+            catalog.renderCatalog();
+            const basket = new Basket([]);
+
+            document.addEventListener('click', function (event) {
+                if (event.target.dataset.action == 'addBasket') {
+                    basket.addBasket();
+                };
+                if (event.target.dataset.action == 'nextBasket') {
+                    document.getElementById('basket').style.display = "block";
+                };
+                if (event.target.dataset.action == 'resBasket') {
+                    basket.resBasket();
+                };
+                if (event.target.dataset.action == 'close') {
+                    let modals = document.getElementsByClassName("modal");
+                    for (const modal of modals) {
+                        modal.style.display = "none";
+                    };
+                };
+                if (event.target.dataset.action == 'next') {
+                    event.target.closest('.modal').nextElementSibling.style.display = "block";
+                };
+                if (event.target.dataset.action == 'back') {
+                    event.target.closest('.modal').style.display = "none";
+                };
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <div class="basket_sum" data-action="nextBasket"></div>
+        <div class="basket_message" data-action="nextBasket">0</div>
+    </div>
+    <div id="catalog">
+        <h2>catalog</h2>
+        <div class="container" style=" max-width: 600px; ">
+            <div class="container_item">
+                <h4 class="product_name">Товар</h4>
+                <h4 class="product_number">Цена, руб.</h4>
+                <h4 class="product_number">Количество</h4>
+                <h4 class="product_number">Корзина</h4>
+            </div>
+            <div class="catalog_items">
+            </div>
+        </div>
+    </div>
+    <div id="basket" class="modal">
+        <div class="container modal_box" style=" max-width: 600px; ">
+            <div data-action="close" class="close"> × </div>
+            <h2>basket</h2>
+            <div class="container_item header_table">
+                <h4 class="product_name">Товар</h4>
+                <h4 class="product_number">Цена, руб.</h4>
+                <h4 class="product_number">Количество</h4>
+                <h4 class="product_number">Сумма</h4>
+                <h4 class="product_number">Корзина</h4>
+            </div>
+            <div class="basket_items"></div>
+            <div class="basket_result">Корзина пуста</div>
+            <div class="btn_menu">
+                <button data-action="next" class="btn_modal btn_address">Далее</button>
+            </div>
+        </div>
+    </div>
+    <div id="modal_address" class="modal">
+        <div class="modal_box">
+            <div data-action="close" class="close"> × </div>
+            <div class="centering">
+                <h2>Адрес доставки</h2>
+                <textarea id="address" class="modal_body" cols="40" rows="10"></textarea>
+            </div>
+            <div class="btn_menu">
+                <button data-action="back" class="btn_modal">Возврат</button>
+                <button data-action="next" class="btn_modal">Далее</button>
+            </div>
+        </div>
+    </div>
+    <div id="modal_comment" class="modal">
+        <div class="modal_box">
+            <div data-action="close" class="close"> × </div>
+            <div class="centering">
+                <h2>комментарий</h2>
+                <textarea id="comment" class="modal_body" cols="40" rows="20"></textarea>
+                <div class="btn_menu">
+                    <button data-action="back" class="btn_modal">Возврат</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>
