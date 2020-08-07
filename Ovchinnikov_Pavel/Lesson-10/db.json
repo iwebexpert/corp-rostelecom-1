@@ -1,0 +1,73 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Ноутбук",
+      "price": 20000,
+      "images": [
+        "https://img.mvideo.ru/Pdb/30049917b.jpg",
+        "https://img.mvideo.ru/Pdb/30049917b1.jpg",
+        "https://img.mvideo.ru/Pdb/30049917b2.jpg",
+        "https://img.mvideo.ru/Pdb/30049917b3.jpg",
+        "https://img.mvideo.ru/Pdb/30049917b4.jpg",
+        "https://img.mvideo.ru/Pdb/30049917b5.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Системный блок",
+      "price": 10000,
+      "images": [
+        "https://img.mvideo.ru/Pdb/30050696b.jpg",
+        "https://img.mvideo.ru/Pdb/30050696b1.jpg",
+        "https://img.mvideo.ru/Pdb/30050696b2.jpg",
+        "https://img.mvideo.ru/Pdb/30050696b3.jpg",
+        "https://img.mvideo.ru/3dPics/30050696/005.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Монитор",
+      "price": 5000,
+      "images": [
+        "https://img.mvideo.ru/Pdb/30036675b.jpg",
+        "https://img.mvideo.ru/Pdb/30036675b1.jpg",
+        "https://img.mvideo.ru/Pdb/30036675b2.jpg",
+        "https://img.mvideo.ru/Pdb/30036675b3.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Клавиатура",
+      "price": 1000,
+      "images": [
+        "https://img.mvideo.ru/Pdb/50130903b.jpg",
+        "https://img.mvideo.ru/Pdb/50130903b1.jpg",
+        "https://img.mvideo.ru/Pdb/50130903b2.jpg"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Мышка",
+      "price": 100,
+      "images": [
+        "https://img.mvideo.ru/Pdb/50130917b.jpg",
+        "https://img.mvideo.ru/Pdb/50130917b1.jpg",
+        "https://img.mvideo.ru/Pdb/50130917b2.jpg",
+        "https://img.mvideo.ru/Pdb/50130917b3.jpg"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Коврик",
+      "price": 10,
+      "images": [
+        "https://img.mvideo.ru/Pdb/50049282b.jpg",
+        "https://img.mvideo.ru/Pdb/50049282b1.jpg",
+        "https://img.mvideo.ru/Pdb/50049282b2.jpg",
+        "https://img.mvideo.ru/Pdb/50049282b3.jpg",
+        "https://img.mvideo.ru/Pdb/50049282b5.jpg"
+      ]
+    }
+  ]
+}
