@@ -1,0 +1,39 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Super keyboard",
+            "price": 10000
+        },
+        {
+            "id": 2,
+            "name": "Super mouse",
+            "price": 7500
+        },
+        {
+            "id": 3,
+            "name": "Mouse pad 30x40",
+            "price": 490
+        },
+        {
+            "id": 4,
+            "name": "Motherboard NEW",
+            "price": 15000
+        },
+        {
+            "id": 5,
+            "name": "Notebook 17",
+            "price": 37500
+        },
+        {
+            "id": 6,
+            "name": "USB cable 2m",
+            "price": 328
+        },
+        {
+            "id": 7,
+            "name": "Router 5 ch",
+            "price": 4530
+        }
+    ]
+}
