@@ -8,39 +8,32 @@
 
     <script>
 
-        window.onload = function () {
+        class Product {
+            constructor(name, price, imgLink, bigImgLink) {
+                this.name = name;
+                this.price = price;
+                this.imgLink = imgLink;
+                this.bigImgLink = bigImgLink;
+            }
+        }
 
-            class Product {
-                constructor(name, price, imgLink, bigImgLink) {
-                    this.name = name;
-                    this.price = price;
-                    this.imgLink = imgLink;
-                    this.bigImgLink = bigImgLink;
-                }
+        class Catalog {
+            constructor() {
+                this.catalog = [];
             }
 
-            class Catalog {
-                constructor() {
-                    this.catalog = [];
-                }
-
-                fetchProduct(url) {
-
-                    fetch(url)
-                        .then(response => response.json())
-                        .then((itemsList) => {
-                            for (let items of itemsList) {
-                                this.catalog.push(new Product(items.name, items.price, items.imgLink, items.bigImgLink));
-                                console.log(this.catalog.length);
-                            }
-                        });
-                }
+            async fetchProduct(url) {
+                let response = await fetch(url);
+                if (response.ok) {
+                    this.catalog = await response.json();
+                } else alert('Сервер или файл не доступны');
             }
+        }
+
+        window.onload = async function () {
 
             const products = new Catalog();
-            products.fetchProduct('/itemsList');
-            console.log(products.catalog);
-            console.log(products.catalog.length);
+            await products.fetchProduct('/itemsList');
 
             class Basket {
                 constructor() {
@@ -56,7 +49,6 @@
                     }
                     else productItem.count += 1;
                     return productItem.count;
-
                 }
 
                 del(id) {
@@ -85,7 +77,6 @@
                     }
                     return { cost, count, showItems }
                 }
-
             }
 
             //продукт выбранный в корзину
@@ -95,8 +86,7 @@
                     this.name = name;
                     this.price = price;
                     this.count = count;
-                };
-
+                }
             }
 
             const basket = new Basket();
@@ -199,9 +189,7 @@
                     formAddress.style.display = "none";
                     btnFurtherCountClick = 0;
                 }
-
             });
-
         }
 
     </script>
