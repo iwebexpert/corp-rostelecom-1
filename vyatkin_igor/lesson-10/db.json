@@ -1,0 +1,38 @@
+{
+    "itemsList": [{
+            "id": 1,
+            "name": "CPU AMD Ryzen 5 Pinnacle Ridge",
+            "price": 11990,
+            "imgLink": "https://www.e-katalog.ru/jpg/1361917.jpg",
+            "bigImgLink": "https://avatars.mds.yandex.net/get-mpic/1362400/img_id5346570003457120657.jpeg/9hq"
+        },
+        {
+            "id": 2,
+            "name": "MB GIGABYTE B450M DS3H",
+            "price": 5390,
+            "imgLink": "https://www.e-katalog.ru/jpg/1392432.jpg",
+            "bigImgLink": "https://avatars.mds.yandex.net/get-mpic/1361544/img_id5999933867825933882.jpeg/orig"
+        },
+        {
+            "id": 3,
+            "name": "GPU SAPPHIRE AMD Radeon RX 580",
+            "price": 17990,
+            "imgLink": "https://www.e-katalog.ru/jpg/1097852.jpg",
+            "bigImgLink": "https://avatars.mds.yandex.net/get-mpic/195452/img_id1811082657304061327/orig"
+        },
+        {
+            "id": 4,
+            "name": "RAM CRUCIAL CT8G4DFS8266 DDR4 - 8Gb",
+            "price": 2590,
+            "imgLink": "https://www.e-katalog.ru/jpg_zoom1/1685432.jpg",
+            "bigImgLink": "https://www.e-katalog.ru/jpg_zoom1/1685432.jpg"
+        },
+        {
+            "id": 5,
+            "name": "БП SEASONIC FOCUS Plus SSR-550PX",
+            "price": 9750,
+            "imgLink": "https://www.e-katalog.ru/jpg/1226577.jpg",
+            "bigImgLink": "https://static.bhphoto.com/images/images750x750/1507055707_1365559.jpg"
+        }
+    ]
+}
