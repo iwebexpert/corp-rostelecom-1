@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>Hamburger</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="form">
+        <form action="#" autocomplete="on" name="hamburger">
+            <fieldset name="settingsHamburger">
+                <legend>Настройки гамбургера</legend>
+                <p>
+                    <label>Выберите размер гамбургера:</label>
+                    <select id="sizeHamburger" name="sizeHamburger">
+                        <option value="size-min">Маленький</option>
+                        <option value="size-max">Большой</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Выберите начинку:</label>
+                    <select name="stuffingHamburger">
+                        <option value="cheese">С сыром</option>
+                        <option value="salad">С салатом</option>
+                        <option value="potato">С картофелем</option>
+                    </select>
+                </p>
+                <p>
+                    <label>Выберите добавку:</label>
+                    <input class="checkbox" type="checkbox" name="toppings" value="spice">с приправой
+                    <input class="checkbox" type="checkbox" name="toppings" value="mayonnaise">с майонезом
+                </p>
+            </fieldset>
+
+            <div class="form__button">
+                <p class="form__reset"><input type="reset" class="form__btn form__btn-reset" value="Сбросить"></p>
+                <p class="form__submit"><input type="submit" class="form__btn form__btn-submit" value="Посчитать">
+                </p>
+            </div>
+        </form>
+    </div>
+    <div id="order"></div>
+</div>
+
+<script src="./js/hamburger.js"></script>
+<script src="./js/main.js"></script>
+</body>
+
+</html>

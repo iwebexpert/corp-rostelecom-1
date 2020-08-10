@@ -73,7 +73,8 @@ body {
     margin-bottom: 10px;
 }
 
-.btn-next {
+.btn-next,
+.btn-finish {
     display: block;
 }
 

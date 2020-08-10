@@ -41,6 +41,7 @@ class Catalog {
 
     // Обработка клика на кнопку
     clickHandler(event) {
+        event.preventDefault();
         if (event.target.classList.contains('btn-add') && shop.items[event.target.dataset.id].quantity !== 0) {
             this.addGood(event.target.dataset.id);
             // console.log('previousSibling', event.target.previousSibling);
@@ -63,6 +64,10 @@ class Catalog {
             this.nextLink(event.target);
         }
 
+        if (event.target.classList.contains('btn-finish')) {
+            this.showOrder(event.target);
+        }
+
         if (event.target.classList.contains('image')) {
             modal.addModal(event.target);
         }
@@ -78,7 +83,6 @@ class Catalog {
         if (event.target.classList.contains('btn-modal-close') || event.target.classList.contains('modal')) {
             modal.closeModal();
         }
-
     }
 
     get count() {
@@ -120,7 +124,7 @@ class Catalog {
             imgWrap.className = 'productListImg';
 
             for (let j = 0; j < this.items[i].image.length; j++) {
-            const imgCard = document.createElement('img');
+                const imgCard = document.createElement('img');
                 imgCard.className = 'image';
                 imgCard.src = `${this.items[i].image[j]}`;
                 imgWrap.appendChild(imgCard);
@@ -169,6 +173,14 @@ class Catalog {
         basketMenuComment.id = 'basket-link-comment';
         basketMenu.appendChild(basketMenuComment);
 
+        const basketMenuOrder = document.createElement('a');
+        basketMenuOrder.href = '#basket-order';
+        basketMenuOrder.textContent = 'Заказ';
+        basketMenuOrder.className = 'basket-link basket-link-order';
+        basketMenuOrder.id = 'basket-link-order';
+        basketMenuOrder.style.display = 'none';
+        basketMenu.appendChild(basketMenuOrder);
+
         basketDiv.appendChild(basketMenu);
 
 
@@ -203,13 +215,13 @@ class Catalog {
         basketDiv.appendChild(basketWrap);
 
 
-        const basket_address = document.createElement('div');
-        basket_address.className = 'basket-tab basket-address';
-        basket_address.id = 'basket-address';
+        const basketAddress = document.createElement('div');
+        basketAddress.className = 'basket-tab basket-address';
+        basketAddress.id = 'basket-address';
 
         const basketAddressTitle = document.createElement('h3');
         basketAddressTitle.textContent = 'Адрес доставки';
-        basket_address.appendChild(basketAddressTitle);
+        basketAddress.appendChild(basketAddressTitle);
 
         const basketAddressText = document.createElement('textarea');
         basketAddressText.className = 'basket-address-text';
@@ -217,24 +229,20 @@ class Catalog {
         basketAddressText.cols = 50;
         basketAddressText.rows = 5;
         basketAddressText.placeholder = 'Введите адрес доставки';
-        basket_address.appendChild(basketAddressText);
+        basketAddress.appendChild(basketAddressText);
 
         const basketBtnNext2 = document.createElement('button');
         basketBtnNext2.textContent = 'Далее';
         basketBtnNext2.className = 'btn btn-next';
         basketBtnNext2.id = 'btn-next';
+        basketAddress.appendChild(basketBtnNext2);
 
-        basket_address.appendChild(basketBtnNext2);
-
-        basketDiv.appendChild(basket_address);
+        basketDiv.appendChild(basketAddress);
 
 
         const basketComment = document.createElement('div');
-        // basketComment.textContent = '';
         basketComment.className = 'basket-tab basket-comment';
         basketComment.id = 'basket-comment';
-        basketComment.dataset.link = 'basket-comment';
-
 
         const basketCommentTitle = document.createElement('h3');
         basketCommentTitle.textContent = 'Комментарий';
@@ -250,7 +258,27 @@ class Catalog {
         basketCommentText.placeholder = 'Введите комментарий'
         basketComment.appendChild(basketCommentText);
 
+        const basketBtnNext3 = document.createElement('button');
+        basketBtnNext3.textContent = 'заказать';
+        basketBtnNext3.className = 'btn btn-next btn-finish';
+        basketBtnNext3.id = 'btn-finish';
+
+        basketComment.appendChild(basketBtnNext3);
+
         basketDiv.appendChild(basketComment);
+
+
+        const basketOrder = document.createElement('div');
+        basketOrder.textContent = 'Итого:';
+        basketOrder.className = 'basket-tab basket-order';
+        basketOrder.id = 'basket-order';
+
+        const basketOrderContent = document.createElement('div');
+        basketOrderContent.className = 'basket-order-content';
+        basketOrderContent.id = 'basket-order-content';
+        basketOrder.appendChild(basketOrderContent);
+
+        basketDiv.appendChild(basketOrder);
 
     }
 
@@ -321,6 +349,15 @@ class Catalog {
         this.showBasket();
     }
 
+    basketLocalStorage() {
+        if (document.getElementById('basket-address-text')) {
+            localStorage.address = document.getElementById('basket-address-text').value;
+        }
+        if (document.getElementById('basket-comment-text')) {
+            localStorage.comment = document.getElementById('basket-comment-text').value;
+        }
+    }
+
     basketLink(el) {
         const links = document.querySelectorAll('.basket-link');
         const link = el.getAttribute('href').slice(1);
@@ -331,10 +368,16 @@ class Catalog {
             let basketAtr = document.getElementById(link).getAttribute('id');
 
             document.getElementById(linkAtr).style.display = (basketAtr == linkAtr) ? 'block' : 'none';
+
+            this.basketLocalStorage();
         }
     }
 
     nextLink(e) {
+        console.log(e);
+        console.log(document.getElementById('basket-address-text').value);
+        this.basketLocalStorage();
+
         if (e.previousElementSibling.getAttribute('id') == 'btn-clear') {
             e.parentElement.nextElementSibling.style.display = 'block';
             e.parentElement.style.display = 'none';
@@ -343,6 +386,11 @@ class Catalog {
             e.parentElement.nextElementSibling.style.display = 'block';
             e.parentElement.previousElementSibling.style.display = 'none';
         }
+    }
+
+    showOrder() {
+        const order = document.getElementById('basket-order');
+        order.innerHTML = `<p><b>В корзине:</b> ${this.count} товаров <b>на сумму</b> ${this.cost} рублей</p><p><b>Адрес доставки:</b> ${localStorage.address}</p><p><b>Комментарий:</b> ${localStorage.comment}</p>`;
     }
 }
 
