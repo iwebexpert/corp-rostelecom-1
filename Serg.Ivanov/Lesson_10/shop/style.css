@@ -1,0 +1,13 @@
+.container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+.goods-list {
+    background-color: antiquewhite;
+    width: 400px;
+}
+.basket {
+    background-color: burlywood;
+    width: 400px;
+}

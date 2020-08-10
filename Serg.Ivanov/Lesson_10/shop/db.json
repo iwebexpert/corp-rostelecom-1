@@ -1,0 +1,50 @@
+{
+    "fetchGoods": [
+        {
+            "id": 1,
+            "title": "Shirt",
+            "price": 150
+        },
+        {
+            "id": 2,
+            "title": "Socks",
+            "price": 50
+        },
+        {
+            "id": 3,
+            "title": "Jacket",
+            "price": 350
+        },
+        {
+            "id": 4,
+            "title": "Shoes",
+            "price": 250
+        }
+    ],
+    "fetchBasket": [
+        {
+            "id": 1,
+            "title": "Shirt",
+            "price": 150,
+            "amount": 1
+        },
+        {
+            "id": 2,
+            "title": "Socks",
+            "price": 50,
+            "amount": 3
+        },
+        {
+            "id": 3,
+            "title": "Jacket",
+            "price": 350,
+            "amount": 1
+        },
+        {
+            "id": 4,
+            "title": "Shoes",
+            "price": 250,
+            "amount": 1
+        }
+    ]
+}
