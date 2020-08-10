@@ -1,0 +1,40 @@
+{
+  "goods": [
+    {
+      "id": 1,
+      "name": "Item1",
+      "description": "Description Item1",
+      "price": 100,
+      "currency": "RUB",
+      "imgUrls": [
+        "https://cdn.pixabay.com/photo/2018/07/06/08/49/tomato-3520004_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2015/03/07/13/55/tomato-663097_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2016/03/26/16/44/tomatoes-1280859_960_720.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Item2",
+      "description": "Описание Item2",
+      "price": 200,
+      "currency": "RUB",
+      "imgUrls": [
+        "https://cdn.pixabay.com/photo/2018/06/04/23/42/raspberry-3454504_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2010/12/13/10/05/raspberry-2276_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2010/12/13/10/05/berry-2270_960_720.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Item3",
+      "description": "Описание Item3",
+      "price": 250,
+      "currency": "RUB",
+      "imgUrls": [
+        "https://cdn.pixabay.com/photo/2016/01/02/01/59/oranges-1117628_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2017/02/26/12/27/oranges-2100108_960_720.jpg",
+        "https://cdn.pixabay.com/photo/2016/01/02/02/03/orange-1117645_960_720.jpg"
+      ]
+    }
+  ]
+}
