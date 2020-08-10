@@ -1,0 +1,16 @@
+{
+  "items": [
+    {"id" :  1, "name":  "Клавиатура", "price" : 1500 },
+    {"id" :  2, "name":  "Мышь компьютераная", "price" : 700 },
+    {"id" :  3, "name":  "SSD 250GB", "price" : 3500 },
+    {"id" :  4, "name":  "CompactFlash 32G", "price" : 1400 }
+  ],
+  "images": [
+    {"id":  1, "itemId": 1, "url" :  "img/kb1.jpg"},
+    {"id":  2, "itemId": 1, "url" :  "img/kb2.jpg"},
+    {"id":  3, "itemId": 1, "url" :  "img/kb3.png"},
+    {"id":  4, "itemId": 2, "url" :  "img/m1.jpg"},
+    {"id":  5, "itemId": 2, "url" :  "img/m2.jpg"},
+    {"id":  6, "itemId": 2, "url" :  "img/m3.jpg"}
+  ]
+}
