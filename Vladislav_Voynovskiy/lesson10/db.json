@@ -1,0 +1,34 @@
+{
+  "goods": [
+    {
+      "id": 1,
+      "name": "Mangan",
+      "price": 8000,
+      "currency": "P"
+    },
+    {
+      "id": 2,
+      "name": "Haneman",
+      "price": 12000,
+      "currency": "P"
+    },
+    {
+      "id": 3,
+      "name": "Baiman",
+      "price": 16000,
+      "currency": "P"
+    },
+    {
+      "id": 4,
+      "name": "Sanbaiman",
+      "price": 24000,
+      "currency": "P"
+    },
+    {
+      "id": 5,
+      "name": "Yakuman",
+      "price": 32000,
+      "currency": "P"
+    }
+  ]
+}
