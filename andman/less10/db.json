@@ -1,0 +1,40 @@
+{
+    "goods": [
+        {
+            "id": 0,
+            "name": "Cofe",
+            "cost": 150,
+            "curr": "RUR"
+        },
+        {
+            "id": 1,
+            "name": "Cake",
+            "cost": 50,
+            "curr": "RUR"
+        },
+        {
+            "id": 2,
+            "name": "Sugar",
+            "cost": 15,
+            "curr": "RUR"
+        },
+        {
+            "id": 3,
+            "name": "Milk",
+            "cost": 25,
+            "curr": "RUR"
+        },
+        {
+            "id": 4,
+            "name": "Tea",
+            "cost": 130,
+            "curr": "RUR"
+        },
+        {
+            "id": 5,
+            "name": "GreenTea",
+            "cost": 200,
+            "curr": "RUR"
+        }
+    ]
+}
