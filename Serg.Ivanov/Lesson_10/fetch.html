@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch JS</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const btn1 = document.querySelector('#btn1');
+            const users1 = document.querySelector('#users1');
+            //console.log(users1);
+
+            btn1.addEventListener('click', function(){
+                fetch('/users')
+                .then(response => response.json())
+                .then((users) =>{
+                    //resolve()
+                    users.forEach(function(user) {
+                            const li = document.createElement('li');
+                            li.textContent = `${user.name} (${user.age})`;
+
+                            users1.appendChild(li);
+                        });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="btn1">Получить пользователей</button>
+    <ul id="users1"></ul>
+</body>
+</html>

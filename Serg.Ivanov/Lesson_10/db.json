@@ -1,0 +1,15 @@
+{
+    "users": [
+        {"id": 1, "name": "Anna", "age": 25, "profile": 100},
+        {"id": 2, "name": "Ivan", "age": 28},
+        {"id": 3, "name": "Alex", "age": 22}
+    ],
+    "profiles": [
+        {"id": 100, "email": "anna@test.localdomain"}
+    ],
+    "goods": [
+        {"id": 1, "title": "Клавиатура", "price": 500},
+        {"id": 2, "title": "SSD", "price": 2100},
+        {"id": 3, "title": "Компьютерная мышь", "price": 300}
+    ]
+}

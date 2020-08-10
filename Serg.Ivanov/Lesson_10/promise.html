@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Promise</title>
+    <script>
+        function sendRequest(url, callback){
+            const xhr = new XMLHttpRequest();
+                // xhr.open('GET', 'http://localhost:3000/users', false); //Синхронный запрос
+                xhr.open('GET', url); //Настройка запроса
+
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState === XMLHttpRequest.DONE){
+                        if(xhr.status !== 200){
+                            return;
+                        }
+                        
+                        return callback(JSON.parse(xhr.responseText));
+                    }
+                };
+
+                xhr.send(); //Отправка запроса
+                console.log('1');
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            const btn1 = document.querySelector('#btn1');
+            const users1 = document.querySelector('#users1');
+            //console.log(users1);
+
+            btn1.addEventListener('click', function(){
+                sendRequest('/users', function(users){
+                    console.log(users);
+                });
+                console.log('2');
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="btn1">Получить пользователей</button>
+    <ul id="users1"></ul>
+</body>
+</html>

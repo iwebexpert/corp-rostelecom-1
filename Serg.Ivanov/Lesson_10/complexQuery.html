@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complexQuery</title>
+    <script>
+        //ES8
+        async function getUserDataWithProfile(){
+            let response = await fetch('/users/1');
+            let user = await response.json();
+            console.log(user);
+
+            let profileId = user.profile;
+
+            //Получаем профиль пользователя
+            let response2 = await fetch(`http://localhost:3000/profiles/${profileId}`);
+            let profile = await response2.json();
+            console.log(profile);
+
+            return {...user, ...profile};
+        }
+
+        async function getData(){
+            let userWithProfile = await getUserDataWithProfile();
+            console.log(userWithProfile);
+        }
+
+        getData();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
