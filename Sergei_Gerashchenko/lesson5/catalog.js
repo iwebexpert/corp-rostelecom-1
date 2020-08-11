@@ -80,26 +80,56 @@ const catalog = [];
 
 let catalogContainer=null;
 let basketContainer=null;
+
+
+function sendRequest(url) {
+    return new Promise((resolve, reject)=>{
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onreadystatechange=function () {
+            if(xhr.readyState === XMLHttpRequest.DONE){
+                if(xhr.status != 200){
+                    reject();
+                }
+
+                resolve(JSON.parse(xhr.responseText));
+            }
+        }
+        xhr.send();
+    });
+}
+
+function addCatalogItems(items) {
+    console.log(items);
+    items.forEach((item)=>{
+        let p = new Product(item.id, item.name, item.price);
+        item.images.forEach((img)=>{p.addImage(img.url)});
+        catalog.push(p);
+    });
+    loadCatalog();
+}
+
 function loadPage() {
     catalogContainer = document.getElementById('catalog');
     basketContainer = document.getElementById('basket');
     basketContainer.className = 'basket';
     catalogContainer.innerText = 'Каталог';
-    let p=new Product(1,'Мышка', 400);
-    p.addImage('img/m1.jpg');
-    p.addImage('img/m2.jpg');
-    p.addImage('img/m3.jpg');
-    catalog.push(p);
-    p = new Product(2,'Клавиатура', 1400);
-    p.addImage('img/kb1.jpg');
-    p.addImage('img/kb2.jpg');
-    p.addImage('img/kb3.png');
-    catalog.push(p);
-    catalog.push(new Product(3,'Флешка 32г', 1800));
-    catalog.push(new Product(4,'Флешка 64г', 2400));
-    catalog.push(new Product(5,'Флешка 128г', 3300));
+    sendRequest("/items?_embed=images").then((items)=>{addCatalogItems(items)}, ()=>{});
+    // let p=new Product(1,'Мышка', 400);
+    // p.addImage('img/m1.jpg');
+    // p.addImage('img/m2.jpg');
+    // p.addImage('img/m3.jpg');
+    // catalog.push(p);
+    // p = new Product(2,'Клавиатура', 1400);
+    // p.addImage('img/kb1.jpg');
+    // p.addImage('img/kb2.jpg');
+    // p.addImage('img/kb3.png');
+    // catalog.push(p);
+    // catalog.push(new Product(3,'Флешка 32г', 1800));
+    // catalog.push(new Product(4,'Флешка 64г', 2400));
+    // catalog.push(new Product(5,'Флешка 128г', 3300));
     loadBasket();
-    loadCatalog();
+    //loadCatalog();
     createModal();
 }
 
