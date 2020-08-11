@@ -1,0 +1,68 @@
+{
+  "goods": [
+    {
+      "id": 1,
+      "quantity": 1,
+      "price": 147.68,
+      "currency": "руб./шт",
+      "name": "чай Akbar в пакетиках 2г.*100 пак.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/277/AKBAR_Mountain_Fresh_100pak.jpg"
+    },
+    {
+      "id": 2,
+      "quantity": 1,
+      "price": 66.33,
+      "currency": "руб./шт",
+      "name": "чай Азерчай Чёрный с бергамотом 100 г.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/fbe/azerchai_cherny_bergamot_100g.jpg"
+    },
+    {
+      "id": 3,
+      "quantity": 1,
+      "price": 238.55,
+      "currency": "руб./шт",
+      "name": "чай Благовест шкатулка жест/б 60 г.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/92d/Dolche_vita_sergi_s_medvedem_60.jpg"
+    },
+    {
+      "id": 4,
+      "quantity": 1,
+      "price": 76.97,
+      "currency": "руб./шт",
+      "name": "чай Tess 'Ceylon' крупный лист 100 г.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/c47/Tess_Ceylon_100g.jpg"
+    },
+    {
+      "id": 5,
+      "quantity": 1,
+      "price": 71.60,
+      "currency": "руб./шт",
+      "name": "чай Ассам сашет 1,8 г*25 пак.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/6e7/Tea_house_assam_vecher_25sashet.jpg"
+    },
+    {
+      "id": 6,
+      "quantity": 1,
+      "price": 76.62,
+      "currency": "руб./шт",
+      "name": "чай Гринфилд 2г.*25пак. черный",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/93c/Greenfield_Kenyan_Sunrise.jpg"
+    },
+    {
+      "id": 7,
+      "quantity": 1,
+      "price":78.60,
+      "currency": "руб./шт",
+      "name": "чай Ричард в пакетиках сашет 2 г*25 пак.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/011/Richard_Royal_English_Breakfast_25pak.jpg"
+    },
+    {
+      "id": 8,
+      "quantity": 1,
+      "price": 190.55,
+      "currency": "руб./шт",
+      "name": "чай SVAY в пакетиках зелёный 2 г*20 пак.",
+      "imgLink": "https://lavka-coffee-tea.ru/upload/iblock/8bc/Svay_romantic_jasmin_sashe.jpg"
+    }
+  ]
+}

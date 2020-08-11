@@ -1,0 +1,128 @@
+/**
+ * Домашнее задание #10
+ * @author  Сорванов Михаил Леонидович [CorpRostelecom-1]
+ */
+
+/**
+*/
+
+body {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#content {
+  width: 900px;
+  margin: 0 auto;
+  /* чтобы выровнялось по центру */
+  min-height: 100%;
+  padding: 10px;
+}
+
+#basket {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(223, 221, 221);
+}
+
+.select-goods {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+}
+
+.select-amount, .select-name {
+  margin: 10px;
+}
+
+.sel-btn-minus, .sel-btn-plus, .sel-btn-del, .ctrl-btn {
+  padding: 10px 10px;
+  margin: 1px 2px;
+  opacity: 0.8;
+  text-align: center;
+  line-height: 14px;
+  color: black;
+  background-color: lightgray;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+#basket-control {
+  margin: 15px;
+}
+
+input {
+  width: 700px;
+  height: 36px;
+  opacity: 0.6;
+  font-size: 18px;
+  color: black;
+  border: 1px solid grey;
+  box-sizing: border-box;
+  border-radius: 10px;
+  text-indent: 36px;
+}
+
+.text-send {
+  height: 72px;
+  opacity: 0.6;
+  font-size: 26px;
+  color: black;
+  text-indent: 36px;
+}
+
+#catalog-name, #basket-info {
+  font-size: 1.5em;
+  font-weight: 5600;
+  text-align: center;
+  line-height: 26px;
+  padding: 15px;
+}
+
+#catalog {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(223, 221, 221);
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 23%;
+  box-sizing: border-box;
+  margin-top: 15px;
+  box-shadow: 5px 10px 10px rgba(16, 112, 177, 0.2);
+}
+
+.card-name {
+  opacity: 0.6;
+  text-align: center;
+  line-height: 26px;
+}
+
+.card-price {
+  opacity: 0.8;
+  font-size: 1.0em;
+  line-height: 26px;
+  text-align: center;
+}
+
+.card-btn {
+  opacity: 0.6;
+  text-align: center;
+  line-height: 26px;
+  padding: 5px 10px;
+  display: flex;
+  justify-content: center;
+  color: black;
+  background-color: rgb(206, 200, 200);
+  text-decoration: none;
+}
+
+.card-img {
+  width: 100%;
+  display: flex;
+  align-self: flex-end;
+}
