@@ -1,0 +1,7 @@
+{
+    "goods": [
+        {"id": "1", "name": "chair", "price": "100", "quantity": "0"},
+        {"id": "2", "name": "table", "price": "400", "quantity": "0"},
+        {"id": "3", "name": "lamp", "price": "200", "quantity": "0"}
+    ]
+}
