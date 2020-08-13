@@ -1,0 +1,114 @@
+.shoppingCarH2, .deliveryAddressH2, .commentsOrderH2 {
+    text-align: center;
+}
+
+.shoppingCartItemsDiv {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+.shoppingCartItemsDiv:hover {
+    box-shadow: 10px 9px 16px 3px rgba(143,143,143,1);
+}
+
+.addShoppingCartItemDiv {
+    display: flex;
+    padding: 0 15px;
+    margin: 20px 0;
+}
+.addShoppingCartItemP {
+    font-size: 30px;
+}
+.shoppingCartAmountPrice {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.shoppingCartButtonDelete, .shoppingCartButtonDeleteAll, .shoppingCartButtonDeleteAllItems, .addShoppingCartNextButton, .deliveryAddressButtonNext, .commentsOrderButtonNext {
+    align-self: center;
+    padding: 2px 10px;
+    margin: 0 10px;
+    font-size: 19px;
+    background: white;
+    border-radius: 13px;
+    border: 1px solid #000;
+}
+
+
+.shoppingCartButtonDelete:hover, .shoppingCartButtonDeleteAll:hover, .shoppingCartButtonDeleteAllItems:hover {
+    background: linear-gradient(to top, red, white);
+    box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
+}
+.addShoppingCartNextButton:hover, .deliveryAddressButtonNext:hover, .commentsOrderButtonNext:hover {
+    background: linear-gradient(to top, lightgreen, white);
+    box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
+}
+
+.shoppingCartButtonDelete:focus, .shoppingCartButtonDeleteAll:focus, .shoppingCartButtonDeleteAllItems:focus{
+    outline: none;
+    background: linear-gradient(to top, orangered, white);
+    box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
+}
+.addShoppingCartNextButton:focus, .deliveryAddressButtonNext:focus, .commentsOrderButtonNext:focus {
+    outline: none;
+    background: linear-gradient(to top, green, white);
+    box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
+}
+.shoppingCartButtonDelete:active, .shoppingCartButtonDeleteAll:active, .shoppingCartButtonDeleteAllItems:active{
+    background: linear-gradient(to top, #820000, white);
+}
+
+.addShoppingCartNextButton:active, .deliveryAddressButtonNext:active, .commentsOrderButtonNext:active {
+    background: linear-gradient(to top, green, white);
+}
+
+.shoppingCartButtonDelete {
+    margin-left: auto;
+}
+
+.shoppingCartAmountPrice {
+    align-self: center;
+}
+
+
+.shoppingCartButtonDeleteAllItems {
+    align-self: flex-end;
+    margin: 10px;
+}
+
+.addShoppingCartNextButton, .deliveryAddressButtonNext, .commentsOrderButtonNext  {
+    align-self: flex-end;
+    margin: 10px;
+}
+
+.deliveryAddressDiv, .commentsOrderDiv {
+    background-color: white;
+}
+.commentsOrderDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.commentsOrderDivTextArea {
+    align-self: center;
+    margin: 40px;
+}
+
+.deliveryAddressDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.hideBlock {
+    display: none;
+}
+
+.deliveryAddressDivForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px;
+}
+
+
+
