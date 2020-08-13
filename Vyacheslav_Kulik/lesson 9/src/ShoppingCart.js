@@ -208,7 +208,7 @@ class ShoppingCart {
     }
     clickToBlock() {
         const allH2 = document.querySelectorAll('h2');
-        console.log(allH2);
+        //console.log(allH2);
         for (let j = 0; j < allH2.length; j++) {
             allH2[j].addEventListener('click', function (event) {
                 //console.log(event.target.parentNode.parentNode);
@@ -236,7 +236,7 @@ class ShoppingCart {
     }
     _restoreShoppingCartFromLocalStorage() {
         const data = JSON.parse(localStorage.getItem('shoppingCart'));
-        console.log(data);
+        //console.log(data);
         if(data) {
             for (let i = 0; i < data.shoppingCartItems.length; i++) {
                 for (let j = 0; j < data.shoppingCartItems[i][1]; j++) {
