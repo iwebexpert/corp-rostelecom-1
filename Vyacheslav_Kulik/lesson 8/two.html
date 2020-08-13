@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>Two</title>
+    <script>
+        // if (!("a" in window)) {
+        //     var a = 1;
+        // }
+        // alert(a); // браузер выведет уведомление с текстом undefined, так как выражение !("a" in window) = false, но в window присутсвует неопределенное a
+
+        // var b = function a(x) {
+        //     x && a(--x);
+        // };
+        // alert(a); //a - не определено
+
+        // function a(x) {
+        //     return x * 2;
+        // }
+        // var a;
+        // alert(a); // выведется тело функции, так как a(x) было задано раньше чем var a
+
+        // function b(x, y, a) {
+        //     arguments[2] = 10;
+        //     alert(a);
+        // }
+        // b(1, 2, 3); // выведется 10, так как arguments[2] это третий аргумент, независимо от того, что будет передано третим аргументом в  функцию b(), он всегда будет переопределяться на значение = 10
+
+        // function a() {
+        //     alert(this); //выведется object window, так как в качестве аргумента call не предается ничего (null) и a.call(null) равнасильна записи a()
+        // }
+        // a.call(null);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
