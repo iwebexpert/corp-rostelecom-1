@@ -1,0 +1,54 @@
+/* Задание 1 */
+.chess-table{
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.chess-board_let{
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    /* border: 1px solid black; */
+    padding-top: 20px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+.chess-board__white{
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+}
+
+.chess-board__black{
+    background-color:black;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+}
+
+/* Задание 2 */
+
+.container{
+    width: 500px;
+    min-height: 100%;
+    padding: 10px;
+}
+
+[class^="error"]{
+    color: red;
+}
+
+input{
+    margin-top: 5px;
+    width: 50%;
+    box-sizing: border-box;
+}
