@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДЗ-11</title>
+    <!-- <link rel="stylesheet" href="./main.css"> -->
+    <!-- <script src="./main.js" defer></script> -->
+    <script>
+
+        window.onload = function () {
+
+            let form = document.querySelector('form');
+            let quotes = document.getElementById('quotes');
+            let name = document.getElementById('name');
+            let phone = document.getElementById('phone');
+            let email = document.getElementById('email');
+            let rez = document.querySelector('b');
+
+            form.addEventListener('submit', function (event) {
+                let mesg = '';
+                let _quotes = quotes.value;
+                let _name = name.value;
+                let _phone = phone.value;
+                let _email = email.value;
+
+                quotes.value = _quotes.replace(/'/g, '"');
+                _quotes = quotes.value;
+                quotes.value = _quotes.replace(/(\w)(")(\w)/ig, "$1'$3") + ' \r\n\r\nЗамена кавычек выполнена';
+
+                let regexp = /^[a-zа-яё]+$/ui;
+                if (!regexp.test(_name)) {
+                    mesg += 'Имя должно содержать только буквы\r\n';
+                    name.style = 'border-color: red;';
+                } else name.style = null;
+
+                regexp = /^\+7\(\d{3}\)\d{3}\-\d{4}$/g
+                if (!regexp.test(_phone)) {
+                    mesg += 'Телефон должен иметь вид +7(000)000-0000\r\n';
+                    phone.style = 'border-color: red;';
+                } else phone.style = null;
+
+                regexp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/i
+                if (!regexp.test(_email)) {
+                    mesg += 'Email должен иметь вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru\r\n';
+                    email.style = 'border-color: red;';
+                } else email.style = null;
+
+                rez.innerText = mesg;
+
+                event.preventDefault();
+            }, false);
+        }
+
+    </script>
+
+    <style type="text/css">
+        .container {
+            width: 400px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        textarea {
+            width: 200px
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <form action="" method="GET">
+
+            <div>
+                <h4>Замена кавычек:</h4>
+                <textarea id="quotes" rows="6"
+                    required>'Lorem' ipsu'm dolor 'sit' amet, consectetur's adipisicing 'elit'. </textarea>
+                <br>
+                <h4>Имя:</h4>
+                <input id="name" type="text" value="Николай2" required>
+                <br>
+                <h4>Телефон:</h4>
+                <input id="phone" type="text" value="+7 (909)735-7728" required />
+                <br>
+                <h4>Email:</h4>
+                <input id="email" type="text" value="mail @mail.com" required />
+                <br><br>
+                <b></b>
+                <br><br>
+                <button type="submit">Отправить</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
