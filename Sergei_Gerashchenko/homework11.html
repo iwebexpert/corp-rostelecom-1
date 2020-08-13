@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            changeSymbol();
+        })
+
+        function changeSymbol() {
+            let src = document.getElementById("source").textContent;
+            let r = /(\'(?=\s)|(?<=\s)\'|^\'|\'$)/g;
+            document.getElementById("target").textContent = src.replace(r, '"');
+        }
+    </script>
+</head>
+<body>
+<p id="source">'Lorem ip'sum dolor sit amet, co'nsectetur adipisicing elit. A error ex exercitationem iste porro quaerat
+    qui temporibus! 'Facere illum ipsum perferendis!' Commodi, eaque iure odio optio placeat qui saepe vitae. Ad aliquam,
+    aliquid animi aperiam autem explicabo inventore molestiae numquam praesentium sit, vitae voluptatem voluptates.
+    Animi culpa et iure natus sapiente. Expedita itaque maxime odit quibusdam. Aliquid amet blanditiis consequuntur
+    dicta dignissimos dolore et eveniet facilis id impedit ipsa ipsam, ipsum laboriosam laborum maiores maxime minima
+    natus necessitatibus nesciunt nisi nostrum obcaecati, pariatur quaerat quam suscipit, tenetur unde. Accusantium
+    atque blanditiis delectus dolorem ex fuga ipsum maiores maxime nam neque, non nulla praesentium provident quaerat
+    quia quibusdam quidem sed, sunt tempora totam veniam voluptatem voluptatum. Accusamus aperiam consequuntur expedita
+    hic illo 'itaque maxime voluptatum!' Atque, error excepturi exercitationem harum impedit ipsam nulla quam quas qui
+    quibusdam reiciendis saepe tenetur ullam. Deserunt id illo labore laborum odit pariatur ratione reiciendis
+    reprehenderit unde veritatis. 'Aliquid eius expedita ipsum, iure neque odit porro quam quasi tenetur voluptate! Autem
+    et, illum ipsum mollitia nam quam saepe.' A animi eius incidunt nesciunt, porro quis similique suscipit. Assumenda
+    atque culpa deleniti exercitationem nemo praesentium quisquam reiciendis vitae voluptas voluptatibus? Aliquam
+    asperiores at eligendi esse iste molestiae natus nihil nulla possimus. 'A assumenda at, commodi corporis delectus
+    dolorem doloribus ea earum eius error facilis fugit, illum iste itaque iure laboriosam libero natus nemo neque
+    nesciunt nostrum officiis optio porro quo, repellat sapiente temporibus totam unde voluptatibus voluptatum!
+    Consectetur consequatur, consequuntur cum cumque cupiditate delectus distinctio earum eos ex exercitationem fuga
+    fugiat illum in ipsam labore laudantium magnam maiores minus nemo nobis odio optio pariatur placeat qui, quos
+    ratione repellendus reprehenderit sed soluta, tempore ullam veniam veritatis voluptates? Cupiditate enim eos eveniet
+    ex expedita, id ipsum itaque libero sapiente tenetur. A accusamus accusantium ad aliquam aperiam commodi consequatur
+    corporis cumque, cupiditate ducimus eaque error esse ipsam ipsum libero' magnam magni minus mollitia nam nemo,
+    nesciunt nobis non nostrum officiis placeat praesentium quaerat quam quas quasi, quisquam quos rem repudiandae rerum
+    sint suscipit vel voluptatem. A ab accusamus adipisci aspernatur autem blanditiis cum cumque delectus doloremque
+    ducimus ea eaque eveniet ex, fugiat fugit, illum in incidunt ipsa ipsum iure libero magni maiores nesciunt non
+    officiis pariatur perferendis quaerat quia quisquam, ratione sit unde vero voluptate? Error quasi recusandae
+    tempora! Hic, maxime voluptatibus? Aliquam distinctio facilis ipsum sint soluta. Accusantium eos hic nesciunt
+    nostrum odit omnis pariatur quae tenetur totam, velit. Delectus dolore laborum obcaecati! Ab architecto aut deleniti
+    enim inventore laboriosam quo quod recusandae repudiandae voluptate. Amet dolorem explicabo inventore nihil officia
+    officiis quae reprehenderit similique! Alias aliquid asperiores at autem beatae consectetur cum deleniti dicta
+    dolores eaque earum eius esse eum facilis, fuga fugiat fugit magni mollitia nihil nisi odio odit perspiciatis
+    provident quia quidem quis quod quos reprehenderit repudiandae, sit suscipit tempore ut vel! Adipisci dignissimos,
+    minus? Autem consequuntur cum eius eligendi harum in iste iusto voluptatem. Atque blanditiis eveniet maxime minus
+    modi molestiae necessitatibus omnis quaerat reiciendis repellendus repudiandae, sit veritatis. Culpa exercitationem
+    expedita nobis ratione?</p>
+<br><br><br><br>
+<p id="target"></p>
+</body>
+</html>
