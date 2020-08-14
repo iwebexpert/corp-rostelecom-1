@@ -48,10 +48,8 @@ class BlockDivWithImg extends Block {
             //console.log(index)
             if(index !== 0) {
                 blockImg.classList.add('itemImgNoneDisplay');
-                this._element.appendChild(blockImg);
-            } else {
-                this._element.appendChild(blockImg);
             }
+            this._element.appendChild(blockImg);
 
 
         } );

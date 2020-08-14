@@ -61,11 +61,10 @@ class Modal {
                 const nextElement = event.target.nextElementSibling;
                 if (nextElement === null) {
                     parrentDiv.children[0].classList.remove('itemImgNoneDisplay');
-                    currentElement.classList.add('itemImgNoneDisplay');
                 } else {
                     nextElement.classList.remove('itemImgNoneDisplay');
-                    currentElement.classList.add('itemImgNoneDisplay');
                 }
+                currentElement.classList.add('itemImgNoneDisplay');
             });
             //TODO keydown
             // document.addEventListener('keydown', function (event) {

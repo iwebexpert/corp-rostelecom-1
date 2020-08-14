@@ -193,7 +193,7 @@ class ShoppingCart {
             allButtonDelete[i].addEventListener('click', (function()  {
                 this.deleteItemsById(i);// delete from Shopping Cart
                 this.reloadShoppingCart(); // reload Shopping Cart //// i don't understand how this work, but i tried it, and this works // After 10 minutes I understood how it works
-            }).bind(this))
+            }).bind(this));
         }
     }
     deleteAllButton() { //Delete All Button
@@ -240,7 +240,7 @@ class ShoppingCart {
         if(data) {
             for (let i = 0; i < data.shoppingCartItems.length; i++) {
                 for (let j = 0; j < data.shoppingCartItems[i][1]; j++) {
-                    this.addItems(data.shoppingCartItems[i][0])
+                    this.addItems(data.shoppingCartItems[i][0]);
                 }
             }
         }
