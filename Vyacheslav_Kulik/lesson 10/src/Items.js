@@ -83,7 +83,8 @@ class Items  {
             addItemDivModal.appendChild(addItemDivModalParent);
             addItemDivModalParent.appendChild(new BlockDivWithImg('itemDivImgFull', this.listItems[i].photo, 'itemImgModal').render());
             addItemDivModalParent.appendChild(new Block('itemModalClose', 'div').render());
-
+            addItemDivModalParent.appendChild(new BlockDivWithImg('itemModalRightDiv', ['../img/right_icon.png'],'itemModalRight').render());
+            addItemDivModalParent.appendChild(new BlockDivWithImg('itemModalLeftDiv', ['../img/left_icon.png'],'itemModalLeft').render());
 
             itemDiv.appendChild(new BlockButton('itemButton',  'Buy', `itemsButton-${i}`).render());
 
