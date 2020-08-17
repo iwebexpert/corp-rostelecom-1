@@ -158,4 +158,4 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     const list = new GoodsList();
     list.fetchGoods();
-}
+})

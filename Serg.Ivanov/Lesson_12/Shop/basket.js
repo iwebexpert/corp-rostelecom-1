@@ -189,4 +189,4 @@ window.addEventListener('DOMContentLoaded', function () {
     const l = new Basket();
     l.fetchBasket();
 
-}
+})
