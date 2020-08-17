@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина товаров</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="basket.js"></script>
+    <script src="jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="top">
+            <div class="container">
+                <ul class="navigator_contact">
+                    <li>
+                        <a href="index.html">Интернет-магазин</a>
+                    </li>
+                    <li>
+                        <a href="basket.html">Ваша корзина</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="contact_us container">
+                <h2 class="contact_head">В вашей корзине</h2>
+                <p class="contact_text"></p>
+                <a href="#basket" id="btn2" class="button_basket">Состав корзины</a>
+
+            </div>
+            <div id="basket" class="product container" style="display: none; overflow: hidden;">
+                <h3 class="heading" style="display: none;">Товары в вашей корзине</h3>
+                <a href="#talk" class="button_b" style="display: none;">Оформить заказ</a>
+                <div class="block_card">
+
+                </div>
+            </div>
+            <div class="contact_box container">
+                <div class="contact_list">
+                    <div class="image_contact">
+                        <img src="img/content.jpg" alt="photo">
+                    </div>
+                    <div class="margin_contact">
+                        <h4 class="contact_heading">НАШ АДРЕС</h4>
+                        <p class="c_p">г.Калининград "Плаза"</p>
+                    </div>
+                    <div class="margin_contact">
+                        <h4 class="contact_heading">ТЕЛЕФОН</h4>
+                        <ul class="phone">
+                            <li class="ph_p phone_mrg">+7-812-7313-4321 </li>
+                            <li class="ph_p">+7-817-0000-1234</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="contact_heading">МЫ ОНЛАЙН</h4>
+                        <ul class="online_service">
+                            <li class="os_p phone_mrg">www.site.com</li>
+                            <li class="os_p">shop@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="talk" class="message_box">
+                    <div class="message_block">
+                        <h4 class="message_heading contact_mrg">Напишите нам</h4>
+                        <form class="f_con" action="#talk">
+                            <div class="mes_mrg">
+                                Ваше имя
+                                <br>
+                                <input id="name" class="input_text" type="text" placeholder="   Имя">
+                            </div>
+                            <div class="mes_mrg">
+                                Телефон
+                                <br>
+                                <input id="phone" class="input_text" type="text"
+                                    placeholder="   Телефон +7(000)000-0000">
+                            </div>
+                            <div class="mes_mrg">
+                                Email
+                                <br>
+                                <input id="mail" class="input_text" type="text"
+                                    placeholder="   Электронная почта *@mail.ru">
+                            </div>
+                            <div>
+                                Адрес
+                                <br>
+                                <textarea id="text" class="input_area" placeholder="   Ваш адрес" cols="30"
+                                    rows="10"></textarea>
+                            </div>
+                            <button class="send button_mes">Отправить</button>
+                            <button class="clear button_mes">Очистить</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3" class="map">
+                <div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div>
+                <script>(function () {
+                        var setting = { "height": 480, "width": 940, "zoom": 17, "queryString": "Калининград Плаза, проспект Ленинский, Калининград, Калининградская область, Россия", "place_id": "ChIJe-W2shoW40YRVk9zZf_AyxY", "satellite": false, "centerCoord": [54.7111555224378, 20.5085775], "cid": "0x16cbc0ff65734f56", "lang": "ru", "cityUrl": "/russia/kaliningrad-16026", "cityAnchorText": "Карта [CITY1], Северо-Западный регион, Россия", "id": "map-9cd199b9cc5410cd3b1ad21cab2e54d3", "embed_id": "250217" };
+                        var d = document;
+                        var s = d.createElement('script');
+                        s.src = 'https://1map.com/js/script-for-user.js?embed_id=250217';
+                        s.async = true;
+                        s.onload = function (e) {
+                            window.OneMap.initMap(setting)
+                        };
+                        var to = d.getElementsByTagName('script')[0];
+                        to.parentNode.insertBefore(s, to);
+                    })();</script><a href="https://1map.com/ru/map-embed">1 Map</a>
+            </div>
+
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="relation">
+                    <div class="relation_box">
+                        <h3 class="relation_head">Не нашли какой-то товар?</h3>
+                        <p class="relation_text">Мы готовы доставить нужный вам товар на заказ.</p>
+                    </div>
+                    <a href="basket.html#talk" class="footer_button">Напишите нам</a>
+                </div>
+            </div>
+            <hr class="terminator">
+            <div class="container">
+                <div class="info_container">
+                    <ul class="info">
+                        <li class="footer_list">г.Калининград "Плаза"</li>
+                        <li class="footer_list">+62-812-7313-4321</li>
+                        <li class="footer_list">shop@gmail.com</li>
+                    </ul>
+                    <div class="contact_reserve">
+                        <p class="text_reserve">2020 All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

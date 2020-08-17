@@ -1,0 +1,76 @@
+{
+  "fetchGoods": [
+    {
+      "id": 1,
+      "img_item": "img/1.jpg",
+      "img_arr": [
+        "img/1-1.jpg",
+        "img/1-2.jpg",
+        "img/1-3.jpg"
+      ],
+      "title": "Монитор Samsung S24R350FHI",
+      "price": 9490,
+      "amount": 0
+    },
+    {
+      "id": 2,
+      "img_item": "img/2.jpg",
+      "img_arr": [
+        "img/2-1.jpg",
+        "img/2-2.jpg",
+        null
+      ],
+      "title": "Системный блок Apple Mac mini Core i3 3,6/64/128 SSD",
+      "price": 175190,
+      "amount": 0
+    },
+    {
+      "id": 3,
+      "img_item": "img/3.jpg",
+      "img_arr": [
+        "img/3-1.jpg",
+        "img/3-2.jpg",
+        "img/3-3.jpg"
+      ],
+      "title": "Лазерный принтер Canon i-SENSYS LBP6030B",
+      "price": 10290,
+      "amount": 0
+    },
+    {
+      "id": 4,
+      "img_item": "img/4.jpg",
+      "img_arr": [
+        "img/4-1.jpg",
+        "img/4-2.jpg",
+        "img/4-3.jpg"
+      ],
+      "title": "Мышь беспроводная Microsoft Mobile 1850 Blue (U7Z-00014)",
+      "price": 910,
+      "amount": 0
+    },
+    {
+      "id": 5,
+      "img_item": "img/5.jpg",
+      "img_arr": [
+        "img/5-1.jpg",
+        "img/5-2.jpg",
+        null
+      ],
+      "title": "Клавиатура Red Square Tesla TKL RGB(RSQ-20008)",
+      "price": 1990,
+      "amount": 0
+    },
+    {
+      "id": 6,
+      "img_item": "img/6.jpg",
+      "img_arr": [
+        "img/6-1.jpg",
+        "img/6-2.jpg",
+        null
+      ],
+      "title": "Колонки компьютерные Smartbuy A3 (SBA-155)",
+      "price": 890,
+      "amount": 0
+    }
+  ]
+}
