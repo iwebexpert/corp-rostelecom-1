@@ -24,7 +24,7 @@
     font-size: 40px;
 }
 
-.shoppingCartButtonDelete, .shoppingCartButtonDeleteAll, .shoppingCartButtonDeleteAllItems, .addShoppingCartNextButton, .deliveryAddressButtonNext, .commentsOrderButtonNext {
+.shoppingCartButtonDelete, .shoppingCartButtonDeleteAll, .shoppingCartButtonDeleteAllItems, .addShoppingCartNextButton, .deliveryAddressButtonNext, .commentsOrderButtonNext, .deliveryAddressButtonPrevious, .commentsOrderButtonPrevious {
     align-self: center;
     padding: 2px 10px;
     margin: 0 10px;
@@ -39,7 +39,7 @@
     background: linear-gradient(to top, red, white);
     box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
 }
-.addShoppingCartNextButton:hover, .deliveryAddressButtonNext:hover, .commentsOrderButtonNext:hover {
+.addShoppingCartNextButton:hover, .deliveryAddressButtonNext:hover, .commentsOrderButtonNext:hover, .deliveryAddressButtonPrevious:hover, .commentsOrderButtonPrevious:hover {
     background: linear-gradient(to top, lightgreen, white);
     box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
 }
@@ -49,7 +49,7 @@
     background: linear-gradient(to top, orangered, white);
     box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
 }
-.addShoppingCartNextButton:focus, .deliveryAddressButtonNext:focus, .commentsOrderButtonNext:focus {
+.addShoppingCartNextButton:focus, .deliveryAddressButtonNext:focus, .commentsOrderButtonNext:focus, .deliveryAddressButtonPrevious:focus, .commentsOrderButtonPrevious:focus {
     outline: none;
     background: linear-gradient(to top, green, white);
     box-shadow: 6px 4px 14px -5px rgba(0,0,0,1);
@@ -58,7 +58,7 @@
     background: linear-gradient(to top, #820000, white);
 }
 
-.addShoppingCartNextButton:active, .deliveryAddressButtonNext:active, .commentsOrderButtonNext:active {
+.addShoppingCartNextButton:active, .deliveryAddressButtonNext:active, .commentsOrderButtonNext:active, .deliveryAddressButtonPrevious:active, .commentsOrderButtonPrevious:active {
     background: linear-gradient(to top, green, white);
 }
 
@@ -76,9 +76,17 @@
     margin: 10px;
 }
 
-.addShoppingCartNextButton, .deliveryAddressButtonNext, .commentsOrderButtonNext  {
+.addShoppingCartNextButton, .deliveryAddressButtonNext, .commentsOrderButtonNext, .deliveryAddressButtonPrevious, .commentsOrderButtonPrevious  {
     align-self: flex-end;
     margin: 10px;
+}
+
+.buttonDivForm{
+    align-self: flex-end;
+}
+
+.buttonDivComment{
+    align-self: flex-end;
 }
 
 .deliveryAddressDiv, .commentsOrderDiv {

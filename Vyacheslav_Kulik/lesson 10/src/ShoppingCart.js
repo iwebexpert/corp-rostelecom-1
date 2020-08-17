@@ -129,11 +129,12 @@ class ShoppingCart {
 
         const linkToShoppingCartText = document.querySelector('.linkToShoppingCart');
         const priceShoppingCart = document.querySelector('.priceShoppingCart');
-        linkToShoppingCartText.textContent = `${this.countQuantityItems()}`;
+        linkToShoppingCartText.textContent   = `${this.countQuantityItems()}`;
         priceShoppingCart.textContent = `${this.countBasketPrice()} RUB`;
 
         shoppingCartItemsDiv.appendChild(new BlockButton('addShoppingCartNextButton',  'Next').render());
         this.nextToAddress();
+
 
         const shoppingCartDeliveryAddress = new Block('shoppingCartDeliveryAddress', 'div').render();
         shoppingCartContainer.appendChild(shoppingCartDeliveryAddress);
@@ -147,43 +148,84 @@ class ShoppingCart {
 <label for="tel">Номер телефона</label>
 <input type="tel" name="tel" placeholder="+7 (900) 000 11 22"  required> 
 </form>
-<button class="deliveryAddressButtonNext">Next</button>`;
+<div class="buttonDivForm">
+<button class="deliveryAddressButtonPrevious">Back</button>
+<button class="deliveryAddressButtonNext">Next</button>
+</div>
+`;
         deliveryAddressDiv.classList.add('hideBlock');
         shoppingCartDeliveryAddress.appendChild(deliveryAddressDiv);
         this.nextToComments();
+        this.backToShoppingCart();
+
 
         const shoppingCartComments = new Block('shoppingCartComments', 'div').render();
         shoppingCartContainer.appendChild(shoppingCartComments);
         shoppingCartComments.appendChild(new BlockH2('commentsOrderH2','Comments').render());
         const commentsOrderDiv = new Block('commentsOrderDiv', 'div').render();
         commentsOrderDiv.innerHTML = `<textarea class="commentsOrderDivTextArea" rows="5" required></textarea><br>
-<button class="commentsOrderButtonNext">Next</button>`;
+<div class="buttonDivComment">
+<button class="commentsOrderButtonPrevious">Back</button>
+<button class="commentsOrderButtonNext">Next</button>
+</div>
+`;
         commentsOrderDiv.classList.add('hideBlock');
         shoppingCartComments.appendChild(commentsOrderDiv);
-
+        this.backToAddress();
         this.clickToBlock();
 
 
+    }
+    backToShoppingCart(){
+        const buttonDeliveryAddressButtonPrevious = document.querySelector('.deliveryAddressButtonPrevious');
+
+        buttonDeliveryAddressButtonPrevious.addEventListener('click', function () {
+
+            const divDeliveryAddress = document.querySelector('.deliveryAddressDiv');
+            divDeliveryAddress.classList.add('hideBlock');
+            const divshoppingCartContainer = document.querySelector('.shoppingCartItemsDiv');
+            divshoppingCartContainer.classList.remove('hideBlock');
+            const divCommentsOrderDiv = document.querySelector('.commentsOrderDiv');
+            divCommentsOrderDiv.classList.add('hideBlock');
+        })
     }
     nextToAddress() {
         const buttonAddShoppingCartNext = document.querySelector('.addShoppingCartNextButton');
 
         buttonAddShoppingCartNext.addEventListener('click', function () {
+
             const divDeliveryAddress = document.querySelector('.deliveryAddressDiv');
             divDeliveryAddress.classList.remove('hideBlock');
             const divshoppingCartContainer = document.querySelector('.shoppingCartItemsDiv');
             divshoppingCartContainer.classList.add('hideBlock');
+            const divCommentsOrderDiv = document.querySelector('.commentsOrderDiv');
+            divCommentsOrderDiv.classList.add('hideBlock');
+        })
+    }
+    backToAddress(){
+        const buttonAddShoppingCartPrevious = document.querySelector('.commentsOrderButtonPrevious');
+        buttonAddShoppingCartPrevious.addEventListener('click', function () {
+            console.log(buttonAddShoppingCartPrevious);
+            const divDeliveryAddress = document.querySelector('.deliveryAddressDiv');
+            divDeliveryAddress.classList.remove('hideBlock');
+            const divshoppingCartContainer = document.querySelector('.shoppingCartItemsDiv');
+            divshoppingCartContainer.classList.add('hideBlock');
+            const divCommentsOrderDiv = document.querySelector('.commentsOrderDiv');
+            divCommentsOrderDiv.classList.add('hideBlock');
         })
     }
     nextToComments() {
         const buttonDeliveryAddressNext = document.querySelector('.deliveryAddressButtonNext');
 
         buttonDeliveryAddressNext.addEventListener('click', function (event) {
-            event.preventDefault();
+            //event.preventDefault();
+            //console.log(event.preventDefault());
             const divDeliveryAddress = document.querySelector('.deliveryAddressDiv');
             divDeliveryAddress.classList.add('hideBlock');
             const divCommentsOrderDiv = document.querySelector('.commentsOrderDiv');
             divCommentsOrderDiv.classList.remove('hideBlock');
+            const divshoppingCartContainer = document.querySelector('.shoppingCartItemsDiv');
+            divshoppingCartContainer.classList.add('hideBlock');
 
         })
     }
@@ -193,7 +235,7 @@ class ShoppingCart {
             allButtonDelete[i].addEventListener('click', (function()  {
                 this.deleteItemsById(i);// delete from Shopping Cart
                 this.reloadShoppingCart(); // reload Shopping Cart //// i don't understand how this work, but i tried it, and this works // After 10 minutes I understood how it works
-            }).bind(this))
+            }).bind(this));
         }
     }
     deleteAllButton() { //Delete All Button
@@ -212,7 +254,23 @@ class ShoppingCart {
         for (let j = 0; j < allH2.length; j++) {
             allH2[j].addEventListener('click', function (event) {
                 //console.log(event.target.parentNode.parentNode);
-                event.target.nextElementSibling.classList.contains('hideBlock') ? event.target.nextElementSibling.classList.remove('hideBlock') : event.target.nextElementSibling.classList.add('hideBlock');
+                //console.log(event.path[0].className);
+
+                switch(event.path[0].className){
+                    case('shoppingCarH2'):
+                        document.querySelector('.deliveryAddressButtonPrevious').click();
+                        break;
+
+                    case('deliveryAddressH2'):
+                        document.querySelector('.commentsOrderButtonPrevious').click();
+                        break;
+
+                    case('commentsOrderH2'):
+                        document.querySelector('.deliveryAddressButtonNext').click();
+                        break;
+
+                }
+                //event.target.nextElementSibling.classList.contains('hideBlock') ? event.target.nextElementSibling.classList.remove('hideBlock') : event.target.nextElementSibling.classList.add('hideBlock');
 
             })
         }
@@ -240,7 +298,7 @@ class ShoppingCart {
         if(data) {
             for (let i = 0; i < data.shoppingCartItems.length; i++) {
                 for (let j = 0; j < data.shoppingCartItems[i][1]; j++) {
-                    this.addItems(data.shoppingCartItems[i][0])
+                    this.addItems(data.shoppingCartItems[i][0]);
                 }
             }
         }

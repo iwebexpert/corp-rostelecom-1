@@ -7,6 +7,27 @@ class Items  {
     init(){
         this._getListItem('/goods'); //вызываем обработчик Promise
 
+
+
+    }
+    renderItems(){
+        const itemsDiv = document.querySelector('.items');
+        itemsDiv.innerHTML = '';
+        this.show();//Отрисовка товаров
+        this.addEventBuyButton(); //Отрисовка товаров
+    }
+    filterItems(){
+        const search = new Search(this.listItems);
+        //const test = search.getValueFromSearchLine();
+        const searchLine = document.querySelector('.search');
+        searchLine.addEventListener('input',(function (event) {
+            //console.log(event.target.value)
+            console.log(search.filter(event.target.value))
+            this.listItems = search.filter(event.target.value);
+            console.log(this.listItems,'this.listItems');
+            this.renderItems();
+
+        }).bind(this));
     }
     _getListItemsPromise(url) { // Promise  на получение товаров
         return new Promise((resolve, reject) => {
@@ -32,8 +53,8 @@ class Items  {
         //console.log(this._getListItemsPromise('/goods'));
         this._getListItemsPromise('/goods').then((goods) => {
             Object.assign(this.listItems, goods);
-            this.show(); //Отрисовка товаров
-            this.addEventBuyButton(); //Отрисовка товаров
+            this.renderItems();
+            this.filterItems();
         }, () => {
 
         })
@@ -83,7 +104,8 @@ class Items  {
             addItemDivModal.appendChild(addItemDivModalParent);
             addItemDivModalParent.appendChild(new BlockDivWithImg('itemDivImgFull', this.listItems[i].photo, 'itemImgModal').render());
             addItemDivModalParent.appendChild(new Block('itemModalClose', 'div').render());
-
+            addItemDivModalParent.appendChild(new BlockDivWithImg('itemModalRightDiv', ['../img/right_icon.png'],'itemModalRight').render());
+            addItemDivModalParent.appendChild(new BlockDivWithImg('itemModalLeftDiv', ['../img/left_icon.png'],'itemModalLeft').render());
 
             itemDiv.appendChild(new BlockButton('itemButton',  'Buy', `itemsButton-${i}`).render());
 

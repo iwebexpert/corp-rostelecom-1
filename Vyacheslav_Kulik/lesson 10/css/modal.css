@@ -26,11 +26,50 @@
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 1;
 
 }
 .itemImgModal {
     max-width: 1300px;
     max-height: 80vh;
+}
+
+.itemModalRightDiv {
+    right: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+
+}
+
+.itemModalRight {
+    align-self: center;
+    margin-left: auto;
+    display: none;
+}
+.itemModalRightDiv:hover .itemModalRight{
+    display: block;
+}
+
+.itemModalLeftDiv {
+    left: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    display: flex;
+}
+
+
+.itemModalLeft {
+    align-self: center;
+    display: none;
+}
+
+.itemModalLeftDiv:hover .itemModalLeft{
+    display: block;
 }
 
 .itemImgNoneDisplay {
