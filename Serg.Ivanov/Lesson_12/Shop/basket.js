@@ -1,4 +1,4 @@
-window.onload = function () {
+window.addEventListener('DOMContentLoaded', function () {
     // Валидация формы сообщений
     const sendBtn = document.querySelector('.send');
     const clearBtn = document.querySelector('.clear');

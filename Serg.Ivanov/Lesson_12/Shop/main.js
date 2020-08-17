@@ -1,4 +1,4 @@
-window.onload = function () {
+window.addEventListener('DOMContentLoaded', function () {
     // Карточка товара
     class GoodsItem {
         constructor(id, img_item, img_arr, title, price, amount) {
