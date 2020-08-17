@@ -17,7 +17,6 @@ header {
 }
 .containerHeader {
     display: flex;
-    justify-content: flex-end;
 }
 .linkToShoppingCart {
     background-image: url(../img/shoppingcart.png);
@@ -31,6 +30,7 @@ header {
     font-size: 20px;
     text-decoration: none;
     font-weight: bold;
+    margin-left: auto;
 
 }
 .linkToShoppingCart:link {
