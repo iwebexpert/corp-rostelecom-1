@@ -2,51 +2,35 @@
 // обрабатывать входящие GET запросы и возвращать ответы,
 // полученные через API Яндекс.Переводчика.
 
-const readline = require('readline')
-const { info, ok, log, err } = require('../../node1/src/_colors')
+const express = require('express')
+const path = require('path')
 const { translate } = require("google-translate-api-browser") // Google-переводчик, раз у Яндекса халява кончилась
 
-const notify = () => {
-    console.log(
-        info(' Доступные команды: '),
-        '\n\tВведите английский текст для перевода на русский',
-        '\n\tQ - выход'
-    )
-}
+const app = express()
+const port = 3000
 
-const prompt = (msg = "Перевести на русский > ") => {
-    rl.setPrompt(msg)
-    rl.prompt()
-}
+app.use(express.static(path.join(__dirname, '..', 'static')))
 
-const translateText = (text) => {
-    translate(text, { from: 'en', to: 'ru' }).then(res => {
-        prompt(`${log(text)} > ${ok(res.text)}\nПеревести на русский > `)
-    }).catch(error => {
-        prompt(err('Не удалось выполнить перевод. Ошибка:'))
-        console.error(err)
+app.get('/translate/:text', (req, res) => {
+    const text = req.params.text
+    translate(text, { from: 'en', to: 'ru' }).then(r => {
+        res.send(JSON.stringify({
+            status: 200,
+            data: {
+                from: text,
+                to: r.text
+            }
+        }))
+    }).catch(err => {
+        res.send(JSON.stringify({
+            status: 500,
+            data: {
+                error: err.message
+            }
+        }))
     })
-}
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
 })
 
-notify()
-prompt()
-
-rl.on('line', (cmd) => {
-    const text = cmd.trim()
-    switch (text.toUpperCase()) {
-        case 'Q':
-            rl.close()
-            break
-        case 'H':
-            notify()
-            break
-        default:
-            translateText(text)
-            break
-    }
+app.listen(port, () => {
+    console.log(`http://localhost:${port}`)
 })

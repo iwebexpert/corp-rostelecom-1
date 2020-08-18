@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node 2 - Переводчик</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .container>textarea {
+            flex-basis: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Переводчик к EN на RU</h1>
+    <div class="container">
+        <textarea id="from">Hello, world!</textarea>
+        <textarea id="to"></textarea>
+    </div>
+    <div class="actions">
+        <button id="translate">Перевести</button>
+    </div>
+</body>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('translate').addEventListener('click', async () => {
+            const text = document.getElementById('from').value || '';
+            const response = await fetch(`/translate/${text}`);
+            const res = await response.json();
+            if (!res || res.status !== 200) {
+                alert('Ошибка перевода! ' + ((res || {}).data || {}).error);
+            } else {
+                document.getElementById('to').value = res.data.to;
+            }
+        });
+    });
+</script>
+
+</html>
