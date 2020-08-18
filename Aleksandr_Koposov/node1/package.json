@@ -1,0 +1,14 @@
+{
+  "name": "node1",
+  "version": "1.0.0",
+  "description": "Lesson 13 (Node 1): Покраска цвета в консоли и игра \"Орёл-Решка\"",
+  "private": true,
+  "author": "Aleksandr.Koposov",
+  "scripts": {
+    "task2": "node ./src/task2.js",
+    "task3": "node ./src/task3.js"
+  },
+  "dependencies": {
+    "cli-color": "^2.0.0"
+  }
+}
