@@ -1,0 +1,16 @@
+{
+  "name": "lesson_1",
+  "version": "1.0.0",
+  "description": "HW 1 nodeJS",
+  "main": "task_1.js",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Egor Efanov",
+  "license": "ISC"
+}
