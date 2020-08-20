@@ -1,0 +1,17 @@
+{
+  "name": "lesson-1",
+  "version": "1.0.0",
+  "description": "�������� �������:\r ���������� Node.js � ��������� ������� �� �����.\r ����������� ����: ������� � ������� Node.js ���������� ���������, ������� ����� �������� ���-���� � ������� ������� �������.\r �������� ���������� ���� \"���� ��� �����\", � ������� ���� ����� ��������� ���������� ����� (1 ��� 2).\r https://v8.dev/\r https://github.com/libuv/libuv\r https://nodejs.org/en/\r https://www.npmjs.com/\r https://expressjs.com/\r npm i",
+  "main": "lesson-1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ansi": "^0.3.1",
+    "cli-color": "^2.0.0"
+  },
+  "devDependencies": {}
+}
