@@ -1,0 +1,17 @@
+{
+  "name": "node1",
+  "version": "1.0.0",
+  "description": "Lesson 14 (Node 2): Сборщик новостей и переводчик",
+  "private": true,
+  "author": "Aleksandr.Koposov",
+  "scripts": {
+    "task1": "node ./src/task1.js",
+    "task2": "node ./src/task2.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "google-translate-api-browser": "^1.1.71",
+    "request": "^2.88.2"
+  }
+}
