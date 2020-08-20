@@ -1,0 +1,19 @@
+{
+  "name": "mylesson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server1234": "http-server -p 62800 ./homework"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ansi": "^0.3.1",
+    "chalk": "^4.1.0",
+    "http-server": "^0.12.3",
+    "node-static": "^0.7.11"
+  }
+}
