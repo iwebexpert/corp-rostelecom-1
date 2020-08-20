@@ -1,0 +1,14 @@
+{
+  "name": "lesson-13",
+  "version": "1.0.0",
+  "description": "HomeWork Node.JS Lesson 1",
+  "main": "colorConsole.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vyacheslav Kulik",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}
