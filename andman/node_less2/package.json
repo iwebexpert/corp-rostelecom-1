@@ -1,0 +1,19 @@
+{
+  "name": "less_2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "less_2_1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.3",
+    "minimist": "^1.2.5",
+    "request": "^2.88.2"
+  }
+}
