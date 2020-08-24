@@ -1,0 +1,18 @@
+{
+  "name": "lesson14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "parserNews.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vitalets/google-translate-api": "^3.0.0",
+    "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.3",
+    "request": "^2.88.2"
+  }
+}
