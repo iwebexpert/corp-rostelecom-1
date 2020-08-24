@@ -1,0 +1,15 @@
+{
+  "name": "gt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "google_translate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "google-translate-free": "^2.4.5"
+  }
+}
