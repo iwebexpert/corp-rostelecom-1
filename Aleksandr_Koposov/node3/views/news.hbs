@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>Новости</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .v-card__text img {
+            max-width: 300px;
+        }
+
+        .v-card__text .oembed {
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <v-app>
+            <v-app-bar app absolute color="primary" dark src="https://picsum.photos/1920/1080?random">
+                <template #img="{ props }">
+                    <v-img v-bind="props" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"></v-img>
+                </template>
+
+                <v-toolbar-title>Новостной сайт</v-toolbar-title>
+
+                <template #extension>
+                    <v-tabs v-model="activeTab" centered>
+                        <v-tab href="/">Главная</v-tab>
+                        <v-tab href="/news">Новости</v-tab>
+                    </v-tabs>
+                </template>
+            </v-app-bar>
+            <v-main app>
+                <v-container>
+                    <v-row align="center" justify="center">
+                        <v-col cols="12">
+                            <h1>Новости</h1>
+                            {{#each news}}
+                            <v-card key="news_{{this.index}}" class="mb-3" elevation="5">
+                                <v-card-title>
+                                    <a class="title" href="{{ this.link }}">{{{ this.title }}}</a>
+                                </v-card-title>
+                                <v-divider></v-divider>
+                                <v-card-text>{{{ this.content }}}</v-card-text>
+                                {{#if this.categories}}
+                                <v-divider></v-divider>
+                                <v-card-actions>
+                                    {{#each this.categories}}
+                                    <v-chip small class="mr-2">{{ this }}</v-chip>
+                                    {{/each}}
+                                </v-card-actions>
+                                {{/if}}
+                            </v-card>
+                            {{/each}}
+                            <v-pagination :value="+('{{ page }}' || 1)" :length="+('{{ pages }}' || 1)"
+                                @input="pageChange" @next="pageChange" @previous="pageChange">
+                            </v-pagination>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify({
+                theme: {
+                    themes: {
+                        light: {
+                            primary: '#7700ff'
+                        }
+                    }
+                }
+            }),
+            data: function () {
+                return {
+                    activeTab: '/news'
+                }
+            },
+            methods: {
+                pageChange(event) {
+                    window.location = `/news?page=${event}`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
