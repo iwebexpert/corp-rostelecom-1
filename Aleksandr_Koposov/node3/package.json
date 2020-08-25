@@ -1,0 +1,16 @@
+{
+  "name": "node3",
+  "version": "1.0.0",
+  "description": "Lesson 15 (Node 3): Отображение новостей и настройки в Cookies",
+  "private": true,
+  "author": "Aleksandr.Koposov",
+  "scripts": {
+    "serve": "node ./src/main.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "rss-parser": "^3.9.0"
+  }
+}

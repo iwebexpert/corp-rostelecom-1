@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <title>Настройка</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <v-app>
+            <v-app-bar app absolute color="primary" dark src="https://picsum.photos/1920/1080?random">
+                <template #img="{ props }">
+                    <v-img v-bind="props" gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"></v-img>
+                </template>
+
+                <v-toolbar-title>Новостной сайт</v-toolbar-title>
+
+                <template #extension>
+                    <v-tabs v-model="activeTab" centered>
+                        <v-tab href="/">Главная</v-tab>
+                        <v-tab href="/news">Новости</v-tab>
+                    </v-tabs>
+                </template>
+            </v-app-bar>
+            <v-main app>
+                <v-container>
+                    <v-row align="center" justify="center">
+                        <v-col cols="6">
+                            <h1>Настройки</h1>
+                            <v-fade-transition>
+                                <v-snackbar v-model="alert.visible" rounded timeout="4000"
+                                    :color="alert.type || 'black'" dark>
+                                    <span v-text="alert.message"></span>
+                                    <template #action="{ attrs }">
+                                        <v-btn text v-bind="attrs" @click="alert.visible = false">
+                                            Закрыть
+                                        </v-btn>
+                                    </template>
+                                </v-snackbar>
+                            </v-fade-transition>
+                            <v-form v-model="valid">
+                                <v-autocomplete v-model="site" :items="sites" filled item-value="id" item-text="name"
+                                    return-object label="Новостной сайт"
+                                    :rules="[v => !!v || 'Это обязательное поле!']"></v-autocomplete>
+                                <v-autocomplete v-model="category" :items="siteCats" :disabled="!siteCats.length" filled
+                                    item-value="id" item-text="name" return-object label="Категория новостей">
+                                </v-autocomplete>
+                                <v-text-field v-model="perPage" type="number" label="Новостей на странице" filled
+                                    :rules="[v => !!v || 'Это обязательное поле!']">
+                                </v-text-field>
+                                <v-row>
+                                    <v-col cols="6">
+                                        <v-btn color="primary" rounded @click="saveSettings">
+                                            <v-icon left>mdi-check</v-icon>
+                                            Сохранить
+                                        </v-btn>
+                                    </v-col>
+                                    <v-col cols="6" class="text-right">
+                                        <v-btn href="/news" rounded outlined>
+                                            <v-icon left>mdi-newspaper</v-icon>
+                                            К новостям
+                                        </v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-form>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify({
+                theme: {
+                    themes: {
+                        light: {
+                            primary: '#7700ff'
+                        }
+                    }
+                }
+            }),
+            data: function () {
+                return {
+                    valid: false,
+                    site: null,
+                    sites: [
+                        {
+                            name: 'Goha.ru',
+                            link: 'https://www.goha.ru/rss/',
+                            cats: ['news', 'presentations', 'interviews']
+                        },
+                        {
+                            name: 'Habr',
+                            link: 'https://habr.com/ru/rss/',
+                            cats: ['all/all', 'hub/storages']
+                        },
+                        {
+                            name: 'Msn',
+                            link: 'http://rss.msn.com/ru-ru/',
+                            cats: []
+                        }
+                    ],
+                    category: null,
+                    perPage: 10,
+                    alert: {
+                        message: '',
+                        visible: false,
+                        type: 'info'
+                    },
+                    activeTab: '/'
+                }
+            },
+            computed: {
+                siteCats() {
+                    return (this.site || {}).cats || []
+                }
+            },
+            mounted() {
+                this.site = this.sites.find(i => i.link === '{{ site }}') || null
+                this.category = '{{ cat }}'
+                this.perPage = +'{{ perPage }}'
+            },
+            methods: {
+                saveSettings() {
+                    fetch('/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify({
+                            site: (this.site || {}).link || null,
+                            cat: this.category,
+                            perPage: this.perPage
+                        })
+                    }).then(res => res.json()).then((data) => {
+                        this.alert = {
+                            message: data.message,
+                            visible: true,
+                            type: 'success'
+                        }
+                    }).catch((err) => {
+                        this.alert = {
+                            message: err.message,
+                            visible: true,
+                            type: 'error'
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
