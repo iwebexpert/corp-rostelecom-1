@@ -41,9 +41,7 @@ app.use((req, res, next) => {
 })
 
 // Middleware для получения POST-параметров
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(express.json())
 
 // Задаём движок шаблонизатора
 app.set('view engine', 'hbs')
