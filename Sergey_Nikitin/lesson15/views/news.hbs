@@ -1,0 +1,10 @@
+<div>
+    <p>Максимальное количество новостей: {{newsCount}} </p>
+    <ul>
+        {{#each news}}
+        <li>
+            <h3>{{this.title}}</h3><br> {{this.newsSContent}}
+        </li>
+        {{/each}}
+    </ul>
+</div>
