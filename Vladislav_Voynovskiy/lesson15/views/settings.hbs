@@ -1,0 +1,8 @@
+<h3>Страница настроек</h3>
+{{#if articleCount}}
+<span>aCount param: {{articleCount}}</span>
+{{/if}}
+<form method="POST" action="/settings">
+  Кол-во статей:<input type="number" name="countParam" value="{{articleCount}}">
+  <input type="submit">
+</form>
