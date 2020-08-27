@@ -1,0 +1,13 @@
+<h2>Статьи {{title}}</h2>
+<h5>{{description}}</h5>
+
+<div id="catalog">
+    {{#each articles}}
+    <div class="product">
+        <h2 class="product_name">{{this.title}}</h2>
+        <p>{{this.description}}
+            <a href="{{this.url}}">>></a>
+        </p>
+    </div>
+    {{/each}}
+</div>
