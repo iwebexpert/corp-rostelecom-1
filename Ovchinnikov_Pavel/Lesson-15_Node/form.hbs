@@ -1,0 +1,11 @@
+<h3>Форма для ДЗ</h3>
+{{#if mysettings.limitItemNews}}
+<div>countNews param: {{mysettings.limitItemNews}}</div>
+{{/if}}
+
+
+<form method="POST" action="/">
+    <input type="text" name="param123" placeholder="Сколько новостей выводить на страницу"
+        value={{mysettings.limitItemNews}}>
+    <input type="submit">
+</form>
