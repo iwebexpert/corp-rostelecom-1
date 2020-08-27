@@ -1,0 +1,8 @@
+<h3>Настройки отображения новостей</h3>
+{{#if cookiesNum}}
+<div>Количество новостей сейчас в cookie: {{cookiesNum}}</div>
+{{/if}}
+<form method="POST" action="/settings">
+    <input type="text" name="param1" placeholder="Сколько новостей выводить на страницу">
+    <input type="submit">
+</form>
