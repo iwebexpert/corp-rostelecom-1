@@ -1,0 +1,11 @@
+<div>
+    <h2>Новости</h2>
+    {{#each newsBlock }}
+        <div>
+            <hr>
+            <h3>{{this.title}}</h3>
+            <p>{{this.content}}</p>
+            <p><i>{{this.date}}</i></p>
+        </div>
+    {{/each}}
+</div>
