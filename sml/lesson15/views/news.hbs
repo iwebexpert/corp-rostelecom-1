@@ -1,0 +1,14 @@
+<h3>Количество отображаемых новостей</h3>
+{{#if countNews}}
+<div>Количество новостей: {{countNews}}</div>
+{{/if}}
+<form method="POST" action="/">
+  <input type="text" name="param1" value="{{countNews}}" placeholder="Сколько новостей выводить на страницу">
+  <input type="submit" value="Изменить количество новостей">
+</form>
+
+<ul>
+  {{#each news}}
+  <li>{{this}}</li>
+  {{/each}}
+</ul>
