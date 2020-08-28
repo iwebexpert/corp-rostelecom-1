@@ -1,0 +1,6 @@
+<h1>{{title}}</h1>
+<ul></ul>
+{{#each allNews}}
+    <li><a href="{{this.index}}" id='{{this.index}}' data-link='{{this.url}}'>{{this.text}}</a></li>
+{{/each}}
+
