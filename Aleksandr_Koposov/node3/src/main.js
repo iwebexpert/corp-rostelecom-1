@@ -14,6 +14,7 @@
 */
 
 const express = require('express')
+const path = require('path')
 const Parser = require('rss-parser')
 const app = express()
 
@@ -45,7 +46,7 @@ app.use(express.json())
 
 // Задаём движок шаблонизатора
 app.set('view engine', 'hbs')
-app.set('views', __dirname + '\\..\\views')
+app.set('views', path.join(__dirname, '..', 'views'))
 
 // Главная - страница настроек
 app.get('/', (req, res) => {
