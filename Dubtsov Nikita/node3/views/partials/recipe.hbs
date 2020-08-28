@@ -1,0 +1,13 @@
+<div class="d-flex flex-wrap justify-content-between container align-items-start" style="width: 100%">
+    {{#each data}}
+    <div class="card border mb-4" style="width: 30%; border: 1px solid gray">
+        <a href="{{url}}" target="_blank"><img class="card-img-top" src="{{img}}" alt="Пирог" width="300" height="250"
+                align="middle"></a>
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{description}}</p>
+            <a href="{{url}}" target="_blank" class="btn btn-primary">Хочу этот!</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
