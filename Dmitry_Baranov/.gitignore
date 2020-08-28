@@ -107,4 +107,4 @@ dist
 .idea/
 
 # Add my ignore
-.package-lock.json
+package-lock.json
