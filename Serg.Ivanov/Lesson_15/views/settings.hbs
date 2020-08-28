@@ -1,0 +1,11 @@
+<h3>Новости</h3>
+
+<form method="POST" action="/settings">
+    <input type="text" name="param1" class="text" placeholder="Сколько новостей выводить?">
+    <input type="submit">
+</form>
+
+
+{{#if news}}
+<div>Новость: {{news}}</div>
+{{/if}}
