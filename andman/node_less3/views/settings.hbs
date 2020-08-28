@@ -1,0 +1,8 @@
+<h3>Страница настроек</h3>
+{{#if countNews}}
+    <div>countNews param: {{countNews}}</div>
+    {{/if}}
+<form method="POST" action="/settings">
+ Сколько новостей выводить на страницу:<input type="number" name="param1" value="{{countNews}}">
+<input type="submit">
+</form>

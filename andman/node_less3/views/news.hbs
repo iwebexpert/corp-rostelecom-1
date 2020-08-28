@@ -1,0 +1,10 @@
+<div>
+    <h2>Новости</h2>	
+	    {{#each data}}
+			<hr>
+            <h3>{{this.annotation}}</h3><a href="{{this.href}}">Читать оригинал на Lenta.ru</a>
+			<p>{{this.text}}</p>
+			
+        {{/each}}
+    
+</div>
