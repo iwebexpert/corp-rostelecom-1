@@ -1,0 +1,20 @@
+{
+  "name": "Node3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node-3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.3",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "request": "^2.88.2"
+  }
+}

@@ -2,7 +2,7 @@ const chalk = require('chalk')
 const log = console.log
 const readline = require('readline')
 
-const translate = require('@vitalets/google-translate-api');
+const translate = require('@vitalets/google-translate-api')
 
 
 log(`${chalk.red('Переводчик  en -> ru')}`)
@@ -26,7 +26,7 @@ rl.on('line', (word) => {
             log("Введите слово или Q для выхода")
 
         }).catch(err => {
-            console.error(err);
+            console.error(err)
         });
     }
 })

@@ -1,7 +1,6 @@
 const req = require('request')
 const cheer = require('cheerio')
 const chalk = require('chalk')
-const minmist = require('minimist')
 const minimist = require('minimist')
 
 
@@ -36,8 +35,8 @@ req.get({
 },
     function (err, res, html) {
         if (!err && res.statusCode == 200) {
-            let regex = /<!\[CDATA\[([\s\S]*?)\]\]>(?=\s*<)/gi;
-            html = html.replace(regex, "$1");
+            let regex = /<!\[CDATA\[([\s\S]*?)\]\]>(?=\s*<)/gi
+            html = html.replace(regex, "$1")
             //console.log(html)
             let $ = cheer.load(html)
             let siteTitle = $('rss channel generator').eq(0).text()

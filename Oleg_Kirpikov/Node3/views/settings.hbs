@@ -1,0 +1,10 @@
+<h3>Настройки</h3>
+
+{{#if channelNews.count}}
+<div>Количество новостей: {{channelNews.count}}</div>
+{{/if}}
+<form method="POST" action="/">
+    <input type="text" name="count" placeholder="Сколько новостей выводить на страницу">
+    <input type="submit">
+</form>
+{{> articles channelNews}}
