@@ -1,11 +1,27 @@
-<h3>Новости</h3>
+<h3>Параметры подборки новостей</h3>
 
 <form method="POST" action="/settings">
     <input type="text" name="param1" class="text" placeholder="Сколько новостей выводить?">
+    <input type="text" name="param2" class="text" placeholder="1 - РИА или 2 - mail.ru?">
     <input type="submit">
 </form>
 
+{{#if agency}}
+<div>Прежние настройки: {{agency}} агентство</div>
+{{/if}}
+
+{{#if cookie}}
+<div>Прежние настройки: {{cookie}} новостей</div>
+<div>Отправьте пустой запрос, чтобы повторить</div>
+{{/if}}
+
 
 {{#if news}}
-<div>Новость: {{news}}</div>
+<h4>Новости:</h4>
+<ol>
+    {{#each news}}
+    <li>{{this.text}}</li>
+    <a href={{this.href}} target="_blank">Подробнее</a>
+    {{/each}}
+</ol>
 {{/if}}
