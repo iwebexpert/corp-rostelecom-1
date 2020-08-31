@@ -1,0 +1,8 @@
+<h3>Форма для ДЗ</h3>
+{{#if countNews}}
+    <div>countNews param: {{countNews}}</div>
+    {{/if}}
+<form method="POST" action="/settings">
+<input type="text" name="param1" placeholder="Сколько новостей выводить на страницу">
+<input type="submit">
+</form>
