@@ -1,0 +1,18 @@
+<div>
+    <ul>
+        {{#each todo_items}}
+            <li><input id="{{this._id}}" type="checkbox"
+                {{#if this.doneAt }}
+                       checked
+                       {{/if}}  onchange="check_as_done('{{this._id}}')"><a href="/todo/{{this._id}}"><span class="author">{{{this.author}}}</span> - <span class="item_title">{{{this.title}}}</span> :
+                <span class="item_text">{{{this.text}}}</span></a></li>
+        {{/each}}
+    </ul>
+
+</div>
+<form method="POST" action="/todo">
+    <input type="text" name="author" placeholder="Автор">
+    <input type="text" name="title" placeholder="Название">
+    <input type="text" name="text" placeholder="Текст">
+    <input type="submit">
+</form>
