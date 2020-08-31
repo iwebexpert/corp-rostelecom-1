@@ -1,0 +1,14 @@
+{{!-- <form method="POST" action="/">
+    <div class="header">
+        <h2 style="margin:5px">Список дел</h2>
+        <input type="text" id="myInput" name="myInput" placeholder="Название...">
+        <input type="submit" class="addBtn" value="Добавить">
+    </div>
+</form> --}}
+
+<div class="header">
+    <h2 style="margin:5px">Список дел</h2>
+    <input type="text" id="myInput" name="myInput" placeholder="Название..."
+        onkeyup="if (event.keyCode == 13) addItem()">
+    <span onclick="addItem()" class="addBtn">Добавить</span>
+</div>
