@@ -1,0 +1,32 @@
+<div class="todolist">
+    <h2>Список задач</h2>
+    {{#each todos}}
+    <div class="item-todolist">
+        <div class="todo-item">
+            <form action="todosedit" method="POST">
+                {{#if this.checked}}
+                <input type="checkbox" name="todoid_{{this._id}}" id="{{this._id}}" checked>
+                <label for="{{this._id}}" class="checked">{{this.todo}}</label>
+                {{else}}
+                <input type="checkbox" name="todoid_{{this._id}}" id="{{this._id}}">
+                <label for="{{this._id}}">{{this.todo}}</label>
+                {{/if}}
+        </div>
+        <div class="todo-button">
+            <input type="submit" class="btn" name="save_{{this._id}}" value="Сохранить">
+            <input type="submit" class="btn" name="del_{{this._id}}" value="Удалить">
+            </form>
+        </div>
+    </div>
+    {{/each}}
+    <div class="item-todolist">
+        <div class="todo-item">
+            <form action="todosadd" method="POST">
+                <input class="input-text" type="text" placeholder="Введите наименование задачи" name="todotext">
+        </div>
+        <div class="todo-button">
+            <input class="btn btn-add" type="submit" value="Добавить">
+            </form>
+        </div>
+    </div>
+</div>
