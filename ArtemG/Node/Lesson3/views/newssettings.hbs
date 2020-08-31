@@ -1,0 +1,8 @@
+<h3>Настройка получения новостей</h3>
+{{#if countNews}}
+    <div>countNews param: {{countNews}}</div>
+    {{/if}}
+<form method="POST" action="/newssettings">
+<input type="text" name="count" placeholder="Сколько новостей показать?">
+<input type="submit">
+</form>
