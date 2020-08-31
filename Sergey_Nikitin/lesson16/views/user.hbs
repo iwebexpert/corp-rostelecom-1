@@ -1,0 +1,20 @@
+<div>
+    <h3>{{user.username}}</h3>
+
+    {{#if user.age}}
+    <div>Возраст: {{user.age}}</div>
+    {{/if}}
+
+    {{#if user.skills}}
+    <h4>Навыки</h4>
+    <ol>
+        {{#each user.skills}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ol>
+    {{else}}
+    <div>Не были указаны навыки пользователя</div>
+    {{/if}}
+    <hr>
+    <a href="/users">Все пользователи</a>
+</div>

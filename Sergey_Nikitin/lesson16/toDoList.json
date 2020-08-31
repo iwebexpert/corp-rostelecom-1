@@ -1,0 +1,57 @@
+[{
+  "_id": {
+    "$oid": "5f4d00df90190e1b4c7bb432"
+  },
+  "name": "Позавтракать",
+  "description": "Чего нибудь пожевать.",
+  "checked": false
+},{
+  "_id": {
+    "$oid": "5f4d012190190e1b4c7bb433"
+  },
+  "name": "Посмотреть запись урока",
+  "description": "пересмотреть или посмотреть если не был",
+  "checked": false
+},{
+  "_id": {
+    "$oid": "5f4d014a90190e1b4c7bb434"
+  },
+  "name": "Сделать ДЗ",
+  "description": "Лень, но надо :-)",
+  "checked": false
+},{
+  "_id": {
+    "$oid": "5f4d018c90190e1b4c7bb435"
+  },
+  "name": "Полить цветы",
+  "description": "Нафиг они не нужны, но домашние не оценят их засохшие трупы",
+  "checked": false
+},{
+  "_id": {
+    "$oid": "5f4d01df90190e1b4c7bb436"
+  },
+  "name": "Продолжить проходить The Last of Us 2",
+  "description": "Апосля трудов праведных почему бы и не почилить :-)",
+  "checked": false
+},{
+  "_id": {
+    "$oid": "5f4d020c90190e1b4c7bb437"
+  },
+  "name": "Приготовить ужин и съесть его",
+  "description": "Вспомнить что жрать нечего и в авральном порядке это исправить",
+  "checked": false
+},{
+  "_id": {
+    "$oid": "5f4d19b6e77b9a40f8ab0788"
+  },
+  "checked": false,
+  "name": "test",
+  "description": "test"
+},{
+  "_id": {
+    "$oid": "5f4d1ccde77b9a40f8ab0789"
+  },
+  "checked": false,
+  "name": "test2",
+  "description": "testssssssssss"
+}]

@@ -1,0 +1,8 @@
+<div>
+    <h2>{{ toDoListItem.name}}</h2>
+    <p>{{ toDoListItem.description}}</p>
+    <input type="checkbox" id="subscribeNews{{toDoListItem._id}}" {{#if toDoListItem.checked}} checked="true"
+        {{/if}}><label for="subscribeNews{{toDoListItem._id}}"> Сделано?</label>
+    <br>
+    <a href="/todolist">Назад</a>
+</div>

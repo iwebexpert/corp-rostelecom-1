@@ -1,0 +1,19 @@
+<div class="toDoListClass">
+    <div class="toDoListClassCurr">
+        <h2>Шо делать :-)</h2>
+        <ul>
+            {{#each toDoList}}
+            <li>
+                <input type="checkbox" id="subscribeNews{{this._id}}" {{#if toDoListItem.checked}} checked="true"
+                    {{/if}}>
+                <a href="/todolist/{{this._id}}">{{this.name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    <form method="POST" action="/todolistadd" class="addToDoListClass">
+        <input type="text" name="name" placeholder="название">
+        <input type="text" name="description" placeholder="Описание">
+        <input type="submit" value="Добавить">
+    </form>
+</div>
