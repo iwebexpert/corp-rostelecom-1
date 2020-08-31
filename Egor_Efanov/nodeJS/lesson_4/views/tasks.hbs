@@ -1,0 +1,19 @@
+<div>
+    <form action="createtask" method="POST">
+        <input type="text" name="newTaskText" id="newTaskText">
+
+        <button type="submit">Новая задача</button>
+    </form>
+</div>
+
+<div class='task-list'>
+    {{#each tasks}}
+    <div class="task-list_el">
+        <input type="checkbox" name="isDone" id="isDone" {{#if this.isDone}} checked="true" {{/if}}>
+
+        <p>{{{this.text}}}</p>
+
+
+    </div>
+    {{/each}}
+</div>
