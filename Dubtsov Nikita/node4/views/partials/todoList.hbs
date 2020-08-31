@@ -1,0 +1,25 @@
+{{#if todoList.length}}
+<ul style="list-style-type: none;" class="list-group list-group-flush w-75 mx-auto pt-4">
+    {{#each todoList}}
+    <li class="list-group-item" style="font-size: 24px;">
+        <form action="/isDone" method="POST">
+            <label class="d-flex align-items-center">
+                {{#if isDone}}
+                <input type="checkbox" checked onclick="submit();" name="isDone">
+                <span class=" pl-3 text-break text-secondary"><s>{{text}}</s></span>
+                <span class="mr-2 ml-auto text-secondary" style="font-size: 11px;">added {{createdAt}}</span>
+                {{else}}
+                <input type="checkbox" onclick="submit();" name="isDone">
+                <span class=" pl-3 text-break">{{text}}</span>
+                <span class="mr-2 ml-auto" style="font-size: 11px;">added {{createdAt}}</span>
+                {{/if}}
+                <button class="btn btn-outline-danger btn-sm" type="submit" formaction="/remove">Delete</button>
+                <input type="hidden" value="{{_id}}" name="id">
+            </label>
+        </form>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<p class="text-center text-secondary pt-2" style="font-size: 22px;">You have no tasks yet</p>
+{{/if}}
