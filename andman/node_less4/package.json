@@ -1,0 +1,16 @@
+{
+  "name": "less_4",
+  "version": "1.0.0",
+  "main": "less_4.js",
+  "scripts": {
+    "todo-start": "node less_4.js"
+  },
+  "author": "AndMan",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "mongoose": "^5.10.1"
+  }
+}
