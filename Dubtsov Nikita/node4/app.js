@@ -31,12 +31,12 @@ async function start() {
                 useUnifiedTopology: true
             }
         )
+        app.listen(sett.PORT, () => {
+            console.log(`Server started on port ${sett.PORT}...`)
+        })
     } catch (err) {
         console.log(err);
     }
-    app.listen(sett.PORT, () => {
-        console.log(`Server started on port ${sett.PORT}...`)
-    })
 }
 
 start()
