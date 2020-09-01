@@ -1,0 +1,8 @@
+<div>
+    <h2>TODO list</h2>
+    <ul>
+        {{#each todo}}
+        <li>{{{this.task}}}{{#if this.isOK}} - OK{{/if}}</li>
+        {{/each}}
+    </ul>
+</div>
