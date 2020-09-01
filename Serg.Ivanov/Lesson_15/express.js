@@ -7,6 +7,13 @@ const cheerio = require('cheerio')
 
 const app = express()
 
+class elementNews {
+    constructor(text, href) {
+        this.text = text
+        this.href = href
+    }
+}
+
 app.use(express.urlencoded({ extended: false }))
 
 app.use(cookieParser())
@@ -22,40 +29,74 @@ app.engine('hbs', hbs({
 app.set('view engine', 'hbs')
 
 app.get('/settings', (req, res) => {
-    res.render('settings', { layout: 'default' })
+    let cookie = req.cookies.countNews
+    let agency = req.cookies.agencyNews
+    res.render('settings', { layout: 'default', cookie, agency })
 })
 
 app.post('/settings', (req, res) => {
     let countNews = 10
+    let agencyNews = 1
+    if (req.cookies.countNews != '') { countNews = req.cookies.countNews }
+    if (req.cookies.agencyNews != '') { agencyNews = req.cookies.agencyNews }
     if (req.body.param1) {
         countNews = parseInt(req.body.param1)
     }
-
+    if (req.body.param2) {
+        agencyNews = parseInt(req.body.param2)
+    }
     res.cookie('countNews', countNews)
+    res.cookie('agencyNews', agencyNews)
     let len = Number(countNews)
+    agencyNews = Number(agencyNews)
+    let news = []
+    switch (agencyNews) {
+        case 1:
+            for (let i = 0; i < len; i++) {
 
-    // for (let i = 0; i < len; i++) {
-    let news = ''
-    request('https://nauka.tass.ru/nauka/9249947', (err, res2, body2) => {
-        if (!err && res2.statusCode === 200) {
-            const $ = cheerio.load(body2)
-            const header = $('.news-header__title').eq(0).text()
-            const headerMini = $('.news-header__lead').eq(0).text()
+                request('https://ria.ru/', (err, res2, body2) => {
+                    if (!err && res2.statusCode === 200) {
+                        const $ = cheerio.load(body2)
+                        const header = $('.cell-list__item-title').eq(i).text()
+                        const href = $('.cell-list__item-link').eq(i).attr('href')
+                        const el = new elementNews(`${header}`, `${href}`)
+                        news[i] = el
+                    } else {
+                        console.log('Ошибка загрузки новостного сервера')
+                    }
 
-            news += `${header}` + `${headerMini}`
-        } else {
-            console.log('Ошибка загрузки новостного сервера')
-        }
-        res.render('settings', { layout: 'default', news })
-    })
+                    res.render('settings', { layout: 'default', news })
 
-    // }
+                })
+            }
+            break;
+        case 2:
+            for (let i = 0; i < len; i++) {
+
+                request('https://news.mail.ru/', (err, res2, body2) => {
+                    if (!err && res2.statusCode === 200) {
+                        const $ = cheerio.load(body2)
+                        const header = $('.list__item').eq(i).text()
+                        const message = $('.list__text').eq(i).attr('href')
+                        const href = 'https://news.mail.ru' + `${message}`
+                        const el = new elementNews(`${header}`, `${href}`)
+                        news[i] = el
+                    } else {
+                        console.log('Ошибка загрузки новостного сервера')
+                    }
+
+                    res.render('settings', { layout: 'default', news })
+
+                })
+            }
+            break;
+        default: console.log('Неверный ввод новостного агентства')
+    }
 
 })
 
 app.get('/cookie/get', (req, res) => {
-    console.log(req.cookies.countNews ? req.cookies.countNews : null)
-    res.send(JSON.stringify(req.cookies.countNews)).status(200)
+    res.send(JSON.stringify(req.cookies)).status(200)
 })
 
 app.listen(4000, () => {
