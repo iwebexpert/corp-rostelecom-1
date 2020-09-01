@@ -1,0 +1,8 @@
+<div>
+    <h2>Сообщения</h2>
+    <ul>
+        {{#each messages}}
+            <li><a href="/messages/{{this._id}}">{{this.author}} - {{this.text}} (chat: {{this.chat}})</a></li>
+        {{/each}}
+    </ul>
+</div>
