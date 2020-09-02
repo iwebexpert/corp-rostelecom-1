@@ -1,0 +1,9 @@
+<div>
+    <ul class="list">
+        {{#each todolists}}
+        <li>
+            <input type="checkbox"><a href="/todolists/{{this._id}}">{{this.time}} - {{this.title}} </a>
+        </li>
+        {{/each}}
+    </ul>
+</div>
