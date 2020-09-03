@@ -55,7 +55,7 @@ app.get('/', function (req, res, next) {
     res.redirect('/auth')
 })
 
-app.get('/auth', function (req, res, next) {
+app.get('/auth', passport.checkAuth, function (req, res, next) {
     const notFirstUseSite = req.cookies.notFirstUseSite.toString() // если пришел на сайт не впервые - сработает уведомление о необходимости регистрации или авторизации
     res.cookie('notFirstUseSite', 'false')
     res.render('auth', {title: 'Authentication', notFirstUseSite: notFirstUseSite})
@@ -99,7 +99,7 @@ app.post('/auth', [
 ])
 
 app.get('/reg', passport.checkAuth, function (req, res, next) { //проверяем, что пользователь уже не авторизован
-        res.render('reg', {title: 'Registration'})
+    res.render('reg', {title: 'Registration'})
 
 })
 
@@ -173,10 +173,10 @@ app.post('/reg', [
 ])
 
 
-
 app.get('/todo', passport.checkNotAuth, async function (req, res, next) { //защищаем от неавторизованных пользователей
     const toDoAll = await toDo.find({}).exec()
-    res.render('todo', {title: 'ToDo', toDoAll: toDoAll})
+    const user = await Users.findById(req.user._id).exec()
+    res.render('todo', {title: 'ToDo', toDoAll: toDoAll, user: user})
 
 })
 
@@ -201,16 +201,77 @@ app.post('/todo', async function (req, res, next) {
     res.redirect('/todo')
 })
 
-app.get('/logout', passport.checkNotAuth, function(req, res){ //проверяем, что  пользователь авторизован и выходим
-    req.logout();
-    res.redirect('/auth');
-});
+app.get('/users/:id', passport.checkUserProfile, async function (req, res, next) {
+
+    const user = await Users.findById(req.user._id).exec()
+    res.render('userProfile', {
+        title: user.fullName,
+        user: user
+    })
+})
+
+app.post('/users/:id', [
+    validator.body('first_name').trim()
+        .isLength({min: 3, max: 20}).withMessage('First Name must be from 3 to 20 symbols')
+        .isAlpha().withMessage('First Name is not Alpha')
+        .escape(),
+
+    validator.body('last_name').trim()
+        .isLength({min: 3, max: 20}).withMessage('Last Name must be from 3 to 20 symbols')
+        .isAlpha().withMessage('Last Name is not Alpha')
+        .escape(),
+
+    validator.body('email_address').trim()
+        .isEmail().withMessage('Email field not correct')
+        .isLowercase()
+        .custom(async (value, {req}) => await Users.checkUserForUpdate(value, req.user._id))
+        .escape(),
+
+    async function (req, res, next) {
+
+        const errors = validator.validationResult(req);
+        let errors_field = []
+        errors.errors.forEach((el) => {
+            errors_field.push(el.param)
+        })
+
+        const user = await Users.findById(req.user._id).exec()
+
+        if (!errors.isEmpty()) {
+            res.render('userProfile', {
+                title: user.fullName,
+                formField: {
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email_address: req.body.email_address
+                },
+                user: user,
+                errors: errors.errors,
+                errors_field: errors_field
+            })
+        } else {
+            await Users.updateOne({_id: req.user._id}, {
+                firstName: req.body.first_name,
+                lastName: req.body.last_name,
+                email: req.body.email_address
+            })
+            res.redirect(`${user.url}`)
+
+        }
+    }
+])
+
+
+app.get('/logout', passport.checkNotAuth, function (req, res) { //проверяем, что  пользователь авторизован и выходим
+    req.logout()
+    res.redirect('/auth')
+})
 
 
 // Если нет обработчиков, то  ошибка 404
 app.use(function (req, res, next) {
     next(createError(404));
-});
+})
 
 // Обработчик ошибок
 app.use((err, req, res, next) => {

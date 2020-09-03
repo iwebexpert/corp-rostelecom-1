@@ -23,11 +23,32 @@ const Users = new Schema({
 
 })
 
+Users.virtual('url')
+    .get(function () {
+        return `/users/${this._id}`
+    })
+
+Users.virtual('fullName')
+    .get(function () {
+        return this.firstName + ' ' + this.lastName
+    })
+
 Users.statics = {
     async checkUser(candidateEmail) {
         return this.findOne({'email': candidateEmail}).exec()
             .then(res => {
                 if(res) throw new Error('A user with the same email address already exists')
+            })
+    },
+    async checkUserForUpdate(candidateEmail, userId) {
+        return this.findOne({'email': candidateEmail}).exec()
+            .then(res => {
+                if(res) {
+                    if(res._id != userId) {
+                        throw new Error('A user with the same email address already exists')
+                    }
+                }
+
             })
     },
     checkUserAuth(candidateEmail) {

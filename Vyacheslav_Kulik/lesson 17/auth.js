@@ -68,5 +68,12 @@ module.exports = {
             next()
         }
     },
+    checkUserProfile: function (req, res, next) {
+        if (req.params.id !== req.user._id) {
+            res.redirect('/auth')
+        } else {
+            next()
+        }
+    }
 
 }
