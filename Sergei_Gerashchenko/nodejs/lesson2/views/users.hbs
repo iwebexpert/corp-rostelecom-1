@@ -1,0 +1,9 @@
+<div>
+    <h2>Пользователи</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti animi dolor quia sit architecto nam!</p>
+    <ul>
+        {{#each users}}
+            <li><a href="/users/{{@key}}">{{this.username}}</a></li>
+        {{/each}}
+    </ul>
+</div>

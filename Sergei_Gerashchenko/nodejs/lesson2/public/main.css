@@ -20,3 +20,7 @@ a{
     font-size: small;
     font-style: italic;
 }
+.top-menu-container{
+    display: flex;
+    justify-content: space-between;
+}

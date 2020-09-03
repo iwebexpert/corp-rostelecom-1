@@ -24,3 +24,17 @@ function sendRequest(url) {
         xhr.send();
     });
 }
+
+function edit_todo(id) {
+    const li_el = document.getElementById(id).parentElement
+
+    const editTitle = document.getElementById('edittitle')
+    const editText = document.getElementById('edittext')
+    const editId = document.getElementById('editid')
+
+
+    editTitle.value = li_el.querySelector('.item_title').textContent
+    editText.value = li_el.querySelector('.item_text').textContent
+    editId.value = id
+
+}

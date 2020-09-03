@@ -6,9 +6,18 @@ const request = require('request')
 const cheerio  = require("cheerio")
 const getPage = require('./parse')
 const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+
+
+
 mongoose.connect('mongodb://localhost:27017/todolist', {useNewUrlParser: true, useUnifiedTopology: true})
 
 const todoModel = require('./models/todo_item')
+const usersModel = require('./models/users')
+
+const passport = require('./auth')
+
 
 const app = express()
 app.use(express.json())
@@ -26,7 +35,24 @@ app.engine('hbs', hbs({
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     partialsDir: path.join(__dirname, 'views', 'partials'),
 }))
+
+
+
 app.set('view engine', 'hbs')
+
+
+app.use(session({
+    resave: true,
+    saveUninitialized: false,
+    secret: 'fudduisafyiudsayfodysfysdfydsiyfdtausfuaysdytf8dstyf87dsaf',
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+}))
+app.use(passport.initialize)
+app.use(passport.session)
+
+//Проверка на авторизацию пользователя
+app.use('/users', passport.isAuthenticated)
+app.use('/todo', passport.isAuthenticated)
 
 
 app.get('/', (req, res) => {
@@ -39,9 +65,6 @@ app.get('/news', (req, res) => {
     res.render('news', {layout: 'default', countNews})
 })
 
-app.listen(4000, () => {
-    console.log('Server started...')
-})
 
 app.post('/news', (req, res) => {
     let countNews = 5
@@ -54,7 +77,7 @@ app.post('/news', (req, res) => {
 
 
 app.get('/todo', async (req, res) => {
-    const todo_items = await todoModel.find({}).lean()
+    const todo_items = await todoModel.find({author: req.user.email}).lean()
 
     //res.json(messages)
     console.log(todo_items)
@@ -62,27 +85,22 @@ app.get('/todo', async (req, res) => {
     res.render('todolist', {layout: 'default', todo_items: todo_items})
 })
 
-app.get('/todo/add', async (req, res) => {
-    const item = new todoModel({author: 'Sergey', title: 'Two', text: 'New todo item'})
-    item.save(function (err, doc) {
-        if (err) {
-            res.json(err)
-            return
-        }
-
-        res.json(doc)
-    })
-})
 
 app.post('/todo',  async (req, res) => {
-    const item = new todoModel({author: req.body.author, title: req.body.title, text: req.body.text, doneAt : null})
-    item.save(function (err, doc) {
-        if (err) {
-            res.json(err)
-            return
-        }
-        res.redirect('/todo')
-    })
+    const id = req.body.item_id ? req.body.item_id : null;
+    console.log("*********",id)
+    if(!id || id == "") {
+        const item = new todoModel({author: req.user.email, title: req.body.title, text: req.body.text, doneAt: null})
+        item.save(function (err, doc) {
+            if (err) {
+                res.json(err)
+                return
+            }
+        })
+    }else{
+        const item = await todoModel.update({_id: id}, {title : req.body.title, text: req.body.text})
+    }
+    res.redirect('/todo')
 })
 
 app.get('/todo/check/:id', async (req, res) => {
@@ -106,3 +124,54 @@ app.get('/todo/uncheck/:id', async (req, res) => {
     //const messages2  = JSON.parse(JSON.stringify(messages))
     //res.render('messages', {layout: 'default', messages: messages})
 })
+
+app.get('/users', (req, res) => {
+    //console.log(req.test)
+    //console.log(req.body)
+    //res.send("Users!")
+
+    res.render('users', {layout: 'default', users})
+})
+
+app.get('/users/:username', (req, res) => {
+    // console.log(req.params)
+
+    const user = users[req.params.username] ? users[req.params.username] : null
+    res.render('user', {layout: 'default', user})
+})
+app.get('/register', (req, res) => {
+    res.render('register', {layout: 'default'})
+})
+
+app.post('/register', async (req, res) => {
+    const {repassword, ...restBody} =  req.body
+
+    // const restBody = req.body
+    // const repassword = restBody.repassword
+    // delete restBody.repassword
+
+    if(restBody.password === repassword){
+        const user = new usersModel(restBody)
+        await user.save()
+        res.redirect('/auth')
+    }
+    res.redirect('/register?err=repassword')
+})
+
+app.get('/auth', (req, res) => {
+    const {error} = req.query
+    res.render('auth', {layout: 'default', error})
+})
+
+app.post('/auth', passport.authenticate)
+
+app.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/auth')
+})
+
+app.listen(4000, () => {
+    console.log('Server started...')
+})
+
+
