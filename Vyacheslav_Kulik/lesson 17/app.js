@@ -201,6 +201,15 @@ app.post('/todo', async function (req, res, next) {
     res.redirect('/todo')
 })
 
+app.get('/usres/profile', function (req,  res, next) {
+    if(req.isAuthenticated()) {
+        res.redirect(`/users/${req.user._id}`)
+    } else {
+        res.redirect(`/todo`)
+    }
+
+})
+
 app.get('/users/:id', passport.checkUserProfile, async function (req, res, next) {
 
     const user = await Users.findById(req.user._id).exec()
@@ -293,7 +302,7 @@ app.post('/updatePassword/users/:id', [
         const errors = validator.validationResult(req);
         let errors_array = errors.array()
         if (errors.mapped().oldPassword) { // если возникла ошибка с "Old Password" - не показывать остальные ошибки
-            console.log(errors_array.splice(1))
+            errors_array.splice(1)
         }
         let errors_field = []
         errors_array.forEach((el) => {

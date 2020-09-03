@@ -29,7 +29,7 @@ passport.use('local', new LocalStrategy(
 ))
 
 passport.serializeUser(function (user, done) { //после процедуры авторизации поместить в куки данные о пользователе (его id)
-    console.log(user, 'serializeUser')
+    //console.log(user, 'serializeUser')
     done(null, user._id) // - в куках выглядит вот так "passport":{"user":"5f50a39603361338b0cd067c"}
 })
 
@@ -69,11 +69,16 @@ module.exports = {
         }
     },
     checkUserProfile: function (req, res, next) {
-        if (req.params.id !== req.user._id) {
-            res.redirect('/auth')
+        if(req.user) {
+            if (req.params.id !== req.user._id) {
+                res.redirect('/auth')
+            } else {
+                next()
+            }
         } else {
-            next()
+            res.redirect('/auth')
         }
+
     }
 
 }
