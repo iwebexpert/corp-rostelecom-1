@@ -1,0 +1,20 @@
+<div class="header">
+    {{#if error}}
+    <div>
+        <b>Неверный логин/пароль</b>
+    </div>
+    {{/if}}
+
+    <form action="/auth" method="POST" class="form">
+        <div>
+            <input type="text" name="email" placeholder="Введите E-mail">
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Введите пароль">
+        </div>
+        <div>
+            <input type="submit" value="Войти">
+            <p><a href="/register">Форма для регистрации</a></p>
+        </div>
+    </form>
+</div>
