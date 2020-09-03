@@ -1,0 +1,41 @@
+body {
+    background-color: #E5E5E5;
+}
+.input_task {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    align-items: center;
+}
+#name, #desc {
+    margin-bottom: 10px;
+    width: 100%;
+}
+.submit {
+    max-width: 150px;
+    max-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.hide {
+    display: none;
+}
+a {
+    text-decoration: none;
+}
+.done {
+    text-decoration: line-through;
+}
+li {
+    list-style-type: none; /* Убираем маркеры */
+}
+ul {
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+}
+li  form  a {
+    font-size: 22px;
+}
+li  form  img {
+    width: 20px;
+}

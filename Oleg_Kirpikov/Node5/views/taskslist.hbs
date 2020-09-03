@@ -1,0 +1,27 @@
+<div>
+    <span>
+        <h2 style="display:inline;">Список текущих дел</h2>
+        <a href="/logout">Выйти</a>
+    </span>
+    <ul>
+        {{#each tasks}}
+        <li>
+            <form id="{{this._id}}_f" action="/tasksclose" method="POST">
+                <input type='hidden' value='{{this._id}}' name='undone' />
+                {{#if this.done}}
+                <input type="checkbox" name="done" checked value="{{this._id}}"
+                    onchange="document.getElementById('{{this._id}}_f').submit()" />
+                <a href="#" onclick="" class="done" title="Выполнено {{this.closeDate}}">{{this.name}}</a>
+                {{else}}
+                <input type="checkbox" name="done" value="{{this._id}}"
+                    onchange="document.getElementById('{{this._id}}_f').submit()" />
+                <a href="#" onclick="showHide('{{this._id}}_p')" title="Раскрыть описание">{{this.name}}</a>
+                {{/if}}
+                <a href="/tasksdel/{{this._id}}" title="Удалить"><img alt="Удалить"
+                        src="https://img.icons8.com/material-outlined/24/000000/delete-trash.png" /></a>
+                <pre id="{{this._id}}_p" class="desc hide">{{this.desc}}</pre>
+            </form>
+        </li>
+        {{/each}}
+    </ul>
+</div>
