@@ -1,0 +1,5 @@
+{
+    "liveSassCompile.settings.excludeList": [
+        "leson7/css/_*"
+    ]
+}

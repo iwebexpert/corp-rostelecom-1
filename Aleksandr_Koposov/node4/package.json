@@ -1,0 +1,15 @@
+{
+  "name": "node4",
+  "version": "1.0.0",
+  "description": "Lesson 16 (Node 4): TODO-list",
+  "private": true,
+  "author": "Aleksandr.Koposov",
+  "scripts": {
+    "serve": "node ./src/main.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1",
+    "mongoose": "^5.10.2"
+  }
+}
