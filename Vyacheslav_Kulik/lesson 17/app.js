@@ -1,8 +1,8 @@
 const express = require('express')
 const createError = require('http-errors')
 const cookieParser = require('cookie-parser')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+const session = require('express-session') //сессии
+const MongoStore = require('connect-mongo')(session)//сохранение сессий в БД Mongo
 const hbs = require('hbs')
 const helper = require('handlebars-helpers')()
 const logger = require('morgan')
@@ -10,61 +10,13 @@ const path = require('path')
 var debug = require('debug')('lesson-16:server')
 var http = require('http')
 const validator = require('express-validator')
+const passport = require('./auth')
 
 const mongoose = require('mongoose')
 let toDo = require('./models/todolist')
 let Users = require('./models/users')
 
-// Паспорт код
-
-//const passport = require('./auth')
-
-
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
-
-
-passport.use('local', new LocalStrategy(
-    {
-        usernameField: 'email_address' // поле формы авторизации, которое нужно использовать в качестве username
-    },
-    function (username, password, done) {
-
-        Users.findOne({email: username}, function (err, user) {
-            if (err) {
-                return done(err);
-            }
-            // if (!user) { \\ эта ветка не используется, так как я реализовал ее через валидацию (express-validator)
-            //     return done(null, false);
-            // }
-            // if (!user.validatePassword(password)) { \\ эта ветка не используется, так как я реализовал ее через валидацию (express-validator)
-            //     console.log('validatePassword!!!!!')
-            //     return done(null, false);
-            // }
-            const plainUser = JSON.parse(JSON.stringify(user))
-            delete plainUser.password
-            return done(null, plainUser)
-        })
-    }
-))
-
-passport.serializeUser(function (user, done) {
-    console.log(user, 'serializeUser')
-    done(null, user._id)
-})
-
-passport.deserializeUser(function (id, done) {
-    Users.findById(id, function (err, user) {
-        const plainUser = JSON.parse(JSON.stringify(user))
-        delete plainUser.password
-        console.log(plainUser, 'deserializeUser plainUser')
-        done(err, plainUser);
-    })
-})
-
-// паспорт код
-
-
+//доступ к БД
 mongoose.connect('mongodb://localhost:27017/todo', {useNewUrlParser: true, useUnifiedTopology: true});
 
 let app = express()
@@ -75,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static('public'));
 
+//настройка поддержки сессий для passport
 app.use(cookieParser())
 app.use(session({
     resave: true,
@@ -88,8 +41,9 @@ app.use(session({
     store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
+//инициализация passport
+app.use(passport.initialize)
+app.use(passport.session)
 
 // Handelbars engine
 hbs.registerHelper(helper)
@@ -107,7 +61,6 @@ app.get('/auth', function (req, res, next) {
     res.render('auth', {title: 'Authentication', notFirstUseSite: notFirstUseSite})
 })
 
-// app.post('/auth',)
 
 app.post('/auth', [
 
@@ -142,18 +95,11 @@ app.post('/auth', [
             next()
         }
     },
-    passport.authenticate('local', {
-        session: true,
-        successRedirect: '/todo'
-    })
+    passport.authenticate //если нет ошибок, вызываем обработчик авторизации
 ])
 
-app.get('/reg', function (req, res, next) {
-    if (req.isAuthenticated()) {
-        res.redirect('/todo') //защита от авторизированых пользователей
-    } else {
+app.get('/reg', passport.checkAuth, function (req, res, next) { //проверяем, что пользователь уже не авторизован
         res.render('reg', {title: 'Registration'})
-    }
 
 })
 
@@ -226,16 +172,9 @@ app.post('/reg', [
     }
 ])
 
-const checkAuth = function (req, res, next) {
-    if (!req.isAuthenticated()) { //защита от не авторизированых пользователей
-        res.cookie('notFirstUseSite', 'true')
-        res.redirect('auth')
-    } else {
-        next()
-    }
-}
 
-app.get('/todo', checkAuth, async function (req, res, next) {
+
+app.get('/todo', passport.checkNotAuth, async function (req, res, next) { //защищаем от неавторизованных пользователей
     const toDoAll = await toDo.find({}).exec()
     res.render('todo', {title: 'ToDo', toDoAll: toDoAll})
 
@@ -261,6 +200,11 @@ app.post('/todo', async function (req, res, next) {
     }
     res.redirect('/todo')
 })
+
+app.get('/logout', passport.checkNotAuth, function(req, res){ //проверяем, что  пользователь авторизован и выходим
+    req.logout();
+    res.redirect('/auth');
+});
 
 
 // Если нет обработчиков, то  ошибка 404
