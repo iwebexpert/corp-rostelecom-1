@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+}
+
+body {
+    background: #e27442;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto Light", sans-serif;
+    font-size: 16px;
+}
+
+.todo-container {
+    color: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo {
+    width: 400px;
+}
+
+.todo-container h2 {
+    margin-bottom: 20px;
+}
+
+.todo-header input {
+    width: 91%;
+    border: none;
+    border-radius: 5px;
+    height: 20px;
+    padding: 16px;
+}
+
+.todo-header button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    background-color: rgb(51, 212, 100);
+}
+
+.todo-container ul {
+    list-style: none;
+}
+
+.todo-list-item {
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: row;
+}
+
+.todo-list-item form {
+    width: 100%;
+    display: flex;
+}
+
+.todo-list-item input {
+    flex-grow: 2;
+    margin-right: 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.todo-list-item label {
+    flex-grow: 2;
+    padding: 10px;
+}
+
+
+.todo-list-item .edit {
+    color: rgb(143, 233, 58);
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.todo-list-item .remove {
+    color: rgb(243, 96, 96);
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.todo-list-item-checked {
+    background-color: red;
+    opacity: .3;
+}
+
+footer {
+    margin-top: auto;
+    padding: 20px 0;
+}
