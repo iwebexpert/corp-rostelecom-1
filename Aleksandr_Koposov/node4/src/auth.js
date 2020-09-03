@@ -1,7 +1,8 @@
+const path = require('path')
 const passport = require('passport')
 const Strategy = require('passport-local')
 
-const UsersModel = require('../models/users')
+const UsersModel = require(path.join(__dirname, '..', 'models', 'users'))
 const e = require('express')
 
 passport.use(

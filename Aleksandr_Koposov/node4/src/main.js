@@ -6,8 +6,8 @@ const MongoStore = require('connect-mongo')(session)
 
 const config = require('./config')
 
-const TodoItemsModel = require('../models/todo')
-const UsersModel = require('../models/users')
+const TodoItemsModel = require(path.join(__dirname, '..', 'models', 'todo'))
+const UsersModel = require(path.join(__dirname, '..', 'models', 'users'))
 
 const passport = require('./auth')
 
