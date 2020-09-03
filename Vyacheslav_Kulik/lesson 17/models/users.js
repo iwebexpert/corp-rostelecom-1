@@ -40,6 +40,14 @@ Users.statics = {
                 if(res) throw new Error('A user with the same email address already exists')
             })
     },
+    async checkUserPassword(candidateEmail, candidatePassword) {
+        return this.findOne({'email': candidateEmail}).exec()
+            .then(res => {
+                if(!res.validatePassword(candidatePassword)){
+                    throw new Error('Old password is not correct')
+                }
+            })
+    },
     async checkUserForUpdate(candidateEmail, userId) {
         return this.findOne({'email': candidateEmail}).exec()
             .then(res => {
@@ -69,9 +77,20 @@ Users.pre('save', function (next) {
     next()
 })
 
-// Users.methods.validatePassword = function(candidatePassword) {
-//     return bcrypt.compareSync(candidatePassword, this.password)
-// }
+Users.pre('updateOne', async function (next) {// при смене пароля - кодируем его
+    console.log(this.getUpdate())
+
+    if (this._update.password) {
+        const salt = bcrypt.genSaltSync(12);
+        this._update.password = bcrypt.hashSync(this._update.password, salt);
+    }
+    next()
+})
+
+
+Users.methods.validatePassword = function(candidatePassword) {
+    return bcrypt.compareSync(candidatePassword, this.password)
+}
 Users.methods.validatePasswordCheck = function(candidatePassword) {
     if(!bcrypt.compareSync(candidatePassword, this.password)) {
         throw new Error('Invalid email or password')

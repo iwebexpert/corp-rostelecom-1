@@ -86,7 +86,7 @@ app.post('/auth', [
 
             res.render('auth', {
                 title: 'Authentication',
-                errors: errors.errors,
+                errors: errors.array(),
                 formField: {
                     email_address: req.body.email_address
                 }
@@ -148,7 +148,7 @@ app.post('/reg', [
                     last_name: req.body.last_name,
                     email_address: req.body.email_address
                 },
-                errors: errors.errors,
+                errors: errors.array(),
                 errors_field: errors_field
             })
         } else {
@@ -246,7 +246,7 @@ app.post('/users/:id', [
                     email_address: req.body.email_address
                 },
                 user: user,
-                errors: errors.errors,
+                errors: errors.array(),
                 errors_field: errors_field
             })
         } else {
@@ -257,6 +257,74 @@ app.post('/users/:id', [
             })
             res.redirect(`${user.url}`)
 
+        }
+    }
+])
+
+app.get('/updatePassword/users/:id', passport.checkUserProfile, async function (req, res, next) {
+
+    const user = await Users.findById(req.user._id).exec()
+    res.render('updatePassword', {
+        title: 'Change password',
+        user: user
+    })
+})
+
+app.post('/updatePassword/users/:id', [
+
+    validator.body('oldPassword').trim()
+        .custom(async (value, {req}) => {
+            await Users.checkUserPassword(req.user.email, req.body.oldPassword)
+        })
+        .bail()
+        .escape(),
+
+    validator.body('password').trim()
+        .isLength({min: 3}).withMessage('Password must be at least 3 symbols long')
+        .escape(),
+
+    validator.check('repassword', 'Field "Return password" not equal "Password"').trim()
+        .custom((value, {req}) => value === req.body.password)
+        .escape(),
+
+
+    async function (req, res, next) {
+
+        const errors = validator.validationResult(req);
+        let errors_array = errors.array()
+        if (errors.mapped().oldPassword) { // если возникла ошибка с "Old Password" - не показывать остальные ошибки
+            console.log(errors_array.splice(1))
+        }
+        let errors_field = []
+        errors_array.forEach((el) => {
+            errors_field.push(el.param)
+        })
+        const user = await Users.findById(req.user._id).exec()
+
+        if (!errors.isEmpty()) {
+            res.render('updatePassword', {
+                title: 'Change password',
+                formField: {
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    email_address: req.body.email_address
+                },
+                user: user,
+                errors: errors_array,
+                errors_field: errors_field
+            })
+        } else {
+            // await user.updateOne({
+            //     password: req.body.password
+            // })
+            await Users.updateOne({_id: req.user._id}, {
+                password: req.body.password
+            })
+            res.render('updatePassword',{
+                title: 'Change password',
+                user: user,
+                success: 'true'
+            })
         }
     }
 ])
