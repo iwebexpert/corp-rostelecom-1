@@ -1,0 +1,62 @@
+const mongoose = require('mongoose')
+var bcrypt = require('bcryptjs');
+
+const Schema = mongoose.Schema
+
+const Users = new Schema({
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+
+})
+
+Users.statics = {
+    async checkUser(candidateEmail) {
+        return this.findOne({'email': candidateEmail}).exec()
+            .then(res => {
+                if(res) throw new Error('A user with the same email address already exists')
+            })
+    },
+    checkUserAuth(candidateEmail) {
+        return this.findOne({'email': candidateEmail}).exec()
+            .then(res => {
+                if(!res) throw new Error('Invalid email or password')
+            })
+    }
+
+
+}
+
+Users.pre('save', function (next) {
+    if (this.isModified('password')) {
+        const salt = bcrypt.genSaltSync(12);
+        this.password = bcrypt.hashSync(this.password, salt);
+    }
+    next()
+})
+
+// Users.methods.validatePassword = function(candidatePassword) {
+//     return bcrypt.compareSync(candidatePassword, this.password)
+// }
+Users.methods.validatePasswordCheck = function(candidatePassword) {
+    if(!bcrypt.compareSync(candidatePassword, this.password)) {
+        throw new Error('Invalid email or password')
+    }
+}
+
+
+
+module.exports = mongoose.model('Users', Users, 'Users')
