@@ -1,0 +1,8 @@
+<div>
+    <h2>TODO:</h2>
+        <ul>
+            {{#each todolist}}
+                <li><a href="/todolist/{{this._id}}">Task:{{this.title}}    Description:{{this.text}}</a></li>
+            {{/each}}
+        </ul>
+</div>
