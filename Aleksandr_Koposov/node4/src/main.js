@@ -1,7 +1,15 @@
 const express = require('express')
 const path = require('path')
+const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 
-const TodoItems = require('../models/todo')
+const config = require('./config')
+
+const TodoItemsModel = require('../models/todo')
+const UsersModel = require('../models/users')
+
+const passport = require('./auth')
 
 const app = express()
 app.use(express.json())
@@ -12,20 +20,39 @@ app.use((req, res, next) => {
         error: '',
         data
     })
+    res.err = error => res.status(500).json({
+        status: 500,
+        error: error,
+        data: null
+    })
     next()
 })
 
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, '..', 'views'))
 
-// Отображаем страницу со списком
-app.get('/', async (req, res) => {
+app.use(session({
+    resave: true,
+    saveUninitialized: false,
+    secret: config.app.secret,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
+app.use(passport.initialize)
+app.use(passport.session)
+
+// Защищённые маршруты
+app.use('/list', passport.loggedIn)
+app.use('/todo*', passport.loggedIn)
+
+// Маршруты для списка дел
+app.get('/', (req, res) => {
+    res.redirect('/list')
+})
+app.get('/list', (req, res) => {
     res.render('index')
 })
-
-// Получение списка
 app.get('/todo', async (req, res) => {
-    const list = await TodoItems.find({}).lean()
+    const list = await TodoItemsModel.find({}).lean()
     list.sort((a, b) => a.planned === b.planned ? 0 : (a.planned > b.planned ? 1 : -1))
     res.ok([
         { header: 'Важное' },
@@ -41,10 +68,8 @@ app.get('/todo', async (req, res) => {
         ...list.filter(i => !i.important && i.planned > new Date())
     ])
 })
-
-// Добавляем задачу
 app.post('/todo', async (req, res) => {
-    await (new TodoItems({
+    await (new TodoItemsModel({
         name: req.body.name || '',
         desc: req.body.desc || '',
         done: false,
@@ -54,10 +79,8 @@ app.post('/todo', async (req, res) => {
     })).save()
     res.ok(true)
 })
-
-// Изменяем задачу
 app.post('/todo/:id', async (req, res) => {
-    await TodoItems.findByIdAndUpdate(req.body._id, {
+    await TodoItemsModel.findByIdAndUpdate(req.body._id, {
         name: req.body.name || '',
         desc: req.body.desc || '',
         done: req.body.done || false,
@@ -66,18 +89,51 @@ app.post('/todo/:id', async (req, res) => {
     })
     res.ok(true)
 })
-
-// Удаляем задачу
 app.delete('/todo/:id', async (req, res) => {
-    await TodoItems.findByIdAndDelete(req.body._id)
+    await TodoItemsModel.findByIdAndDelete(req.body._id)
     res.ok(true)
 })
 
+// Маршруты авторизации
+app.get('/login', (req, res) => {
+    const { error } = req.query
+    res.render('login', { error })
+})
+app.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/login')
+})
+app.get('/register', (req, res) => {
+    res.render('register')
+})
+app.post('/login', passport.authenticate)
+app.post('/auth/register', async (req, res) => {
+    const { email, name, password, confirm } = req.body
+    if (!password || !confirm || !email) {
+        res.err('Не все обязательные поля заполнены')
+    }
+    if (password !== confirm) {
+        res.err('Введённые пароли не совпадают')
+    }
+    const userExists = await UsersModel.exists({ email })
+    if (userExists) {
+        res.err('Пользователь уже существует')
+    }
+    if (email.length > 0 && password.length > 0) {
+        const user = await new UsersModel({
+            email,
+            name,
+            password
+        }).save()
+        res.ok(true)
+    } else {
+        res.err('Не удалось создать пользователя')
+    }
+})
+
 // Подключаемся к БД и запускаем приложение
-const mongoose = require('mongoose')
-const config = require('./config')
 mongoose.connect(
-    'mongodb+srv://node-4-todo:Mplwu21508@free-cluster-aws-m0.gyryz.mongodb.net/node-4?retryWrites=true&w=majority', {
+    `mongodb+srv://${config.db.user}:${config.db.pass}@${config.db.host}/${config.db.base}?retryWrites=true&w=majority`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false

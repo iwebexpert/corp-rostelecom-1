@@ -25,11 +25,18 @@
                         <v-col cols="8">
                             <h1 class="text-h3 text-center mt-8 mb-4">Список дел
                             </h1>
-                            <div class="text-right">
-                                <v-btn @click="calendarDialog = true" x-small text color="primary">
-                                    <v-icon small>mdi-calendar</v-icon>Открыть календарь
-                                </v-btn>
-                            </div>
+                            <v-row align="center">
+                                <v-col cols="6">
+                                    <v-btn href="/logout" x-small text color="primary">
+                                        Выйти <v-icon small>mdi-exit-to-app</v-icon>
+                                    </v-btn>
+                                </v-col>
+                                <v-col cols="6" class="text-right">
+                                    <v-btn @click="calendarDialog = true" x-small text color="primary">
+                                        <v-icon small>mdi-calendar</v-icon>Открыть календарь
+                                    </v-btn>
+                                </v-col>
+                            </v-row>
                             <v-card>
                                 <v-card-title>
                                     <h3 class="text-h5"><span v-text="!!editedTask.id ? 'Изменить' : 'Добавить'"></span>

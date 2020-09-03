@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <title>TODO List</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <v-app>
+            <v-main app>
+                <v-container>
+                    <v-row align="center" justify="center">
+                        <v-col cols="8">
+                            <h1 class="text-h3 text-center mt-8 mb-4">Вход</h1>
+                            <v-card>
+                                <v-form v-model="valid" ref="loginForm" method="POST" action="/login">
+                                    <v-card-text>
+                                        {{#if error}}
+                                        <v-alert type="error"><b>Неправильный логин/пароль</b></v-alert>
+                                        {{/if}}
+                                        <v-text-field v-model="email" name="email" type="email" :rules="[rules.required]"
+                                            label="Email" filled clearable>
+                                        </v-text-field>
+                                        <v-text-field v-model="password" name="password" :type="visiblePassword ? 'text' : 'password'"
+                                            :rules="[rules.required, rules.password]" label="Пароль" filled clearable
+                                            :append-icon="visiblePassword ? 'mdi-eye-off' : 'mdi-eye'"
+                                            @click:append="visiblePassword = !visiblePassword">
+                                        </v-text-field>
+                                    </v-card-text>
+                                    <v-card-actions>
+                                        <v-btn type="submit" color="primary" :disabled="!valid">
+                                            Войти
+                                        </v-btn>
+                                        <v-spacer></v-spacer>
+                                        <v-btn href="/register" color="info">
+                                            Регистрация
+                                        </v-btn>
+                                    </v-card-actions>
+                                </v-form>
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-main>
+        </v-app>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify({
+                theme: {
+                    themes: {
+                        light: {
+                            primary: '#7700ff'
+                        }
+                    }
+                }
+            }),
+            data: () => ({
+                loading: false,
+                email: null,
+                password: null,
+                visiblePassword: null,
+                valid: false,
+                rules: {
+                    password: v => (!!v && v.length >= 6) || 'Пароль должен быть не менее 6 символов',
+                    required: v => !!v || 'Это обязательное поле',
+                }
+            }),
+            mounted() {
+                if (this.$refs.loginForm) {
+                    this.$refs.loginForm.validate()
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
