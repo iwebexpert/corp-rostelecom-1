@@ -1,0 +1,15 @@
+<form action="/auth" method="POST" class="w-50 mx-auto">
+  {{#if error}}
+  <h3>Incorrect login or password</h3>
+  {{/if}}
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="text" class="form-control" name="email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password">
+  </div>
+  <button type="submit" class="btn btn-primary">Sign in</button>
+  <a href="register" class="btn">Registration</a>
+</form>
