@@ -1,0 +1,41 @@
+<div class="d-flex flex-column align-items-end">
+    <div>
+        <span>login: <strong>{{user.email}}</strong></span>
+        <div  class="d-flex justify-content-between">
+            <a href="{{user.url}}">More</a>
+            <a href="/logout" class="">Logout</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h2 class="text-center mt-3">ToDo list</h2>
+
+    <form action="/todo" class="mt-3 mb-3" method="post">
+
+        <div class="form-group d-flex justify-content-around">
+            <input type="text" class="col-10 col-form-label" name="add">
+            <button type="submit" class="btn btn-light col-1" name="add_button" value="add">Add</button>
+        </div>
+
+        <div class="list-group">
+            {{#each toDoAll}}
+                <div class="list-group-item list-group-item-action">
+                    <div class="d-flex justify-content-around">
+                        <span class="col-10 align-self-center textData">{{this.text}}</span>
+                        <input type="text" class="col-10 align-self-center d-none inputDataForEdit"
+                               value="{{this.text}}" name="data-{{this._id}}">
+                        <a class="btn btn-light editButton" id="{{this._id}}">Edit</a>
+                        <button class="btn btn-light d-none okButton" type="submit" name="edit" value="{{this._id}}">
+                            Ok
+                        </button>
+                        <button class="btn btn-light" type="submit" name="delete" value="{{this._id}}">Delete</button>
+                    </div>
+                </div>
+            {{/each}}
+
+
+        </div>
+    </form>
+</div>
+
