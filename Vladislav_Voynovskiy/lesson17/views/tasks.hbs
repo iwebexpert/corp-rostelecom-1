@@ -1,0 +1,15 @@
+<div>
+  <p><a href="/logout">Выйти</a></p>
+  <form action="createtask" method="POST">
+    <input type="text" name="newTaskText" id="newTaskText">
+    <button type="submit">Новая задача</button>
+  </form>
+</div>
+
+<div class='task-list'>
+  {{#each tasks}}
+  <div>
+    <p>{{{this.task}}} {{#if this.isDone}}&#10004{{else}}&times{{/if}}</p>
+  </div>
+  {{/each}}
+</div>
