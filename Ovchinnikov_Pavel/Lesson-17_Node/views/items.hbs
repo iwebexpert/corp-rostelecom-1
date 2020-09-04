@@ -1,0 +1,16 @@
+<div>
+    <div class="logout">
+        <a href="/logout">Выйти</a>
+    </div>
+    <div>
+        {{> form}}
+        <ul id="myUL">
+            {{#each items}}
+            <li id="{{this._id}}" {{#if this.status}} class="checked" {{/if}} onclick="updateItem(this)">
+                {{this.name}}
+                <span class="close" onclick="removeItem(this)">×</span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
