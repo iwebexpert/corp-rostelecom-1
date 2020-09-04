@@ -1,0 +1,41 @@
+<div class="todo-container">
+    <h2>To-Do List</h2>
+    <div class="todo">
+        <form action="/todoAdd" method="POST" class="todo-header">
+            <input type="text" name="text">
+            <button type="submit">
+                <span class="fas fa-plus"></span>
+            </button>
+        </form>
+        <ul id="todo-list" class="todo-list">
+            {{#each todo}}
+                {{#if isDone}}
+                <li class="todo-list-item todo-list-item-checked">
+                {{else}}
+                <li class="todo-list-item">
+                {{/if}}
+                <form action="/isDone" method="POST">
+                    <label class="todo-list-item-name">
+                        {{#if isDone}}
+                            <div class="todo-list-item-name">
+                                <input type="checkbox" checked onclick="submit()" name="isDone" id="isDone">
+                                <span>{{this.text}}</span>
+                            </div>
+                        {{else}}
+                            <div class="todo-list-item-name">
+                                <input type="checkbox" onclick="submit()" name="isDone" id="isDone">
+                                <span>{{this.text}}</span>
+                            </div>
+                        {{/if}}
+                    </label>
+                    <input type="hidden" value="{{this._id}}" name="id">
+                </form>
+                <a href="/todoremove/{{this._id}}" class="remove">
+                    <span class="fas fa-times"></span>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    <p><a href="/logout">Выйти</a></p>
+</div>
