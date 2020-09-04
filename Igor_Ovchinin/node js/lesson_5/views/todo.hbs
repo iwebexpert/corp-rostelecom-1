@@ -1,0 +1,9 @@
+<p><a href="/logout">Выйти</a></p>
+<div>
+    <h2>ToDo:</h2>
+    <ul>
+        {{#each todo}}
+        <li><a href="/todo/{{this._id}}">{{this.check}} - {{this.task}}</a></li>
+        {{/each}}
+    </ul>
+</div>
