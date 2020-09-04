@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "5f517aa5bf39b219bca6363b"
+  },
+  "task": "HTML/CSS",
+  "isOK": true
+},{
+  "_id": {
+    "$oid": "5f517aa5bf39b219bca6363c"
+  },
+  "task": "Git",
+  "isOK": true
+},{
+  "_id": {
+    "$oid": "5f517aa5bf39b219bca6363d"
+  },
+  "task": "Javascript",
+  "isOK": true
+},{
+  "_id": {
+    "$oid": "5f517aa5bf39b219bca6363e"
+  },
+  "task": "Node.js",
+  "isOK": false
+},{
+  "_id": {
+    "$oid": "5f517aa5bf39b219bca6363f"
+  },
+  "task": "REACT.js",
+  "isOK": false
+}]
