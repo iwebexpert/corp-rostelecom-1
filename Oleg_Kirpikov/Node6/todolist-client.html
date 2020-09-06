@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="./public/main.css">
+    <script src="./public/main.js" defer></script>
+    <script>
+        console.log('Works!!!!');
+    </script>
+</head>
+
+<body>
+    <h1>TODO список</h1>
+    <hr>
+    <div id="auth">
+        <div id=wrong_password><b>Неправильный логин/пароль</b></div>
+        <form action="javascript:auth()" method="#">
+            <div>
+                <input type="text" name="email" placeholder="Введите E-mail">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Введите пароль">
+            </div>
+            <div>
+                <input type="submit" value="Войти">
+                <p><a href="javascript:newUserForm()">Регистрация</a></p>
+            </div>
+        </form>
+    </div>
+    <div id="register">
+        <div>
+            <input type="text" name="email" placeholder="Введите E-mail">
+        </div>
+        <div>
+            <input type="text" name="firstName" placeholder="Введите имя">
+        </div>
+        <div>
+            <input type="text" name="lastName" placeholder="Введите фамилию">
+        </div>
+        <div>
+            <input type="password" name="password" placeholder="Введите пароль">
+        </div>
+        <div>
+            <input type="password" name="repassword" placeholder="Повторите пароль">
+        </div>
+        <div>
+            <input type="submit" onclick="javascript:registerUser()" value="Зарегистрироваться">
+            <p><a href="javascript:authForm();">Форма входа на сайт</a></p>
+        </div>
+    </div>
+    <div id="list">
+        <span>
+            <h2 style="display:inline;">Список текущих дел</h2>
+            <h2 id="fname" style="display: inline;"></h2>
+            <h2 id="lname" style="display: inline;"></h2>
+            <a href="javascript:logoutUser()">Выйти</a>
+        </span>
+        <ul id="tasks_list">
+        </ul>
+    </div>
+    <div id="add" class="input_task">
+        <input id="add_name" name="name" type="text" placeholder="Краткое имя дела">
+        <textarea id="add_desc" name="desc" rows="10" placeholder="Описание что нужно сделать"></textarea>
+        <button class="submit" onclick="javascript:taskAdd()">Добавить</button>
+    </div>
+
+    <hr>
+    <p>&copy; 2020</p>
+</body>
+
+</html>
