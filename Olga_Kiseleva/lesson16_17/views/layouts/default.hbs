@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <script>
+    </script>
+</head>
+
+<body>
+    {{> header}}
+    {{{body}}}
+    {{> footer}}
+</body>
+<script>
+    const todo = document.querySelector('.todo');
+
+    if (todo) {
+
+        todo.addEventListener('click', (event) => {
+            if (event.target.classList.contains('todo__delete')) {
+                event.preventDefault();
+                const todoItem = event.target.parentElement;
+                const id = event.target.dataset.id;
+
+                fetch(`/todo/${id}`, {
+
+                    method: 'DELETE',
+                })
+                    .then(response => response.json())
+                    .then((data) => {
+                        if (data._id) {
+                            todoItem.remove()
+                        }
+                    })
+                    .catch((err) => {
+                        alert('Не удалось удалить задачу');
+                    });
+            }
+        })
+    }
+</script>
+
+</html>
