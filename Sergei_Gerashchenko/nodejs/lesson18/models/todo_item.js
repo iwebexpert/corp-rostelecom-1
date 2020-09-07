@@ -10,7 +10,7 @@ const todoitemSchema = new Schema({
         default: new Date(),
     },
     doneAt: {type: Date, required : false},
-    user : {type : Schema.type.ObjectId, ref : "Users"}
+    user : {type : Schema.Types.ObjectId, ref : "Users"}
 })
 
 module.exports = mongoose.model('todo_items', todoitemSchema, 'todo_items')

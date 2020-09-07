@@ -21,7 +21,7 @@
     "google-translate-api-browser": "^1.1.71",
     "handlebars": "^4.7.6",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.2",
+    "mongoose": "^5.10.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "request": "^2.88.2"
