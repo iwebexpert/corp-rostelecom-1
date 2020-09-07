@@ -2,8 +2,10 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 const toDoSchema = new Schema({
-    text: {
-        type: String,
+    text: [],
+    user: {
+        type: Schema.ObjectId,
+        ref: 'Users',
         required: true
     },
     date: {

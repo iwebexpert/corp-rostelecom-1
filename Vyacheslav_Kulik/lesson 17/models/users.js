@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 var bcrypt = require('bcryptjs');
+let toDo = require('../models/todolist')
 
 const Schema = mongoose.Schema
 
@@ -75,6 +76,13 @@ Users.pre('save', function (next) {
         this.password = bcrypt.hashSync(this.password, salt);
     }
     next()
+})
+
+Users.post('save', async function (next) {
+    const toDoUser = new toDo({user: this._id})
+    toDoUser.save(function (error, doc) {
+        if (error) console.log(error)
+    })
 })
 
 Users.pre('updateOne', async function (next) {// при смене пароля - кодируем его

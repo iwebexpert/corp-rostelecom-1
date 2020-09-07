@@ -33,13 +33,23 @@ passport.serializeUser(function (user, done) { //после процедуры �
     done(null, user._id) // - в куках выглядит вот так "passport":{"user":"5f50a39603361338b0cd067c"}
 })
 
-passport.deserializeUser(function (id, done) { //берется из записи сесии в BD  (passport":{"user":"5f50a39603361338b0cd067c"}) id = passport.user
-    Users.findById(id, function (err, user) {
-        const plainUser = JSON.parse(JSON.stringify(user))
-        delete plainUser.password
-        //console.log(plainUser, 'deserializeUser plainUser')
-        done(err, plainUser); //  при logout  запись из сесии в БД удаляется - "passport":{}
-    })
+passport.deserializeUser(async function (id, done) { //берется из записи сесии в BD  (passport":{"user":"5f50a39603361338b0cd067c"}) id = passport.user
+    if(await Users.findById(id).exec()) {
+        Users.findById(id, function (err, user) {
+            if (err) {
+                console.log(err)
+            } else {
+                const plainUser = JSON.parse(JSON.stringify(user))
+                delete plainUser.password
+                //console.log(plainUser, 'deserializeUser plainUser')
+                done(err, plainUser); //  при logout  запись из сесии в БД удаляется - "passport":{}
+            }
+
+        })
+    } else {
+        done(null, null);
+    }
+
 })
 
 

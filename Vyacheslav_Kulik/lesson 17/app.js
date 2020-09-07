@@ -174,35 +174,78 @@ app.post('/reg', [
 
 
 app.get('/todo', passport.checkNotAuth, async function (req, res, next) { //защищаем от неавторизованных пользователей
-    const toDoAll = await toDo.find({}).exec()
+    const toDoAll = await toDo.find({user: req.user._id}).exec()
     const user = await Users.findById(req.user._id).exec()
-    res.render('todo', {title: 'ToDo', toDoAll: toDoAll, user: user})
+    res.render('todo', {title: 'ToDo', toDoAll: toDoAll[0].text, user: user})
 
 })
 
 app.post('/todo', async function (req, res, next) {
-
-    if (req.body.add_button) {
-        const toDoAdd = new toDo({text: req.body.add})
-        toDoAdd.save(function (error, doc) {
-            if (error) console.log(error)
-        })
-    }
-    if (req.body.delete) {
-        toDo.deleteOne({_id: req.body.delete}, function (error, doc) {
-            if (error) console.log(error)
-        })
-    }
-    if (req.body.edit) {
-        toDo.updateOne({_id: req.body.edit}, {text: req.body[`data-${req.body.edit}`]}, function (error, doc) {
-            if (error) console.log(error)
-        })
-    }
+    const toDoUser = await toDo.findOne({user: req.user._id}).exec()
+    console.log('post mtd')
+    toDoUser.text.push(req.body.add)
+    toDoUser.save(function (error, doc) {
+        if (error) console.log(error)
+    })
+    // if(!toDoUser) {
+    //     const toDoUser = new toDo({user: req.user._id})
+    //     toDoUser.save(function (error, doc) {
+    //         if (error) console.log(error)
+    //     })
+    // }
+    // if (req.body.add_button) {
+    //
+    //
+    // }
+    // if (req.body.delete) {
+    //     const indexDelete = toDoUser.text.indexOf(req.body.delete)
+    //     toDoUser.text.splice(indexDelete, 1)
+    //     toDoUser.save(function (error, doc) {
+    //         if (error) console.log(error)
+    //     })
+    // }
+    // if (req.body.edit) {
+    //     const indexUpdate = toDoUser.text.indexOf(req.body.edit)
+    //     toDoUser.text.set(indexUpdate, req.body.inputDataForEdit[indexUpdate])
+    //     toDoUser.save(function (error, doc) {
+    //         if (error) console.log(error)
+    //     })
+    // }
     res.redirect('/todo')
 })
 
-app.get('/usres/profile', function (req,  res, next) {
-    if(req.isAuthenticated()) {
+app.delete('/todo/:id', async function (req, res, next) {
+    const toDoUser = await toDo.findOne({user: req.user._id}).exec()
+    console.log('delete method')
+    toDoUser.text.splice(req.params.id, 1)
+    await toDoUser.save(function (error, doc) {
+        if (error) {
+            console.log(error)
+            res.status(400).json({error: 'Failed to delete'})
+        }
+        else {
+            res.status(200).json(doc)
+        }
+    })
+})
+
+app.put('/todo/:id', async function (req, res, next) {
+    //console.log(req.body)
+    const toDoUser = await toDo.findOne({user: req.user._id}).exec()
+    const indexUpdate = toDoUser.text.indexOf(req.body.edit)
+    toDoUser.text.set(req.params.id, req.body.value)
+    toDoUser.save(function (error, doc) {
+        if (error) {
+            //console.log(error)
+            res.status(400).json({error: 'Failed to update'})
+        } else {
+            res.status(200).json(doc)
+        }
+    })
+})
+
+app.get('/usres/profile', function (req, res, next) {
+    if (req.isAuthenticated()) {
         res.redirect(`/users/${req.user._id}`)
     } else {
         res.redirect(`/todo`)
@@ -329,7 +372,7 @@ app.post('/updatePassword/users/:id', [
             await Users.updateOne({_id: req.user._id}, {
                 password: req.body.password
             })
-            res.render('updatePassword',{
+            res.render('updatePassword', {
                 title: 'Change password',
                 user: user,
                 success: 'true'

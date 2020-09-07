@@ -19,20 +19,20 @@
         </div>
 
         <div class="list-group">
-            {{#each toDoAll}}
+            {{#eachIndex toDoAll}}
                 <div class="list-group-item list-group-item-action">
                     <div class="d-flex justify-content-around">
-                        <span class="col-10 align-self-center textData">{{this.text}}</span>
+                        <span class="col-10 align-self-center textData">{{item}}</span>
                         <input type="text" class="col-10 align-self-center d-none inputDataForEdit"
-                               value="{{this.text}}" name="data-{{this._id}}">
-                        <a class="btn btn-light editButton" id="{{this._id}}">Edit</a>
-                        <button class="btn btn-light d-none okButton" type="submit" name="edit" value="{{this._id}}">
+                               value="{{item}}" name="inputDataForEdit">
+                        <a class="btn btn-light editButton" id="{{item}}">Edit</a>
+                        <button class="btn btn-light d-none okButton" name="edit" value="{{index}}">
                             Ok
                         </button>
-                        <button class="btn btn-light" type="submit" name="delete" value="{{this._id}}">Delete</button>
+                        <button class="btn btn-light deleteButton" name="delete" value="{{index}}">Delete</button>
                     </div>
                 </div>
-            {{/each}}
+            {{/eachIndex}}
 
 
         </div>
