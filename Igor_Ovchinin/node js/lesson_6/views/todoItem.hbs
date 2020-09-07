@@ -1,0 +1,22 @@
+<h2>Список задач "{{todoItem.title}}"</h2>
+<div>
+    <h2>Задачи</h2>
+    <ul>
+        {{#each todoItem.task}}
+        <li>{{this.check}} - {{this.task}}</li>
+        {{/each}}
+    </ul>
+</div>
+<div>
+    <h2>Добавить новую задачу</h2>
+    <form action="/todo" method="POST">
+        <div>
+            <label for="title">Название списка</label>
+            <input type="text" name="title" id="title">
+        </div>
+        <div>
+            <input type="submit" value="Создать новый чат">
+            <input type="reset" value="Очистить форму">
+        </div>
+    </form>
+</div>
