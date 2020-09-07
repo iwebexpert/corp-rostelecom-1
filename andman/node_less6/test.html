@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test REST API</title>
+    <script>
+        const url = 'http://127.0.0.1:4000/';
+        var token = '';
+        var idForDelete = '';
+        var idForChecked = '';
+        console.log("Проверка REST API todos");
+
+        const req = async () => {
+            console.log("<< Пробуем получить данные без авторизации >>");
+            await fetch(`${url}todos`, {
+                method: 'GET',
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+            console.log("<< Регистрируем пользователя test@test.ru с паролем 123 >>");
+            let bodyText = {
+                'email': 'test@test.ru',
+                'password': '123',
+                'repassword': '123',
+                'firstName': 'Abc',
+                'lastName': 'Def'
+            };
+
+            await fetch(`${url}register`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyText)
+            })
+                .then(response => console.log('Status ', response.status));
+
+
+
+            console.log("<< Авторизуемся пользователем test@test.ru с паролем 123 >>");
+            bodyText = {
+                'username': 'test@test.ru',
+                'password': '123'
+            };
+
+            await fetch(`${url}auth`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyText)
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                    token = data.token;
+                    console.log('Получили TOKEN ', token);
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+
+
+
+            console.log("<< Добавим задачу >>");
+            bodyText = {
+                'todoText': 'TestTODO_' + ~~(Math.random() * 10000)
+            };
+
+            await fetch(`${url}todos`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bodyText)
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                    idForChecked = data._id;
+                    console.log('ID для установки CHECKED, ', idForChecked);
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+
+
+
+            console.log("<< Добавим задачу 2 >>");
+            bodyText = {
+                'todoText': 'TestTODO_' + ~~(Math.random() * 10000)
+            };
+
+            await fetch(`${url}todos`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bodyText)
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                    idForDelete = data._id;
+                    console.log('ID для тестирования удаления, ', idForDelete);
+
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+
+
+
+            console.log("<< Получаем список задач >>");
+            await fetch(`${url}todos`, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((err) => {
+                    console.log('Error!');
+                });
+
+
+
+            console.log(`<< Удалим задачу ${idForDelete} >>`);
+            await fetch(`${url}todos/${idForDelete}`, {
+                method: 'DELETE',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+
+
+
+            console.log(`<< Установим CHECKED у задачи ${idForChecked} >>`);
+            bodyText = {
+                'checked': 'on'
+            };
+            await fetch(`${url}todos/${idForChecked}`, {
+                method: 'PATCH',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(bodyText)
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+
+
+
+            console.log("<< Снова получаем список задач >>");
+            await fetch(`${url}todos`, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data);
+                })
+                .catch((err) => {
+                    console.log('Error!', err.message);
+                });
+
+        }
+
+        req();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
