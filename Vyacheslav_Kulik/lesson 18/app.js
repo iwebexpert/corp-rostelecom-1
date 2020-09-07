@@ -3,8 +3,8 @@ const createError = require('http-errors')
 const cookieParser = require('cookie-parser')
 // const session = require('express-session') //сессии
 // const MongoStore = require('connect-mongo')(session)//сохранение сессий в БД Mongo
-const hbs = require('hbs')
-const helper = require('handlebars-helpers')()
+// const hbs = require('hbs')
+// const helper = require('handlebars-helpers')()
 const logger = require('morgan')
 const path = require('path')
 var debug = require('debug')('lesson-16:server')
@@ -70,10 +70,10 @@ app.use(cookieParser())
 // app.use(passport.session)
 
 // Handelbars engine
-hbs.registerHelper(helper)
-hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'hbs')
+// hbs.registerHelper(helper)
+// hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
+// app.set('views', path.join(__dirname, 'views'))
+// app.set('view engine', 'hbs')
 
 app.get('/', function (req, res, next) {
     res.redirect('/auth')
@@ -234,7 +234,7 @@ app.post('/todo', isAuthenticated, async function (req, res, next) {
 
 app.delete('/todo/:id', isAuthenticated, async function (req, res, next) {
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
-    console.log('delete method')
+    //console.log('delete method')
     toDoUser.text.splice(req.params.id, 1)
     await toDoUser.save(function (error, doc) {
         if (error) {
