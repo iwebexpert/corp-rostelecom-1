@@ -1,0 +1,20 @@
+{{#eq notFirstUseSite 'true'}}
+    <b class="text-danger">You are not authorized. Please Sign In or Register</b>
+{{/eq}}
+
+<form action="" method="post">
+    <div class="form-group">
+        <label for="email_address">Email address</label>
+        {{#if errors}}<p class="text-danger">Invalid email or password</p>{{/if}}
+        <input class="form-control" type="email" name="email_address" required placeholder="Enter email" value="{{#eq formField.email_address 'undefined'}}''{{else}}{{formField.email_address}}{{/eq}}">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" required placeholder="Password">
+    </div>
+    <div class="form-group">
+        <a href="/reg">Register here</a>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign in</button>
+</form>

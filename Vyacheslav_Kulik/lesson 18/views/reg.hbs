@@ -1,0 +1,35 @@
+<form action="" method="post" class="mb-5">
+    <div class="form-group">
+        <label for="first_name">First name</label>
+        <input class="form-control {{#contains errors_field 'first_name'}}bg-warning{{else}}{{/contains}}" type="text" name="first_name" required placeholder="Enter First Name" value="{{#eq formField.first_name 'undefined'}}''{{else}}{{formField.first_name}}{{/eq}}">
+    </div>
+    <div class="form-group">
+        <label for="last_name">Last name</label>
+        <input class="form-control {{#contains errors_field 'last_name'}}bg-warning{{else}}{{/contains}}" type="text" name="last_name" required placeholder="Enter Last Name" value="{{#eq formField.last_name 'undefined'}}''{{else}}{{formField.last_name}}{{/eq}}">
+    </div>
+    <div class="form-group">
+        <label for="email_address">Email address (login)</label>
+        <input class="form-control {{#contains errors_field 'email_address'}}bg-warning{{else}}{{/contains}}" type="email" name="email_address" required placeholder="Enter email" value="{{#eq formField.email_address 'undefined'}}''{{else}}{{formField.email_address}}{{/eq}}">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control {{#contains errors_field 'password'}}bg-warning{{else}}{{/contains}}" type="password" name="password" required placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="repassword">Repeat password</label>
+        <input class="form-control {{#contains errors_field 'repassword'}}bg-warning{{else}}{{/contains}}" type="password" name="repassword" required placeholder="Password">
+    </div>
+    <div class="form-group">
+        <a href="/auth">Do you have an account? Sign in here.</a>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create an account</button>
+</form>
+
+{{#if errors}}
+{{#each errors}}
+    <div class="alert alert-danger" role="alert">
+        <b>{{this.msg}}</b>
+    </div>
+{{/each}}
+{{/if}}
