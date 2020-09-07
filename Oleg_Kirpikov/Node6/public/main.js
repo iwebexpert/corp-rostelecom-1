@@ -111,6 +111,7 @@ function taskClose(_id) {
             console.log(data);
             list();
         })
+        .catch((err) => { console.log(err) })
 };
 
 
@@ -123,6 +124,7 @@ function taskOpen(_id) {
             console.log(data);
             list();
         })
+        .catch((err) => { console.log(err) })
 };
 
 function taskDel(_id) {
@@ -132,6 +134,7 @@ function taskDel(_id) {
             console.log(data);
             list();
         })
+        .catch((err) => { console.log(err) })
 }
 
 function taskAdd() {
@@ -148,6 +151,7 @@ function taskAdd() {
             document.querySelector('#add_desc').value = '';
             list();
         })
+        .catch((err) => { console.log(err) })
 
 
 };
@@ -158,6 +162,8 @@ function registerUser() {
     let firstName = document.querySelector('#register *[name="firstName"]').value;
     let lastName = document.querySelector('#register *[name="lastName"]').value;
     let repassword = document.querySelector('#register *[name="repassword"]').value;
+    document.getElementById('error').innerText = '';
+
     const formData = new URLSearchParams();
     formData.append('email', email);
     formData.append('password', password);
@@ -173,8 +179,15 @@ function registerUser() {
             document.querySelector('#register *[name="firstName"]').value = '';
             document.querySelector('#register *[name="lastName"]').value = '';
             document.querySelector('#register *[name="repassword"]').value = '';
-            authForm();
+            if (data.message) {
+                document.getElementById('error').innerText = data.message;
+                show('error');
+            } else {
+                authForm();
+            }
+
         })
+        .catch((err) => { console.log(err) })
 };
 
 function newUserForm() {
@@ -182,6 +195,9 @@ function newUserForm() {
         hide(id)
     });
     hide('wrong_password');
+    document.getElementById('error').innerText = '';
+    hide('error');
+
     show('register');
 };
 
@@ -202,6 +218,7 @@ function logoutUser() {
 
             show('auth');
         })
+        .catch((err) => { console.log(err) })
 
 };
 

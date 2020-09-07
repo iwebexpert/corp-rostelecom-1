@@ -79,12 +79,12 @@ app.post('/register', async (req, res) => {
 
     if (dbEmails) {
         console.log('User exist!!')
-        res.status(409).json({ message: 'Пользователь уже существует' })
+        return res.status(409).json({ message: 'Пользователь уже существует' })
     }
     if (restBody.password === repassword && email.length > 0 && restBody.password.length > 0) {
         const user = new usersModel(restBody)
         await user.save()
-        res.status(201).json(user)
+        return res.status(201).json(user)
     }
     res.status(401).json({ message: 'Неверный пароль' })
 })
