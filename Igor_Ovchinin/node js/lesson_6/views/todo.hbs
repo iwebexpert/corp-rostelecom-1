@@ -1,0 +1,25 @@
+<p><a href="/logout">Выйти</a></p>
+<div>
+    <h2>Списки задач</h2>
+    <ul class="todo-list">
+        {{#each todo}}
+        <li><a href="/todo/{{this._id}}">{{this.title}}</a> (<a href="#delete" data-id="{{this._id}}"
+                class="todo-list__delete">удалить</a></a>)
+        </li>
+        {{/each}}
+    </ul>
+</div>
+
+<div>
+    <h2>Создание списка</h2>
+    <form action="/todo" method="POST">
+        <div>
+            <label for="title">Название списка</label>
+            <input type="text" name="title" id="title">
+        </div>
+        <div>
+            <input type="submit" value="Создать новый список">
+            <input type="reset" value="Очистить форму">
+        </div>
+    </form>
+</div>

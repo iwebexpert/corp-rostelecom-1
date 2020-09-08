@@ -1,0 +1,12 @@
+<p><a href="/logout">Выйти</a></p>
+<a href="./news">Главная</a>
+<a href="./settings">Настройки</a>
+<h3>Форма для настроек</h3>
+{{#if newsCount}}
+<div>Ноостей на странице: {{newsCount}}</div>
+{{/if}}
+
+<form method="POST" action="/settings">
+    <input type="text" name="params" placeholder="Сколько новостей выводить на страницу">
+    <input type="submit">
+</form>
