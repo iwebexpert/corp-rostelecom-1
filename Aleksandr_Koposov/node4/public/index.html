@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node 6</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .text-shadow {
+            text-shadow: 2px 2px black;
+        }
+
+        .parallax-container {
+            min-height: 380px;
+            line-height: 0;
+            height: auto;
+            color: rgba(255, 255, 255, .9);
+        }
+
+        .parallax-container .section {
+            width: 100%;
+        }
+
+        .mh-160 {
+            min-height: 160px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper white left-align">
+            <a href="#" class="brand-logo black-text">Fetch REST API</a>
+        </div>
+    </nav>
+
+    <!-- Авторизация -->
+    <div class="parallax-container mh-160 valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h2 class="header col s12 light text-shadow">1. Получение доступа</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="background1.jpg" alt="Background img 1"></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div id="login-alert" class="col s12 yellow darken-2"></div>
+                <div id="fetch-register" class="col s6">
+                    <div class="card blue-grey darken-1">
+                        <div class="card-content white-text">
+                            <span class="card-title">Регистрация</span>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input placeholder="Введите Email" id="register_email" type="email"
+                                        class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input placeholder="Введите имя" id="register_name" type="text" class="validate">
+                                    <label for="first_name">Имя</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input placeholder="Введите пароль" id="register_password" type="password"
+                                        class="validate">
+                                    <label for="password">Пароль</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">Зарегистрироваться</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="fetch-login" class="col s6">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Введите Email" id="login_email" type="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input placeholder="Введите пароль" id="login_password" type="password" class="validate">
+                            <label for="password">Пароль</label>
+                        </div>
+                    </div>
+                    <a class="waves-effect waves-light btn orange">
+                        <i class="material-icons left">vpn_key</i>Войти (получить токен)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Список задач -->
+    <div class="parallax-container mh-160 valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h2 class="header col s12 light text-shadow">Список задач</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="background2.jpg" alt="Background img 2"></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col s12">
+                    <div id="fetch-list">
+                        <div class="center-align">
+                            <a class="waves-effect waves-light btn">
+                                <i class="material-icons left">get_app</i>Загрузить
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Добавить задачу -->
+    <div class="parallax-container mh-160 valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="row center">
+                    <h2 class="header col s12 light text-shadow">Добавить задачу</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="background3.jpg" alt="Background img 3"></div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div id="fetch-add" class="col s12 center-align">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Введите название задачи" id="add_name" type="text">
+                            <label for="add_name">Название задачи</label>
+                        </div>
+                        <p>В демонстрации работы с API обойдёмся только названием</p>
+                    </div>
+                    <a class="waves-effect waves-light btn">
+                        <i class="material-icons left">get_app</i>Добавить
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer teal">
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col s6">
+                        &copy; Aleksandr.Koposov
+                    </div>
+                    <div class="col s6 right-align">
+                        Создано с использованием <span class="brown-text text-lighten-3">Materialize</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        // Получение куки по имени
+        function getCookie(name) {
+            const matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ))
+            return matches ? decodeURIComponent(matches[1]) : undefined
+        }
+
+        // Установка куки
+        function setCookie(name, value, options = {}) {
+            options = { path: '/', ...options }
+            if (options.expires instanceof Date) {
+                options.expires = options.expires.toUTCString()
+            }
+            let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value)
+            for (let optionKey in options) {
+                updatedCookie += "; " + optionKey
+                let optionValue = options[optionKey]
+                if (optionValue !== true) {
+                    updatedCookie += "=" + optionValue
+                }
+            }
+            document.cookie = updatedCookie
+        }
+
+        $(document).ready(function () {
+            M.AutoInit()
+
+            let token = getCookie('api_token')
+
+            if (token) {
+                $('#login-alert').html('Токен уже получен из Cookies')
+            }
+
+            const loadList = () => {
+                fetch('/api/todo', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }).then(res => res.json()).then(({ status, error, data }) => {
+                    if (status !== 200) {
+                        throw new Error(error)
+                    }
+                    M.toast({ html: 'Данные получены', classes: 'green' })
+                    $('#fetch-list').html('<table><tbody>' + data.map(i => i.divider
+                        ? ''
+                        : (i.header
+                            ? `<tr class="lightblue"><td colspan="2">${i.header}</td></tr>`
+                            : `<tr class="${i.name ? 'task' : ''}">
+                                    <td>${i.header || i.name}</td>
+                                    <td>
+                                        <a class="waves-effect waves-light btn red delete" data-id="${i._id}">
+                                            <i class="material-icons left">delete</i>Удалить
+                                        </a>
+                                    </td>
+                                </tr>`)
+                    ).join('') + '</tbody></table>')
+                }).catch((err) => {
+                    console.error(err)
+                    M.toast({ html: err.message, classes: 'red' })
+                })
+            }
+
+            $('#fetch-register .card-action a').on('click', async () => {
+                fetch('/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        email: $('#register_email').val(),
+                        name: $('#register_name').val(),
+                        password: $('#register_password').val()
+                    })
+                }).then(res => res.json()).then(({ status, error, data }) => {
+                    if (status !== 200) {
+                        throw new Error(error)
+                    }
+                    M.toast({ html: 'Вы успешно зарегистрированы!', classes: 'green' })
+                }).catch((err) => {
+                    console.error(err)
+                    M.toast({ html: err.message, classes: 'red' })
+                })
+            })
+
+            $('#fetch-login .btn').on('click', async () => {
+                fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({
+                        email: $('#login_email').val(),
+                        password: $('#login_password').val()
+                    })
+                }).then(res => res.json()).then(({ status, error, data }) => {
+                    if (status !== 200) {
+                        throw new Error(error)
+                    }
+                    document.cookie = `api_token=${data.token}`
+                    token = data.token
+                    $('#login-alert').html('Токен получен из API')
+                    M.toast({ html: `Вы успешно авторизованы, ${data.name || data.email || 'аноним'}!`, classes: 'green' })
+                }).catch((err) => {
+                    console.error(err)
+                    M.toast({ html: err.message, classes: 'red' })
+                })
+            })
+
+            $('#fetch-list .btn').on('click', async () => {
+                loadList()
+            })
+
+            $('body').on('click', '.task a.delete', function () {
+                const id = $(this).data('id')
+                fetch(`/api/todo/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                        'Authorization': `Bearer ${token}`
+                    }
+                }).then(res => res.json()).then(({ status, error, data }) => {
+                    if (status !== 200) {
+                        throw new Error(error)
+                    }
+                    M.toast({ html: 'Задача удалена', classes: 'green' })
+                    loadList()
+                }).catch((err) => {
+                    console.error(err)
+                    M.toast({ html: err.message, classes: 'red' })
+                })
+            })
+
+            $('#fetch-add .btn').on('click', async () => {
+                fetch('/api/todo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        name: $('#add_name').val(),
+                        desc: '',
+                        done: false,
+                        important: true,
+                        planned: new Date(2020, 8, 20, 20, 20, 20),
+                        created: new Date()
+                    })
+                }).then(res => res.json()).then(({ status, error, data }) => {
+                    if (status !== 200) {
+                        throw new Error(error)
+                    }
+                    M.toast({ html: 'Задача добавлена', classes: 'green' })
+                    loadList()
+                }).catch((err) => {
+                    console.error(err)
+                    M.toast({ html: err.message, classes: 'red' })
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

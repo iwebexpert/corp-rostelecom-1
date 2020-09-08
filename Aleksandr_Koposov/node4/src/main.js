@@ -1,18 +1,17 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
+const cors = require('cors')
+const jwt = require('jsonwebtoken')
 
 const config = require('./config')
 
 const TodoItemsModel = require(path.join(__dirname, '..', 'models', 'todo'))
 const UsersModel = require(path.join(__dirname, '..', 'models', 'users'))
 
-const passport = require('./auth')
-
 const app = express()
 app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use((req, res, next) => {
     res.ok = data => res.status(200).json({
@@ -20,38 +19,33 @@ app.use((req, res, next) => {
         error: '',
         data
     })
-    res.err = error => res.status(500).json({
-        status: 500,
-        error: error,
+    res.err = (status, error) => res.status(status || 500).json({
+        status: status || 500,
+        error: error || 'Непредвиденная ошибка',
         data: null
     })
     next()
 })
 
-app.set('view engine', 'hbs')
-app.set('views', path.join(__dirname, '..', 'views'))
+// Подключаем статику, чтобы не делать клиента отдельно
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
-app.use(session({
-    resave: true,
-    saveUninitialized: false,
-    secret: config.app.secret,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-}))
-app.use(passport.initialize)
-app.use(passport.session)
-
-// Защищённые маршруты
-app.use('/list', passport.loggedIn)
-app.use('/todo*', passport.loggedIn)
-
-// Маршруты для списка дел
-app.get('/', (req, res) => {
-    res.redirect('/list')
-})
-app.get('/list', (req, res) => {
-    res.render('index')
-})
-app.get('/todo', async (req, res) => {
+// Защищаем запросы API
+const isAuthenticated = (req, res, next) => {
+    if (!req.headers || !req.headers.authorization) {
+        return res.err(403, 'Нет доступа')
+    }
+    const [, token] = req.headers.authorization.split(' ')
+    jwt.verify(token, config.app.secret || '', (err, decoded) => {
+        if (err) {
+            return res.err(403, 'Нет доступа')
+        }
+        req.user = decoded
+        next()
+    })
+}
+app.use('/api*', isAuthenticated)
+app.get('/api/todo', async (req, res) => {
     const list = await TodoItemsModel.find({}).lean()
     list.sort((a, b) => a.planned === b.planned ? 0 : (a.planned > b.planned ? 1 : -1))
     res.ok([
@@ -68,7 +62,7 @@ app.get('/todo', async (req, res) => {
         ...list.filter(i => !i.important && i.planned > new Date())
     ])
 })
-app.post('/todo', async (req, res) => {
+app.post('/api/todo', async (req, res) => {
     await (new TodoItemsModel({
         name: req.body.name || '',
         desc: req.body.desc || '',
@@ -79,7 +73,7 @@ app.post('/todo', async (req, res) => {
     })).save()
     res.ok(true)
 })
-app.post('/todo/:id', async (req, res) => {
+app.post('/api/todo/:id', async (req, res) => {
     await TodoItemsModel.findByIdAndUpdate(req.body._id, {
         name: req.body.name || '',
         desc: req.body.desc || '',
@@ -89,46 +83,50 @@ app.post('/todo/:id', async (req, res) => {
     })
     res.ok(true)
 })
-app.delete('/todo/:id', async (req, res) => {
-    await TodoItemsModel.findByIdAndDelete(req.body._id)
+app.delete('/api/todo/:id', async (req, res) => {
+    await TodoItemsModel.findByIdAndDelete(req.params.id).exec()
     res.ok(true)
 })
 
 // Маршруты авторизации
-app.get('/login', (req, res) => {
-    const { error } = req.query
-    res.render('login', { error })
-})
-app.get('/logout', (req, res) => {
+app.get('/auth/logout', (req, res) => {
     req.logout()
-    res.redirect('/login')
+    res.ok(true)
 })
-app.get('/register', (req, res) => {
-    res.render('register')
-})
-app.post('/login', passport.authenticate)
 app.post('/auth/register', async (req, res) => {
-    const { email, name, password, confirm } = req.body
-    if (!password || !confirm || !email) {
-        res.err('Не все обязательные поля заполнены')
-    }
-    if (password !== confirm) {
-        res.err('Введённые пароли не совпадают')
+    const { email, name, password } = req.body
+    if (!password || !email) {
+        return res.err(400, 'Не все обязательные поля заполнены')
     }
     const userExists = await UsersModel.exists({ email })
     if (userExists) {
-        res.err('Пользователь уже существует')
+        return res.err(400, 'Пользователь уже существует')
     }
-    if (email.length > 0 && password.length > 0) {
-        const user = await new UsersModel({
-            email,
-            name,
-            password
-        }).save()
-        res.ok(true)
-    } else {
-        res.err('Не удалось создать пользователя')
+    const user = await new UsersModel({
+        email,
+        name,
+        password
+    }).save()
+    res.ok(true)
+})
+app.post('/auth/login', async (req, res) => {
+    const { email, password } = req.body
+    if (!email || !password) {
+        return res.err(401, 'Не передан логин или пароль')
     }
+    const user = await UsersModel.findOne({ email })
+    if (!user) {
+        return res.err(401, 'Пользователь не найден')
+    }
+    if (!user.validatePassword(password)) {
+        return res.err(401, 'Неправильный логин/пароль')
+    }
+    const plainUser = JSON.parse(JSON.stringify(user))
+    delete plainUser.password
+    res.ok({
+        ...plainUser,
+        token: jwt.sign(plainUser, config.app.secret || ''),
+    })
 })
 
 // Подключаемся к БД и запускаем приложение

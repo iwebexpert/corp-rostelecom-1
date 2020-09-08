@@ -30,6 +30,7 @@ const todoSchema = new mongoose.Schema({
         default: new Date(),
         required: false,
     },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' }
 })
 
 module.exports = mongoose.model('Todo', todoSchema, 'todo')

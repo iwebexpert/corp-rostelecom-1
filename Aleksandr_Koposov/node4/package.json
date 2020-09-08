@@ -1,20 +1,18 @@
 {
-  "name": "node5",
+  "name": "node6",
   "version": "1.0.0",
-  "description": "Lesson 17 (Node 5): TODO-list Auth",
+  "description": "Lesson 18 (Node 6): TODO-list REST API + Client",
   "private": true,
   "author": "Aleksandr.Koposov",
   "scripts": {
     "serve": "node ./src/main.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "hbs": "^4.1.1",
-    "mongoose": "^5.10.2",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^3.2.0",
-    "express-session": "^1.17.1",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2"
   }
 }
