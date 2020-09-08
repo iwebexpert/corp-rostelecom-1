@@ -1,0 +1,46 @@
+body {
+    background-color: burlywood;
+}
+
+.toDoListClass {
+    max-width: 600px;
+    background-color: ghostwhite;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.toDoListClassCurr {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.toDoListClassCurr>h2 {
+    text-align: center;
+}
+
+.addToDoListClass {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    max-width: 400px;
+    min-width: 250px;
+    background-color: floralwhite;
+}
+
+.addToDoListClass>input[type="text"] {
+    margin: 5px;
+}
+
+.addToDoListClass>input[type="submit"] {
+    margin: 5px;
+    padding: 3px;
+    border-radius: 4px;
+}
