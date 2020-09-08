@@ -1,16 +1,39 @@
 const express = require('express')
 const createError = require('http-errors')
 const cookieParser = require('cookie-parser')
-const session = require('express-session') //сессии
-const MongoStore = require('connect-mongo')(session)//сохранение сессий в БД Mongo
-const hbs = require('hbs')
-const helper = require('handlebars-helpers')()
+// const session = require('express-session') //сессии
+// const MongoStore = require('connect-mongo')(session)//сохранение сессий в БД Mongo
+// const hbs = require('hbs')
+// const helper = require('handlebars-helpers')()
 const logger = require('morgan')
 const path = require('path')
 var debug = require('debug')('lesson-16:server')
 var http = require('http')
+
+var cors = require('cors')
+const jwt = require('jsonwebtoken')
+const TOKEN_SECRET_KEY = 'asdasdassaasf22132asdfcsd233wefTGJHDGHhgsdghagha7123123!'
+
+const isAuthenticated = (req, res, next) => {
+
+    if(req.headers.authorization){
+        const [type, token] = req.headers.authorization.split(' ')
+
+        jwt.verify(token, TOKEN_SECRET_KEY, (err, decoded) => {
+            if(err){
+                return res.status(403).send()
+            }
+            req.user = decoded
+            next()
+        })
+    } else {
+        return res.status(403).send()
+    }
+
+}
 const validator = require('express-validator')
-const passport = require('./auth')
+
+// const passport = require('./auth')
 
 const mongoose = require('mongoose')
 let toDo = require('./models/todolist')
@@ -21,44 +44,47 @@ mongoose.connect('mongodb://localhost:27017/todo', {useNewUrlParser: true, useUn
 
 let app = express()
 
-
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static('public'));
+app.use(cookieParser())
 
 //настройка поддержки сессий для passport
-app.use(cookieParser())
-app.use(session({
-    resave: true,
-    rolling: true,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 10 * 60 * 1000,
-        httpOnly: false,
-    },
-    secret: 'sadasdasasqweqwqsdasdacaasdadadadadadas',
-    store: new MongoStore({mongooseConnection: mongoose.connection})
-}))
+//
+// app.use(session({
+//     resave: true,
+//     rolling: true,
+//     saveUninitialized: false,
+//     cookie: {
+//         maxAge: 10 * 60 * 1000,
+//         httpOnly: false,
+//     },
+//     secret: 'sadasdasasqweqwqsdasdacaasdadadadadadas',
+//     store: new MongoStore({mongooseConnection: mongoose.connection})
+// }))
 
-//инициализация passport
-app.use(passport.initialize)
-app.use(passport.session)
+// //инициализация passport
+// app.use(passport.initialize)
+// app.use(passport.session)
 
 // Handelbars engine
-hbs.registerHelper(helper)
-hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'hbs')
+// hbs.registerHelper(helper)
+// hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
+// app.set('views', path.join(__dirname, 'views'))
+// app.set('view engine', 'hbs')
 
 app.get('/', function (req, res, next) {
     res.redirect('/auth')
 })
 
-app.get('/auth', passport.checkAuth, function (req, res, next) {
+//app.get('/auth', passport.checkAuth, function (req, res, next) {
+app.get('/auth', function (req, res, next) {
     const notFirstUseSite = req.cookies.notFirstUseSite.toString() // если пришел на сайт не впервые - сработает уведомление о необходимости регистрации или авторизации
     res.cookie('notFirstUseSite', 'false')
-    res.render('auth', {title: 'Authentication', notFirstUseSite: notFirstUseSite})
+    res.status(200).json({title: 'Authentication', notFirstUseSite: notFirstUseSite})
+    //res.render('auth', {title: 'Authentication', notFirstUseSite: notFirstUseSite})
 })
 
 
@@ -79,12 +105,13 @@ app.post('/auth', [
         })
         .escape(),
 
-    function (req, res, next) {
+    async function (req, res, next) {
         const errors = validator.validationResult(req);
+       // console.log(req.body)
+       // console.log(errors)
 
         if (!errors.isEmpty()) {
-
-            res.render('auth', {
+            res.status(401).json({
                 title: 'Authentication',
                 errors: errors.array(),
                 formField: {
@@ -92,15 +119,22 @@ app.post('/auth', [
                 }
             })
         } else {
-            next()
+            const user = JSON.parse(JSON.stringify(await Users.findOne({email: req.body.email_address}))) // payload for token
+            delete user.password //  delete password from payload data
+            const token = jwt.sign(user, TOKEN_SECRET_KEY)  //create token
+            res.status(200).json({
+                ...user,
+                token: token
+            })
         }
-    },
-    passport.authenticate //если нет ошибок, вызываем обработчик авторизации
+    }
+    // ,
+    // passport.authenticate //если нет ошибок, вызываем обработчик авторизации
 ])
 
-app.get('/reg', passport.checkAuth, function (req, res, next) { //проверяем, что пользователь уже не авторизован
-    res.render('reg', {title: 'Registration'})
-
+//app.get('/reg', passport.checkAuth, function (req, res, next) { //проверяем, что пользователь уже не авторизован
+app.get('/reg', function (req, res, next) { //проверяем, что пользователь уже не авторизован
+    res.status(200).send()
 })
 
 app.post('/reg', [
@@ -141,7 +175,7 @@ app.post('/reg', [
 
 
         if (!errors.isEmpty()) {
-            res.render('reg', {
+            res.status(400).json({
                 title: 'Registration',
                 formField: {
                     first_name: req.body.first_name,
@@ -163,8 +197,7 @@ app.post('/reg', [
                 if (err) {
                     next(err)
                 }
-                //console.log(result)
-                res.redirect('/auth')
+                res.status(200).send()
             })
         }
 
@@ -173,70 +206,54 @@ app.post('/reg', [
 ])
 
 
-app.get('/todo', passport.checkNotAuth, async function (req, res, next) { //защищаем от неавторизованных пользователей
+//app.get('/todo', passport.checkNotAuth, async function (req, res, next) { //защищаем от неавторизованных пользователей
+app.get('/todo', isAuthenticated, async function (req, res, next) { //защищаем от неавторизованных пользователей
     const toDoAll = await toDo.find({user: req.user._id}).exec()
     const user = await Users.findById(req.user._id).exec()
-    res.render('todo', {title: 'ToDo', toDoAll: toDoAll[0].text, user: user})
+    res.status(200).json({title: 'ToDo', toDoAll: toDoAll[0].text, user: user})
 
 })
 
-app.post('/todo', async function (req, res, next) {
+app.post('/todo', isAuthenticated, async function (req, res, next) {
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
-    console.log('post mtd')
+   // console.log('post mtd')
     toDoUser.text.push(req.body.add)
     toDoUser.save(function (error, doc) {
-        if (error) console.log(error)
+        if (error) {
+            console.log(error)
+            res.status(400).json({error: 'Failed to add'})
+        } else {
+            res.status(200).json({element: req.body.add})
+        }
+
+
     })
-    // if(!toDoUser) {
-    //     const toDoUser = new toDo({user: req.user._id})
-    //     toDoUser.save(function (error, doc) {
-    //         if (error) console.log(error)
-    //     })
-    // }
-    // if (req.body.add_button) {
-    //
-    //
-    // }
-    // if (req.body.delete) {
-    //     const indexDelete = toDoUser.text.indexOf(req.body.delete)
-    //     toDoUser.text.splice(indexDelete, 1)
-    //     toDoUser.save(function (error, doc) {
-    //         if (error) console.log(error)
-    //     })
-    // }
-    // if (req.body.edit) {
-    //     const indexUpdate = toDoUser.text.indexOf(req.body.edit)
-    //     toDoUser.text.set(indexUpdate, req.body.inputDataForEdit[indexUpdate])
-    //     toDoUser.save(function (error, doc) {
-    //         if (error) console.log(error)
-    //     })
-    // }
-    res.redirect('/todo')
+
+    //res.redirect('/todo')
 })
 
-app.delete('/todo/:id', async function (req, res, next) {
+app.delete('/todo/:id', isAuthenticated, async function (req, res, next) {
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
-    console.log('delete method')
+    //console.log('delete method')
     toDoUser.text.splice(req.params.id, 1)
     await toDoUser.save(function (error, doc) {
         if (error) {
             console.log(error)
             res.status(400).json({error: 'Failed to delete'})
-        }
-        else {
+        } else {
             res.status(200).json(doc)
         }
     })
 })
 
-app.put('/todo/:id', async function (req, res, next) {
+app.put('/todo/:id', isAuthenticated, async function (req, res, next) {
     //console.log(req.body)
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
     const indexUpdate = toDoUser.text.indexOf(req.body.edit)
     toDoUser.text.set(req.params.id, req.body.value)
     toDoUser.save(function (error, doc) {
         if (error) {
-            //console.log(error)
+            console.log(error)
             res.status(400).json({error: 'Failed to update'})
         } else {
             res.status(200).json(doc)
@@ -244,25 +261,30 @@ app.put('/todo/:id', async function (req, res, next) {
     })
 })
 
-app.get('/usres/profile', function (req, res, next) {
-    if (req.isAuthenticated()) {
-        res.redirect(`/users/${req.user._id}`)
-    } else {
-        res.redirect(`/todo`)
-    }
-
-})
-
-app.get('/users/:id', passport.checkUserProfile, async function (req, res, next) {
+app.get('/users', isAuthenticated, async function (req, res, next) {
 
     const user = await Users.findById(req.user._id).exec()
-    res.render('userProfile', {
+    res.status(200).json({
         title: user.fullName,
         user: user
     })
 })
 
-app.post('/users/:id', [
+//app.get('/users/:id', passport.checkUserProfile, async function (req, res, next) {
+app.get('/users/:id', isAuthenticated, async function (req, res, next) {
+    if(req.params.id === req.user._id) {
+        const user = await Users.findById(req.user._id).exec()
+        res.status(200).json({
+            title: user.fullName,
+            user: user
+        })
+    } else {
+        res.status(400).send()
+    }
+
+})
+
+app.post('/users/:id', isAuthenticated, [
     validator.body('first_name').trim()
         .isLength({min: 3, max: 20}).withMessage('First Name must be from 3 to 20 symbols')
         .isAlpha().withMessage('First Name is not Alpha')
@@ -290,7 +312,7 @@ app.post('/users/:id', [
         const user = await Users.findById(req.user._id).exec()
 
         if (!errors.isEmpty()) {
-            res.render('userProfile', {
+            res.status(400).json({
                 title: user.fullName,
                 formField: {
                     first_name: req.body.first_name,
@@ -307,22 +329,27 @@ app.post('/users/:id', [
                 lastName: req.body.last_name,
                 email: req.body.email_address
             })
-            res.redirect(`${user.url}`)
+            res.status(200).send()
 
         }
     }
 ])
 
-app.get('/updatePassword/users/:id', passport.checkUserProfile, async function (req, res, next) {
+//app.get('/updatePassword/users/:id', passport.checkUserProfile, async function (req, res, next) {
+app.get('/updatePassword/users/:id', isAuthenticated, async function (req, res, next) {
+    if(req.params.id === req.user._id) {
+        const user = await Users.findById(req.user._id).exec()
+        res.status(200).json({
+            title: 'Change password',
+            user: user
+        })
+    } else {
+        res.status(400).send()
+    }
 
-    const user = await Users.findById(req.user._id).exec()
-    res.render('updatePassword', {
-        title: 'Change password',
-        user: user
-    })
 })
 
-app.post('/updatePassword/users/:id', [
+app.post('/updatePassword/users/:id', isAuthenticated, [
 
     validator.body('oldPassword').trim()
         .custom(async (value, {req}) => {
@@ -354,7 +381,7 @@ app.post('/updatePassword/users/:id', [
         const user = await Users.findById(req.user._id).exec()
 
         if (!errors.isEmpty()) {
-            res.render('updatePassword', {
+            res.status(400).json({
                 title: 'Change password',
                 formField: {
                     first_name: req.body.first_name,
@@ -372,7 +399,7 @@ app.post('/updatePassword/users/:id', [
             await Users.updateOne({_id: req.user._id}, {
                 password: req.body.password
             })
-            res.render('updatePassword', {
+            res.status(200).json( {
                 title: 'Change password',
                 user: user,
                 success: 'true'
@@ -382,9 +409,10 @@ app.post('/updatePassword/users/:id', [
 ])
 
 
-app.get('/logout', passport.checkNotAuth, function (req, res) { //проверяем, что  пользователь авторизован и выходим
-    req.logout()
-    res.redirect('/auth')
+//app.get('/logout', function (req, res) { //проверяем, что  пользователь авторизован и выходим
+app.get('/logout', isAuthenticated, function (req, res) { //проверяем, что  пользователь авторизован и выходим
+    //req.logout()
+    res.status(200).send()
 })
 
 
@@ -401,7 +429,7 @@ app.use((err, req, res, next) => {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.send();
 })
 
 app.listen('4000', function () {
