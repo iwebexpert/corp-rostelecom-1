@@ -1,0 +1,26 @@
+body {
+    background-color: burlywood;
+}
+
+li{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+}
+.author{
+    font-weight: bold;
+    color: darkgreen;
+}
+
+.item_title{
+    font-size: medium;
+}
+.item_text{
+    font-size: small;
+    font-style: italic;
+}
+.top-menu-container{
+    display: flex;
+    justify-content: space-between;
+}
