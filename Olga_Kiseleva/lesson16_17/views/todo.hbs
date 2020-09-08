@@ -1,0 +1,20 @@
+<div style="margin: 0 auto">
+    <h2>Список дел</h2>
+
+    <form action="/todo" class="mt-3 mb-3" method="post">
+
+        <div class="form-group d-flex justify-content-around">
+            <input type="text" class="col-10 col-form-label" name="add">
+            <button type="submit" class="todo__add" name="add_button" data-action="addItems">Add</button>
+            <p><a href="/auth">Выход</a></p>
+        </div>
+    </form>
+    <ul class="todo">
+        {{#each todo}}
+        <li class="todo__delete" style="display: flex; margin-bottom: 3px">
+            <p href="/todo/{{this._id}}" style="display: flex; margin: 0;width: 80%">{{this.todo}} </p>
+            <a href="#delete" data-id="{{this._id}}" class="todo__delete" style="border-style: solid;">удалить</a>
+        </li>
+        {{/each}}
+
+</div>
