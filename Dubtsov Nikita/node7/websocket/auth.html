@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/main.css">
+  <style>
+    .container {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    input {
+      margin: 10px 0;
+    }
+
+    input[type="submit"] {
+      background-color: green;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: rgb(1, 160, 1);
+    }
+  </style>
+  <title>Auth</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const username = document.querySelector('#username');
+      const password = document.querySelector('#password');
+      const sendBtn = document.querySelector('#sendBtn');
+
+      sendBtn.addEventListener('click', (event) => {
+        localStorage.removeItem('token');
+        fetch('/auth', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username.value,
+            password: password.value,
+          }),
+        })
+          .then((response) => {
+            if (response.status !== 200) {
+              return { token: null };
+            }
+            return response.json();
+          })
+          .then((response) => {
+            if (response.token) {
+              const { token, ...user } = response;
+              localStorage.setItem('token', token);
+              localStorage.setItem('user', JSON.stringify(user));
+
+              window.location = '/';
+            }
+          });
+        event.preventDefault();
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Sign in</h1>
+    <div>
+      <input id="username" type="text" placeholder="Enter e-mail">
+    </div>
+    <div>
+      <input id="password" type="password" placeholder="Enter password">
+    </div>
+    <div>
+      <input id="sendBtn" type="submit" value="Sign in">
+    </div>
+  </div>
+</body>
+
+</html>

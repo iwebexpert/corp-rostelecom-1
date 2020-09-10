@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chats</title>
+  <style>
+    .container {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    button {
+      background-color: rgb(94, 0, 0);
+      color: white;
+      padding: 5px;
+      margin-left: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgb(129, 0, 0);
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      margin: 12px 0;
+      font-size: 20px;
+    }
+
+    input {
+      margin-right: 10px;
+    }
+
+    input[type="button"] {
+      background-color: green;
+      color: white;
+      padding: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    input[type="button"]:hover {
+      background-color: rgb(1, 160, 1);
+    }
+
+    .done {
+      text-decoration: line-through;
+      color: grey;
+    }
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const list = document.querySelector('#list');
+      const create = document.querySelector('#create');
+
+
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+      if (!token) {
+        window.location = '/auth';
+      }
+
+      //Устанавливаем постоянное соединение
+      const socket = io.connect(`http://localhost:3000?token=${token}`);
+
+      socket.on(`created:${user._id}`, (todo) => {
+        console.log('Сервер создал чат', todo);
+
+        const li = document.createElement('li');
+        const input = document.createElement('input');
+        input.setAttribute('type', 'checkbox');
+        const button = document.createElement('button');
+        button.textContent = 'Delete';
+
+        li.dataset.id = todo._id;
+        input.dataset.id = todo._id;
+        input.checked = todo.isDone;
+        li.textContent = todo.text;
+        li.prepend(input);
+        li.appendChild(button);
+        list.appendChild(li);
+      });
+
+      socket.on(`deleted:${user._id}`, (todoId) => {
+        console.log('Сервер удалил чат', todoId);
+
+        const todoElement = document.querySelector(`[data-id="${todoId}"]`);
+        if (todoElement) {
+          todoElement.remove();
+        }
+      });
+
+      socket.on(`updated:${user._id}`, (todo) => {
+        console.log('Задача отредактирована', todo);
+
+        const liElement = document.querySelector(`li[data-id="${todo._id}"]`);
+        const inputElement = document.querySelector(`input[data-id="${todo._id}"]`);
+        inputElement.checked = todo.isDone;
+        if (!liElement.classList.contains("done")) {
+          liElement.classList.add("done")
+        } else {
+          liElement.classList.remove("done")
+        }
+
+      })
+
+
+      list.addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON') {
+          const li = event.target.parentElement;
+          const idTodo = li.dataset.id;
+          console.log('Отправлено на сервер событие delete', idTodo);
+          socket.emit('delete', idTodo);
+          event.preventDefault();
+        }
+        if (event.target.tagName === 'INPUT') {
+          const li = event.target.parentElement;
+          const idTodo = li.dataset.id;
+
+          console.log('Отправлено на сервер событие update', idTodo);
+          socket.emit('update', idTodo);
+          event.preventDefault();
+        }
+      });
+
+      create.addEventListener('click', (event) => {
+        const newTodo = {
+          text: prompt('Enter task text', 'TODO'),
+          createdBy: user.login,
+          user: user._id,
+
+        };
+        console.log('Отправлено на сервер событие create', newTodo);
+        socket.emit('create', newTodo);
+        event.preventDefault();
+      });
+
+
+      fetch('/todos', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (response.status !== 200) {
+            localStorage.removeItem('token');
+            window.location = '/auth';
+            return null;
+          }
+          return response.json();
+        })
+        .then((todos) => {
+          todos.forEach((todo) => {
+            const li = document.createElement('li');
+            const input = document.createElement('input');
+            input.setAttribute('type', 'checkbox');
+            const button = document.createElement('button');
+            button.textContent = 'Delete';
+
+            li.dataset.id = todo._id;
+            input.dataset.id = todo._id;
+            input.checked = todo.isDone;
+            li.textContent = todo.text;
+            li.prepend(input);
+            li.appendChild(button);
+            list.appendChild(li);
+          });
+        });
+    });
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Your tasks</h1>
+    <ul id="list"></ul>
+    <input type="button" id="create" value="Create new task">
+  </div>
+</body>
+
+</html>
