@@ -167,13 +167,7 @@ io.on('connection', (socket) => {
     })
     socket.on('todo/update', async (data) => {
         const todo = await TodoItemsModel.findOne({ _id: data._id }).lean()
-        await TodoItemsModel.findByIdAndUpdate(data._id, {
-            name: data.name || '',
-            desc: data.desc || '',
-            done: data.done || false,
-            important: data.important || false,
-            planned: data.planned || null
-        })
+        await TodoItemsModel.findByIdAndUpdate(data._id, data)
         socket.emit('update', todo)
     })
 })

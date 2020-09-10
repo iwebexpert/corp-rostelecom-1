@@ -77,6 +77,11 @@ $(document).ready(function () {
               : (i.header
                 ? `<tr class="lightblue"><td colspan="2">${i.header}</td></tr>`
                 : `<tr class="${i.name ? 'task' : ''}">
+                        <td>
+                            <a class="waves-effect waves-light btn ${i.done ? 'green' : ''} done" data-id="${i._id}" data-done="${i.done}">
+                                <i class="material-icons left">${i.done ? 'repeat' : 'check'}</i>
+                            </a>
+                        </td>
                         <td>${i.header || i.name}</td>
                         <td>
                             <a class="waves-effect waves-light btn red delete" data-id="${i._id}">
@@ -103,6 +108,15 @@ $(document).ready(function () {
     $('body').on('click', '.task a.delete', function () {
         const id = $(this).data('id')
         socket.emit('todo/delete', id)
+    })
+
+    $('body').on('click', '.task a.done', function () {
+        const id = $(this).data('id')
+        const done = $(this).data('done')
+        socket.emit('todo/update', {
+          _id: id,
+          done: !done
+        })
     })
 
     $('#add_btn').on('click', async () => {

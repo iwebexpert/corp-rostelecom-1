@@ -82,24 +82,26 @@ const users = [
         ]
     }
 ]
-users.forEach(async ({ email, name = '', password, tasks = [] }) => {
-    let userExists = await UsersModel.exists({ email })
-    if (!userExists) {
-        await new UsersModel({
-            email,
-            name,
-            password
-        }).save()
-    }
-    const usr = await UsersModel.findOne({ email })
-    for (const task of tasks || []) {
-        const tasksExists = await TodoItemsModel.exists({ name: task.name, user: usr._id })
-        if (!tasksExists) {
-            await (new TodoItemsModel({
-                ...task,
-                user: usr._id
-            })).save()
+const init = async () => {
+    for (const { email, name = '', password, tasks = [] } of users) {
+        let userExists = await UsersModel.exists({ email })
+        if (!userExists) {
+            await new UsersModel({
+                email,
+                name,
+                password
+            }).save()
+        }
+        const usr = await UsersModel.findOne({ email })
+        for (const task of tasks || []) {
+            const tasksExists = await TodoItemsModel.exists({ name: task.name, user: usr._id })
+            if (!tasksExists) {
+                await (new TodoItemsModel({
+                    ...task,
+                    user: usr._id
+                })).save()
+            }
         }
     }
-})
-process.exit()
+}
+init().then(r => process.exit())
