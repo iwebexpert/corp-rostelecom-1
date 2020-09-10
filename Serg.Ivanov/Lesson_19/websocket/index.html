@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chats</title>
+    <style>
+        .list {
+            list-style-type: none;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.querySelector('#list');
+            const create = document.querySelector('#create');
+
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+            if (!token) {
+                window.location = '/auth';
+            }
+
+            const socket = io.connect(`http://localhost:4000?token=${token}`);
+
+            socket.on(`created:${user._id}`, (chat) => {
+                console.log('Сервер создал запись', chat);
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = 'Удалить событие';
+
+                li.innerHTML = `<input type="button" value="${chat.status}">   ${chat.title}`;
+                li.dataset.id = chat._id;
+                li.appendChild(button);
+                list.appendChild(li);
+            });
+
+            socket.on(`updated:${user._id}`, (chatId) => {
+                console.log('Сервер обновил запись', chatId);
+                const li = document.querySelector(`[data-id="${chatId}"]`);
+                if (li.firstChild.value === 'Статус: выполнено') {
+                    li.firstChild.value = 'Статус: новое';
+                }
+                else {
+                    li.firstChild.value = 'Статус: выполнено';
+                }
+            });
+
+            socket.on(`deleted:${user._id}`, (chatId) => {
+                console.log('Сервер удалил запись', chatId);
+
+                const chatElement = document.querySelector(`[data-id="${chatId}"]`);
+                if (chatElement) {
+                    chatElement.remove();
+                }
+            });
+
+            list.addEventListener('click', (event) => {
+                if (event.target.tagName === 'BUTTON') {
+                    const li = event.target.parentElement;
+                    const idChat = li.dataset.id;
+                    console.log('Отправлено на сервер событие delete', idChat);
+                    socket.emit('delete', idChat);
+                    event.preventDefault();
+                };
+                if (event.target.tagName === 'INPUT') {
+                    const li = event.target.parentElement;
+                    const idChat = li.dataset.id;
+                    console.log('Отправлено на сервер событие update', idChat);
+                    socket.emit('update', idChat);
+                    event.preventDefault();
+                }
+
+            });
+
+            create.addEventListener('click', (event) => {
+                const newChat = {
+                    title: prompt('Введите событие', 'Запись 1'),
+                    status: 'Статус: новое',
+                    user: user._id,
+                };
+                console.log('Отправлено на сервер событие create', newChat);
+                socket.emit('create', newChat);
+                event.preventDefault();
+            });
+
+
+            fetch('/chats', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        localStorage.removeItem('token');
+                        window.location = '/auth';
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then((chats) => {
+                    chats.forEach((chat) => {
+                        const li = document.createElement('li');
+                        const button = document.createElement('button');
+                        button.textContent = 'Удалить событие';
+                        li.innerHTML = `<input type="button" value="${chat.status}">   ${chat.title}`;
+                        li.dataset.id = chat._id;
+                        li.appendChild(button);
+                        list.appendChild(li);
+                    });
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <ul id="list" class="list"></ul>
+
+    <input type="button" id="create" value="Создать новую запись">
+
+</body>
+
+</html>
