@@ -1,0 +1,20 @@
+{
+  "name": "node7",
+  "version": "1.0.0",
+  "description": "Lesson 19 (Node 7): TODO-list Websocket",
+  "private": true,
+  "author": "Aleksandr.Koposov",
+  "scripts": {
+    "init": "node ./src/init.js",
+    "serve": "node ./src/main.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^3.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
+    "socket.io": "^2.3.0"
+  }
+}
