@@ -38,6 +38,7 @@ const validator = require('express-validator')
 const mongoose = require('mongoose')
 let toDo = require('./models/todolist')
 let Users = require('./models/users')
+let toDoItems = require('./models/todoitems')
 
 //доступ к БД
 mongoose.connect('mongodb://localhost:27017/todo', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -209,7 +210,9 @@ app.post('/reg', [
 //app.get('/todo', passport.checkNotAuth, async function (req, res, next) { //защищаем от неавторизованных пользователей
 app.get('/todo', isAuthenticated, async function (req, res, next) { //защищаем от неавторизованных пользователей
     const toDoAll = await toDo.find({user: req.user._id}).exec()
+    //console.log(toDoAll)
     const user = await Users.findById(req.user._id).exec()
+    //console.log(toDoAll[0].text)
     res.status(200).json({title: 'ToDo', toDoAll: toDoAll[0].text, user: user})
 
 })
@@ -217,13 +220,17 @@ app.get('/todo', isAuthenticated, async function (req, res, next) { //защищ
 app.post('/todo', isAuthenticated, async function (req, res, next) {
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
    // console.log('post mtd')
-    toDoUser.text.push(req.body.add)
+    const toDoItem = new toDoItems({
+        text: req.body.add,
+        done: false
+    })
+    toDoUser.text.push(JSON.parse(JSON.stringify(toDoItem)))
     toDoUser.save(function (error, doc) {
         if (error) {
             console.log(error)
             res.status(400).json({error: 'Failed to add'})
         } else {
-            res.status(200).json({element: req.body.add})
+            res.status(200).json(JSON.parse(JSON.stringify(toDoItem)))
         }
 
 
@@ -235,12 +242,48 @@ app.post('/todo', isAuthenticated, async function (req, res, next) {
 app.delete('/todo/:id', isAuthenticated, async function (req, res, next) {
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
     //console.log('delete method')
-    toDoUser.text.splice(req.params.id, 1)
+    //console.log(toDoUser.text)
+    let indexDelete
+    toDoUser.text.forEach((el, index) => {
+        if (el._id === req.params.id) {
+            indexDelete = index
+        }
+    })
+    //console.log(indexDelete, )
+    toDoUser.text.splice(indexDelete, 1)
     await toDoUser.save(function (error, doc) {
         if (error) {
             console.log(error)
             res.status(400).json({error: 'Failed to delete'})
         } else {
+            console.log(doc, req.params.id)
+            res.status(200).json(doc)
+        }
+    })
+})
+
+app.patch('/todo/:id', isAuthenticated, async function (req, res, next) {
+    const toDoUser = await toDo.findOne({user: req.user._id}).exec()
+
+    let indexUpdate
+    toDoUser.text.forEach((el, index) => {
+        if (el._id === req.params.id) {
+            indexUpdate = index
+        }
+    })
+    //console.log(indexUpdate)
+
+    const newToDoItem = toDoUser.text[indexUpdate]
+    newToDoItem.done = !newToDoItem.done
+    //toDoUser.text.splice(indexUpdate, 1)
+    toDoUser.text.splice(indexUpdate, 1, newToDoItem)
+    //console.log(toDoUser.text[req.params.id].done)
+    await toDoUser.save(function (error, doc) {
+        if (error) {
+            console.log(error)
+            res.status(400).json({error: 'Failed to update'})
+        } else {
+            //console.log(doc, 'doc')
             res.status(200).json(doc)
         }
     })
@@ -249,14 +292,23 @@ app.delete('/todo/:id', isAuthenticated, async function (req, res, next) {
 app.put('/todo/:id', isAuthenticated, async function (req, res, next) {
     //console.log(req.body)
     const toDoUser = await toDo.findOne({user: req.user._id}).exec()
-    const indexUpdate = toDoUser.text.indexOf(req.body.edit)
-    toDoUser.text.set(req.params.id, req.body.value)
+
+    let indexUpdate
+    toDoUser.text.forEach((el, index) => {
+        if (el._id === req.params.id) {
+            indexUpdate = index
+        }
+    })
+
+    const newToDoItem = toDoUser.text[indexUpdate]
+    newToDoItem.text = req.body.value
+    toDoUser.text.splice(indexUpdate, 1, newToDoItem)
     toDoUser.save(function (error, doc) {
         if (error) {
             console.log(error)
             res.status(400).json({error: 'Failed to update'})
         } else {
-            res.status(200).json(doc)
+            res.status(200).json(newToDoItem)
         }
     })
 })

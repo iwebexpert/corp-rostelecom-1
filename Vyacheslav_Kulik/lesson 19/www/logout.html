@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ToDoList</title>
+    <title>Registration</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -15,20 +15,19 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../public/main.css">
 <body>
 
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
-        <a class="navbar-brand" href="index.html">Main</a>
+        <a class="navbar-brand" href="/">Main</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="todo.html">ToDo List</a>
-                <a class="nav-item nav-link" href="logout.html">Logout</a>
+                <a class="nav-item nav-link toDoList" href="/todo">ToDo List</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
             </div>
         </div>
     </nav>
@@ -36,36 +35,10 @@
 </div>
 
 <div class="container">
-
-    <div class="d-flex flex-column align-items-end">
-        <div>
-            <span>login: <strong class="emailData"></strong></span>
-            <div class="d-flex justify-content-end">
-                <a href="logout.html" class="">Logout</a>
-            </div>
-        </div>
-    </div>
-
-
-    <div>
-        <h2 class="text-center mt-3">ToDo list</h2>
-
-        <form>
-
-            <div class="form-group d-flex justify-content-around">
-                <input type="text" class="col-10 col-form-label" name="add">
-                <button class="btn btn-light col-1 addButton" name="add_button" value="add">Add</button>
-            </div>
-
-            <div class="list-group addDataToDo">
-            </div>
-        </form>
-
-
-    </div>
+    <p class="text-center"><b>You logout</b></p>
 </div>
 
 </body>
-<script src="../public/main.js" defer></script>
-<script src="../public/todo.js" defer></script>
+<script src="main.js" defer></script>
+<script src="logout.js" defer></script>
 </html>

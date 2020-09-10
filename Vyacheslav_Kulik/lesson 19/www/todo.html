@@ -15,20 +15,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../public/main.css">
+
+<script src="/socket.io/socket.io.js"></script>
+<link rel="stylesheet" href="main.css">
 <body>
 
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mt-3">
-        <a class="navbar-brand" href="index.html">Main</a>
+        <a class="navbar-brand" href="/">Main</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="todo.html">ToDo List</a>
-                <a class="nav-item nav-link" href="logout.html">Logout</a>
+                <a class="nav-item nav-link" href="/todo">ToDo List</a>
+                <a class="nav-item nav-link" href="/logout">Logout</a>
             </div>
         </div>
     </nav>
@@ -41,7 +43,7 @@
         <div>
             <span>login: <strong class="emailData"></strong></span>
             <div class="d-flex justify-content-end">
-                <a href="logout.html" class="">Logout</a>
+                <a href="/logout" class="">Logout</a>
             </div>
         </div>
     </div>
@@ -66,6 +68,6 @@
 </div>
 
 </body>
-<script src="../public/main.js" defer></script>
-<script src="../public/todo.js" defer></script>
+<script src="main.js" defer></script>
+<script src="todo.js" defer></script>
 </html>
