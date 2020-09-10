@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>To Do List</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.querySelector('#list');
+            const create = document.querySelector('#create');
+
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+            if (!token) {
+                window.location = '/auth';
+            }
+
+            //Устанавливаем постоянное соединение
+            const socket = io.connect(`http://localhost:4000?token=${token}`);
+
+            socket.on(`switched:${user._id}`, (toDoItem) => {
+                console.log('Сервер обновил статус дело', toDoItem);
+
+                const li = document.querySelector(`[data-id="${toDoItem._id}"]`);
+                if (li) {
+                    li.innerHTML = "";
+                    const button = document.createElement('button');
+                    const checkbox = document.createElement('input');
+                    const p = document.createElement('div');
+                    button.textContent = 'Удалить';
+
+                    li.dataset.id = toDoItem._id;
+                    p.textContent = toDoItem.name;
+
+                    checkbox.type = 'checkbox';
+                    checkbox.checked = toDoItem.checked;
+                    li.appendChild(checkbox);
+                    li.appendChild(p);
+                    li.appendChild(button);
+                }
+            });
+
+            socket.on(`created:${user._id}`, (toDoItem) => {
+                console.log('Сервер создал дело', toDoItem);
+
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                const checkbox = document.createElement('input');
+                const p = document.createElement('div');
+                button.textContent = 'Удалить';
+
+                li.dataset.id = toDoItem._id;
+                p.textContent = toDoItem.name;
+
+                checkbox.type = 'checkbox';
+                checkbox.checked = toDoItem.checked;
+                li.appendChild(checkbox);
+                li.appendChild(p);
+                li.appendChild(button);
+                list.appendChild(li);
+            });
+
+            socket.on(`deleted:${user._id}`, (toDoItemId) => {
+                console.log('Сервер удалил дело', toDoItemId);
+
+                const toDoItemElement = document.querySelector(`[data-id="${toDoItemId}"]`);
+                if (toDoItemElement) {
+                    toDoItemElement.remove();
+                }
+            });
+
+            list.addEventListener('click', (event) => {
+                if (event.target.tagName === 'BUTTON') {
+                    const li = event.target.parentElement;
+                    const toDoItemId = li.dataset.id;
+                    console.log('Отправлено на сервер событие delete', toDoItemId);
+                    socket.emit('delete', toDoItemId);
+                    event.preventDefault();
+                }
+                if (event.target.tagName === 'INPUT') {
+                    const li = event.target.parentElement;
+                    const toDoItemId = li.dataset.id;
+                    console.log('Отправлено на сервер событие switch', toDoItemId);
+                    socket.emit('switch', toDoItemId);
+                    event.preventDefault();
+                }
+            });
+
+            create.addEventListener('click', (event) => {
+                const newToDoItem = {
+                    name: prompt('Введите название дела', 'ХЗ'),
+                    description: prompt('Введите описание дела', 'ХЗ................'),
+                    user: user._id,
+                };
+                console.log('Отправлено на сервер событие create', newToDoItem);
+                socket.emit('create', newToDoItem);
+                event.preventDefault();
+            });
+
+
+
+            //Получение чатов
+            fetch('/todolist', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        localStorage.removeItem('token');
+                        window.location = '/auth';
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then((toDoList) => {
+                    toDoList.forEach((toDoListItem) => {
+                        const li = document.createElement('li');
+                        const button = document.createElement('button');
+                        const checkbox = document.createElement('input');
+                        const p = document.createElement('div');
+                        button.textContent = 'Удалить';
+
+                        li.dataset.id = toDoListItem._id;
+                        p.textContent = toDoListItem.name;
+
+                        checkbox.type = 'checkbox';
+                        checkbox.checked = toDoListItem.checked;
+                        li.appendChild(checkbox);
+                        li.appendChild(p);
+                        li.appendChild(button);
+                        list.appendChild(li);
+                    });
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="toDoListClass">
+        <div class="toDoListClassCurr">
+            <h2>Шо делать :-)</h2>
+            <ul id="list"></ul>
+        </div>
+        <input type="button" id="create" value="Создать новое дело">
+    </div>
+</body>
+
+</html>
