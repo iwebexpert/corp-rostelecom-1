@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node 7 - Auth</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script>
+        let token = localStorage.getItem('api-token')
+        let user = JSON.parse(localStorage.getItem('user') || '') || ''
+        if (!user || !token) {
+            window.location = '/auth'
+        }
+    </script>
+</head>
+
+<body>
+<nav>
+    <div class="nav-wrapper white left-align">
+        <a href="#" class="brand-logo black-text">TODO List + Websocket</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s8">
+                <h5>Список дел</h5>
+                <div class="center-align">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Введите название задачи" id="add_name" type="text">
+                            <label for="add_name">Название задачи</label>
+                        </div>
+                        <p>В демонстрации работы с API обойдёмся только названием</p>
+                    </div>
+                    <a id="add_btn" class="waves-effect waves-light btn">
+                        <i class="material-icons left">get_app</i>Добавить
+                    </a>
+                </div>
+                <hr>
+                <div id="fetch-list"></div>
+            </div>
+            <div class="col s4">
+                <h5>Пользователи</h5>
+                <div id="fetch-users"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+$(document).ready(function () {
+    M.AutoInit()
+
+    const socket = io.connect(`http://localhost:3000?token=${token}`)
+    socket.emit('auth', user)
+    socket.emit('todo/list')
+    socket.on('users', (data) => {
+        $('#fetch-users').html(
+          '<table><tbody>' +
+          data.map((i, idx) =>
+          `<tr class="${i.name ? 'task' : ''}"><td>${idx + 1})</td><td>${i.name}</td></tr>`).join('') +
+          '</tbody></table>'
+        )
+    })
+    socket.on('list', (data) => {
+        M.toast({ html: 'Данные получены', classes: 'green' })
+        $('#fetch-list').html(
+          '<table><tbody>' +
+          data.map(i => i.divider
+              ? ''
+              : (i.header
+                ? `<tr class="lightblue"><td colspan="2">${i.header}</td></tr>`
+                : `<tr class="${i.name ? 'task' : ''}">
+                        <td>
+                            <a class="waves-effect waves-light btn ${i.done ? 'green' : ''} done" data-id="${i._id}" data-done="${i.done}">
+                                <i class="material-icons left">${i.done ? 'repeat' : 'check'}</i>
+                            </a>
+                        </td>
+                        <td>${i.header || i.name}</td>
+                        <td>
+                            <a class="waves-effect waves-light btn red delete" data-id="${i._id}">
+                                <i class="material-icons left">delete</i>Удалить
+                            </a>
+                        </td>
+                    </tr>`)
+            ).join('') +
+          '</tbody></table>')
+    })
+    socket.on('add', () => {
+        M.toast({ html: 'Задача добавлена', classes: 'green' })
+        socket.emit('todo/list')
+    })
+    socket.on('delete', () => {
+        M.toast({ html: 'Задача удалена', classes: 'green' })
+        socket.emit('todo/list')
+    })
+    socket.on('update', () => {
+        M.toast({ html: 'Задача обновлена', classes: 'green' })
+        socket.emit('todo/list')
+    })
+
+    $('body').on('click', '.task a.delete', function () {
+        const id = $(this).data('id')
+        socket.emit('todo/delete', id)
+    })
+
+    $('body').on('click', '.task a.done', function () {
+        const id = $(this).data('id')
+        const done = $(this).data('done')
+        socket.emit('todo/update', {
+          _id: id,
+          done: !done
+        })
+    })
+
+    $('#add_btn').on('click', async () => {
+        socket.emit('todo/add', {
+            name: $('#add_name').val(),
+            desc: '',
+            done: false,
+            important: true,
+            planned: new Date(2020, 8, 20, 20, 20, 20),
+            created: new Date()
+        })
+    })
+})
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    return
+    const list = document.querySelector('#list');
+    const create = document.querySelector('#create');
+
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+    if(!token){
+        window.location = '/auth';
+    }
+
+    //Устанавливаем постоянное соединение
+    const socket = io.connect(`http://localhost:4000?token=${token}`);
+
+    socket.on(`created:${user._id}`, (chat) => {
+        console.log('Сервер создал чат', chat);
+
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.textContent = 'Удалить чат';
+
+        li.dataset.id = chat._id;
+        li.textContent = chat.title;
+        li.appendChild(button);
+        list.appendChild(li);
+    });
+
+    socket.on(`deleted:${user._id}`, (chatId) => {
+        console.log('Сервер удалил чат', chatId);
+
+        const chatElement = document.querySelector(`[data-id="${chatId}"]`);
+        if(chatElement){
+            chatElement.remove();
+        }
+    });
+
+    list.addEventListener('click', (event) => {
+        if(event.target.tagName === 'BUTTON'){
+            const li = event.target.parentElement;
+            const idChat = li.dataset.id;
+            console.log('Отправлено на сервер событие delete', idChat);
+            socket.emit('delete', idChat);
+            event.preventDefault();
+        }
+    });
+
+    create.addEventListener('click', (event) => {
+        const newChat = {
+            title: prompt('Введите название чата', 'Chat 1'),
+            user: user._id,
+        };
+        console.log('Отправлено на сервер событие create', newChat);
+        socket.emit('create', newChat);
+        event.preventDefault();
+    });
+
+
+
+    //Получение чатов
+    fetch('/chats', {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+    })
+      .then((response) => {
+          if(response.status !== 200){
+              localStorage.removeItem('token');
+              window.location = '/auth';
+              return null;
+          }
+          return response.json();
+      })
+      .then((chats) => {
+          chats.forEach((chat) => {
+              const li = document.createElement('li');
+              const button = document.createElement('button');
+              button.textContent = 'Удалить чат';
+
+              li.dataset.id = chat._id;
+              li.textContent = chat.title;
+              li.appendChild(button);
+              list.appendChild(li);
+          });
+      });
+});
+</script>
+</body>
+
+</html>
