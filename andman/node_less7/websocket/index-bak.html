@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        .todolist {
+            width: 50%;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .checked {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .item-todolist {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid blue;
+            padding: 5px;
+            align-items: center;
+        }
+
+        .todo-item {
+            width: 70%;
+            text-align: left;
+        }
+
+        .todo-button {
+            width: 15%;
+            text-align: right;
+            min-width: 100px;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .add-todo {
+            margin-top: 5px;
+        }
+
+        .btn {
+            padding: 5px;
+        }
+
+        .btn-add {
+            width: auto;
+        }
+
+        .err {
+            margin-bottom: 10px;
+        }
+
+        .err-nouserdata::after {
+            content: 'не введены важные данные (email, пароль)';
+            color: red;
+            margin-left: 5px;
+        }
+
+        .err-repassword::after {
+            content: 'пароли не совпадают';
+            color: red;
+            margin-left: 5px;
+        }
+    </style>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.querySelector('.todolist');
+            const create = document.querySelector('#create');
+            const createText = document.querySelector('#create-text');
+
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+            if (!token) {
+                window.location = '/auth';
+            }
+
+            //Устанавливаем постоянное соединение
+            const socket = io.connect(`http://localhost:4000?token=${token}`);
+
+            socket.on(`created:`, (todo) => {
+                console.log('Сервер создал задачу', todo);
+                const todolistItem = document.createElement('div');
+                todolistItem.classList.add('item-todolist');
+                //div задачи 
+                const todoItem = document.createElement('div');
+                todoItem.classList.add('todo-item');
+                //Вставим название и статус задачи 
+                if (todo.checked) {
+                    todoItem.innerHTML = `<input type="checkbox" name="todoid_${todo._id}" id="${todo._id}" checked><label for="${todo._id}" class="checked">${todo.todo}</label>`;
+                }
+                else {
+                    todoItem.innerHTML = `<input type="checkbox" name="todoid_${todo._id}" id="${todo._id}"><label for="${todo._id}">${todo.todo}</label>`;
+                }
+                todolistItem.appendChild(todoItem);
+                //div для кнопки SAVE
+                const saveItem = document.createElement('div');
+                saveItem.classList.add('todo-button');
+                const saveBtn = document.createElement('button');
+                saveBtn.classList.add('btn');
+                saveBtn.textContent = 'Сохранить';
+                saveBtn.dataset.action = 'SAVE';
+
+                saveItem.appendChild(saveBtn);
+                todolistItem.appendChild(saveItem);
+                //div для кнопки DEL
+                const delItem = document.createElement('div');
+                delItem.classList.add('todo-button');
+                const delBtn = document.createElement('button');
+                delBtn.classList.add('btn');
+                delBtn.textContent = 'Удалить';
+                delBtn.dataset.action = 'DELETE';
+
+                delItem.appendChild(delBtn);
+                todolistItem.appendChild(delItem);
+
+                todolistItem.dataset.id = todo._id;
+                list.appendChild(todolistItem);
+            });
+
+            socket.on(`deleted:`, (todoId) => {
+                console.log('Сервер удалил задачу', todoId);
+
+                const todoElement = document.querySelector(`[data-id="${todoId}"]`);
+                if (todoElement) {
+                    todoElement.remove();
+                }
+            });
+
+            socket.on(`patched:`, (todo) => {
+                console.log('Сервер сохранил задачу', todo.todoId);
+
+                const todoElement = document.querySelector(`[data-id="${todo.todoId}"]`);
+
+                todoElement.children[0].children[0].checked = todo.checked;
+                if (todo.checked) {
+                    todoElement.children[0].children[1].classList.add('checked');
+                } else {
+                    todoElement.children[0].children[1].classList.remove('checked');
+                }
+                // if (todoElement) {
+                //     todoElement.remove();
+                // }
+            });
+
+            list.addEventListener('click', (event) => {
+                if (event.target.tagName === 'BUTTON' && event.target.dataset.action === 'DELETE') {
+                    const li = event.target.parentElement.parentElement;
+                    const idTodo = li.dataset.id;
+                    console.log('Отправлено на сервер событие delete', idTodo);
+                    socket.emit('delete', idTodo);
+                    event.preventDefault();
+                }
+                else if (event.target.tagName === 'BUTTON' && event.target.dataset.action === 'SAVE') {
+                    const li = event.target.parentElement.parentElement;
+                    const todoId = li.dataset.id;
+                    console.log('Отправлено на сервер событие patch', todoId, li.children[0].children[0].checked);
+                    socket.emit('patch', {
+                        'todoId': todoId,
+                        'checked': li.children[0].children[0].checked
+                    }
+                    );
+                    event.preventDefault();
+
+                }
+            });
+
+            create.addEventListener('click', (event) => {
+                if (createText.value !== '') {
+                    const newChat = {
+                        todo: createText.value,
+                        checked: false,
+                    };
+                    console.log('Отправлено на сервер событие create', newChat);
+                    socket.emit('create', newChat);
+                    event.preventDefault();
+                }
+            });
+
+
+
+            //Получение задач
+            fetch('/todos', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        localStorage.removeItem('token');
+                        window.location = '/auth';
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then((todos) => {
+                    todos.forEach((todo) => {
+                        //общий div
+                        const todolistItem = document.createElement('div');
+                        todolistItem.classList.add('item-todolist');
+                        //div задачи 
+                        const todoItem = document.createElement('div');
+                        todoItem.classList.add('todo-item');
+                        //Вставим название и статус задачи 
+                        if (todo.checked) {
+                            todoItem.innerHTML = `<input type="checkbox" name="todoid_${todo._id}" id="${todo._id}" checked><label for="${todo._id}" class="checked">${todo.todo}</label>`;
+                        }
+                        else {
+                            todoItem.innerHTML = `<input type="checkbox" name="todoid_${todo._id}" id="${todo._id}"><label for="${todo._id}">${todo.todo}</label>`;
+                        }
+                        todolistItem.appendChild(todoItem);
+                        //div для кнопки SAVE
+                        const saveItem = document.createElement('div');
+                        saveItem.classList.add('todo-button');
+
+                        const saveBtn = document.createElement('button');
+                        saveBtn.classList.add('btn');
+                        saveBtn.textContent = 'Сохранить';
+                        saveBtn.dataset.action = 'SAVE';
+                        saveItem.appendChild(saveBtn);
+                        todolistItem.appendChild(saveItem);
+                        //div для кнопки DEL
+                        const delItem = document.createElement('div');
+                        delItem.classList.add('todo-button');
+                        const delBtn = document.createElement('button');
+                        delBtn.classList.add('btn');
+                        delBtn.textContent = 'Удалить';
+                        delBtn.dataset.action = 'DELETE';
+                        delItem.appendChild(delBtn);
+                        todolistItem.appendChild(delItem);
+
+                        todolistItem.dataset.id = todo._id;
+                        list.appendChild(todolistItem);
+                    });
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="todolist">
+
+        <h2>Список задач</h2>
+
+        <div class="item-todolist">
+            <div class="todo-item">
+                <input class="input-text add-todo" id="create-text" type="text"
+                    placeholder="Введите наименование задачи" name="todotext">
+            </div>
+            <div class="todo-button">
+                <input class="btn btn-add" id="create" type="button" value="Добавить">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
