@@ -1,0 +1,9 @@
+<div>
+    <h2>Сообщения</h2>
+    <p><a href="/logout">Выйти</a></p>
+        <ul>
+            {{#each messages}}
+                <li><a href="/messages/{{this._id}}">{{this.title}} {{this.text}} {{this.chat}}</a></li>
+            {{/each}}
+        </ul>
+</div>

@@ -1,0 +1,16 @@
+{{#if error}}
+<div><strong>Неправильный логин/пароль</strong></div>
+{{/if}}
+
+<form action="/auth" method="POST">
+<div>
+    <input type="text" name="email" placeholder="Введите email">
+</div>
+<div>
+    <input type="password" name="password" placeholder="Введите ваш пароль">
+</div>
+<div>
+    <input type="submit" value="Войти">
+    <p><a href="/register">Зарегистрироваться</a></p>
+</div>
+</form>
