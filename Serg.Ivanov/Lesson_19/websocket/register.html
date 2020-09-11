@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const email = document.querySelector('#email');
+            const password = document.querySelector('#password');
+            const repassword = document.querySelector('#repassword');
+            const firstName = document.querySelector('#firstName');
+            const lastName = document.querySelector('#lastName');
+            const sendBtn = document.querySelector('#sendBtn');
+
+            sendBtn.addEventListener('click', (event) => {
+                localStorage.removeItem('token');
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email.value,
+                        password: password.value,
+                        repassword: repassword.value,
+                        firstName: firstName.value,
+                        lastName: lastName.value,
+                    }),
+                })
+                    .then((response) => {
+                        if (response.status !== 200) {
+                            return { token: null };
+                        }
+                        return response.json();
+                    })
+                    .then((response) => {
+                        if (response.token) {
+                            const { token, ...user } = response;
+                            localStorage.setItem('token', token);
+                            localStorage.setItem('user', JSON.stringify(user));
+
+                            window.location = '/auth';
+                        }
+                    });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <form action="/register" method="POST">
+        <div>
+            <input type="text" id="email" placeholder="Введите E-mail">
+        </div>
+        <div>
+            <input type="text" id="firstName" placeholder="Введите имя">
+        </div>
+        <div>
+            <input type="text" id="lastName" placeholder="Введите фамилию">
+        </div>
+        <div>
+            <input type="password" id="password" placeholder="Введите пароль">
+        </div>
+        <div>
+            <input type="password" id="repassword" placeholder="Повторите пароль">
+        </div>
+        <div>
+            <input type="submit" id="sendBtn" value="Зарегистрироваться">
+            <p><a href="/auth">Форма входа на сайт</a></p>
+        </div>
+    </form>
+</body>
+
+</html>
