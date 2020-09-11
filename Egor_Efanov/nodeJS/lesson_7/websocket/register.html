@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const username = document.querySelector('#username');
+            const password = document.querySelector('#password');
+            const sendBtn = document.querySelector('#btn');
+
+            sendBtn.addEventListener('click', (event) => {
+                localStorage.removeItem('token');
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: username.value,
+                        firstName: firstName.value,
+                        lastName: lastName.value,
+                        password: password.value,
+                        repassword: repassword.value,
+                    }),
+                })
+                    .then((response) => {
+                        if (response.status !== 200) {
+                            return { token: null };
+                        }
+                        return response.json();
+                    })
+                    .then((response) => {
+                        if (response.token) {
+                            const { token, ...user } = response;
+                            localStorage.setItem('token', token);
+                            localStorage.setItem('user', JSON.stringify(user));
+
+                            window.location = '/auth';
+                        }
+                    });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="form">
+        <div>
+            <input id="username" type="text" name="email" placeholder="Введите E-mail">
+        </div>
+        <div>
+            <input id="firstName" type="text" name="firstName" placeholder="Введите имя">
+        </div>
+        <div>
+            <input id="lastName" type="text" name="lastName" placeholder="Введите фамилию">
+        </div>
+        <div>
+            <input id="password" type="password" name="password" placeholder="Введите пароль">
+        </div>
+        <div>
+            <input id="repassword" type="password" name="repassword" placeholder="Повторите пароль">
+        </div>
+        <div>
+            <input id="btn" type="submit" value="Зарегистрироваться">
+            <p><a href="/auth">Форма входа на сайт</a></p>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
