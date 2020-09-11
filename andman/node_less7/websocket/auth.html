@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        .todolist {
+            width: 50%;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 5px;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const username = document.querySelector('#username');
+            const password = document.querySelector('#password');
+            const sendBtn = document.querySelector('#sendBtn');
+
+            sendBtn.addEventListener('click', (event) => {
+                localStorage.removeItem('token');
+                //console.log(username.value, ' - ', password.value);
+                fetch('/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username.value,
+                        password: password.value,
+                    }),
+                })
+                    .then((response) => {
+                        if (response.status !== 200) {
+                            return { token: null };
+                        }
+                        return response.json();
+                    })
+                    .then((response) => {
+                        if (response.token) {
+                            const { token, ...user } = response;
+                            console.log(token);
+                            localStorage.setItem('token', token);
+                            localStorage.setItem('user', JSON.stringify(user));
+
+                            window.location = '/';
+                        }
+                    });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="todolist">
+        <h2>Авторизация</h2>
+        <div>
+            <input id="username" class="input-text" type="text" placeholder="Введите e-mail">
+        </div>
+        <div>
+            <input id="password" class="input-text" type="password" placeholder="Введите password">
+        </div>
+        <div>
+            <input id="sendBtn" class="btn" type="submit" value="Войти">
+            <p><a href="/register">Регистрация</a></p>
+        </div>
+    </div>
+</body>
+
+</html>

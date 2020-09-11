@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        .todolist {
+            width: 50%;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 5px;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const email = document.querySelector('#email');
+            const password = document.querySelector('#password');
+            const repassword = document.querySelector('#repassword');
+            const firstName = document.querySelector('#firstName');
+            const lastName = document.querySelector('#lastName');
+            const sendBtn = document.querySelector('#sendBtn');
+
+            sendBtn.addEventListener('click', (event) => {
+                fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email.value,
+                        password: password.value,
+                        repassword: repassword.value,
+                        firstName: firstName.value,
+                        lastName: lastName.value,
+                    }),
+                })
+                    .then((response) => {
+                        if (response.status !== 201) {
+                            return response.json();
+                        }
+                        window.location = '/auth';
+                    });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="todolist">
+        <h2>Регистрация</h2>
+        <div>
+            <input type="email" class="input-text" id="email" placeholder="Введите E-mail">
+        </div>
+        <div>
+            <input type="text" class="input-text" id="firstName" placeholder="Введите имя">
+        </div>
+        <div>
+            <input type="text" class="input-text" id="lastName" placeholder="Введите фамилию">
+        </div>
+        <div>
+            <input type="password" class="input-text" id="password" placeholder="Введите пароль">
+        </div>
+        <div>
+            <input type="password" class="input-text" id="repassword" placeholder="Повторите пароль">
+        </div>
+        <div>
+            <input type="submit" class="btn" value="Зарегистрироваться" id="sendBtn">
+            <p><a href="/auth">Форма входа на сайт</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
