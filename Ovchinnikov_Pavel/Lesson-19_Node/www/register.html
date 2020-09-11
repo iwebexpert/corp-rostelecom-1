@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./main.js" defer></script>
+</head>
+
+<body>
+
+    <h1 class="mein_header">
+        ДЗ к уроку "Урок 7. Использование websockets в связке с фреймворком Express"
+    </h1>
+    <hr>
+    <div class="header">
+        <div>
+            <b id="label_error" class="error"></b>
+        </div>
+        <div class="form">
+            <div>
+                <input id="username" type="text" name="email" placeholder="Введите E-mail">
+            </div>
+            <div>
+                <input id="firstName" type="text" name="firstName" placeholder="Введите имя">
+            </div>
+            <div>
+                <input id="lastName" type="text" name="lastName" placeholder="Введите фамилию">
+            </div>
+            <div>
+                <input id="password" type="password" name="password" placeholder="Введите пароль">
+            </div>
+            <div>
+                <input id="repassword" type="password" name="repassword" placeholder="Повторите пароль">
+            </div>
+            <div>
+                <input id="btn_register" type="submit" value="Зарегистрироваться" onclick="onRegister()">
+                <p><a href="/auth">Я уже зарегестрирован</a></p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p>&copy; 2020</p>
+</body>
+
+</html>

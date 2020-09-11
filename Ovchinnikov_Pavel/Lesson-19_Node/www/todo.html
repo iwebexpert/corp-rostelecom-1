@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./main.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.getElementById('myUL');
+            const btnCreate = document.getElementById('btnCreate');
+            const inputTask = document.getElementById("myInput");
+            const logout = document.getElementById("logout");
+            const label_user = document.getElementById("user");
+
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+            if (!token) {
+                window.location = '/auth';
+            }
+
+            label_user.textContent = "Р›РѕРіРёРЅ: " + user.email;
+
+            //РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕСЃС‚РѕСЏРЅРЅРѕРµ СЃРѕРµРґРёРЅРµРЅРёРµ
+            const socket = io.connect(`http://localhost:3000?token=${token}`);
+
+            socket.on(`created:${user._id}`, (task) => {
+                console.log('РЎРµСЂРІРµСЂ СЃРѕР·РґР°Р» Р·Р°РґР°С‡Сѓ', task);
+                taskAdd(task);
+            });
+
+            socket.on(`deleted:${user._id}`, (taskId) => {
+                console.log('РЎРµСЂРІРµСЂ СѓРґР°Р»РёР» Р·Р°РґР°С‡Сѓ', taskId);
+
+                const taskElement = document.querySelector(`[data-id="${taskId}"]`);
+                if (taskElement) {
+                    taskElement.remove();
+                }
+            });
+
+            socket.on(`updated:${user._id}`, (task) => {
+                console.log('РЎРµСЂРІРµСЂ РѕР±РЅРѕРІРёР» Р·Р°РґР°С‡Сѓ', task);
+
+                const taskElement = document.querySelector(`[data-id="${task.id}"]`);
+                if (taskElement) {
+                    if (task.status)
+                        taskElement.classList.add("checked");
+                    else
+                        taskElement.classList.remove("checked");
+                }
+            });
+
+            function taskAdd(task) {
+                let li = document.createElement('li');
+                li.dataset.id = task._id;
+                li.textContent = task.name;
+
+                if (task.status)
+                    li.classList.add("checked");
+
+                li.onclick = function () {
+                    const updateTask = {
+                        id: task._id,
+                        status: !li.classList.contains("checked"),
+                    };
+
+                    console.log('РћС‚РїСЂР°РІР»РµРЅРѕ РЅР° СЃРµСЂРІРµСЂ СЃРѕР±С‹С‚РёРµ update', updateTask);
+                    socket.emit('update', updateTask);
+                };
+
+                let span = document.createElement("SPAN");
+                span.className = "close";
+                span.textContent = "\u00D7";
+
+                span.onclick = function () {
+                    console.log('РћС‚РїСЂР°РІР»РµРЅРѕ РЅР° СЃРµСЂРІРµСЂ СЃРѕР±С‹С‚РёРµ delete', task._id);
+                    socket.emit('delete', task._id);
+                };
+
+                li.appendChild(span);
+
+                list.appendChild(li);
+            }
+
+            function taskCreate() {
+                if (inputTask.value === '') {
+                    alert("РќР°Р·РІР°РЅРёРµ РІ РїРѕР»Рµ 'РЎРїРёСЃРѕРє РґРµР»' РЅРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј!");
+                    return;
+                }
+
+                const newTask = {
+                    name: inputTask.value,
+                    user: user._id,
+                };
+
+                inputTask.value = "";
+
+                console.log('РћС‚РїСЂР°РІР»РµРЅРѕ РЅР° СЃРµСЂРІРµСЂ СЃРѕР±С‹С‚РёРµ create', newTask);
+                socket.emit('create', newTask);
+            }
+
+            inputTask.onkeyup = function (event) {
+                if (event.keyCode == 13)
+                    taskCreate();
+            }
+
+            btnCreate.onclick = function () {
+                taskCreate();
+            };
+
+            logout.onclick = function () {
+                if (localStorage.getItem('token')) {
+                    localStorage.removeItem('token')
+                }
+                if (localStorage.getItem('user')) {
+                    localStorage.removeItem('user')
+                }
+            };
+
+
+            //РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° Р·Р°РґР°С‡
+            fetch('/todo', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        localStorage.removeItem('token');
+                        window.location = '/auth';
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then((tasks) => {
+                    tasks.forEach((task) => {
+                        taskAdd(task);
+                    });
+                });
+        })
+    </script>
+</head>
+
+<body>
+
+    <h1 class="mein_header">
+        Р”Р— Рє СѓСЂРѕРєСѓ "РЈСЂРѕРє 7. РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ websockets РІ СЃРІСЏР·РєРµ СЃ С„СЂРµР№РјРІРѕСЂРєРѕРј Express"
+    </h1>
+    <hr>
+
+    <div class="user">
+        <p id="user"></p>
+    </div>
+    <div class="logout">
+        <a id="logout" href="/auth">Р’С‹Р№С‚Рё</a>
+    </div>
+
+    <div class="header">
+        <h2 style="margin:5px">РЎРїРёСЃРѕРє РґРµР»</h2>
+        <input type="text" id="myInput" name="myInput" placeholder="РќР°Р·РІР°РЅРёРµ...">
+        <span id="btnCreate" class="addBtn">Р”РѕР±Р°РІРёС‚СЊ</span>
+    </div>
+
+    <div>
+
+        <ul id="myUL">
+
+        </ul>
+    </div>
+
+    <hr>
+    <p>&copy; 2020</p>
+</body>
+
+</html>
