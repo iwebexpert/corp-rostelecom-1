@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <script>
+        // дожидаемся пока DOM загрузится
+        document.addEventListener('DOMContentLoaded', () => {
+            // выбираем все поля
+            const username = document.querySelector('#username');
+            const password = document.querySelector('#password');
+            const sendBtn = document.querySelector('#sendBtn');
+
+            // обработчик на кнопку на событие клик
+            sendBtn.addEventListener('click', (event) => {
+                localStorage.removeItem('token');  // если был старый токен, о его удаляем
+                // просто авторизация и просто сохранение токина   
+                fetch('/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    // берем данные их body
+                    body: JSON.stringify({
+                        username: username.value,
+                        password: password.value,
+                    }),
+                })
+                    // 
+                    .then((response) => {
+                        // удалось ли авторизоватся
+                        if (response.status !== 200) {
+                            return { token: null };
+                        }
+                        return response.json();
+                    })
+                    // сюда приходят данные которые мы можем сохранить в localstorige
+                    .then((response) => {
+                        if (response.token) {
+                            const { token, ...user } = response;
+                            // сохраняем данные в localStorage
+                            localStorage.setItem('token', token);
+                            // localStorage хранит текст, не структуры
+                            localStorage.setItem('user', JSON.stringify(user));
+
+                            window.location = '/';   // перенаправление на главную страницу
+                        }
+                    });
+                event.preventDefault();  // отменим отправку данных по умолчанию, 
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <input id="username" type="text" placeholder="Введите e-mail">
+    </div>
+    <div>
+        <input id="password" type="password" placeholder="Введите password">
+    </div>
+    <div>
+        <input id="sendBtn" type="submit" value="Войти">
+    </div>
+    <p><a href="/register">Пройти регистрацию</a></p>
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOs</title>
+    <!-- чтобы работать в web сокетами-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // дожидаемся пока документ загрузится
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.querySelector('#list');      // поля
+            const create = document.querySelector('#create');  // кнопка
+
+            const token = localStorage.getItem('token');   // получим токен из localStorage
+            // получим структурe JS пользователя из localStorage
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+            // если нет токена, редирект на авторизацию
+            if (!token) {
+                window.location = '/auth';
+            }
+
+            //Устанавливаем постоянное соединение
+            // указываем сервер и токен
+            const socket = io.connect(`http://localhost:4000?token=${token}`);
+
+            // подписываемся на событие создать    
+            socket.on(`created:${user._id}`, (todo) => {
+                console.log('Сервер создал todo', todo);
+
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = 'Удалить todo';
+
+                // добавляем интерактивность создание 
+                li.dataset.id = todo._id;
+                li.textContent = todo.task;
+                li.appendChild(button);
+                list.appendChild(li);
+            });
+
+            // подписываемся на событие удалить
+            socket.on(`deleted:${user._id}`, (todoId) => {
+                console.log('Сервер удалил todo', todoId);
+
+                // добавляем интерактивность
+                const todoElement = document.querySelector(`[data-id="${todoId}"]`);
+                if (todoElement) {
+                    todoElement.remove();
+                }
+            });
+            // навешываем на родителя    
+            list.addEventListener('click', (event) => {
+                if (event.target.tagName === 'BUTTON') {  // сравнивается с учетом регистра
+                    const li = event.target.parentElement;
+                    const idTodo = li.dataset.id;
+                    console.log('Отправлено на сервер событие delete', idTodo);
+                    socket.emit('delete', idTodo);  // отправляем событие на сервер
+                    event.preventDefault();  // отключаем обработку формы по умолчанию
+                }
+            });
+
+            create.addEventListener('click', (event) => {
+                const newTodo = {
+                    task: prompt('Введите название новой задачи', 'TODO 1'),
+                    isOK: false,
+                    user: user._id,
+                };
+                console.log('Отправлено на сервер событие create', newTodo);
+                socket.emit('create', newTodo);
+                event.preventDefault();
+            });
+
+
+
+            //Получение чатов
+            fetch('/todo', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,   // Bearer - это тип токена
+                },
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        // если не авторизован
+                        localStorage.removeItem('token');  // удаляем токин
+                        window.location = '/auth';  // и редирект на авторизацию
+                        return null;
+                    }
+                    return response.json();  // если все хорошо
+                })
+                .then((todos) => {
+                    // перебираем todo и создаем их динамически
+                    todos.forEach((todo) => {
+                        const li = document.createElement('li');
+                        const button = document.createElement('button');  // создаем кнопку удаления todo
+                        button.textContent = 'Удалить todo';
+
+                        li.dataset.id = todo._id;
+                        li.textContent = todo.task;
+                        li.appendChild(button);
+                        list.appendChild(li);
+                    });
+                });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- сюда мы будем добавлять todo -->
+    <ul id="list"></ul>
+    <input type="button" id="create" value="Создать новый todo">
+</body>
+
+</html>

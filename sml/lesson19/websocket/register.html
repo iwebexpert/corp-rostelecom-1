@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация новогоп пользователя</title>
+  <script>
+    // дожидаемся пока DOM загрузится
+    document.addEventListener('DOMContentLoaded', () => {
+      // выбираем все поля
+      const username = document.querySelector('#username');
+      const firstName = document.querySelector('#firstName');
+      const lastName = document.querySelector('#lastName');
+      const password = document.querySelector('#password');
+      const repassword = document.querySelector('#repassword');
+      const sendBtn = document.querySelector('#sendBtn');
+
+      // обработчик на кнопку на событие клик
+      sendBtn.addEventListener('click', (event) => {
+        localStorage.removeItem('token');  // если был старый токен, о его удаляем
+        // просто авторизация и просто сохранение токина   
+        fetch('/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // берем данные их body
+          body: JSON.stringify({
+            email: username.value,
+            firstName: firstName.value,
+            lastName: lastName.value,
+            password: password.value,
+            repassword: repassword.value,
+          }),
+        })
+          .then((response) => {
+            if (response.status !== 201) {
+              return response.json();
+            }
+            window.location = '/';
+          });
+        event.preventDefault();  // отменим отправку данных по умолчанию, 
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div>
+    <input id="username" type="text" placeholder="Введите e-mail">
+  </div>
+  <div>
+    <input id="firstName" type="text" placeholder="Введите имя">
+  </div>
+  <div>
+    <input id="lastName" type="text" placeholder="Введите фамилию">
+  </div>
+  <div>
+    <input id="password" type="password" placeholder="Введите password">
+  </div>
+  <div>
+    <input id="repassword" type="password" placeholder="Repaet password">
+  </div>
+  <div>
+    <input id="sendBtn" type="submit" value="Войти">
+  </div>
+  <p><a href="/auth">Войти в систему</a></p>
+</body>
+
+</html>
