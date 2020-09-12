@@ -65,6 +65,7 @@ app.post('/todoAdd', async (req, res) => {
 app.post('/isDone', async (req, res) => {
     console.log('123')
     console.log(req.body)
+    console.log('req.body.isDone: ' + req.body.isDone)
     const todoDone = await todoModel.findById(req.body.id)
     todoDone.isDone = !!req.body.isDone
     await todoDone.save()

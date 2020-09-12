@@ -18,17 +18,19 @@
                     <label class="todo-list-item-name">
                         {{#if isDone}}
                             <div class="todo-list-item-name">
-                                <input type="checkbox" checked onclick="submit()" name="isDone">
+<!--                                <input type="checkbox" checked onclick="submit()" name="id" value="{{_id}}">-->
+                                <input type="checkbox" checked onclick="submit()" name="isDone" value="{{isDone}}">
                                 <span>{{text}}</span>
                             </div>
                         {{else}}
                             <div class="todo-list-item-name">
-                                <input type="checkbox" onclick="submit()" name="isDone">
+<!--                                <input type="checkbox" onclick="submit()" name="id" value="{{_id}}">-->
+                                <input type="checkbox" onclick="submit()" name="isDone" value="{{isDone}}">
                                 <span>{{text}}</span>
                             </div>
                         {{/if}}
                     </label>
-                    <input type="hidden" value="{{_id}}" name="id">
+<!--                    <input type="hidden" value="{{_id}}" name="id">-->
                 </form>
                 <a href="/todoremove/{{_id}}" class="remove">
                     <span class="fas fa-times"></span>

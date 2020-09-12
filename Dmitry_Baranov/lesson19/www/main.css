@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.main__header {
+    text-align: center;
+}
+
+/* Стиль заголовка */
+.header {
+    background: #e27442;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+}
+
+/* Стиль ввода */
+input {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    width: 75%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Стиль кнопки "Добавить" */
+.addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+}
+
+.addBtn:hover {
+    background-color: #bbb;
+}
+
+
+/* Стиль элементов списка */
+ul li {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: darkgray;
+    font-size: 18px;
+    transition: 0.2s;
+
+    /* сделайте элементы списка просматриваемыми */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Установите для всех нечетных элементов списка другой цвет (полосы зебры) */
+ul li:nth-child(odd) {
+    background: lightgrey;
+}
+
+/* Более темный фон-цвет при наведении курсора */
+ul li:hover {
+    background: #d79f9f;
+}
+
+/* При нажатии на кнопку добавить цвет фона и вычеркнуть текст */
+ul li.checked {
+    background: #888;
+    color: #fff;
+    text-decoration: line-through;
+}
+
+/* Добавить отметку "проверено" при нажатии на нее */
+ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 10px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+}
+
+/* Стиль кнопки закрытия */
+.close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+    background-color: #f44336;
+    color: white;
+}
+
+.success {
+    background-color: #1cb456;
+    padding: 10px 10px;
+    color: white;
+    text-align: center;
+    font-size: 14pt;
+}
+
+a {
+    padding: 10px;
+    background: #d9d9d9;
+    color: #555;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 0;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover {
+    background-color: #bbb;
+}
+
+.logout {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.logout a {
+    margin-left: auto;
+}
+
+.form input, a {
+    margin-top: 5px;
+}
+
+.user {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.user p {
+    margin-left: auto;
+}
+
+p {
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+}
