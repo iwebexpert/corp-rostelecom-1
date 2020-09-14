@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const username = document.querySelector('#username');
+            const password = document.querySelector('#password');
+            const sendBtn = document.querySelector('#sendBtn');
+
+            sendBtn.addEventListener('click', () => {
+                localStorage.removeItem('token');
+                fetch('/auth', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username.value,
+                        password: password.value,
+                    }),
+                })
+                .then((response) => {
+                    if(response.status != 200) {
+                        return {token: null};
+                    }
+                    return response.json();
+                })
+                .then((response) => {
+                    if(response.token){
+                        const {token, ...user} = response;
+                        localStorage.setItem('token', token);
+                        localStorage.setItem('user', JSON.stringify(user));
+
+                        window.location = '/'; //редирект на JS на /
+                    }
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <input id="username" type="text" placeholder="Введите логин">
+        <input id="password" type="password" placeholder="Введите пароль">
+    </div>
+    <div>
+        <input id="sendBtn" type="submit" value="Войти">
+    </div>
+</body>
+</html>
