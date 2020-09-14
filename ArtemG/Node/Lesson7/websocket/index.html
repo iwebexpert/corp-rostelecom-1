@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todolist</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.querySelector('#list');
+            const create = document.querySelector('#create');
+            const box = document.querySelector('#boxid');
+
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+            if(!token){
+                window.location = '/auth';
+            }
+
+            //Устанавливаем постоянное соединение
+            const socket = io.connect(`http://localhost:5000?token=${token}`);
+
+            socket.on(`created:${user._id}`, (deal) => {
+                console.log('Сервер создал задачу', deal);
+
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.textContent = 'Удалить задачу';
+
+                li.dataset.id = deal._id;
+                li.textContent = deal.title;
+                li.appendChild(button);
+                list.appendChild(li);
+            });
+
+            socket.on(`deleted:${user._id}`, (dealId) => {
+                console.log('Сервер удалил задачу', dealId);
+                const dealElement = document.querySelector(`[data-id="${dealId}"]`);
+                if(dealElement){
+                    dealElement.remove();
+                }
+            });
+
+            list.addEventListener('click', (event) => {
+                if(event.target.tagName === 'BUTTON'){
+                    const li = event.target.parentElement;
+                    const idDeal = li.dataset.id;
+                    console.log('Отправлено на сервер событие delete', idDeal);
+                    socket.emit('delete', idDeal);
+                    event.preventDefault();
+                }                
+            });
+
+
+
+            create.addEventListener('click', (event) => {
+                const newDeal = {
+                    title: prompt('Введите название задачи', 'New deal'),
+                    user: user._id,
+                    text: prompt('Что нужно сделать?', 'Template task'),
+                };
+                console.log('Отправлено на сервер событие create', newDeal);
+                socket.emit('create', newDeal);
+                event.preventDefault();
+            });
+
+            // box.addEventListener('change', (event) => {
+            //     console.log("checkbox change");
+            // });
+
+
+        fetch('/todolist', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                if(response.status !== 200){
+                    localStorage.removeItem('token');
+                    window.location = '/auth';
+                    return null;
+                }
+                return response.json();
+            })
+            .then((deals) => {
+                deals.forEach((deal) => {
+                    const li = document.createElement('li');
+                    const button = document.createElement('button');
+                    const box = document.createElement('input');
+                    box.type = 'checkbox';
+                    box.id = 'boxid';
+                    button.textContent = 'Удалить задачу';
+
+                    li.dataset.id = deal._id;
+                    li.textContent = deal.title;
+                    li.appendChild(button);
+                    console.log(box);
+                    li.appendChild(box);
+                    list.appendChild(li);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <ul id="list"></ul>
+    <input type="button" id="create" value="Создать новую задачу">
+</body>
+</html>
