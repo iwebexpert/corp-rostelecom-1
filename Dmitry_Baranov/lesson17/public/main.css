@@ -57,6 +57,7 @@ body {
 
 .todo-container ul {
     list-style: none;
+    margin-bottom: 16px;
 }
 
 .todo-list-item {

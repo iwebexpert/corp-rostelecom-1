@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="/socket.io/gitgsocket.io.js"></script>
+    <script src="./main.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.getElementById('myUL');
+            const btnCreate = document.getElementById('btnCreate');
+            const inputTask = document.getElementById("myInput");
+            const logout = document.getElementById("logout");
+            const label_user = document.getElementById("user");
+
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+
+            if (!token) {
+                window.location = '/auth';
+            }
+
+            label_user.textContent = "Логин: " + user.email;
+
+            //Устанавливаем постоянное соединение
+            const socket = io.connect(`http://localhost:4000?token=${token}`);
+
+            socket.on(`created:${user._id}`, (task) => {
+                console.log('Сервер создал задачу: ', task);
+                taskAdd(task);
+            });
+
+            socket.on(`deleted:${user._id}`, (taskId) => {
+                console.log('Сервер удалил задачу: ', taskId);
+
+                const taskElement = document.querySelector(`[data-id="${taskId}"]`);
+                if (taskElement) {
+                    taskElement.remove();
+                }
+            });
+
+            socket.on(`updated:${user._id}`, (task) => {
+                console.log('Сервер обновил задачу: ', task);
+
+                const taskElement = document.querySelector(`[data-id="${task.id}"]`);
+                if (taskElement) {
+                    if (task.status)
+                        taskElement.classList.add("checked");
+                    else
+                        taskElement.classList.remove("checked");
+                }
+            });
+
+            function taskAdd(task) {
+                let li = document.createElement('li');
+                li.dataset.id = task._id;
+                li.textContent = task.name;
+
+                if (task.status)
+                    li.classList.add("checked");
+
+                li.onclick = function () {
+                    const updateTask = {
+                        id: task._id,
+                        status: !li.classList.contains("checked"),
+                    };
+
+                    console.log('Отправлено на сервер событие update', updateTask);
+                    socket.emit('update', updateTask);
+                };
+
+                let span = document.createElement("SPAN");
+                span.className = "close";
+                span.textContent = "\u00D7";
+
+                span.onclick = function () {
+                    console.log('Отправлено на сервер событие delete', task._id);
+                    socket.emit('delete', task._id);
+                };
+
+                li.appendChild(span);
+
+                list.appendChild(li);
+            }
+
+            function taskCreate() {
+                if (inputTask.value === '') {
+                    alert("Название в поле 'Список дел' не должно быть пустым!");
+                    return;
+                }
+
+                const newTask = {
+                    name: inputTask.value,
+                    user: user._id,
+                };
+
+                inputTask.value = "";
+
+                console.log('Отправлено на сервер событие create', newTask);
+                socket.emit('create', newTask);
+            }
+
+            inputTask.onkeyup = function (event) {
+                if (event.keyCode === 13)
+                    taskCreate();
+            }
+
+            btnCreate.onclick = function () {
+                taskCreate();
+            };
+
+            logout.onclick = function () {
+                if (localStorage.getItem('token')) {
+                    localStorage.removeItem('token')
+                }
+                if (localStorage.getItem('user')) {
+                    localStorage.removeItem('user')
+                }
+            };
+
+
+            //Получение списка задач
+            fetch('/todo', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        localStorage.removeItem('token');
+                        window.location = '/auth';
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then((tasks) => {
+                    tasks.forEach((task) => {
+                        taskAdd(task);
+                    });
+                });
+        })
+    </script>
+</head>
+
+<body>
+
+    <h1 class="main__header">
+        Список дел: TODO List
+    </h1>
+    <hr>
+
+    <div class="user">
+        <p id="user"></p>
+    </div>
+    <div class="logout">
+        <a id="logout" href="/auth">Выйти</a>
+    </div>
+
+    <div class="header">
+        <h2 style="margin:5px">Список дел</h2>
+        <input type="text" id="myInput" name="myInput" placeholder="Название...">
+        <span id="btnCreate" class="addBtn">Добавить</span>
+    </div>
+
+    <div>
+
+        <ul id="myUL">
+
+        </ul>
+    </div>
+
+    <hr>
+    <p>&copy; 2020</p>
+</body>
+
+</html>
