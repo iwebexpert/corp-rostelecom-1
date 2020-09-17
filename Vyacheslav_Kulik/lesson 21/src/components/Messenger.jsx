@@ -18,12 +18,17 @@ export default class Messenger extends Component {
 
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    botAnswer = null
+
+    componentDidUpdate() {
+
+        if (this.botAnswer) {
+            clearTimeout(this.botAnswer)
+            this.botAnswer = null
+        }
         const lastMessage = this.state.messages[this.state.messages.length - 1]
         if (lastMessage.author !== 'Bot') {
-
-            setTimeout (this.answerFromBot, 2000, lastMessage)
-
+            this.botAnswer = setTimeout(this.answerFromBot, 2000, lastMessage)
         }
 
 
@@ -55,7 +60,7 @@ export default class Messenger extends Component {
 
     render() {
         return (
-            <div>
+            <div className="d-flex flex-column align-items-center  justify-content-between messenger">
                 <MessageFields message={this.state.messages}/>
                 <MessageForm onSend={this.getMessageFromForm}/>
             </div>

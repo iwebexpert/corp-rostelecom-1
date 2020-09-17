@@ -1,5 +1,6 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'src', 'index.js'), // путь до скрипта для сборки
@@ -24,9 +25,23 @@ module.exports = {
                     loader: "babel-loader",
                     options: {
                         presets: ['@babel/preset-env', '@babel/preset-react'], //пресет для babel-loader @babel/preset-react - для JSX
-                        plugins: ['@babel/plugin-proposal-class-properties']
+                        plugins: [
+                            ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                            ["@babel/plugin-proposal-class-properties", { "loose" : true }]
+                        ]
                     }
                 }
+            },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+            },
+            {
+                test: /\.(gif|png|jpg|jpeg|svg)?$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'img/[name].[ext]',
+                },
             }
         ]
     },
@@ -35,7 +50,24 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src', 'index.html'), // путь до шаблона
             filename: 'index.html' //название файла
+        }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
         })
-    ]
+    ],
+    devtool: 'eval-source-map',
+
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                styles: {
+                    name: 'styles',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true,
+                },
+            },
+        },
+    }
 
 };

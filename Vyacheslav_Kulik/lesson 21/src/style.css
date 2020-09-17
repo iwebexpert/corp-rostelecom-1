@@ -1,0 +1,110 @@
+body {
+    background-color: #09101c;
+}
+
+.messenger {
+    height: 100vh;
+    max-height: 100vh;
+    background-image: url("img/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#root {
+    height: 100vh;
+    max-height: 100vh;
+
+}
+
+.messageField {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+    margin-top: 20px;
+    padding: 10px 10px;
+
+    flex-grow: 1;
+
+
+
+}
+
+.messageStyle {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    -webkit-box-shadow: 14px 12px 35px -11px rgba(0,0,0,0.67);
+    -moz-box-shadow: 14px 12px 35px -11px rgba(0,0,0,0.67);
+    box-shadow: 14px 12px 35px -11px rgba(0,0,0,0.67);
+}
+
+.messageStyleRight {
+    background: #2b5278;
+    align-self: flex-end;
+}
+
+.messageStyleLeft {
+    background: #495e93;
+    align-self: flex-start;
+}
+
+.timeStyle {
+    color: #7da8d3;
+    font-size: 0.9em;
+    margin-left: 10px;
+    vertical-align: -10px;
+
+}
+
+.guestName {
+    width: 10em;
+    text-align: center;
+}
+
+.shadowForm {
+    -webkit-box-shadow: 0px -13px 35px -11px rgba(0,0,0,0.67);
+    -moz-box-shadow: 0px -13px 35px -11px rgba(0,0,0,0.67);
+    box-shadow: 0px -13px 35px -11px rgba(0,0,0,0.67);
+}
+
+input, button {
+    color: #6c7883;
+    font-size: large;
+    background-color: #17212b;
+    border: 0;
+    height: 50px;
+    outline: none;
+
+}
+
+button:focus {
+    outline: none;
+}
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(36, 42, 51);
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    background: rgb(79, 85, 92);
+    -webkit-box-shadow: inset 0 0 6px rgba(114, 114, 114, 0.24);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 255, 255, 0.4);
+}
