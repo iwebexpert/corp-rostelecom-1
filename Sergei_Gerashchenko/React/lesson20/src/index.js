@@ -1,7 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDom from 'react-dom';
 
-const element = <h1 className="react1" id="test1">Первое приложение на React</h1>;
 
-ReactDOM.render(element,
-    document.getElementById('root'));
+import {Messenger} from 'components/Messenger';
+
+
+ReactDom.render(
+    <div>
+        <Messenger />
+    </div>
+    , 
+    document.getElementById('root')
+    );
