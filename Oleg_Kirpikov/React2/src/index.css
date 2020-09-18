@@ -1,0 +1,28 @@
+.messenger {
+    background: darkgray;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.message {
+    width: 85%;
+}
+.right {
+    max-width: 75%;
+    background-color: aquamarine;    
+    margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    text-align: right;
+}
+.left {
+    max-width: 75%;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    background-color: bisque;
+    text-align: left;
+}
