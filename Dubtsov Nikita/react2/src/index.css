@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  width: 75%;
+  padding-top: 2rem;
+}
+
+p {
+  margin-top: 1rem;
+}
+
+form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input {
+  margin: 0.5rem;
+}
+
+label {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  padding: 0.5rem;
+  border: none;
+  background-color: mediumseagreen;
+  color: aliceblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: forestgreen;
+}
