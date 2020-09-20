@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,cAAe;EACb,UAAU,EAAE,MAAM",
+"sources": ["MessageFieldsMUI.scss"],
+"names": [],
+"file": "MessageFieldsMUI.css"
+}

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAc;EACZ,gBAAgB,EAAE,KAAK",
+"sources": ["MessageFormMUI.scss"],
+"names": [],
+"file": "MessageFormMUI.css"
+}

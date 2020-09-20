@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,YAAa;EACX,kBAAkB,EAAE,wCAAqC;EACzD,eAAe,EAAE,wCAAqC;EACtD,UAAU,EAAE,wCAAqC;EACjD,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI;;AAIb,WAAY;EACV,KAAK,EAAE,IAAI;EACX,UAAU,EAAE,MAAM",
+"sources": ["MessageForm.scss"],
+"names": [],
+"file": "MessageForm.css"
+}

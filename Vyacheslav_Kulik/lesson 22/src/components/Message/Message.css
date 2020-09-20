@@ -1,0 +1,24 @@
+.message-style {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  -webkit-box-shadow: 14px 12px 35px -11px rgba(0, 0, 0, 0.67);
+  -moz-box-shadow: 14px 12px 35px -11px rgba(0, 0, 0, 0.67);
+  box-shadow: 14px 12px 35px -11px rgba(0, 0, 0, 0.67); }
+  .message-style-start {
+    background: #495e93;
+    align-self: flex-start; }
+  .message-style-end {
+    background: #2b5278;
+    align-self: flex-end; }
+
+.time-style {
+  color: #7da8d3;
+  font-size: 0.9em;
+  margin-left: 10px;
+  vertical-align: -10px; }
+
+/*# sourceMappingURL=MessageMUI.css.map */
