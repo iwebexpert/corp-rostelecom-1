@@ -1,0 +1,28 @@
+.message {
+    width: 50%;
+    margin: 5px;
+
+    &__text {
+        padding: 5px 10px !important;
+        font-size: 14px;
+        color: white;
+    }
+
+    &__author {
+        font-size: 14px;
+        font-style: italic;
+        color: lightgray;
+        justify-content: flex-end;
+    }
+
+    &.by-author {
+        float: right;
+        align-self: flex-end;
+        background-color: #7700ff;
+    }
+
+    &.by-bot {
+        align-self: flex-start;
+        background-color: #123456;
+    }
+}

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Icon, Fab, TextField } from '@material-ui/core'
 
+import './MessageForm.scss'
+
 export class MessageForm extends Component {
   state = {
     text: '',
@@ -14,9 +16,8 @@ export class MessageForm extends Component {
     if (text && author) {
       if (typeof (onSend) === 'function') {
         onSend(this.state)
-        this.setState({
-          text: ''
-        })
+        document.getElementById('text').focus()
+        this.setState({ text: '' })
       }
     } else {
       alert('Заполните все поля формы.')
@@ -39,23 +40,26 @@ export class MessageForm extends Component {
   render() {
     const { text, author } = this.state
     return (
-      <div className='form'>
+      <div className='message__form'>
         <TextField
+          name="author"
           label="Автор"
           variant="outlined"
           placeholder="Автор"
-          name="author"
+          color="primary"
           value={author}
           onChange={this.onInputChange}
           onKeyUp={this.onKeyUp}
         />
         <TextField
+          id="text"
+          name="text"
           label="Сообщение"
           variant="outlined"
           placeholder="Сообщение"
           multiline
           rowsMax={4}
-          name="text"
+          color="primary"
           value={text}
           onChange={this.onInputChange}
           onKeyUp={this.onKeyUp}
