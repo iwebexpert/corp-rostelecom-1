@@ -1,0 +1,7 @@
+.chat {
+    border-right: 10px;
+
+    &.active {
+        background-color: rgb(119, 0, 255, 0.57);
+    }
+}
