@@ -1,0 +1,16 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+  font-family: "Roboto";
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current-chat {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
