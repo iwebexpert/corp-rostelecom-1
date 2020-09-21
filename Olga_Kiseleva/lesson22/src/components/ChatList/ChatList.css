@@ -1,0 +1,9 @@
+.chat-list {
+    width: 30%;
+    box-sizing: border-box;
+    background-color: rosybrown;
+    padding: 5px 5px;
+    border-radius: 10px;
+    font-size: 20px;
+        list-style: none;
+}
