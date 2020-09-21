@@ -20,11 +20,6 @@ export class MessageForm extends Component {
                 this.setState({
                     text: ''
                 });
-                
-                
-                //alert(bot)
-                // const { timerId } = Messenger.state.messages[Messenger.state.messages.length-1];
-                // clearTimeout(timerId);
             }
         } else{
             alert('Заполните все поля формы.')
