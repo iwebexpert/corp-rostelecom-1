@@ -1,0 +1,19 @@
+.message {
+  border-radius: 30px;
+}
+
+.message__bot {
+  border-top-left-radius: 0;
+  background-color: midnightblue;
+  color: white;
+  align-self: flex-start;
+  padding: 15px 25px;
+}
+
+.message__user {
+  border-top-right-radius: 0;
+  background-color: lightsteelblue;
+  color: black;
+  align-self: flex-end;
+  padding: 15px 25px;
+}
