@@ -1,0 +1,16 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center
+
+}
+
+.container {
+    display: flex;
+} 
+
+
+.grid30 {
+    flex-basis: 30%;
+}
