@@ -1,0 +1,13 @@
+.chatList {
+    height: 100%;
+    width: 30%;
+    margin: auto;
+    display: flex;
+    color: gray;
+    /* align-items: center; */
+    background-color:bisque;
+    justify-content: space-between;
+}
+.chat {
+    width: 100%;
+}
