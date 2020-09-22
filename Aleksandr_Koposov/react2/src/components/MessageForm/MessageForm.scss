@@ -4,5 +4,11 @@
     align-items: center;
     align-content: center;
     justify-content: space-between;
-    width: 70%;
+    border-top: 1px solid lightgray;
+    padding-top: 10px;
+
+    & .MuiTextField-root {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
 }

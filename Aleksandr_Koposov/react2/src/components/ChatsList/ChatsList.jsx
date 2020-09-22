@@ -1,29 +1,27 @@
 import React, { Component } from 'react'
-import { nanoid } from 'nanoid'
-import { List } from '@material-ui/core'
+
+import { List, Divider } from '@material-ui/core'
 
 import { ChatItem } from 'components/ChatItem'
+import { ChatForm } from 'components/ChatForm'
 
 import './ChatsList.scss'
 
 export class ChatsList extends Component {
-    state = {
-        chats: [
-            { id: nanoid(), name: 'Chat 1', active: false, users: [1, 2, 3] },
-            { id: nanoid(), name: 'Chat 2', active: true, users: [1] },
-            { id: nanoid(), name: 'Chat 3', active: false, users: [] },
-            { id: nanoid(), name: 'Chat 4', active: false, users: [1, 2, 3, 4, 5, 6] }
-        ]
-    }
     render() {
+        const { match, onAdd } = this.props
+        const id = +((match || {}).params || {}).id || 0
         return (
             <List className="chats-list">
-                {this.state.chats.map(item => (
+                {(this.props.chats || []).map(item => (
                     <ChatItem
                         key={item.id}
                         item={item}
+                        active={id === item.id}
                     />
                 ))}
+                <Divider />
+                <ChatForm onAdd={onAdd} />
             </List>
         )
     }

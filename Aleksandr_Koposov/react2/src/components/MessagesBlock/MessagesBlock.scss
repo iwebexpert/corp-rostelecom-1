@@ -19,4 +19,11 @@ html, body {
     align-items: flex-end;
     flex-direction: column;
     justify-content: flex-end;
+
+    & .MuiDivider-root {
+        width: 100%;
+    }
+    & .MuiTypography-root {
+        width: 100%;
+    }
 }
