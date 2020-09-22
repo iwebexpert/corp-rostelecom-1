@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAW;EACT,MAAM,EAAE,IAAI;EACZ,gBAAgB,EAAE,OAAO",
+"sources": ["MessengerMUI.scss"],
+"names": [],
+"file": "MessengerMUI.css"
+}

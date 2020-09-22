@@ -1,0 +1,32 @@
+div .message-style {
+  margin: 10px;
+
+  &-text {
+
+
+    border-radius: 20px;
+    padding: 15px;
+
+  }
+  &-time {
+    color: #aabbcf;
+    align-self: flex-end;
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+  &-start {
+    align-self: flex-start;
+  }
+  &-end {
+    align-self: flex-end;
+
+  }
+  &-color-start {
+    color: white;
+    background-color: #6c8bff;
+  }
+  &-color-end {
+    background-color: #dbe5ef;
+    color: #79818d;
+  }
+}
