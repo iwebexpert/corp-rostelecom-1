@@ -1,0 +1,6 @@
+.chat-list {
+    width: 30%;    
+    background-color:rgb(175, 216, 221);     
+    overflow-y: scroll;
+    padding: 20px;   
+}

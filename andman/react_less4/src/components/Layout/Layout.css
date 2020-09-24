@@ -1,0 +1,24 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 16px;            
+    color: rgb(181, 196, 216);
+    background-color: rgb(45, 102, 124);
+    padding: 5px;    
+}
+a {text-decoration: none; color: white; font-family: Verdana, Geneva, Tahoma, sans-serif;}
+a:hover {font-weight: bold;}
+
+.container {
+    display: flex;
+    flex-direction: row;        
+    width: 100%;       
+
+}
+.chat-list {
+    width: 30%;    
+    background-color:rgb(104, 128, 158);     
+    overflow-y: scroll;
+    padding: 20px;   
+}
