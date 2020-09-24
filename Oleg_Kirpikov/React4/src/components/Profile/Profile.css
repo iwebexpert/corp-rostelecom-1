@@ -1,0 +1,13 @@
+.profile {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    background-color: rgb(186, 200, 228);
+}
+.panelButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}

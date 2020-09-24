@@ -1,0 +1,11 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    flex-grow: 1;
+}
+.menu {
+    font-size: medium;
+    margin-right: 2em;
+}
