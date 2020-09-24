@@ -58,7 +58,9 @@ module.exports = {
             filename: '[name].css', //настройка имени выходного файла
         })
     ],
-    dev
+    devServer: {
+        historyApiFallback: true, // все запросы будут идти к / сайта - нужно для рутинга
+    }
     //,
     // devtool: 'eval-source-map',
     //
