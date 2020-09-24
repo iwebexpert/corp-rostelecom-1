@@ -4,6 +4,7 @@ import { Link, } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import ChatIcon from '@material-ui/icons/Chat';
 import FaceIcon from '@material-ui/icons/Face';
+import Button from '@material-ui/core/Button';
 
 
 import './Header.css';
@@ -28,12 +29,13 @@ export class Header extends Component {
                             justify="flex-end"
                             alignItems="baseline"
                         >
-                            <Grid item>
+                            <Grid item> <Button size="small" color="primary">
                                 <Avatar>
                                     <FaceIcon />
-                                </Avatar></Grid>
-                            <Grid item>
-                                <p>Профиль</p></Grid>
+                                </Avatar>
+                                    Профиль</Button>
+                            </Grid>
+
                         </Grid>
                     </Link>
                 </Grid>
