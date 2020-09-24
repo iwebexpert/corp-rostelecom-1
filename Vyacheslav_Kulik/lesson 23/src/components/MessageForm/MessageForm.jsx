@@ -4,6 +4,7 @@ import keydown from 'react-keydown'
 import {Input, Button, Grid} from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send'
 
+
 import './MessageForm.scss'
 
 export class MessageForm extends Component {

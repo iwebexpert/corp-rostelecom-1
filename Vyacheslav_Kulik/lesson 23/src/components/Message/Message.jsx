@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import classNames from 'classnames'
 import {Grid, Box} from '@material-ui/core'
+import moment from 'moment'
 
 import './Message.scss'
 
@@ -12,7 +13,12 @@ export class Message extends Component {
 
     render() {
 
-        const {text, author, time} = this.props.messages
+        const {text, author} = this.props.messages
+        let {time} = this.props.messages
+        if (typeof time === 'string') {
+            time = moment(time, 'HH:mm')
+        }
+
         const messageStyle = classNames('message-style', `message-style-${this.location}`)
         const messageStyleText = classNames('message-style-text', `message-style-color-${this.location}`)
 

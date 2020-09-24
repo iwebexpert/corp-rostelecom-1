@@ -61,20 +61,5 @@ module.exports = {
     devServer: {
         historyApiFallback: true, // все запросы будут идти к / сайта - нужно для рутинга
     }
-    //,
-    // devtool: 'eval-source-map',
-    //
-    // optimization: {
-    //     splitChunks: {
-    //         cacheGroups: {
-    //             styles: {
-    //                 name: 'styles',
-    //                 test: /\.css$/,
-    //                 chunks: 'all',
-    //                 enforce: true,
-    //             },
-    //         },
-    //     },
-    // }
 
 };

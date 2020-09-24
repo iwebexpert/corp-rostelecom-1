@@ -1,21 +1,25 @@
 import React, {Component} from 'react'
-import {Avatar, ListItemAvatar, ListItemText, MenuItem} from '@material-ui/core'
+import {ListItemText, MenuItem} from '@material-ui/core'
 import {Link} from 'react-router-dom'
 
+import './ChatItem.scss'
+
 export class ChatItem extends Component {
+
+
 
     render() {
 
         return (
-            <Link to={`/chats/${this.props.id}`} >
+            <Link to={`/chats/${this.props.id}`} className='link'>
                 <MenuItem>
-                    <ListItemAvatar>    
-                        <Avatar src={this.props.srcAvatar}/>
-                    </ListItemAvatar >
-                    <ListItemText>{this.props.title}</ListItemText>
+                        <img src={this.props.srcAvatar} className='avatar'/>
+                    <ListItemText className='chatName'>{this.props.title}</ListItemText>
              </MenuItem>
             </Link>
         )
     }
 
 }
+
+
