@@ -1,0 +1,10 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
+.profile {
+    position: absolute;
+    margin-left: 90%;
+}
