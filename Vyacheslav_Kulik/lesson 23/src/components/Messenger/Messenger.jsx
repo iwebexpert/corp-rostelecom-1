@@ -52,7 +52,7 @@ export class Messenger extends Component {
 
     addChat = (title) => {
         //const newChats = this.chats.slice()
-        console.log(this.chats)
+        //console.log(this.chats)
         this.setState({
             chats: [
                 ...this.chats,

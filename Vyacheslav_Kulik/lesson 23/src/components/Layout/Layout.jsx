@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Container, Grid} from '@material-ui/core'
 import {Messenger} from '../Messenger'
 import {NewChatPage} from '../NewChatPage'
+import {Profile} from '../Profile'
 import {Header} from '../Header'
 import {ChatList} from '../ChatList'
 import {Switch, Route} from  'react-router-dom'
@@ -61,6 +62,7 @@ export class Layout extends Component {
                                 </Route>
                                 <Route path='/chats/:id' exact render={routeProps  => (<Messenger getChats={this.getChats} {...routeProps} />)} />
                                 <Route path='/newchats' exact render={routeProps  => (<NewChatPage getNewChatTitle={this.getNewChatTitle}/>)} />
+                                <Route path='/profile' exact component={Profile} />
                             </Switch>
                         </Grid>
                     </Grid>
