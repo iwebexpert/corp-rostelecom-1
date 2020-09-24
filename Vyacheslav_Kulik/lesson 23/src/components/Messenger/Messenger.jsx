@@ -4,6 +4,7 @@ import {MessageFields} from '../MessageFields'
 import moment from "moment";
 import {nanoid} from "nanoid";
 import {Grid} from '@material-ui/core'
+import {chats} from 'helpers/chats'
 
 import './Messenger.scss'
 
@@ -18,9 +19,14 @@ export class Messenger extends Component {
                 author: 'Bot',
                 time: moment(),
                 id: nanoid()
-            }]
+            }],
+            chats: chats
         }
 
+    }
+
+    get chats() {
+        return this.state.chats
     }
 
     botAnswer = null
@@ -64,8 +70,17 @@ export class Messenger extends Component {
 
     }
 
+    componentDidMount() {
+        const {getChats} = this.props
+        if(typeof getChats === 'function'){
+            getChats(this.chats)
+        }
+    }
+
 
     render() {
+        
+
         return (
             <Grid container wrap="nowrap" direction="column" justify="space-between" className='messenger'>
                 <MessageFields message={this.state.messages}/>

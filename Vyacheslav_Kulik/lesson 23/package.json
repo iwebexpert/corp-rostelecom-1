@@ -42,6 +42,7 @@
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-keydown": "^1.9.12"
+    "react-keydown": "^1.9.12",
+    "react-router-dom": "^5.2.0"
   }
 }

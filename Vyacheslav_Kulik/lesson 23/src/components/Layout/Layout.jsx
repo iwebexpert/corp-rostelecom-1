@@ -10,8 +10,17 @@ import './Layout.scss'
 
 export class Layout extends Component {
 
-    render() {
+    state = {
+        chats: null
+    }
 
+     getChats = (chats) => {
+         this.setState({
+            chats: chats
+        })
+    }
+
+    render() {
         return (
             <Container className="layout">
 
@@ -20,10 +29,10 @@ export class Layout extends Component {
                 </Grid>
                 <Grid container style={{height: '100%'}}>
                         <Grid item xs={3}>
-                            <ChatList />
+                            <ChatList chats={this.state.chats} />
                         </Grid>
                         <Grid item xs>
-                            <Messenger />
+                            <Messenger getChats={this.getChats} />
                         </Grid>
                     </Grid>
 

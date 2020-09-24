@@ -14,6 +14,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         alias: {
             components: path.join(__dirname, 'src', 'components'),
+            helpers: path.join(__dirname, 'src', 'helpers'),
             src: path.join(__dirname, 'src')
         }
     },
@@ -56,7 +57,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css', //настройка имени выходного файла
         })
-    ]
+    ],
+    dev
     //,
     // devtool: 'eval-source-map',
     //

@@ -1,41 +1,32 @@
 import React, {Component} from 'react'
-import {Avatar, List, ListItem, ListItemAvatar , ListItemIcon, ListItemText,  Grid} from '@material-ui/core'
-import InboxIcon from '@material-ui/icons/Inbox'
+import {Grid, MenuList, } from '@material-ui/core'
+import {ChatItem} from '../ChatItem'
 
 export class ChatList extends Component {
 
+    state = {
+        chats: null
+    }
+
+    componentDidUpdate() {
+        if(!this.state.chats){
+            this.setState({
+                chats: this.props.chats 
+            })
+        }
+    }
+
+
     render() {
+        let chatList
+        if(this.state.chats) {
+            chatList = this.state.chats.map(item => <ChatItem key={item.id} {...item}/>) 
+        }
 
         return (<Grid container direction="column">
-            <List component="nav" aria-label="main mailbox folders">
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar src='src/img/bot.svg'/>
-                    </ListItemAvatar >
-                    <ListItemText>Bot</ListItemText>
-                </ListItem>
-
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar src='src/img/bot.svg'/>
-                    </ListItemAvatar >
-                    <ListItemText>Bot 1</ListItemText>
-                </ListItem>
-
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar src='src/img/bot.svg'/>
-                    </ListItemAvatar >
-                    <ListItemText>Bot 123456789</ListItemText>
-                </ListItem>
-
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar src='src/img/bot.svg'/>
-                    </ListItemAvatar >
-                    <ListItemText>Bot</ListItemText>
-                </ListItem>
-            </List>
+            <MenuList>
+                {chatList}
+            </MenuList>
         </Grid>)
 
     }
