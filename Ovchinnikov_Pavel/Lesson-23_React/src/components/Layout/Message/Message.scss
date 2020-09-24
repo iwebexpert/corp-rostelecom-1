@@ -1,0 +1,22 @@
+.message {    
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 5px;
+    list-style: none;
+
+    &-sender {
+        font-size: 14px;
+        color: gray;
+    }
+
+    &-author {
+        background-color: rgb(168, 231, 177);
+        align-self: flex-end;
+    }
+
+    &-bot {
+        background-color:white;
+        align-self: flex-start;
+    }
+}
