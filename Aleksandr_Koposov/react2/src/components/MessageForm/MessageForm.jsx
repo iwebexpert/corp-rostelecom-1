@@ -5,15 +5,14 @@ import './MessageForm.scss'
 
 export class MessageForm extends Component {
   state = {
-    text: '',
-    author: '',
+    text: ''
   }
 
   onMessageSend = () => {
-    const { text, author } = this.state
+    const { text } = this.state
     const { onSend } = this.props
 
-    if (text && author) {
+    if (text) {
       if (typeof (onSend) === 'function') {
         onSend(this.state)
         document.getElementById('text').focus()
@@ -38,19 +37,9 @@ export class MessageForm extends Component {
   }
 
   render() {
-    const { text, author } = this.state
+    const { text } = this.state
     return (
       <div className='message__form'>
-        <TextField
-          name="author"
-          label="Автор"
-          variant="outlined"
-          placeholder="Автор"
-          color="primary"
-          value={author}
-          onChange={this.onInputChange}
-          onKeyUp={this.onKeyUp}
-        />
         <TextField
           id="text"
           name="text"
