@@ -1,0 +1,9 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.Container {
+    display: flex;
+}
