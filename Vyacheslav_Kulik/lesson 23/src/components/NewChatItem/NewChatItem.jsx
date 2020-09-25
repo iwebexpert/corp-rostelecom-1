@@ -11,7 +11,7 @@ export class NewChatItem extends Component {
     render() {
 
         return (
-            <Link to={`/newchats`} className='link-new-chat'>
+            <Link to={`/new/chats`} className='link-new-chat'>
                 <MenuItem>
                     <AddIcon color="action" fontSize="large" />
                     <ListItemText className='text-new-chat'>Создать новый чат</ListItemText>

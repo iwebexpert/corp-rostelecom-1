@@ -5,7 +5,10 @@ import {NewChatPage} from '../NewChatPage'
 import {Profile} from '../Profile'
 import {Header} from '../Header'
 import {ChatList} from '../ChatList'
+import {NonExistChat} from '../NonExistChat'
 import {Switch, Route} from  'react-router-dom'
+import {chats} from 'helpers/chats'
+import moment from "moment";
 
 
 
@@ -14,37 +17,53 @@ import './Layout.scss'
 export class Layout extends Component {
 
     state = {
-        chats: null,
-        titleNewChat: ''
+        chats,
+        profile: {
+            author: 'Гость',
+            age: ''
+        }
     }
 
-     getChats = (chats) => {
-        //console.log('this', this.state.chats)
 
-         this.setState({
+    getMessage = (chats) => {
+        this.setState({
             chats: chats
+        })
+
+    }
+
+    addChat = (title) => {
+        this.setState({
+            chats: [
+                ...this.state.chats,
+                {
+                    id: this.state.chats.length + '',
+                    title: title,
+                    srcAvatar: 'src/img/bot.svg',
+                    messages: [{
+                        id: '0',
+                        author: 'Bot',
+                        time: moment(),
+                        text: 'Привет, это новый чат!'
+                    }]
+                }
+            ]
+
         })
     }
 
     getNewChatTitle =  (title) =>  {
+        this.addChat(title)
+    }
 
+    getProfileData = (profile) => {
         this.setState({
-            titleNewChat: title
+            profile: profile
         })
     }
 
-    componentWillUpdate() {
-        //console.log(this.state.titleNewChat,'titleNewChat' )
-        if(this.state.titleNewChat){
-            this.setState({
-                titleNewChat: ''
-            })
-        }
-
-    }
 
     render() {
-        //console.log(this.state.titleNewChat)
         return (
             <Container className="layout">
 
@@ -57,12 +76,10 @@ export class Layout extends Component {
                         </Grid>
                         <Grid  container item xs>
                             <Switch>
-                                <Route path='/' exact>
-                                    <Messenger newChat={this.state.titleNewChat} getChats={this.getChats} />
-                                </Route>
-                                <Route path='/chats/:id' exact render={routeProps  => (<Messenger getChats={this.getChats} {...routeProps} />)} />
-                                <Route path='/newchats' exact render={routeProps  => (<NewChatPage getNewChatTitle={this.getNewChatTitle}/>)} />
-                                <Route path='/profile' exact component={Profile} />
+                                <Route path='/'  component={NonExistChat} exact/>
+                                <Route path='/chats/:id' exact render={routeProps  => (<Messenger author={this.state.profile.author} chats={this.state.chats} getMessage={this.getMessage} {...routeProps} />)} />
+                                <Route path='/new/chats' exact render={()  => (<NewChatPage getNewChatTitle={this.getNewChatTitle}/>)} />
+                                <Route path='/profile' exact render={()  => (<Profile profile={this.state.profile} getProfileData={this.getProfileData} />)} />
                             </Switch>
                         </Grid>
                     </Grid>

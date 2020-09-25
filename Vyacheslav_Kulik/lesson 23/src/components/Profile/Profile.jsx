@@ -6,8 +6,8 @@ import './Profile.scss'
 
 export class Profile extends Component {
     state = {
-        author: 'Гость',
-        age: ''
+        author: this.props.profile.author,
+        age: this.props.profile.age
     }
 
     handleForm = (event) => {
@@ -15,6 +15,12 @@ export class Profile extends Component {
             [event.target.name]: event.target.value
         })
     }
+
+    save = (event) => {
+        this.props.getProfileData(this.state)
+    }
+
+
 
 
     render() {
@@ -31,7 +37,7 @@ export class Profile extends Component {
                     <TextField name='age' label="Ваш возраст" value={this.state.age} onChange={this.handleForm}/>
                 </Grid>
                 <Grid item>
-                    <Link to='/' style={{textDecoration: 'none'}}><Button>Save</Button></Link>
+                    <Button onClick={this.save}>Save</Button>
 
                 </Grid>
 
