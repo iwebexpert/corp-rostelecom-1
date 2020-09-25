@@ -1,0 +1,19 @@
+/* .message-list {
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+    height: 50%;
+    padding: 20px;
+    overflow-y: scroll;
+    width: calc(100% - 40px);
+} */
+
+
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(198, 223, 253);    
+    overflow-y: scroll;
+    width: calc(100% - 40px);
+}
