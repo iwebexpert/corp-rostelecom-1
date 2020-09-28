@@ -13,7 +13,7 @@ export class MessageForm extends Component {
 
         this.state = {
             text: '',
-            author: 'Гость',
+            author: this.props.author,
             errorMessage: false,
             errorAuthor: false,
         }
@@ -72,11 +72,11 @@ export class MessageForm extends Component {
 
         return (
             <Grid container item direction="row"  alignItems="center" className='message-form'>
-                <Grid item xs={1}>
+                {/* <Grid item xs={1}>
                     <Input fullWidth error={this.state.errorAuthor} type="text" name="author" value={author}
                            onChange={this.handleChange} onKeyDown={this.sendForm}
                            placeholder="Введите ваше имя"/>
-                </Grid>
+                </Grid> */}
                 <Grid item xs>
                     <Input fullWidth autoFocus error={this.state.errorMessage} multiline name="text" value={text}
                            onChange={this.handleChange}
