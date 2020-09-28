@@ -8,23 +8,24 @@ import { ChatForm } from 'components/ChatForm'
 import './ChatsList.scss'
 
 export class ChatsList extends Component {
-    render() {
-        const { match, onAdd } = this.props
-        const id = +((match || {}).params || {}).id || 0
-        return (
-            <List className="chats-list">
-                {(this.props.chats || []).map(item => (
-                    <ChatItem
-                        key={item.id}
-                        item={item}
-                        active={id === item.id}
-                    />
-                ))}
-                <Divider />
-                <ChatForm onAdd={onAdd} />
-            </List>
-        )
-    }
+  render() {
+    const { activeChat, onAdd } = this.props
+    return (
+      <div className="chats__container">
+        <List className="chats__list">
+          {(this.props.chats || []).map(item => (
+            <ChatItem
+              key={item.id}
+              item={item}
+              active={activeChat === item.id}
+            />
+          ))}
+        </List>
+        <Divider/>
+        <ChatForm onAdd={onAdd}/>
+      </div>
+    )
+  }
 }
 
 

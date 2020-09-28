@@ -1,0 +1,20 @@
+.chats__container {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  .chats__list {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
+
+  & .MuiDivider-root {
+    width: 100%;
+  }
+
+  & .MuiTypography-root {
+    width: 100%;
+  }
+}

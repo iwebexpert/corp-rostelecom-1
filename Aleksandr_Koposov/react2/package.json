@@ -1,7 +1,7 @@
 {
-  "name": "react4",
+  "name": "react5",
   "version": "1.0.0",
-  "description": "Lesson 23 (React 4)",
+  "description": "Lesson 24 (React 5)",
   "private": true,
   "author": "Aleksandr.Koposov",
   "scripts": {
@@ -17,6 +17,7 @@
     "css-loader": "^4.3.0",
     "html-webpack-plugin": "^4.4.1",
     "mini-css-extract-plugin": "^0.11.2",
+    "redux-devtools-extension": "^2.13.8",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
@@ -29,7 +30,10 @@
     "classnames": "^2.2.6",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
+    "react-addons-update": "^15.6.2",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5"
   }
 }

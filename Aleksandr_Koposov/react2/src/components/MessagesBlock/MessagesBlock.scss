@@ -1,29 +1,30 @@
 * {
-    font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 }
+
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html, body {
-    margin: 0;
+  margin: 0;
 }
 
 .messages__block {
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-    justify-content: flex-end;
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
 
-    & .MuiDivider-root {
-        width: 100%;
-    }
-    & .MuiTypography-root {
-        width: 100%;
-    }
+  & .MuiDivider-root {
+    width: 100%;
+  }
+
+  & .MuiTypography-root {
+    width: 100%;
+  }
 }

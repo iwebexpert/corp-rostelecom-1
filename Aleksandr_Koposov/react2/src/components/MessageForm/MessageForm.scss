@@ -1,14 +1,14 @@
 .message__form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    border-top: 1px solid lightgray;
-    padding-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
 
-    & .MuiTextField-root {
-        flex-grow: 1;
-        margin-right: 10px;
-    }
+  & .MuiTextField-root {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
 }
