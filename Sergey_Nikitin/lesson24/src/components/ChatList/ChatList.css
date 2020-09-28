@@ -1,0 +1,10 @@
+.chatList {
+    width: '30%';
+    max-width: 360;
+    background-color: paper;
+}
+
+.MuiListItem-root:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    cursor: grab;
+}
