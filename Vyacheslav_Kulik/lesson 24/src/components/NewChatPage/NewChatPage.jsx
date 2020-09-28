@@ -17,8 +17,8 @@ export class NewChatPage extends Component {
             title: event.target.value
         })
     }
-    @keydown('enter')
-    sendData = (event) => {
+    @keydown( 'enter' )
+    sendData(event) {
         this.sendTitle()
     }
     sendTitle = () => {

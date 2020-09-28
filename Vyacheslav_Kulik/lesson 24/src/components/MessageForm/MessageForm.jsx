@@ -45,7 +45,7 @@ export class MessageForm extends Component {
 
         if (typeof onSend === 'function') {
             if (text && author) {
-                onSend(this.state, moment())
+                onSend({text, author}, moment())
                 this.setState({text: ''})
                 this.setState({
                     errorMessage: false,

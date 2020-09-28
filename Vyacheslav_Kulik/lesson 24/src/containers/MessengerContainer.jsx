@@ -6,15 +6,18 @@ import {addChatsAction, addChatsMessageAction} from 'actions/chats'
 
 class MessengerContainerClass extends Component {
 
-    componentDidMount() {
-        this.props.addChatsAction()
+    // componentDidMount() {
+    //     this.props.addChatsAction()
+    // }
+
+    getMessage = (chats) => {
+        this.props.addChatsMessageAction(chats)
     }
 
-
     render() {
-        console.log(this.props)
-        return <Messenger author={this.props.author} chats={this.props.chats.entries} getMessage={this.getMessage} match={this.props.match}/>
-        //return null
+
+        const {author} = this.props.profile.entries
+        return <Messenger author={author} chats={this.props.chats.entries} getMessage={this.getMessage} match={this.props.match}/>
     }
 
 }

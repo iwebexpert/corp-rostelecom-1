@@ -30,19 +30,18 @@ export class Messenger extends Component {
 
     }
 
-    
-
     botAnswer = null
 
     addMessage = (message) => {
         const newChats = this.chats.slice()
         newChats[this.props.match.params.id].messages = newChats[this.props.match.params.id].messages.concat([message])
+        //console.log(message)
         this.props.getMessage(newChats)
     }
 
    
     componentDidUpdate(prevProps) {
-        
+
         if (this.isChat) {
             if (this.botAnswer) {
                 clearTimeout(this.botAnswer)
@@ -53,7 +52,7 @@ export class Messenger extends Component {
                 this.botAnswer = setTimeout(this.answerFromBot, 2000, lastMessage)
             }
         }
-        
+
     }
 
 
