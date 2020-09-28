@@ -1,0 +1,10 @@
+.current-chat {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+}
+
+.no-chat {
+  margin-top: 30px;
+  text-align: center;
+}
