@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Grid, Container} from '@material-ui/core';
-import {Switch, Route} from 'react-router-dom'
 
 import {Messenger} from 'components/Messenger';
 import {Header} from 'components/Header';
+import {Profile} from 'components/Profile';
+import {Switch, Route} from 'react-router-dom'
+
 
 import './Layout.css';
 import {ChatList} from "../ChatList";
-import {Profile} from "components/Profile";
 
 export class Layout extends Component {
     render(){
@@ -23,8 +24,9 @@ export class Layout extends Component {
                         <Grid item xs={10} >
                             <div>
                                 <Switch>
-                                    <Route exact path="/"><Profile /></Route>
-                                    <Route exact path="/profile"><Messenger /></Route>
+                                    <Route exact path="/profile"><Profile /></Route>
+                                    <Route exact path="/"><Messenger /></Route>
+                                    <Route exact path='/chats/:id' component={Messenger} />
                                 </Switch>
                             </div>
                         </Grid>
