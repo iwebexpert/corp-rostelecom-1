@@ -1,0 +1,20 @@
+.chatlist {
+    max-height: 100%;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    background-color: rgb(201, 213, 235);
+    align-items: center;
+    flex-direction: column;
+}
+.chatlistheader {
+    width: 100%;
+    margin: auto;
+    font-size: medium;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(94, 141, 228);
+    color: white;
+}
