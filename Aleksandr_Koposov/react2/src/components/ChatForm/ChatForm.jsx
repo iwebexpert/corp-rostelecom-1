@@ -1,65 +1,64 @@
 import React, { Component } from 'react'
 
-import { ListItem, ListItemIcon, ListItemText, ListItemAvatar, TextField, Fab, Icon } from '@material-ui/core'
+import { ListItem, ListItemIcon, ListItemText, TextField, Fab, Icon } from '@material-ui/core'
 
 import './ChatForm.scss'
 
 export class ChatForm extends Component {
-    state = {
-        name: ''
-    }
+  state = {
+    name: ''
+  }
 
-    onAdd = () => {
-        const { name } = this.state
-        const { onAdd } = this.props
+  onAdd = () => {
+    const { name } = this.state
+    const { onAdd } = this.props
 
-        if (!name) {
-            return
-        }
-        if (typeof (onAdd) === 'function') {
-            onAdd(name)
-            this.setState({ name: '' })
-        }
+    if (!name) {
+      return
     }
+    if (typeof (onAdd) === 'function') {
+      onAdd(name)
+      this.setState({ name: '' })
+    }
+  }
 
-    onInput = (event) => {
-        this.setState({
-            name: event.target.value
-        })
-    }
+  onInput = (event) => {
+    this.setState({
+      name: event.target.value
+    })
+  }
 
-    onKeyUp = (event) => {
-        if (event.ctrlKey && event.keyCode === 13) {
-            this.onAdd()
-        }
+  onKeyUp = (event) => {
+    if (event.keyCode === 13) {
+      this.onAdd()
     }
+  }
 
-    render() {
-        const { name } = this.state
-        return (
-            <ListItem className="chat__form">
-                <ListItemAvatar />
-                <ListItemText>
-                    <TextField
-                        label="Название"
-                        variant="outlined"
-                        placeholder="Название"
-                        color="primary"
-                        value={name}
-                        onChange={this.onInput}
-                        onKeyUp={this.onKeyUp}
-                    />
-                </ListItemText>
-                <ListItemIcon>
-                    <Fab
-                        color="secondary"
-                        size="small"
-                        onClick={this.onAdd}
-                    >
-                        <Icon>add</Icon>
-                    </Fab>
-                </ListItemIcon>
-            </ListItem>
-        )
-    }
+  render() {
+    const { name } = this.state
+    return (
+      <ListItem className="chat__form">
+        <ListItemText>
+          <TextField
+            label="Название"
+            variant="outlined"
+            placeholder="Название"
+            color="primary"
+            value={name}
+            onChange={this.onInput}
+            onKeyUp={this.onKeyUp}
+          />
+        </ListItemText>
+        <ListItemIcon>
+          <Fab
+            color="secondary"
+            size="small"
+            onClick={this.onAdd}
+          >
+            <Icon>add</Icon>
+          </Fab>
+        </ListItemIcon>
+      </ListItem>
+    )
+  }
 }

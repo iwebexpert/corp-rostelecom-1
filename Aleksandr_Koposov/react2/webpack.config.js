@@ -13,6 +13,12 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       components: path.join(__dirname, 'src', 'components'),
+      containers: path.join(__dirname, 'src', 'containers'),
+      pages: path.join(__dirname, 'src', 'pages'),
+      store: path.join(__dirname, 'src', 'store'),
+      helpers: path.join(__dirname, 'src', 'helpers'),
+      actions: path.join(__dirname, 'src', 'store/actions'),
+      reducers: path.join(__dirname, 'src', 'store/reducers'),
     },
   },
 

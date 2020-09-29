@@ -1,21 +1,22 @@
 .profile {
-    & .MuiBadge-badge {
-        height: 36px;
-        width: 36px;
-        border-radius: 50%;
-        background-color: grey;
-        color: white;
-    }
+  & .MuiBadge-badge {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    background-color: grey;
+    color: white;
+    cursor: pointer;
+  }
 
-    & .MuiTextField-root {
-        width: 100%;
-        margin: 15px 0;
-    }
+  & .MuiTextField-root {
+    width: 100%;
+    margin: 15px 0;
+  }
 }
 
 .avatar-dialog {
-    & .MuiTextField-root {
-        max-width: 550px;
-        width: 100%;
-    }
+  & .MuiTextField-root {
+    max-width: 550px;
+    width: 100%;
+  }
 }
