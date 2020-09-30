@@ -1,0 +1,6 @@
+.logo{font-size:2em;font-weight:bold;font-style:italic}.header{display:flex;justify-content:space-between;align-items:center}
+.chatlist{background-color:#fafad2}
+.message{background-color:bisque;padding:5px 12px;border-radius:10px;font-size:20px;margin:5px;list-style:none}.message-sender{font-size:14px;color:gray}.message-author{align-self:flex-end}.message-bot{align-self:flex-start}
+.message-list{display:flex;flex-direction:column;background-color:#7fffd4;height:50%;padding:20px;overflow-y:scroll;width:calc(100% - 40px)}
+.messenger{height:100%;width:70%;margin:auto;display:flex;align-items:center;flex-direction:column;justify-content:center}
+.logo{font-size:2em;font-weight:bold;font-style:italic}.Container{display:flex}
