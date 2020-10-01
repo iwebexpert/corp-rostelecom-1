@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
+
