@@ -10,7 +10,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 
 import './ChatList.css';
-import {chats} from '../../../helpers/chatsData';
+//import {chats} from '../../helpers/chatsData';
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 export class ChatList extends Component {
     render(){
+        console.log('props ', this.props)
+        const {chats} = this.props;
             return (
                 <List component="nav"
                       aria-labelledby="nested-list-subheader">
