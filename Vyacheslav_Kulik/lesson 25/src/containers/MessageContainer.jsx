@@ -20,20 +20,22 @@ class MessageClass extends Component {
 
 function mapStateToProps(state, ownProps) {
     const chatId = state.router.location.pathname.replace('/chats/','')
-    const chatMessages = state.chats.entries[chatId].messages
-    const idMessage = ownProps.messages.id + ''
-    let indexDeleteMessage
-    chatMessages.forEach((value, index) => {
-        if(value.id === idMessage){
-            indexDeleteMessage = index
 
+    if(chatId && state.chats.entries[chatId]) {
+        const chatMessages = state.chats.entries[chatId].messages
+        const idMessage = ownProps.messages.id + ''
+        let indexDeleteMessage
+        chatMessages.forEach((value, index) => {
+            if(value.id === idMessage){
+                indexDeleteMessage = index
+
+            }
+        })
+        return {
+            chatId: state.router.location.pathname.replace('/chats/',''),
+            indexDeleteMessage
         }
-    })
-    return {
-        chatId: state.router.location.pathname.replace('/chats/',''),
-        indexDeleteMessage
     }
-
 
 }
 
