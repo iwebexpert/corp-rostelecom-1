@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {Grid, Container} from '@material-ui/core';
 
-import {Messenger} from 'components/Messenger';
+import {MessengerContainer as  Messenger} from 'containers/MessengerContainer';
 import {Header} from 'components/Header';
-import {Profile} from 'components/Profile';
+import {ProfileContainer as Profile} from 'containers/ProfileContainer';
 import {Switch, Route} from 'react-router-dom'
 
 
 import './Layout.css';
-import {ChatList} from "../ChatList";
+import {ChatListContainer as ChatList} from "containers/ChatListContainer";
 
 export class Layout extends Component {
     render(){
