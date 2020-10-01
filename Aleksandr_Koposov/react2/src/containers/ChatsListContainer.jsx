@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import { nanoid } from 'nanoid'
 
-import { chatsLoadAction, chatAddAction } from 'actions/chats'
+import {
+  chatsLoadAction,
+  chatAddAction
+} from 'actions/chats'
 
 import { ChatsList } from 'components/ChatsList'
 
@@ -11,20 +15,17 @@ class ChatsListContainerClass extends Component {
     this.props.chatsLoadAction()
   }
 
-  routeTo = (id) => {
-    if (this.props.history) {
-      this.props.history.push(`/chats/${id}`)
-    }
-  }
-
   onChatAdd = (name) => {
     const newId = nanoid()
-    this.props.chatAddAction({
-      id: newId,
-      name: name,
-      users: [this.props.user.id],
-      messages: []
-    }, this.routeTo)
+    if (name) {
+      this.props.chatAddAction({
+        id: newId,
+        name: name,
+        users: [this.props.user.id],
+        messages: []
+      })
+      this.props.redirect(newId)
+    }
   }
 
   render() {
@@ -53,7 +54,8 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch) {
   return {
     chatsLoadAction: () => dispatch(chatsLoadAction()),
-    chatAddAction: (chat, cb) => dispatch(chatAddAction(chat, cb)),
+    chatAddAction: chat => dispatch(chatAddAction(chat)),
+    redirect: id => dispatch(push(`/chats/${id}`)),
   }
 }
 

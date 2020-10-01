@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
-import { Message } from 'components/Message'
+import { MessageContainer } from 'containers/MessageContainer'
 
 import './MessageList.scss'
 
 export class MessageList extends Component {
   render() {
-    const { user } = this.props
-    const items = this.props.items
-      .map(item =>
-        (<Message
-          key={item.id}
-          text={item.text}
-          bot={item.author === 'bot'}
-          user={user}
-        />))
+    const { chatId, items } = this.props
     return (
-      <div className='messages__list'>{items}</div>
+      <div className='messages__list'>
+        {items.map(item =>
+          (<MessageContainer
+            key={item.id}
+            chatId={chatId}
+            message={item}
+          />))}
+      </div>
     )
   }
 }

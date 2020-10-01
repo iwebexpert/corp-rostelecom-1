@@ -1,4 +1,4 @@
-.message {
+.messagee {
   width: 50%;
   margin: 5px;
 
@@ -24,5 +24,61 @@
   &.by-bot {
     align-self: flex-start;
     background-color: #123456;
+  }
+}
+
+.message {
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+
+  & .bubble {
+    max-width: 60%;
+    border-radius: 15px;
+    color: #fff;
+    padding: 10px;
+    position: relative;
+    margin: 0 16px;
+  }
+
+  &.by-bot {
+
+    & .bubble {
+      background-color: #123456;
+
+      &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 10px solid transparent;
+        border-right: 10px solid #123456;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        left: -18px;
+        top: 9px;
+      }
+    }
+  }
+
+  &.by-author {
+    flex-direction: row-reverse;
+
+    & .bubble {
+      background-color: #7700ff;
+
+      &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        position: absolute;
+        border-left: 10px solid #7700ff;
+        border-right: 10px solid transparent;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        right: -18px;
+        top: 9px;
+      }
+    }
   }
 }
