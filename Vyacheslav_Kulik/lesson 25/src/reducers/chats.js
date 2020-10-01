@@ -1,4 +1,4 @@
-import {LOAD_CHATS, ADD_MESSAGES_CHATS, ADD_NEW_CHAT, FIRED_CHAT, UNFIRED_CHAT} from '../actions/chats'
+import {LOAD_CHATS, ADD_MESSAGES_CHATS,  DELETE_MESSAGES_CHATS, ADD_NEW_CHAT, FIRED_CHAT, UNFIRED_CHAT} from '../actions/chats'
 import {chats} from '../helpers/chats'
 import update from 'immutability-helper'
 import moment from 'moment'
@@ -21,6 +21,16 @@ export const chatsReducer = (state = initialState, action) => {
                     [action.payload.chatId]: {
                         messages: {
                             $push: [action.payload.message]
+                        }
+                    }
+                }
+            })
+        case DELETE_MESSAGES_CHATS:
+            return update(state, {
+                entries: {
+                    [action.payload.chatId]: {
+                        messages: {
+                            $splice: [[action.payload.messageId, 1]]
                         }
                     }
                 }

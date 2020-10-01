@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {Message} from '../Message'
+import {MessageContainer as Message} from '../../containers/MessageContainer'
+//import {Message} from '../../components/Message'
 import {Grid} from '@material-ui/core'
 
 import './MessageFields.scss'
@@ -16,7 +17,6 @@ export class MessageFields extends Component {
 
 
     render() {
-
         const allMessages = this.props.message.map((data, index) => (<Message key={data.id}  messages={data}/>))
 
         return (

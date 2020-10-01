@@ -1,5 +1,6 @@
 export const LOAD_CHATS = 'LOAD_CHATS'
 export const ADD_MESSAGES_CHATS = 'ADD_MESSAGES_CHATS'
+export const DELETE_MESSAGES_CHATS = 'DELETE_MESSAGES_CHATS'
 export const ADD_NEW_CHAT = 'ADD_NEW_CHAT'
 export const FIRED_CHAT = 'FIRED_CHAT'
 export const UNFIRED_CHAT = 'UNFIRED_CHAT'
@@ -11,6 +12,11 @@ export const loadChatsAction = () => ({
 export const addChatsMessageAction = (message, chatId) => ({
     type: ADD_MESSAGES_CHATS,
     payload: {message: message, chatId}
+})
+
+export const deleteChatsMessageAction = (messageId, chatId) => ({
+    type: DELETE_MESSAGES_CHATS,
+    payload: {messageId, chatId}
 })
 
 export const addNewChatAction = (title) => ({

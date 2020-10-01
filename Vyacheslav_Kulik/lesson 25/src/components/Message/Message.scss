@@ -29,4 +29,11 @@ div .message-style {
     background-color: #dbe5ef;
     color: #79818d;
   }
+  &-close {
+    position: relative;
+    align-self: flex-end;
+    top: 10px;
+    left: 10px;
+
+  }
 }

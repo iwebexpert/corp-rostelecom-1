@@ -6,14 +6,7 @@ import {addChatsMessageAction} from 'actions/chats'
 
 class MessengerContainerClass extends Component {
 
-    // componentDidUpdate() {
-    //     console.log('componentDidUpdate')
-    //     console.log(this.props)
-    // }
-
-
     getMessage = (message) => {
-        //console.log(message)
         const {chatId} = this.props
         this.props.addChatsMessageAction(message, chatId)
     }
@@ -35,12 +28,9 @@ function mapStateToProps(state, ownProps) {
             author: state.profile.entries.author
         }
     }
-
-    return {
-        chat: chats[match.params.id],
-        chatId: ownProps.match.params.id,
-        author: state.profile.entries.author
-    }
+    // return {
+    //     ...state
+    // }
 }
 
 function mapDispatchToProps(dispatch) {

@@ -18,5 +18,10 @@ div .message-style {
   div .message-style-color-end {
     background-color: #dbe5ef;
     color: #79818d; }
+  div .message-style-close {
+    position: relative;
+    align-self: flex-end;
+    top: 10px;
+    left: 10px; }
 
 /*# sourceMappingURL=Message.css.map */
