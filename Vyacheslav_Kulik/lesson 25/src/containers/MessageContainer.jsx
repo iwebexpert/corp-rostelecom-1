@@ -27,7 +27,7 @@ function mapStateToProps(state, ownProps) {
         let indexDeleteMessage
         chatMessages.forEach((value, index) => {
             if(value.id === idMessage){
-                indexDeleteMessage = index
+                indexDeleteMessage = index // по id сообщения (nanoid) возвращаем id собщения (порядковый номер для slice), который нужно удалить
 
             }
         })
