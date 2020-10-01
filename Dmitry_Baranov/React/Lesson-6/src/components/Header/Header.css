@@ -1,0 +1,19 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: end;
+    align-items: flex-end;
+}
