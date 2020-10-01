@@ -1,0 +1,6 @@
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; }
+
+/*# sourceMappingURL=ChatList.css.map */

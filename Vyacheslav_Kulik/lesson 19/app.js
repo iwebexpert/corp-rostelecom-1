@@ -24,7 +24,7 @@ let app = express()
 let server = http.createServer(app); // создаем сервер с экспрессом внутри
 const io = socketIO(server) //экземпляр вебсокета передаем в наш сервер
 
-//middleware websocket для  авторизации
+//middlewares websocket для  авторизации
 io.use((socket, next) => {
     // получаем токен от клиента в такой  строке: const socket = io.connect(`http://localhost:4000?token=${TOKEN}`)
     const token = socket.handshake.query.token
