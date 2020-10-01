@@ -1,0 +1,62 @@
+.chatList {
+    width: '30%';
+    max-width: 360;
+    background-color: paper;
+}
+
+.MuiListItem-root:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    cursor: grab;
+}
+
+.blink {
+    animation-name: blinker;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0, 0, 1, 1.0);
+    animation-duration: 4s;
+    -webkit-animation-name: blinker;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(0, 0, 1, 1.0);
+    -webkit-animation-duration: 2s;
+    height: 20px;
+    width: 20px;
+    border-radius: 35%;
+}
+
+@keyframes blinker {
+    from {
+        /*opacity: 1.0;*/
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+    to {
+        /* opacity: 0.5;*/
+        background-color: rgba(226, 19, 19, 0.973);
+    }
+    from {
+        /*opacity: 1.0;*/
+        background-color: rgba(226, 19, 19, 0.973);
+    }
+    to {
+        /* opacity: 0.5;*/
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+}
+
+@-webkit-keyframes blinker {
+    from {
+        /* opacity: 1.0;*/
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+    to {
+        /* opacity: 0.5;*/
+        background-color: rgba(226, 19, 19, 0.973);
+    }
+    from {
+        /*opacity: 1.0;*/
+        background-color: rgba(226, 19, 19, 0.973);
+    }
+    to {
+        /* opacity: 0.5;*/
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+}
