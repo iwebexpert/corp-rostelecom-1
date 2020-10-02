@@ -1,0 +1,25 @@
+.message {
+  padding: 5px 12px;
+  border-radius: 10px;
+  font-size: 20px;
+  margin: 5px;
+  list-style: none;
+}
+
+.message-sender {
+  font-size: 14px;
+  color: gray;
+}
+
+.message-author {
+  background-color: #a8e7b1;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.message-bot {
+  background-color: white;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+/*# sourceMappingURL=Message.css.map */
