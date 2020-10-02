@@ -1,0 +1,12 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+  }
+  .fire {
+    background-color: tomato;
+  }
+  .unfire {
+    background-color: white;
+  }
+  
