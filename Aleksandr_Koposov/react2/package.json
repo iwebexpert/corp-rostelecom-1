@@ -1,7 +1,7 @@
 {
-  "name": "react5",
+  "name": "react6",
   "version": "1.0.0",
-  "description": "Lesson 24 (React 5)",
+  "description": "Lesson 25 (React 6)",
   "private": true,
   "author": "Aleksandr.Koposov",
   "scripts": {
@@ -28,12 +28,14 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "classnames": "^2.2.6",
+    "connected-react-router": "^6.8.0",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "react-addons-update": "^15.6.2",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0"
   }
 }

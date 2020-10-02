@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import { List, Divider } from '@material-ui/core'
 
-import { ChatItem } from 'components/ChatItem'
 import { ChatForm } from 'components/ChatForm'
+import { ChatItemContainer } from 'containers/ChatItemContainer'
 
 import './ChatsList.scss'
 
@@ -14,7 +14,7 @@ export class ChatsList extends Component {
       <div className="chats__container">
         <List className="chats__list">
           {(this.props.chats || []).map(item => (
-            <ChatItem
+            <ChatItemContainer
               key={item.id}
               item={item}
               active={activeChat === item.id}

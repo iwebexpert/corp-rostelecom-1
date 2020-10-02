@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { nanoid } from 'nanoid'
+import { push } from 'connected-react-router'
 
-import { messagesLoadAction, messageSendAction } from 'actions/messages'
-import { chatMessageSendAction } from 'actions/chats'
+import { messagesLoadAction, messageSendAction, messageDeleteAction } from 'actions/messages'
+import { chatDeleteAction } from 'actions/chats'
 
 import { MessagesBlock } from 'components/MessagesBlock'
 
@@ -15,7 +15,16 @@ class MessageBlockContainerClass extends Component {
   onMessageAdd = (chatId, message) => {
     const data = { chatId, message }
     this.props.messageSendAction(data)
-    this.props.chatMessageSendAction(data)
+  }
+
+  onMessageDelete = (chatId, messageId) => {
+    const data = { chatId, messageId }
+    this.props.messageDeleteAction(data)
+  }
+
+  onChatDelete = (chatId) => {
+    this.props.redirect()
+    this.props.chatDeleteAction(chatId)
   }
 
   render() {
@@ -25,6 +34,8 @@ class MessageBlockContainerClass extends Component {
       messages={messages || []}
       user={user}
       onAdd={this.onMessageAdd}
+      onChatDelete={this.onChatDelete}
+      onContext={this.onMessageDelete}
     />
   }
 }
@@ -38,12 +49,13 @@ function mapStateToProps(state, ownProps) {
   const chat = chats.find(i => i.id === chatId) || {}
   const messages = !chatId
     ? []
-    : allMessages.filter(i => chat.messages.includes(i.id))
+    : allMessages.filter(i => (chat.messages || []).includes(i.id))
 
   return {
     user,
     messages,
-    chat
+    chat,
+    chatId
   }
 }
 
@@ -51,7 +63,9 @@ function mapDispatchToProps(dispatch) {
   return {
     messagesLoadAction: () => dispatch(messagesLoadAction()),
     messageSendAction: (message) => dispatch(messageSendAction(message)),
-    chatMessageSendAction: (message) => dispatch(chatMessageSendAction(message)),
+    messageDeleteAction: (chatId, messageId) => dispatch(messageDeleteAction(chatId, messageId)),
+    chatDeleteAction: chatId => dispatch(chatDeleteAction(chatId)),
+    redirect: () => dispatch(push('/')),
   }
 }
 
