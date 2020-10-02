@@ -62,7 +62,7 @@ function mapStateToProps(state, ownProps) {
 
     const chats = state.chats.entries;
     const location = state.router.location.pathname;
-    let arr = location.match(/\/chats\/(\d)+/);
+    let arr = location.match(/\/chats\/(\d+)/);
     let currentChatId = null;
     if (arr && arr[1]) {
         currentChatId = arr[1];
