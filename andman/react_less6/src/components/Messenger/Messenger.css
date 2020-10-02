@@ -1,0 +1,18 @@
+.messenger {
+    height: 100%;    
+    height: 90vh;
+    width: 70%;   
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-between;    
+    align-items: center;    
+}
+.title {    
+    background-color: rgb(131, 197, 218);
+    text-align: center;
+    color: rgb(45, 102, 124);
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
+    width: 100%;  
+    margin: 5px;    
+}
