@@ -1,0 +1,8 @@
+.message-form {
+  margin-top: 20px;
+  align-self: flex-end;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
