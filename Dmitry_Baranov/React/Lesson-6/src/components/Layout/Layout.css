@@ -1,0 +1,13 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.fire {
+    background-color: indianred;
+}
+
+.unfire {
+    background-color: white;
+}
