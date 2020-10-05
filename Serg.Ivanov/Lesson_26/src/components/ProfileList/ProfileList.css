@@ -1,0 +1,9 @@
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    background-color: aquamarine;
+    height: 100px;
+    padding: 20px;
+    overflow-y: scroll;
+    width: calc(100% - 40px);
+}
