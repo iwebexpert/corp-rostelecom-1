@@ -1,0 +1,17 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.container {
+    display: flex;
+}
+
+.fire {
+    background-color: red;
+}
+
+.unfire {
+    background-color: white;
+}
