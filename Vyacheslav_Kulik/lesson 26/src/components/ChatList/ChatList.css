@@ -1,0 +1,9 @@
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; }
+  .chat-list-loading {
+    color: #6c8bff;
+    align-self: center; }
+
+/*# sourceMappingURL=ChatList.css.map */
