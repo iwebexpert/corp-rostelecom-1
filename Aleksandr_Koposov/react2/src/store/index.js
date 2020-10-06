@@ -9,6 +9,7 @@ import thunk from 'redux-thunk'
 
 import { rootReducer } from 'reducers'
 import { botMiddleware } from 'middlewares/bot'
+import { chatActionsMiddleware } from 'middlewares/chatActions'
 import { locationChange } from 'middlewares/locationChange'
 
 export const history = createBrowserHistory()
@@ -19,7 +20,7 @@ const persistConfig = {
   blacklist: ['chats', 'messages'],
 }
 
-export function initStore(){
+export function initStore() {
   const initStateStore = {}
 
   const store = createStore(
@@ -29,6 +30,7 @@ export function initStore(){
       apiMiddleware,
       thunk,
       botMiddleware,
+      chatActionsMiddleware,
       locationChange,
       routerMiddleware(history),
     )))

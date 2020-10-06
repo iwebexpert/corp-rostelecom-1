@@ -23,10 +23,12 @@ class MessageBlockContainerClass extends Component {
   }
 
   render() {
-    const { messages, chat, user } = this.props
+    const { messages, chat, user, isLoading, isError } = this.props
     return <MessagesBlock
       chat={chat || {}}
       messages={messages || []}
+      isLoading={isLoading}
+      isError={isError}
       user={user}
       onAdd={this.onMessageAdd}
       onChatDelete={this.onChatDelete}
@@ -39,6 +41,8 @@ function mapStateToProps(state, ownProps) {
   const { match } = ownProps
   const user = state.profile.entries
   const chats = state.chats.entries
+  const isLoading = state.chats.loading
+  const isError = state.chats.error
   const chatId = ((match || {}).params || {}).id || ''
   const chat = chats.find(i => i.id === chatId) || {}
   const messages = !chatId
@@ -49,7 +53,9 @@ function mapStateToProps(state, ownProps) {
     user,
     messages,
     chat,
-    chatId
+    chatId,
+    isLoading,
+    isError
   }
 }
 

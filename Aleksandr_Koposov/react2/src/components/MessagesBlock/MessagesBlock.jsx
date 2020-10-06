@@ -19,17 +19,6 @@ export class MessagesBlock extends Component {
 
   componentDidUpdate() {
     this.scrollToLastMessage()
-    // if (!this.chatId) {
-    //   return
-    // }
-    // const len = this.messages.length
-    // const botChatId = this.chatId
-    // if (!len) {
-    //   this.onSend({
-    //     author: 'bot',
-    //     text: `Добро пожаловать в чат «${this.chatName}»!`
-    //   }, botChatId)
-    // }
   }
 
   onDelete = () => {
@@ -72,10 +61,11 @@ export class MessagesBlock extends Component {
   }
 
   render() {
+    const { isLoading, user, onContext } = this.props
     return (
       <div className="messages__block">
         <Typography variant="h6">
-          Чат «{this.chatName}»
+          {isLoading ? 'Загрузка...' : `Чат «${this.chatName}»`}
           <IconButton onClick={this.onDelete}>
             <Icon>delete_forever</Icon>
           </IconButton>
@@ -84,8 +74,9 @@ export class MessagesBlock extends Component {
         <MessageList
           chatId={this.chatId}
           items={this.messages || []}
-          user={this.props.user || {}}
-          onContext={this.props.onContext}
+          isLoading={isLoading}
+          user={user || {}}
+          onContext={onContext}
         />
         <Divider />
         <MessageForm onSend={this.onSend} />
