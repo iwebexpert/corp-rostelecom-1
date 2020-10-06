@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { messageDeleteAction } from 'actions/messages'
+import { chatDeleteMessageAction } from 'actions/chats'
 import { Message } from 'components/Message'
 
 class MessageContainerClass extends Component {
   onDelete = () => {
-    this.props.messageDeleteAction(this.props.chatId, this.props.message.id)
+    this.props.chatDeleteMessageAction(this.props.chatId, this.props.message.id)
   }
 
   render() {
@@ -28,7 +28,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    messageDeleteAction: (chatId, messageId) => dispatch(messageDeleteAction(chatId, messageId)),
+    chatDeleteMessageAction: (chatId, messageId) => dispatch(chatDeleteMessageAction(chatId, messageId)),
   }
 }
 

@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid'
-import { CHAT_MESSAGE_SEND, chatFlashAction } from 'actions/chats'
-import { messageSendAction } from 'actions/messages'
+import { CHAT_MESSAGE_SEND, chatMessageSendAction, chatFlashAction } from 'actions/chats'
 
 let botWriting = [] // Можно, конечно, менять флаг у чата или проверять длину
 
@@ -17,10 +16,11 @@ export const botMiddleware = store => next => action => {
           message: {
             id: nanoid(),
             author: 'bot',
-            text: `Привет, ${user}! Это бот.`
+            text: `Привет, ${user}! Это бот.`,
+            chatId
           }
         }
-        store.dispatch(messageSendAction(data))
+        store.dispatch(chatMessageSendAction(data))
 
         const pathname = store.getState().router.location.pathname || ''
         const pathParts = pathname.match(/\/chats\/(.*?)$/) || []
