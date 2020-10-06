@@ -1,0 +1,9 @@
+.chat-input-list {                
+    display: flex;
+    flex-direction: row;        
+    justify-content: space-between;
+    align-items: center;
+    height: 5%;
+    padding: 10px;    
+    width: calc(100% - 40px);
+}

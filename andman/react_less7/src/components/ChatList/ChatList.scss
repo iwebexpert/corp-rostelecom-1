@@ -1,0 +1,32 @@
+.chat {
+    &-container{
+        width: 30%;    
+        background-color:rgb(175, 216, 221);             
+        padding: 0;
+        height: 90vh;
+        align-items: center;        
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-form {
+        width: 100%;            
+        height: auto;
+        align-items: center;        
+        border-bottom: 5px solid white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;        
+    }
+    &-list {
+        width: 100%;            
+        overflow-y: scroll;        
+        flex-grow: 1;
+        align-items: center;
+        overflow-y: scroll;
+    }
+    &-del {
+        flex-grow: 1;
+        text-align: right;
+    }
+}

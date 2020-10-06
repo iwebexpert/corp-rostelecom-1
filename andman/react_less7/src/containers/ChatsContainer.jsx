@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 // import { nanoid } from 'nanoid';
 import { push } from 'connected-react-router';
 
+import { nanoid } from 'nanoid';
 
 // import { Messenger } from 'components/Messenger';
 import { ChatList } from 'components/ChatList';
-import { chatsLoadAction, chatsAddAction, chatDeleteAction } from '../actions/chats';
+import { chatsLoadAction, chatsAddAction, chatDeleteAction, chatsMessageSendAction } from '../actions/chats';
 import { CompareArrowsOutlined } from '@material-ui/icons';
 //import { Redirect } from 'react-router-dom';
 
@@ -22,7 +23,7 @@ class ChatListContainerClass extends Component {
         if (chat.title.length > 0) {
             chatsAddAction({
                 ...chat,
-                // id: nanoid(),
+                id: nanoid(),
             });
             redirect(chats.length);
         }
@@ -38,7 +39,7 @@ class ChatListContainerClass extends Component {
     handleChatDel = (chatId, e) => {
         const { chatDeleteAction, chats, redirect } = this.props;
 
-        if (chatId) {
+        if (chatId || chatId == 0) {
             chatDeleteAction(chatId);
             redirect(0);
         }
@@ -67,7 +68,6 @@ function mapStateToProps(state, ownProps) {
     if (arr && arr[1]) {
         currentChatId = arr[1];
     }
-
 
     return {
         chats,

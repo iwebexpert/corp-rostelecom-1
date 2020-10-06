@@ -1,0 +1,74 @@
+{
+    "chats": [
+        {
+            "id": "_IZQAf1sdTxKw_fexow8G",
+            "title": "Тестовый чат"
+        },
+        {
+            "title": "Рабочий чат",
+            "id": "LZul_SVg9aukEtkp7A8ql"
+        },
+        {
+            "title": "Друзья",
+            "id": "nzCY6E6invcjVS7xXD-dm"
+        }
+    ],
+    "messages": [
+        {
+            "id": 0,
+            "author": "WebDev",
+            "text": "Hi!",
+            "chatId": "_IZQAf1sdTxKw_fexow8G"
+        },
+        {
+            "id": 1,
+            "author": "WebDev",
+            "text": "Привет!",
+            "chatId": "_IZQAf1sdTxKw_fexow8G"
+        },
+        {
+            "id": 2,
+            "author": "WebDev",
+            "text": "Тестовое сообщение!",
+            "chatId": "LZul_SVg9aukEtkp7A8ql"
+        },
+        {
+            "id": 3,
+            "author": "WebDev",
+            "text": "Какие есть задачи?",
+            "chatId": "LZul_SVg9aukEtkp7A8ql"
+        },
+        {
+            "id": 4,
+            "author": "WebDev",
+            "text": "Ок!",
+            "chatId": "LZul_SVg9aukEtkp7A8ql"
+        },
+        {
+            "id": 5,
+            "author": "WebDev",
+            "text": "Что нового?",
+            "chatId": "nzCY6E6invcjVS7xXD-dm"
+        },
+        {
+            "text": "Проверка",
+            "author": "WebDev",
+            "chatId": "nzCY6E6invcjVS7xXD-dm",
+            "id": "4yDUIka9oVQ9XANJvpq_F"
+        },
+        {
+            "id": "vDJZWxPhgFifXL1XkaQJb",
+            "chatId": "nzCY6E6invcjVS7xXD-dm",
+            "author": "Bot",
+            "text": "Привет, WebDev! Это бот."
+        }
+    ],
+    "profile": [
+        {
+            "id": 0,
+            "name": "WebDev",
+            "email": "webdev@webdev.dev",
+            "avatar": "https://www.abeautifulsite.net/uploads/2014/08/bit-face.png"
+        }
+    ]
+}
