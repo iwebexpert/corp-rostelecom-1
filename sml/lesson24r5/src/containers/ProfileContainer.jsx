@@ -1,38 +1,39 @@
-//TODO
 import React, { Component } from 'react';
-import { connect } from 'react-redux'; // это контейнер
+import { connect } from 'react-redux';
 import { nanoid } from 'nanoid';
 
 import { Profile } from 'components/Profile';
 import { profileLoadAction } from '../actions/profile';
 
 class ProfileContainerClass extends Component {
-
   componentDidMount() {
     const { profileLoadAction } = this.props;
     profileLoadAction();
   }
-
+  handleReloadProfile = () => {
+    const { profileLoadAction } = this.props;
+    profileLoadAction();
+  };
   render() {
-    console.log('profileContainer' + this.props)
-    const { profile } = this.props;
+    const { profile, isError, isLoading } = this.props;
 
-    return <Profile profile={profile} />
+    return <Profile profile={profile} handleReloadProfile={this.handleReloadProfile}
+      isError={isError}
+      isLoading={isLoading} />
   }
 }
 
-// достает данные из store
 function mapStateToProps(state, ownProps) {
-  console.log('state', state);
-  // const { match } = ownProps;
-  const profile = state.profile.entries;
 
+  const { match } = ownProps;
+  const profile = state.profile.entries;
   return {
     profile,
+    isError: state.profile.error,
+    isLoading: state.profile.loading,
   };
 }
 
-// оборациваем экшен
 function mapDispatchToProps(dispacth) {
   return {
     profileLoadAction: () => dispacth(profileLoadAction()),

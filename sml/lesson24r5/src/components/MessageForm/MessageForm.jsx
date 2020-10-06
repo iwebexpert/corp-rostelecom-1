@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Button, TextField, Fab, withStyles } from '@material-ui/core';
+import React, {Component} from 'react';
+import {Button, TextField, Fab, withStyles} from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
 const styles = {
     root: {
-        backgroundColor: 'white',
+        backgroundColor: 'orange',
         borderRadius: 10, //px
     },
     btn: {
@@ -19,15 +19,15 @@ class MessageFormClass extends Component {
     }
 
     handleMessageSend = () => {
-        const { text, author } = this.state;
-        const { onSend } = this.props;
-
-        if (text && author) {
-            if (typeof (onSend) === 'function') {
+        const {text, author} = this.state;
+        const {onSend} = this.props;
+        
+        if(text && author){
+            if(typeof(onSend) === 'function'){
                 onSend(this.state);
-                this.setState({ text: '' });
+                this.setState({text: ''});
             }
-        } else {
+        } else{
             alert('Заполните все поля формы.')
         }
     }
@@ -41,41 +41,22 @@ class MessageFormClass extends Component {
         });
     }
 
-    render() {
-        const { text, author } = this.state;
-        const { classes } = this.props;
-        console.log('Form', classes);
+    render(){
+        const {text, author} = this.state;
+        const {classes} = this.props;
         return (
-            <div className={classes.root}>
-                <div className={classes.root}>
-                    <TextField
-                        label="Введите автора"
-                        name="author"
-                        variant="outlined"
-                        value={author}
-                        onChange={this.handleInputChange}
-                        style={{ margin: 10, width: 180 }} />
-                    <TextField
-                        label="Введите текст сообщения"
-                        name="text"
-                        value={text}
-                        onChange={this.handleInputChange}
-                        onKeyUp={this.handleKeyPress}
-                        multiline
-                        autoFocus
-                        variant="outlined"
-                        style={{ margin: 10, width: 250 }}
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        style={{ margin: 10, marginTop: 18 }}
-                        onClick={this.handleMessageSend}>
-                        Отправить
-                        <SendIcon style={{ marginLeft: 15 }} />
-                    </Button>
-                </div>
-            </div>
+        <div className={classes.root}>
+            <TextField label="Введите автора" name="author" value={author} onChange={this.handleInputChange} />
+            <TextField 
+            label="Введите текст сообщения" 
+            name="text" 
+            value={text} 
+            onChange={this.handleInputChange}
+            multiline
+            autoFocus
+             />
+            <Fab variant="extended" color="secondary" onClick={this.handleMessageSend} className={classes.btn}><SendIcon /></Fab>
+        </div>
         );
     }
 }

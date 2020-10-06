@@ -1,21 +1,40 @@
-import { PROFILE_LOAD } from '../actions/profile';
-import { profile } from '../helpers/profileData';
+//TODO
+import update from 'react-addons-update';
+
+import {
+  PROFILE_LOAD_REQUEST,
+  PROFILE_LOAD_SUCCESS,
+  PROFILE_LOAD_FAILURE
+} from '../actions/profile';
+
+// import { profile } from '../helpers/profileData';
 
 const initialState = {
-  entries: [],
+  entries: {},
   loading: false,
+  error: false,
 };
 
-// метод который будет менять состояние
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PROFILE_LOAD:
-      console.log('state', state)
+    case PROFILE_LOAD_REQUEST:
       return {
         ...state,
-        entries: profile,
+        loading: true,
+        error: false,
       }
-
+    case PROFILE_LOAD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        entries: action.payload,
+      }
+    case PROFILE_LOAD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      }
     default:
       return state;
   }

@@ -1,20 +1,11 @@
-# Домашнее задание. 24 (React 5)
+# Домашнее задание. 26 (React 7)
  @author Михаил Сорванов [CorpRostelecom-1]
  ----
  ### ДЗ.) 
-1.	Подключить Redux.
-2.	Установить и подключить Redux DevTools Extension.
-3.	Перенести в Redux чаты.
-4.	Перенести в Redux сообщения.
-5.	Перенести в Redux данные профиля и отображать имя (или любую другую информацию из профиля) в Header’е мессенджера.
-
-
+Fail
 
 
 ### run: 
 ```sh
-$ npm run dev
-$ npm start  (запуск localhost:4000)
+$ npm start
 ```
-
-[![](https://miro.medium.com/max/480/1*7LOWVelUHYS1iqeX34Whzg.png)]

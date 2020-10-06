@@ -8,23 +8,20 @@ import './Messenger.css';
 import {chats} from '../../helpers/chatsData';
 
 export class Messenger extends Component {
-
-    // componentDidUpdate()
-    // {
-    //     if(this.messages && this.messages.length){
-    //         const {author} = this.messages[this.messages.length - 1];
-    //         if(author !== 'Bot'){
-    //             setTimeout(() => {
-    //                 this.handleMessageSend({text: `Привет, ${author}! Это бот.`, author: 'Bot'});
-    //             }, 1000);
-    //         }
-    //     }
-    // }
-
     render(){
-        const {messages, handleMessageSend} = this.props;
+        const {messages, handleMessageSend, handleChatAdd, isLoading, isError, handleReloadChats} = this.props;
+
+        if(isError){
+            return (<div>Не удалось загрузить чаты... <button onClick={handleReloadChats}>Загрузить повторно</button></div>);
+        }
+
+        if(isLoading){
+            return (<div>Loading...</div>);
+        }
+
         return (
         <div className="messenger">
+            <button onClick={handleChatAdd}>Добавить новый чат</button>
             {messages ? <MessageList items={messages} /> : 'Пожалуйста, веберите чат слева'}
             {messages && <MessageForm onSend={handleMessageSend} />}
         </div>

@@ -1,21 +1,48 @@
 import update from 'react-addons-update';
-// редьюсер который будет подгружать чаты
 
-import { CHATS_LOAD, CHATS_MESSAGE_SEND } from '../actions/chats';
+import {
+    CHATS_ADD, 
+    //CHATS_LOAD, 
+    CHATS_MESSAGE_SEND,
 
-import { chats } from '../helpers/chatsData';
+    CHATS_LOAD_REQUEST,
+    CHATS_LOAD_SUCCESS,
+    CHATS_LOAD_FAILURE,
+} from '../actions/chats';
+
+import {chats} from '../helpers/chatsData';
 
 const initialState = {
     entries: [],
     loading: false,
+    error: false,
 };
 
 export const chatsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case CHATS_LOAD:
+    switch(action.type){
+        // case CHATS_LOAD:
+        //     return {
+        //         ...state,
+        //         entries: chats,
+        //     }
+
+        case CHATS_LOAD_REQUEST:
             return {
                 ...state,
-                entries: chats,
+                loading: true,
+                error: false,
+            }
+        case CHATS_LOAD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                entries: action.payload,
+            }
+        case CHATS_LOAD_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: true,
             }
 
         case CHATS_MESSAGE_SEND:
@@ -36,10 +63,22 @@ export const chatsReducer = (state = initialState, action) => {
             return update(state, {
                 entries: {
                     [action.payload.chatId]: {
-                        messages: { $push: [{ text: action.payload.text, author: action.payload.author, id: action.payload.id }] },
+                        messages: {$push: [{text: action.payload.text, author: action.payload.author, id: action.payload.id}]},
                     }
                 }
             });
+
+            case CHATS_ADD:
+                const {title, chatId} = action.payload;
+                return update(state, {
+                    entries: {$merge: {
+                        [chatId]: {
+                            id: chatId,
+                            messages: [],
+                            title,
+                        }
+                    }},
+                });
 
         default:
             return state;
