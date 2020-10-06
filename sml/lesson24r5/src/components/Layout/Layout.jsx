@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Switch, Route } from 'react-router-dom';
-import { Grid, Container, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
+import { Grid, Container, List, ListItem, ListItemText } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 import { Messenger } from 'components/Messenger';
 
@@ -10,40 +11,28 @@ import { ContactsPage } from 'pages/Contacts';
 import { NotFoundPage } from 'pages/PageNotFound';
 import { ProfilePage } from 'pages/Profile';
 import { Header } from 'components/Header';
-import ArtTrack from '@material-ui/icons/ArtTrack';
 
-import { chats } from '../../helpers/chatsData';
+import { chats as chatsData } from '../../helpers/chatsData';
 import { routes } from '../../routes';
 import './Layout.css';
 
-export class Layout extends Component {
-
-    //TODO
-    // state = {
-    //     chats: //
-    // };
-
-    // chatAddHandler = (chat) => {
-
-    // };
-    // messageAddHandler = (message) => {
-
-    // };
-
+class LayoutClass extends Component {
     render() {
+        let { chats } = this.props;
+        if (!chats.length) {
+            chats = chatsData;
+        }
+
         return (
-            <Grid container xs={12}>
-                <Grid xs={12} className="logo">
+            <Container maxWidth="xl">
+                <Grid item xs={12} className="logo">
                     <Header />
                 </Grid>
                 <Grid item xs={2}>
-                    <List component="nav">
-                        {chats.map((item) => (<ListItem key={item.id} button>
-                            <Link to={`/chats/${item.id}`} style={{ textDecoration: "none" }} >
-                                <ListItemIcon>
-                                    <ArtTrack />{' '}
-                                    <ListItemText primary={item.title} style={{ marginLeft: 20 }} />
-                                </ListItemIcon>
+                    <List>
+                        {chats.map((item) => (<ListItem key={item.id}>
+                            <Link to={`/chats/${item.id}`}>
+                                <ListItemText primary={item.title} />
                             </Link>
                         </ListItem>))}
                     </List>
@@ -77,7 +66,22 @@ export class Layout extends Component {
                         </Switch>
                     </div>
                 </Grid>
-            </Grid>   // Grid container
+            </Container>
         );
     }
 }
+
+function mapStateToProps(state, ownProps) {
+
+    const chats = state.chats.entries;
+
+    return {
+        chats,
+    };
+}
+
+function mapDispatchToProps(dispacth) {
+    return {};
+}
+
+export const Layout = connect(mapStateToProps, mapDispatchToProps)(LayoutClass);

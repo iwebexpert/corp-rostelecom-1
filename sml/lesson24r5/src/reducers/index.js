@@ -1,10 +1,9 @@
-// для комбинирования всех редьюсов
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
+import {connectRouter} from 'connected-react-router';
 
-import { chatsReducer } from './chats';
-import { profileReducer } from './profile';
+import {chatsReducer} from './chats';
 
-export const rootReducer = combineReducers({
+export const rootReducer = history => combineReducers({
+    router: connectRouter(history),
     chats: chatsReducer,
-    profile: profileReducer, //TODO
 });

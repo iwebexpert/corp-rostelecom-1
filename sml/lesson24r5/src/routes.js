@@ -1,10 +1,11 @@
 import { MessengerContainer as Messenger } from 'containers/MessengerContainer';
+// import { ProfileContainer as ProfilePage } from 'containers/ProfileContainer';
 
 import { HomePage } from 'pages/Home';
 import { AboutPage } from 'pages/About';
 import { ContactsPage } from 'pages/Contacts';
+import { ProfilePage } from 'pages/Profile';
 import { NotFoundPage } from 'pages/PageNotFound';
-import { ProfileContainer } from 'containers/ProfileContainer';
 
 export const routes = [
     {
@@ -23,13 +24,13 @@ export const routes = [
         exact: true,
     },
     {
-        path: '/chats/:id([0-9]+)',
-        component: Messenger,
+        path: '/profile',
+        component: ProfilePage,
         exact: true,
     },
     {
-        path: '/profile',
-        component: ProfileContainer,
+        path: '/chats/:id([0-9]+)',
+        component: Messenger,
         exact: true,
     },
     {

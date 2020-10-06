@@ -2,12 +2,15 @@ import React from 'react';
 import { Button, TextField } from '@material-ui/core';
 
 export function ProfilePage() {
+
+
+
   return (
     <div>
-      <img height="200" src="https://as2.ftcdn.net/jpg/03/39/34/25/500_F_339342532_DlJoFEDUDcOZN3V2z6l9yauLEcvnCfVF.jpg" alt="Фото" />
       <div>Данные профиля</div>
+      <div>email: ivan@mail.ru</div>
+      <div>name: Иван Иванов</div>
       <div>
-
         <TextField
           label="Введите ФИО"
           name="author"
