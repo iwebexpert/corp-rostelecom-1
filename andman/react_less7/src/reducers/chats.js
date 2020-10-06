@@ -76,7 +76,7 @@ export const chatsReducer = (state = initialState, action) => {
             //console.log('ADD', action.payload);
             return update(state, {
                 entries: {
-                    $push: [{ id: action.payload.id, title: action.payload.title }]
+                    $push: [{ id: action.payload.id, title: action.payload.title,messages: [] }]
                 }
             });
 
