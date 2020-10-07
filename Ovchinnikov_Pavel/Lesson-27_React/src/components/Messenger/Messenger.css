@@ -1,0 +1,10 @@
+.messenger {      
+    display: flex;   
+    flex-direction: column;
+    justify-content: center;
+   
+    /* min-height: 100vh; */
+    /* margin-top:calc(60%);
+    bottom: 0; */
+}
+
