@@ -17,6 +17,12 @@
       "title": "My chat",
       "srcAvatar": "src/img/test.svg",
       "fired": false
+    },
+    {
+      "title": "Test",
+      "srcAvatar": "src/img/bot.svg",
+      "fired": false,
+      "id": 3
     }
   ],
   "messages": [
@@ -78,21 +84,49 @@
     },
     {
       "text": "123",
-      "author": "Гость",
-      "time": "2020-10-05T11:20:46.507Z",
-      "id": "8p2joqG9d8WeV3dNhkrhi",
+      "author": "Гость1",
+      "time": "2020-10-08T09:45:50.659Z",
+      "id": "stzlriBH7CpIe8Sk5MzW7",
       "chatId": 1
     },
     {
-      "text": "Привет, <b>Гость</b>. Оператор скоро подключится к тебе",
+      "text": "Привет, <b>Гость1</b>. Оператор скоро подключится к тебе",
       "author": "Bot",
-      "time": "2020-10-05T11:20:47.545Z",
-      "id": "xxxi7vpnYcwjz2xwxSvx7",
+      "time": "2020-10-08T09:45:51.671Z",
+      "id": "wqhcE7ZY8gHMX0jM_kZ-s",
       "chatId": 1
+    },
+    {
+      "text": "132",
+      "author": "Test",
+      "time": "2020-10-08T09:50:30.742Z",
+      "id": "4ThGd1qcnWfKDCoDSsdTr",
+      "chatId": 3
+    },
+    {
+      "text": "Привет, <b>Test</b>. Оператор скоро подключится к тебе",
+      "author": "Bot",
+      "time": "2020-10-08T09:50:31.756Z",
+      "id": "TrnnNOmMibaEVZ4z_2yYU",
+      "chatId": 3
+    },
+    {
+      "text": "Привет, <b>Test</b>. Оператор скоро подключится к тебе",
+      "author": "Bot",
+      "time": "2020-10-08T09:50:35.164Z",
+      "id": "s1wxJoeDg3dpcIXuqUJe3",
+      "chatId": 3
+    },
+    {
+      "text": "asd",
+      "author": "Test",
+      "time": "2020-10-08T09:50:42.784Z",
+      "id": "FvyVJdckn14Acal_b6LoC",
+      "chatId": 3
     }
   ],
   "profile": {
-    "author": "Гость",
-    "age": "26"
+    "author": "Test",
+    "age": "25"
   }
 }

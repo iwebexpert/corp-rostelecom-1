@@ -1,0 +1,11 @@
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  &-loading {
+    color: #6c8bff;
+    align-self: center;
+  }
+}
+
+
