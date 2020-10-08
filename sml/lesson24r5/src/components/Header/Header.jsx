@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+// import React, { Component } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, withStyles } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 
-const styles = {
+const myStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -12,24 +14,43 @@ const styles = {
     fontSize: "20px",
     textAlign: "right",
   }
-};
+}));
 
-class HeaderClass extends Component {
-  render() {
-    const { classes } = this.props;
-    console.log('Form', classes);
-    return (
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Typography variant="h6" className={classes.root} color="inherit">
-            My messenger
+export function Header(props) {
+
+  const classes = myStyles();
+  console.log('Form', classes);
+  return (
+    <AppBar position="static">
+      <Toolbar variant="dense">
+        <Typography variant="h6" className={classes.root} color="inherit">
+          My messenger
           </Typography>
-          <Button color="inherit">{' '}
-            <Link to="/profile" className={classes.a}>Профиль</Link>
-          </Button>
-        </Toolbar>
-      </AppBar>
-    );
-  }
+        <Button color="inherit">{' '}
+          <Link to="/profile" className={classes.a}>Профиль</Link>
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+
 }
-export const Header = withStyles(styles)(HeaderClass);
+
+// class HeaderClass extends Component {
+//   render() {
+//     const { classes } = this.props;
+//     console.log('Form', classes);
+//     return (
+//       <AppBar position="static">
+//         <Toolbar variant="dense">
+//           <Typography variant="h6" className={classes.root} color="inherit">
+//             My messenger
+//           </Typography>
+//           <Button color="inherit">{' '}
+//             <Link to="/profile" className={classes.a}>Профиль</Link>
+//           </Button>
+//         </Toolbar>
+//       </AppBar>
+//     );
+//   }
+// }
+// export const Header = withStyles(styles)(HeaderClass);

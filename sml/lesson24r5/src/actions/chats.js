@@ -12,7 +12,6 @@ export const CHATS_LOAD_FAILURE = 'CHATS_LOAD/CHATS_LOAD_FAILURE';
 //     type: CHATS_LOAD,
 // });
 
-//Вариант 1
 export const chatsLoadAction = () => createAction({
     endpoint: '/api/chats?_embed=messages',
     method: 'GET',
@@ -25,33 +24,6 @@ export const chatsLoadAction = () => createAction({
         CHATS_LOAD_FAILURE,
     ],
 });
-
-//Вариант 2
-// export const chatsLoadRequestAction = () => ({
-//     type: CHATS_LOAD_REQUEST,
-// });
-
-// export const chatsLoadSuccessAction = (data) => ({
-//     type: CHATS_LOAD_SUCCESS,
-//     payload: data,
-// });
-
-// export const chatsLoadFailureAction = (error) => ({
-//     type: CHATS_LOAD_FAILURE,
-//     payload: error,
-// });
-
-// export const chatsLoadAction = () => {
-//     return async (dispatch) => {
-//         try {
-//             dispatch(chatsLoadRequestAction());
-//             const result = await fetch('/api/chats?_embed=messages');
-//             dispatch(chatsLoadSuccessAction(await result.json()));
-//         } catch (error) {
-//             dispatch(chatsLoadFailureAction(error));
-//         }
-//     }
-// };
 
 export const chatsMessageSendAction = (message) => ({
     type: CHATS_MESSAGE_SEND,

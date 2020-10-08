@@ -1,37 +1,36 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import { HomePage } from 'pages/Home';
-import { AboutPage } from 'pages/About';
-import { ContactsPage } from 'pages/Contacts';
-import { ProfilePage } from 'pages/Profile';
-import { NotFoundPage } from 'pages/PageNotFound';
+import {HomePage} from 'pages/Home';
+import {AboutPage} from 'pages/About';
+import {ContactsPage} from 'pages/Contacts';
+import {NotFoundPage} from 'pages/PageNotFound';
 
 class AppRouting extends React.Component {
     state = {
         route: this.route, //Для удаления символа #
     };
 
-    get route() {
+    get route(){
         return window.location.hash.substr(1);
     }
 
     hashchangeHandler = () => {
-        this.setState({ route: this.route })
+        this.setState({route: this.route})
     };
 
-    componentDidMount() {
+    componentDidMount(){
         window.addEventListener('hashchange', this.hashchangeHandler);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(){
         window.removeEventListener('hashchange', this.hashchangeHandler);
     }
 
-    render() {
+    render(){
         let Child;
 
-        switch (this.state.route) {
+        switch(this.state.route){
             case '':
             case '/':
                 Child = HomePage;
@@ -41,9 +40,6 @@ class AppRouting extends React.Component {
                 break;
             case '/contacts':
                 Child = ContactsPage;
-                break;
-            case '/profile':
-                Child = ProfilePage;
                 break;
             default:
                 Child = NotFoundPage;
@@ -55,7 +51,6 @@ class AppRouting extends React.Component {
                     <li><a href="#/">Главная</a></li>
                     <li><a href="#/about">О нас</a></li>
                     <li><a href="#/contacts">Контакты</a></li>
-                    <li><a href="#/profile">Профиль</a></li>
                     <li><a href="#/notfound1234">Случайная страница</a></li>
                 </ul>
                 <div>
@@ -67,6 +62,6 @@ class AppRouting extends React.Component {
 }
 
 ReactDom.render(
-    <AppRouting />,
+     <AppRouting />, 
     document.getElementById('root')
-);
+    );

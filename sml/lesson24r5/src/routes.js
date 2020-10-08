@@ -1,11 +1,10 @@
-import { MessengerContainer as Messenger } from 'containers/MessengerContainer';
-// import { ProfileContainer as ProfilePage } from 'containers/ProfileContainer';
+import {MessengerContainer as Messenger} from 'containers/MessengerContainer';
+import {ProfileContainer as Profile} from 'containers/ProfileContainer';
 
-import { HomePage } from 'pages/Home';
-import { AboutPage } from 'pages/About';
-import { ContactsPage } from 'pages/Contacts';
-import { ProfilePage } from 'pages/Profile';
-import { NotFoundPage } from 'pages/PageNotFound';
+import {HomePage} from 'pages/Home';
+import {AboutPage} from 'pages/About';
+import {ContactsPage} from 'pages/Contacts';
+import {NotFoundPage} from 'pages/PageNotFound';
 
 export const routes = [
     {
@@ -25,7 +24,7 @@ export const routes = [
     },
     {
         path: '/profile',
-        component: ProfilePage,
+        component: Profile,
         exact: true,
     },
     {
