@@ -34,8 +34,7 @@ const initialState = {
     entries: [],
     loading: false,
     error: false,
-    errorSave: false,
-    fire: false
+    errorSave: false,    
 };
 
 export const chatsReducer = (state = initialState, action) => {
