@@ -57,7 +57,7 @@ export const chatsReducer = (state = initialState, action) =>{
             return update(state, {
                 entries: {
                     [action.payload.chatId]: {
-                        messages: {$push: action.payload.messages},
+                        messages: {$set: action.payload.messages},
                     }
                 }
             });
@@ -75,13 +75,15 @@ export const chatsReducer = (state = initialState, action) =>{
             return state;
 
         case MESSAGE_SEND_SUCCESS:
+            console.log('MESSAGE_SEND_SUCCESS', action);
             return update(state, {
                 entries: {
-                    [action.payload.chatId]: {
+                    [action.payload.chatid]: {
                         messages: {$push: [{text: action.payload.text, author: action.payload.author, id: action.payload.id}]},
                     }
                 }
             });
+
         default:
             return state;
     }

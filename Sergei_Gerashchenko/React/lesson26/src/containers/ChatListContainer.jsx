@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {chatsLoadAction} from '../actions/chats';
+import {chatsLoadAction, messagesLoadAction} from '../actions/chats';
 import {ChatList} from 'components/ChatList';
 
 class ChatListContainerClass extends Component{
@@ -12,8 +12,8 @@ class ChatListContainerClass extends Component{
     }
 
     render(){
-        const {chats} = this.props;
-        return <ChatList chats={chats} />
+        const {chats, messagesLoadAction} = this.props;
+        return <ChatList chats={chats} messagesLoadAction={messagesLoadAction} />
     }
 }
 
@@ -31,6 +31,7 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch){
     return {
         chatsLoadAction:() => dispatch(chatsLoadAction()),
+        messagesLoadAction: (chatId) => dispatch(messagesLoadAction(chatId)),
     };
 }
 export const ChatListContainer = connect(mapStateToProps, mapDispatchToProps)(ChatListContainerClass);

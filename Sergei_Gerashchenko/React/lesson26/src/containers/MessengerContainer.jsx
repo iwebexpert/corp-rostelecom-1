@@ -7,11 +7,10 @@ import {nanoid} from 'nanoid';
 class MessengerContainerClass extends Component{
 
     componentDidMount(){
-         const {messagesLoadAction, chatId} = this.props;
+        const {messagesLoadAction, chatId} = this.props;
 
-         console.log('MessengerContainerClass didmount', this.props);
-         console.log('Chatid', chatId);
-         messagesLoadAction(chatId);
+        console.log('MessengerContainerClass didmount', this.props);
+        console.log('this', this);
     }
     handleMessageSend = (message) => {
         const {chatId, messageSendAction} = this.props;
@@ -21,6 +20,7 @@ class MessengerContainerClass extends Component{
             chatId,
         })
     }
+
 
     render(){
         const {chatId, messages} = this.props;

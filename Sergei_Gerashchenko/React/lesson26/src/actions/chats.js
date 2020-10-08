@@ -35,16 +35,19 @@ export const chatsLoadAction = () => createAction(
     }
 );
 
-export const messagesLoadAction = (chatId) => createAction(
-    {
-        endpoint : serverUrl+'/chats/'+chatId,
-        method: 'GET',
-        headers: {'Content-Type':'application/json',"access-control-allow-origin" : "*"},
-        types: [MESSAGES_LOAD_REQUEST,
-            MESSAGES_LOAD_SUCCESS,
-            MESSAGES_LOAD_FAILURE]
-    }
-);
+export const messagesLoadAction = (chatId) => {
+    console.log('messagesLoadAction', chatId);
+    return createAction(
+        {
+            endpoint : serverUrl+'/chats/'+chatId,
+            method: 'GET',
+            headers: {'Content-Type':'application/json',"access-control-allow-origin" : "*"},
+            types: [MESSAGES_LOAD_REQUEST,
+                MESSAGES_LOAD_SUCCESS,
+                MESSAGES_LOAD_FAILURE]
+        }
+    );
+}
 
 
 

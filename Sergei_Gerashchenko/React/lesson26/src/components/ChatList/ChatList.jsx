@@ -12,6 +12,7 @@ import SendIcon from '@material-ui/icons/Send';
 import './ChatList.css';
 //import {chats} from '../../helpers/chatsData';
 import {Link} from "react-router-dom";
+import {messagesLoadAction} from "../../actions/chats";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,19 +25,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export class ChatList extends Component {
     render(){
         console.log('props ', this.props)
-        const {chats} = this.props;
-            return (
-                <List component="nav"
-                      aria-labelledby="nested-list-subheader">
-                    {chats.map((item) => (<ListItem key={item.id}>
-                        <Link to={`/chats/${item.id}`}>
-                            <ListItemText primary={item.title} />
-                        </Link>
-                    </ListItem>))}
-                </List>
+        const {chats, messagesLoadAction} = this.props;
+
+        const loadChatMessages  = (chatId)=>{
+            console.log('loadChatMessages',chatId);
+            if(chatId != undefined) {
+                messagesLoadAction(""+chatId);
+            }
+        }
+        return (
+            <List component="nav"
+                  aria-labelledby="nested-list-subheader">
+                {chats.map((item) => (<ListItem key={item.id}>
+                    <Link to={`/chats/${item.id}`} onClick={()=>{console.log('Event ', item.id);loadChatMessages(item.id)}}>
+                        <ListItemText primary={item.title} />
+                    </Link>
+                </ListItem>))}
+            </List>
         );
     };
 }
