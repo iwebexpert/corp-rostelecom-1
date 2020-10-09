@@ -1,0 +1,14 @@
+.profile-window {
+    background-color: aquamarine;
+    height: 300px;
+    padding: 20px;
+    width: calc(100% - 40px);
+}
+.profile-list {
+    background-color: bisque;
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 5px;
+    list-style: none;
+}
