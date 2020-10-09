@@ -1,35 +1,31 @@
-import update from 'react-addons-update'
-
-import { PROFILE_LOAD, PROFILE_UPDATE } from 'actions/profile'
-
-import { profile } from 'helpers/profileData'
+import {
+  PROFILE_UPDATE,
+  PROFILE_LOAD_REQUEST,
+  PROFILE_LOAD_SUCCESS,
+  PROFILE_LOAD_FAILURE
+} from 'actions/profile'
 
 const initialState = {
   entries: null,
   loading: false,
+  error: false,
   init: false,
 }
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PROFILE_LOAD:
-      if (!state.init) {
-        return {
-          ...state,
-          init: true,
-          entries: profile,
-        }
-      } else {
-        return {
-          ...state
-        }
-      }
+
+    case PROFILE_LOAD_REQUEST:
+      return {...state, loading: true, error: false }
+
+    case PROFILE_LOAD_SUCCESS:
+      return { ...state, loading: false, entries: action.payload }
+
+    case PROFILE_LOAD_FAILURE:
+      return { ...state, loading: false, error: true }
 
     case PROFILE_UPDATE:
-      return {
-        ...state,
-        entries: action.payload
-      }
+      return { ...state, entries: action.payload }
 
     default:
       return state

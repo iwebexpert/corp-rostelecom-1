@@ -1,0 +1,71 @@
+{
+  "chats": [
+    {
+      "id": "first",
+      "name": "Chat 1",
+      "users": [
+        1,
+        2,
+        3
+      ],
+      "flash": false
+    },
+    {
+      "id": "second",
+      "name": "Chat 2",
+      "users": [
+        1
+      ],
+      "flash": false
+    },
+    {
+      "id": "third",
+      "name": "Chat 3",
+      "users": [
+        1
+      ],
+      "flash": false
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "text": "Message 1.1",
+      "author": "User",
+      "chatId": "first"
+    },
+    {
+      "id": 2,
+      "text": "Message 1.2",
+      "author": "bot",
+      "chatId":  "first"
+    },
+    {
+      "id": 3,
+      "text": "Message 1.3",
+      "author": "User",
+      "chatId":  "first"
+    },
+    {
+      "id": 4,
+      "text": "Message 2.1",
+      "author": "User",
+      "chatId": "second"
+    },
+    {
+      "id": 5,
+      "text": "Message 2.2",
+      "author": "User",
+      "chatId": "second"
+    }
+  ],
+  "profile": [
+    {
+      "id": 1,
+      "name": "Иванов Иван",
+      "age": 37,
+      "about": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam repellat officia odio reiciendis delectus, vero dicta a, sapiente consequatur suscipit, expedita nostrum pariatur perspiciatis repellendus.",
+      "avatar": "https://material-ui.com/static/images/avatar/1.jpg"
+    }
+  ]
+}

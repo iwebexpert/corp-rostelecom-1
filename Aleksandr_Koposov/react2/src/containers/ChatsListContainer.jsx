@@ -29,9 +29,11 @@ class ChatsListContainerClass extends Component {
   }
 
   render() {
-    const { chats, chatId } = this.props
+    const { chats, chatId, isLoading, isError } = this.props
     return <ChatsList
       chats={chats || []}
+      isLoading={isLoading}
+      isError={isError}
       activeChat={chatId}
       onAdd={this.onChatAdd}
     />
@@ -43,11 +45,15 @@ function mapStateToProps(state, ownProps) {
   const user = state.profile.entries
   const chats = state.chats.entries
   const chatId = ((match || {}).params || {}).id || ''
+  const isLoading = state.chats.loading
+  const isError = state.chats.error
 
   return {
     user,
     chats,
-    chatId
+    chatId,
+    isLoading,
+    isError
   }
 }
 

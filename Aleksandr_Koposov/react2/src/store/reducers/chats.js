@@ -1,20 +1,22 @@
-import update from 'react-addons-update'
+import update from 'immutability-helper'
 
 import {
-  CHATS_LOAD,
   CHAT_ADD,
   CHAT_DEL,
   CHAT_MESSAGE_SEND,
   CHAT_MESSAGE_DEL,
   CHAT_SET_FLASH,
-  CHAT_UNSET_FLASH
-} from 'actions/chats'
+  CHAT_UNSET_FLASH,
 
-import { chats } from 'helpers/chatsData'
+  CHATS_LOAD_REQUEST,
+  CHATS_LOAD_SUCCESS,
+  CHATS_LOAD_FAILURE,
+} from 'actions/chats'
 
 const initialState = {
   entries: [],
   loading: false,
+  error: false,
   init: false
 }
 
@@ -24,16 +26,15 @@ export const chatsReducer = (state = initialState, action) => {
     .indexOf((action.payload || {}).chatId || '')
 
   switch (action.type) {
-    case CHATS_LOAD:
-      return !state.init
-        ? {
-          ...state,
-          init: true,
-          entries: chats,
-        }
-        : {
-          ...state
-        }
+
+    case CHATS_LOAD_REQUEST:
+      return { ...state, loading: true, error: false }
+
+    case CHATS_LOAD_SUCCESS:
+      return { ...state, loading: false, entries: action.payload }
+
+    case CHATS_LOAD_FAILURE:
+      return { ...state, loading: false, error: true }
 
     case CHAT_ADD:
       return update(state, {
@@ -57,7 +58,7 @@ export const chatsReducer = (state = initialState, action) => {
         entries: {
           [chatIndex]: {
             messages: {
-              $push: [action.payload.message.id]
+              $push: [action.payload.message]
             }
           }
         }
@@ -68,11 +69,12 @@ export const chatsReducer = (state = initialState, action) => {
         return state
       }
       const chat = state.entries[chatIndex]
-      chat.messages = chat.messages.filter(i => i !== action.payload.messageId)
       return update(state, {
         entries: {
           [chatIndex]: {
-            $set: chat
+            messages: {
+              $set: chat.messages.filter(i => i.id !== action.payload.messageId)
+            }
           }
         }
       })
