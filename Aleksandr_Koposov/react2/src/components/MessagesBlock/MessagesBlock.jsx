@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { nanoid } from 'nanoid'
 
 import { Divider, Typography, Icon, IconButton } from '@material-ui/core'
@@ -7,8 +7,18 @@ import { MessageForm } from 'components/MessageForm'
 
 import './MessagesBlock.scss'
 
-export class MessagesBlock extends Component {
-  scrollToLastMessage = () => {
+export const MessagesBlock = (props) => {
+  const {
+    chat,
+    messages,
+    user,
+    isLoading,
+    onContext,
+    onChatDelete,
+    onAdd
+  } = props
+
+  const scrollToLastMessage = () => {
     const items = document.querySelectorAll('.messages__list .message')
     const lastItem = items[items.length - 1]
     if (!lastItem) {
@@ -17,70 +27,52 @@ export class MessagesBlock extends Component {
     lastItem.scrollIntoView()
   }
 
-  componentDidUpdate() {
-    this.scrollToLastMessage()
+  useEffect(() => {
+    scrollToLastMessage()
+  }, [])
+
+  const onDelete = () => {
+    onChatDelete(chat.id)
   }
 
-  onDelete = () => {
-    this.props.onChatDelete(this.chatId)
-  }
-
-  onSend = (message, chat = '') => {
-    const { user, onAdd } = this.props
-    const chatId = chat || this.chatId
-    if (!chatId) {
+  const onSend = (message, chatId = '') => {
+    const id = chatId || chat.id
+    if (!id) {
       return
     }
     message.id = nanoid()
     if (!message.author) {
       message.author = user.id || ''
     }
-    onAdd(chatId, message)
+    onAdd(id, message)
   }
 
-  get chatId() {
-    const { chat } = this.props
-    if (!chat) {
-      return ''
-    }
-    return chat.id
-  }
-
-  get chatName() {
+  const chatName = () => {
     const defaultName = 'Чат не выбран'
-    const { chat } = this.props
     if (!chat) {
       return defaultName
     }
     return chat.name || defaultName
   }
 
-  get messages() {
-    const { messages } = this.props
-    return messages || []
-  }
-
-  render() {
-    const { isLoading, user, onContext } = this.props
-    return (
-      <div className="messages__block">
-        <Typography variant="h6">
-          {isLoading ? 'Загрузка...' : `Чат «${this.chatName}»`}
-          <IconButton onClick={this.onDelete}>
-            <Icon>delete_forever</Icon>
-          </IconButton>
-        </Typography>
-        <Divider />
-        <MessageList
-          chatId={this.chatId}
-          items={this.messages || []}
-          isLoading={isLoading}
-          user={user || {}}
-          onContext={onContext}
-        />
-        <Divider />
-        <MessageForm onSend={this.onSend} />
-      </div>
-    )
-  }
+  return (
+    <div className="messages__block">
+      <Typography variant="h6">
+        {isLoading ? 'Загрузка...' : `Чат «${chatName()}»`}
+        <IconButton onClick={onDelete}>
+          <Icon>delete_forever</Icon>
+        </IconButton>
+      </Typography>
+      <Divider />
+      <MessageList
+        chatId={(chat || {}).id}
+        items={messages || []}
+        isLoading={isLoading}
+        user={user || {}}
+        onContext={onContext}
+      />
+      <Divider />
+      <MessageForm onSend={onSend} />
+    </div>
+  )
 }

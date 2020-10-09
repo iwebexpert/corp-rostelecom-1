@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import { createAction } from 'redux-api-middleware'
 
 export const CHAT_SET_FLASH = 'CHAT_SET_FLASH'
@@ -149,7 +148,7 @@ export const chatMessageSendApiAction = (chatId, message) => createAction({
   types: [
     {
       type: CHAT_MESSAGE_ADD_REQUEST,
-      payload: { ...message, chatId: parseInt(chatId) }
+      payload: { ...message, chatId }
     },
     {
       type: CHAT_MESSAGE_ADD_SUCCESS,

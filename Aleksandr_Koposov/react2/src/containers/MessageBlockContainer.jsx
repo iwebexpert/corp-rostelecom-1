@@ -1,74 +1,53 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { push } from 'connected-react-router'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { chatDeleteAction, chatDeleteMessageAction, chatMessageSendAction } from 'actions/chats'
 
 import { MessagesBlock } from 'components/MessagesBlock'
 
-class MessageBlockContainerClass extends Component {
-  onMessageAdd = (chatId, message) => {
-    const data = { chatId, message }
-    this.props.chatMessageSendAction(data)
-  }
+export const MessageBlockContainer = (props) => {
+  const chatId = useParams().id || ''
+  const dispatch = useDispatch()
 
-  onMessageDelete = (chatId, messageId) => {
-    const data = { chatId, messageId }
-    this.props.chatDeleteMessageAction(data)
-  }
-
-  onChatDelete = (chatId) => {
-    this.props.redirect()
-    this.props.chatDeleteAction(chatId)
-  }
-
-  render() {
-    const { messages, chat, user, isLoading, isError } = this.props
-    return <MessagesBlock
-      chat={chat || {}}
-      messages={messages || []}
-      isLoading={isLoading}
-      isError={isError}
-      user={user}
-      onAdd={this.onMessageAdd}
-      onChatDelete={this.onChatDelete}
-      onContext={this.onMessageDelete}
-    />
-  }
-}
-
-function mapStateToProps(state, ownProps) {
-  const { match } = ownProps
-  const user = state.profile.entries
-  const chats = state.chats.entries
-  const isLoading = state.chats.loading
-  const isError = state.chats.error
-  const chatId = ((match || {}).params || {}).id || ''
+  const [user, chats, isLoading] = useSelector((state) => ([
+    state.profile.entries,
+    state.chats.entries,
+    state.chats.loading,
+  ]))
   const chat = chats.find(i => i.id === chatId) || {}
   const messages = !chatId
     ? []
     : chat.messages || []
 
-  return {
-    user,
-    messages,
-    chat,
-    chatId,
-    isLoading,
-    isError
+  const onMessageAdd = (chatId, message) => {
+    dispatch(chatMessageSendAction({
+      chatId,
+      message
+    }))
   }
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    chatMessageSendAction: (chatId, message) => dispatch(chatMessageSendAction(chatId, message)),
-    chatDeleteMessageAction: (chatId, messageId) => dispatch(chatDeleteMessageAction(chatId, messageId)),
-    chatDeleteAction: chatId => dispatch(chatDeleteAction(chatId)),
-    redirect: () => dispatch(push('/')),
+  const onMessageDelete = (chatId, messageId) => {
+    dispatch(chatDeleteMessageAction({
+      chatId,
+      messageId
+    }))
   }
-}
 
-export const MessageBlockContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MessageBlockContainerClass)
+  const onChatDelete = (chatId) => {
+    dispatch(push('/'))
+    dispatch(chatDeleteAction(chatId))
+  }
+
+  return <MessagesBlock
+    chat={chat || {}}
+    chatId={chatId || ''}
+    messages={messages || []}
+    isLoading={isLoading}
+    user={user}
+    onAdd={onMessageAdd}
+    onChatDelete={onChatDelete}
+    onContext={onMessageDelete}
+  />
+}

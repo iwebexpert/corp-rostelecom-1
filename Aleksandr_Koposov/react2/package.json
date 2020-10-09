@@ -1,7 +1,7 @@
 {
-  "name": "react7",
+  "name": "react8",
   "version": "1.0.0",
-  "description": "Lesson 26 (React 7)",
+  "description": "Lesson 27 (React 8)",
   "private": true,
   "author": "Aleksandr.Koposov",
   "scripts": {
@@ -40,6 +40,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
+    "redux-actions": "^2.6.5",
     "redux-api-middleware": "^3.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0"

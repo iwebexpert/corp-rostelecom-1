@@ -1,66 +1,59 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Icon, Fab, TextField } from '@material-ui/core'
 
 import './MessageForm.scss'
 
-export class MessageForm extends Component {
-  state = {
-    text: ''
-  }
+export const MessageForm = (props) => {
+  const [dataForm, setDataForm] = useState({ text: '' })
 
-  onMessageSend = () => {
-    const { text } = this.state
-    const { onSend } = this.props
+  const onMessageSend = () => {
+    const { text } = dataForm
+    const { onSend } = props
 
     if (text) {
-      if (typeof (onSend) === 'function') {
-        onSend(this.state)
-        document.getElementById('text').focus()
-        this.setState({ text: '' })
-      }
+      onSend(dataForm)
+      setDataForm({ ...dataForm, text: '' })
+      document.getElementById('text').focus()
     } else {
       alert('Заполните все поля формы.')
     }
   }
 
-  onInputChange = (event) => {
-    const name = event.target.name
-    this.setState({
-      [name]: event.target.value
+  const onInputChange = (event) => {
+    setDataForm({
+      ...dataForm,
+      [event.target.name]: event.target.value
     })
   }
 
-  onKeyUp = (event) => {
+  const onKeyUp = (event) => {
     if (event.ctrlKey && event.keyCode === 13) {
-      this.onMessageSend()
+      onMessageSend()
     }
   }
 
-  render() {
-    const { text } = this.state
-    return (
-      <div className='message__form'>
-        <TextField
-          id="text"
-          name="text"
-          label="Сообщение"
-          variant="outlined"
-          placeholder="Сообщение"
-          multiline
-          rowsMax={4}
-          color="primary"
-          value={text}
-          onChange={this.onInputChange}
-          onKeyUp={this.onKeyUp}
-        />
-        <Fab
-          color="primary"
-          size="small"
-          onClick={this.onMessageSend}
-        >
-          <Icon>send</Icon>
-        </Fab>
-      </div>
-    )
-  }
+  return (
+    <div className='message__form'>
+      <TextField
+        id="text"
+        name="text"
+        label="Сообщение"
+        variant="outlined"
+        placeholder="Сообщение"
+        multiline
+        rowsMax={4}
+        color="primary"
+        value={dataForm.text}
+        onChange={onInputChange}
+        onKeyUp={onKeyUp}
+      />
+      <Fab
+        color="primary"
+        size="small"
+        onClick={onMessageSend}
+      >
+        <Icon>send</Icon>
+      </Fab>
+    </div>
+  )
 }
