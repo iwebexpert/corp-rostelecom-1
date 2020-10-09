@@ -1,5 +1,5 @@
 {
-  "name": "lesson26r7",
+  "name": "lesson27r8",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -12,7 +12,7 @@
     "start": "concurrently \"npm:server\" \"npm:dev-server\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Mikhail Sorvanov",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -46,8 +46,10 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
+    "redux-actions": "^2.6.5",
     "redux-api-middleware": "^3.2.1",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
   }
 }

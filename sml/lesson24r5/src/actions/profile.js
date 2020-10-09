@@ -1,19 +1,17 @@
-//TODO
-import { createAction } from 'redux-api-middleware';
+import {createAction} from 'redux-actions';
 
-export const PROFILE_LOAD_REQUEST = 'PROFILE_LOAD/PROFILE_LOAD_REQUEST';
-export const PROFILE_LOAD_SUCCESS = 'PROFILE_LOAD/PROFILE_LOAD_SUCCESS';
-export const PROFILE_LOAD_FAILURE = 'PROFILE_LOAD/PROFILE_LOAD_FAILURE';
+export const profileRequestAction = createAction('[Profile] Request');
+export const profileSuccessAction = createAction('[Profile] Success');
+export const profileFailureAction = createAction('[Profile] Failure');
 
-export const profileLoadAction = () => createAction({
-  endpoint: '/api/profile/0',
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  types: [
-    PROFILE_LOAD_REQUEST,
-    PROFILE_LOAD_SUCCESS,
-    PROFILE_LOAD_FAILURE,
-  ],
-});
+export const profileLoadAction = () => {
+    return async (dispatch) => {
+        try {
+            dispatch(profileRequestAction());
+            const result = await fetch('/api/profile/0');
+            dispatch(profileSuccessAction(await result.json()));
+        } catch(error){
+            dispatch(profileFailureAction(error));
+        }
+    } 
+};

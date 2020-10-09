@@ -54,8 +54,8 @@
     "profile": [
         {
             "id": 0,
-            "email": "ivan@mail.ru",
             "name": "Иван Иванов",
+            "email": "mail@mail.ru",
             "age": 100
         }
     ]

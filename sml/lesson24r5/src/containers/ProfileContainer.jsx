@@ -1,43 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { nanoid } from 'nanoid';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
-import { Profile } from 'components/Profile';
-import { profileLoadAction } from '../actions/profile';
+import {Profile} from 'components/Profile';
+import {profileLoadAction} from '../actions/profile';
 
-class ProfileContainerClass extends Component {
-  componentDidMount() {
-    const { profileLoadAction } = this.props;
-    profileLoadAction();
-  }
-  handleReloadProfile = () => {
-    const { profileLoadAction } = this.props;
-    profileLoadAction();
-  };
-  render() {
-    const { profile, isError, isLoading } = this.props;
+export const ProfileContainer = () => {
+    const dispacth = useDispatch();
 
-    return <Profile profile={profile} handleReloadProfile={this.handleReloadProfile}
-      isError={isError}
-      isLoading={isLoading} />
-  }
+    const profile = useSelector((state) => state.profile.entries);
+    const [isLoading, isError] = useSelector((state) => ([state.profile.loading, state.profile.error]));
+
+    console.log(profile, isLoading, isError);
+    useEffect(() => {
+        dispacth(profileLoadAction());
+    }, []);
+
+    return <Profile {...profile} isLoading={isLoading} isError={isError} />;
 }
-
-function mapStateToProps(state, ownProps) {
-
-  const { match } = ownProps;
-  const profile = state.profile.entries;
-  return {
-    profile,
-    isError: state.profile.error,
-    isLoading: state.profile.loading,
-  };
-}
-
-function mapDispatchToProps(dispacth) {
-  return {
-    profileLoadAction: () => dispacth(profileLoadAction()),
-  };
-}
-
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileContainerClass);
