@@ -1,0 +1,11 @@
+.logo {
+    background-color: darkslateblue;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
