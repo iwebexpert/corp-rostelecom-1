@@ -34,7 +34,7 @@ const initialState = {
     entries: [],
     loading: false,
     error: false,
-    errorSave: false,
+    errorSave: false,    
 };
 
 export const chatsReducer = (state = initialState, action) => {
@@ -76,7 +76,7 @@ export const chatsReducer = (state = initialState, action) => {
             //console.log('ADD', action.payload);
             return update(state, {
                 entries: {
-                    $push: [{ id: action.payload.id, title: action.payload.title,messages: [] }]
+                    $push: [{ id: action.payload.id, title: action.payload.title, messages: [] }]
                 }
             });
 
@@ -92,7 +92,7 @@ export const chatsReducer = (state = initialState, action) => {
                 errorSave: false,
             };
         case CHATS_MSG_ADD_SUCCESS:
-            console.log('ADD_MSG', action.payload);
+            //console.log('ADD_MSG', action.payload);
 
             chatIndex = state.entries.findIndex((e, index, array) => (e.id === action.payload.chatId));
 
@@ -117,7 +117,7 @@ export const chatsReducer = (state = initialState, action) => {
                 errorSave: false,
             };
         case CHATS_MSG_DEL_SUCCESS:
-            console.log('DEL_MSG', action.payload);
+            //console.log('DEL_MSG', action.payload);
 
             chatIndex = state.entries.findIndex((e, index, array) => (e.id === action.payload.chatId));
             const indexMsg = state.entries[chatIndex].messages.findIndex((e, index, array) => (e.id === action.payload.id));
