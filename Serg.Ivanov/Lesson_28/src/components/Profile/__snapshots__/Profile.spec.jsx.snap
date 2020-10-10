@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile component should render MessageList component (2) 1`] = `
+<div
+  class="profile-window"
+>
+  <ul
+    class="profile-list"
+  >
+    <li>
+      Имя: WebDev
+    </li>
+    <li>
+      Возраст: 35
+    </li>
+    <li>
+      Откуда: Moscow
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Profile component should render Profile component (1) 1`] = `
+<div
+  className="profile-window"
+>
+  <ul
+    className="profile-list"
+  >
+    <li>
+      Имя: 
+      WebDev
+    </li>
+    <li>
+      Возраст: 
+      35
+    </li>
+    <li>
+      Откуда: 
+      Moscow
+    </li>
+  </ul>
+</div>
+`;
