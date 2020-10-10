@@ -1,64 +1,53 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
 import { ListItem, ListItemIcon, ListItemText, TextField, Fab, Icon } from '@material-ui/core'
 
 import './ChatForm.scss'
 
-export class ChatForm extends Component {
-  state = {
-    name: ''
-  }
+export const ChatForm = (props) => {
+  const [dataForm, setDataForm] = useState({ name: '' })
 
-  onAdd = () => {
-    const { name } = this.state
-    const { onAdd } = this.props
-
-    if (!name) {
+  const onAdd = () => {
+    const { onAdd } = props
+    if (!dataForm.name) {
       return
     }
-    if (typeof (onAdd) === 'function') {
-      onAdd(name)
-      this.setState({ name: '' })
-    }
+    onAdd(dataForm.name)
+    setDataForm({ ...dataForm, name: '' })
   }
 
-  onInput = (event) => {
-    this.setState({
-      name: event.target.value
-    })
+  const onInput = (event) => {
+    setDataForm({ ...dataForm, name: event.target.value })
   }
 
-  onKeyUp = (event) => {
+  const onKeyUp = (event) => {
     if (event.keyCode === 13) {
-      this.onAdd()
+      onAdd()
     }
   }
 
-  render() {
-    const { name } = this.state
-    return (
-      <ListItem className="chat__form">
-        <ListItemText>
-          <TextField
-            label="Название"
-            variant="outlined"
-            placeholder="Название"
-            color="primary"
-            value={name}
-            onChange={this.onInput}
-            onKeyUp={this.onKeyUp}
-          />
-        </ListItemText>
-        <ListItemIcon>
-          <Fab
-            color="secondary"
-            size="small"
-            onClick={this.onAdd}
-          >
-            <Icon>add</Icon>
-          </Fab>
-        </ListItemIcon>
-      </ListItem>
-    )
-  }
+  return (
+    <ListItem className="chat__form">
+      <ListItemText>
+        <TextField
+          label="Название"
+          variant="outlined"
+          placeholder="Название"
+          color="primary"
+          value={dataForm.name}
+          onChange={onInput}
+          onKeyUp={onKeyUp}
+        />
+      </ListItemText>
+      <ListItemIcon>
+        <Fab
+          color="secondary"
+          size="small"
+          onClick={onAdd}
+        >
+          <Icon>add</Icon>
+        </Fab>
+      </ListItemIcon>
+    </ListItem>
+  )
 }
