@@ -1,0 +1,16 @@
+.back {
+    background-color: gray;
+}
+
+.card {
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.fire {
+    background-color: indianred;
+}
+
+.unfire {
+    background-color: white;
+}
