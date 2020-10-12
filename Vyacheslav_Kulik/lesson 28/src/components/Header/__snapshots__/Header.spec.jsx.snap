@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Test should render Header snapshot 1`] = `
+<div
+  class="MuiGrid-root header MuiGrid-container MuiGrid-direction-xs-column MuiGrid-align-items-xs-center"
+>
+  <div
+    class="MuiGrid-root MuiGrid-item"
+  >
+    <a
+      href="/profile"
+      style="text-decoration:none;color:white"
+    >
+      <p
+        class="MuiTypography-root MuiTypography-body1"
+      >
+        Your Profile
+      </p>
+    </a>
+  </div>
+</div>
+`;

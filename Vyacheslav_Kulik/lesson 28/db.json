@@ -1,0 +1,132 @@
+{
+  "chats": [
+    {
+      "id": 0,
+      "title": "Work",
+      "srcAvatar": "src/img/suitcase.svg",
+      "fired": false
+    },
+    {
+      "id": 1,
+      "title": "Travel",
+      "srcAvatar": "src/img/airplane.svg",
+      "fired": false
+    },
+    {
+      "id": 2,
+      "title": "My chat",
+      "srcAvatar": "src/img/test.svg",
+      "fired": false
+    },
+    {
+      "title": "Test",
+      "srcAvatar": "src/img/bot.svg",
+      "fired": false,
+      "id": 3
+    }
+  ],
+  "messages": [
+    {
+      "id": 0,
+      "author": "Bot",
+      "time": "12:15",
+      "text": "Привет, это рабочий чат!",
+      "chatId": 0
+    },
+    {
+      "id": 1,
+      "author": "Bot",
+      "time": "12:20",
+      "text": "Чем могу помочь!",
+      "chatId": 0
+    },
+    {
+      "id": 2,
+      "author": "Bot",
+      "time": "00:01",
+      "text": "Привет, это Bot, давай знакомиться!",
+      "chatId": 1
+    },
+    {
+      "id": 3,
+      "author": "Гость",
+      "time": "00:01",
+      "text": "Привет, я Гость!",
+      "chatId": 1
+    },
+    {
+      "id": 4,
+      "author": "Bot",
+      "time": "00:02",
+      "text": "Приятно познакомиться, Гость!",
+      "chatId": 1
+    },
+    {
+      "id": 0,
+      "author": "Гость",
+      "time": "22:30",
+      "text": "Это мой чат",
+      "chatId": 2
+    },
+    {
+      "id": 1,
+      "author": "Гость",
+      "time": "22:30",
+      "text": "Тестовый чат",
+      "chatId": 2
+    },
+    {
+      "id": 2,
+      "author": "Bot",
+      "time": "22:31",
+      "text": "Понятно, а я тут зачем?",
+      "chatId": 2
+    },
+    {
+      "text": "123",
+      "author": "Гость1",
+      "time": "2020-10-08T09:45:50.659Z",
+      "id": "stzlriBH7CpIe8Sk5MzW7",
+      "chatId": 1
+    },
+    {
+      "text": "Привет, <b>Гость1</b>. Оператор скоро подключится к тебе",
+      "author": "Bot",
+      "time": "2020-10-08T09:45:51.671Z",
+      "id": "wqhcE7ZY8gHMX0jM_kZ-s",
+      "chatId": 1
+    },
+    {
+      "text": "132",
+      "author": "Test",
+      "time": "2020-10-08T09:50:30.742Z",
+      "id": "4ThGd1qcnWfKDCoDSsdTr",
+      "chatId": 3
+    },
+    {
+      "text": "Привет, <b>Test</b>. Оператор скоро подключится к тебе",
+      "author": "Bot",
+      "time": "2020-10-08T09:50:31.756Z",
+      "id": "TrnnNOmMibaEVZ4z_2yYU",
+      "chatId": 3
+    },
+    {
+      "text": "Привет, <b>Test</b>. Оператор скоро подключится к тебе",
+      "author": "Bot",
+      "time": "2020-10-08T09:50:35.164Z",
+      "id": "s1wxJoeDg3dpcIXuqUJe3",
+      "chatId": 3
+    },
+    {
+      "text": "asd",
+      "author": "Test",
+      "time": "2020-10-08T09:50:42.784Z",
+      "id": "FvyVJdckn14Acal_b6LoC",
+      "chatId": 3
+    }
+  ],
+  "profile": {
+    "author": "Test",
+    "age": "25"
+  }
+}

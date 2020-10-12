@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,cAAe;EACb,UAAU,EAAE,MAAM",
+"sources": ["MessageFields.scss"],
+"names": [],
+"file": "MessageFields.css"
+}
