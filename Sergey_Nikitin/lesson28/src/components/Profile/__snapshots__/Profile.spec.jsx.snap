@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be rendered Profile 1`] = `
+<WithStyles(ForwardRef(Grid))
+  container={true}
+  direction="row"
+  justify="center"
+>
+  <WithStyles(ForwardRef(Grid))
+    item={true}
+  >
+    <WithStyles(ForwardRef(Card))
+      className="root"
+    >
+      <WithStyles(ForwardRef(CardActionArea))>
+        <WithStyles(ForwardRef(CardMedia))
+          alt="Contemplative Reptile"
+          component="img"
+          height="140"
+          image="https://img2.wtftime.ru/store/2020/09/08/6ZW02821.jpg"
+          title="Contemplative Reptile"
+        />
+        <WithStyles(ForwardRef(CardContent))>
+          <WithStyles(ForwardRef(Typography))
+            component="h2"
+            gutterBottom={true}
+            variant="h5"
+          >
+            Test@test.ru
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Typography))
+            color="textSecondary"
+            component="p"
+            variant="body2"
+          >
+            TEST
+          </WithStyles(ForwardRef(Typography))>
+        </WithStyles(ForwardRef(CardContent))>
+      </WithStyles(ForwardRef(CardActionArea))>
+      <WithStyles(ForwardRef(CardActions))>
+        <WithStyles(ForwardRef(Button))
+          color="primary"
+          size="small"
+        >
+          Share
+        </WithStyles(ForwardRef(Button))>
+        <WithStyles(ForwardRef(Button))
+          color="primary"
+          size="small"
+        >
+          Learn More
+        </WithStyles(ForwardRef(Button))>
+      </WithStyles(ForwardRef(CardActions))>
+    </WithStyles(ForwardRef(Card))>
+  </WithStyles(ForwardRef(Grid))>
+</WithStyles(ForwardRef(Grid))>
+`;
