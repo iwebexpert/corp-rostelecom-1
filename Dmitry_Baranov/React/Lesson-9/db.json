@@ -1,0 +1,20 @@
+{
+    "chats": [
+        {"id": 0, "title": "Тестовый чат", "fire": "unfire"},
+        {"id": 1, "title": "Рабочий чат", "fire": "unfire"},
+        {"id": 2, "title": "Друзья", "fire": "unfire"}
+    ],
+
+    "messages": [
+        {"id": 0, "author": "WebDev", "text": "Hi!", "chatId": 0},
+        {"id": 1, "author": "WebDev", "text": "Привет!", "chatId": 0},
+        {"id": 2, "author": "WebDev", "text": "Тестовое сообщение!", "chatId": 1},
+        {"id": 3, "author": "WebDev", "text": "Какие есть задачи?", "chatId": 1},
+        {"id": 4, "author": "WebDev", "text": "Ок!", "chatId": 1},
+        {"id": 5, "author": "WebDev", "text": "Что нового?", "chatId": 2}
+    ],
+
+    "profile": [
+        {"id": 0, "name": "WebDev", "email": "test@1234test.localdomain", "age": 28}
+    ]
+}

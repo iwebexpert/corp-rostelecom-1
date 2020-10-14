@@ -1,0 +1,9 @@
+.root {
+    background-color: orange;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.btn {
+    font-size: 18px;
+}
