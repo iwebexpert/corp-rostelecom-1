@@ -1,0 +1,14 @@
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.Container {
+    display: flex;
+}
+
+.messageField {
+    min-height: 40px;
+    transform: translate(0, 14px) scale(1);
+}
