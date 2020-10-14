@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile component should render MessageList component (2) 1`] = `
+<div>
+  <ul>
+    <li>
+      Имя: WebDev
+    </li>
+    <li>
+      Возраст: 35
+    </li>
+    <li>
+      from: 
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Profile component should render Profile component (1) 1`] = `
+<div>
+  <ul>
+    <li>
+      Имя: 
+      WebDev
+    </li>
+    <li>
+      Возраст: 
+      35
+    </li>
+    <li>
+      from: 
+    </li>
+  </ul>
+</div>
+`;

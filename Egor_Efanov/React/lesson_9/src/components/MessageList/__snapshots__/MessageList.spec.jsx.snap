@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageList component should render MessageList component (1) 1`] = `
+<ul
+  className="message-list"
+>
+  <Message
+    author="WebDev"
+    text="1234"
+  />
+  <Message
+    author="WebDev2"
+    text="Test1"
+  />
+</ul>
+`;
+
+exports[`MessageList component should render MessageList component (2) 1`] = `
+<ul
+  class="message-list"
+>
+  <li
+    class="message message-author"
+  >
+    1234 
+    <b
+      class="message-sender"
+    >
+      (WebDev)
+    </b>
+  </li>
+  <li
+    class="message message-author"
+  >
+    Test1 
+    <b
+      class="message-sender"
+    >
+      (WebDev2)
+    </b>
+  </li>
+</ul>
+`;
