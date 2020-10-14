@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfilePage component should render ProfilePage component (1) 1`] = `
+<div>
+  <h2>
+    Profile page
+  </h2>
+  E - mail: 
+  webdev@webdev.com
+   
+  <hr />
+  Логин: 
+  WebDev
+   
+  <hr />
+  <img
+    height="200px"
+    src="ava.jpg"
+    width="200px"
+  />
+</div>
+`;
+
+exports[`ProfilePage component should render ProfilePage component (error) 1`] = `
+<div>
+  Не удалось загрузить профиль...
+</div>
+`;
+
+exports[`ProfilePage component should render ProfilePage component (loading & error) 1`] = `
+<div>
+  Не удалось загрузить профиль...
+</div>
+`;
+
+exports[`ProfilePage component should render ProfilePage component (loading) 1`] = `
+<div>
+  Profile loading...
+</div>
+`;

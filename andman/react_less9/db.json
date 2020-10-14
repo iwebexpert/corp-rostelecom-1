@@ -1,0 +1,105 @@
+{
+  "chats": [
+    {
+      "id": "_IZQAf1sdTxKw_fexow8G",
+      "title": "Тестовый чат"
+    },
+    {
+      "title": "Рабочий чат",
+      "id": "LZul_SVg9aukEtkp7A8ql"
+    },
+    {
+      "title": "Друзья",
+      "id": "nzCY6E6invcjVS7xXD-dm"
+    },
+    {
+      "title": "Новый тестовый чат",
+      "id": "imHZqdP4gOWwnwR_Y7yi1"
+    },
+    {
+      "title": "Пятый чат",
+      "id": "EoDoc8I6KpV_D92GEIwG8"
+    }
+  ],
+  "messages": [
+    {
+      "id": 0,
+      "author": "WebDev",
+      "text": "Hi!",
+      "chatId": "_IZQAf1sdTxKw_fexow8G"
+    },
+    {
+      "id": 1,
+      "author": "WebDev",
+      "text": "Привет!",
+      "chatId": "_IZQAf1sdTxKw_fexow8G"
+    },
+    {
+      "id": 2,
+      "author": "WebDev",
+      "text": "Тестовое сообщение!",
+      "chatId": "LZul_SVg9aukEtkp7A8ql"
+    },
+    {
+      "id": 3,
+      "author": "WebDev",
+      "text": "Какие есть задачи?",
+      "chatId": "LZul_SVg9aukEtkp7A8ql"
+    },
+    {
+      "id": 5,
+      "author": "WebDev",
+      "text": "Что нового?",
+      "chatId": "nzCY6E6invcjVS7xXD-dm"
+    },
+    {
+      "text": "Проверка",
+      "author": "WebDev",
+      "chatId": "nzCY6E6invcjVS7xXD-dm",
+      "id": "4yDUIka9oVQ9XANJvpq_F"
+    },
+    {
+      "text": "dff",
+      "author": "WebDev",
+      "id": "CyRqVXQmBwgnd3bYc0sgM"
+    },
+    {
+      "text": "Всем привет!",
+      "author": "WebDev",
+      "chatId": "imHZqdP4gOWwnwR_Y7yi1",
+      "id": "CSyevWbmIcXndscOxnd-j"
+    },
+    {
+      "text": "Сообщение",
+      "author": "WebDev",
+      "chatId": "_IZQAf1sdTxKw_fexow8G",
+      "id": "EIkMGHoRG0DCB1mZSLrcn"
+    },
+    {
+      "id": "iGanH91M1Pr8oVbKqB0Ds",
+      "chatId": "_IZQAf1sdTxKw_fexow8G",
+      "author": "Bot",
+      "text": "Привет, WebDev! Это бот."
+    },
+    {
+      "text": "fgg",
+      "author": "WebDev",
+      "chatId": "nzCY6E6invcjVS7xXD-dm",
+      "id": "oHlcs_7AqK8cCQf0afk9A"
+    },
+    {
+      "id": "GNDG3MInrzXrNQ7Rzboq7",
+      "chatId": "nzCY6E6invcjVS7xXD-dm",
+      "author": "Bot",
+      "text": "Привет, WebDev! Это бот."
+    }
+  ],
+  "profile": [
+    {
+      "id": 0,
+      "name": "WebDev",
+      "email": "webdev@webdev.dev",
+      "avatar": "https://www.abeautifulsite.net/uploads/2014/08/bit-face.png"
+    }
+  ]
+}
